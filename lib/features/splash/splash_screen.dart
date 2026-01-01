@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
@@ -10,25 +11,12 @@ import 'package:mobx/mobx.dart';
 
 class _SplashConstants {
   // Layout from Figma (375 × 812)
-  static const double logoTopOffset = 309.0; // From top
   static const double logoWidth = 166.0;
   static const double logoHeight = 166.0; // Square aspect ratio
-  static const double logoHorizontalOffset = 104.0; // From left (centered: (375-166)/2 = 104.5)
-  
+
   // Typography
   static const double appNameFontSize = 24.0;
   static const double appNameTopSpacing = 0.0; // Directly below logo
-  
-  // Status bar
-  static const double statusBarHeight = 50.0;
-  static const double statusBarTopPadding = 21.0;
-  
-  // Home indicator
-  static const double homeIndicatorTop = 778.0;
-  static const double homeIndicatorHeight = 34.0;
-  static const double homeIndicatorWidth = 144.0;
-  static const double homeIndicatorBottomPadding = 8.0;
-  static const double homeIndicatorBarHeight = 5.0;
 }
 
 class SplashScreen extends StatefulWidget {
