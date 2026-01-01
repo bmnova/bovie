@@ -16,6 +16,7 @@ class FigmaConstants {
   static const double spacing20 = 20.0;
   static const double spacing24 = 24.0;
   static const double spacing32 = 32.0;
+  static const double spacing40 = 40.0;
   static const double spacing48 = 48.0;
 
   // Component sizes (from Figma)
@@ -24,6 +25,7 @@ class FigmaConstants {
   static const double genreCardSize = 140.0;
   static const double chipHeight = 40.0;
   static const double buttonHeight = 48.0;
+  static const double buttonHeightLarge = 56.0;
   static const double buttonMinWidth = 120.0;
 
   // Border radius (from Figma)
@@ -38,6 +40,38 @@ class FigmaConstants {
   static const double iconSize24 = 24.0;
   static const double iconSize32 = 32.0;
   static const double iconSize40 = 40.0;
+
+  // Font sizes
+  static const double fontSize8 = 8.0;
+  static const double fontSize10 = 10.0;
+  static const double fontSize12 = 12.0;
+  static const double fontSize14 = 14.0;
+  static const double fontSize16 = 16.0;
+  static const double fontSize24 = 24.0;
+
+  // Border width
+  static const double borderWidth1 = 1.0;
+
+  // Row component constants
+  static const double rowHorizontalPadding = 20.0;
+  static const double rowVerticalPaddingDefault = 0.0;
+  static const double rowVerticalPaddingSmall = 8.0;
+  static const double rowVerticalPaddingMedium = 11.0;
+  static const double rowGapBetweenIconAndText = 20.0;
+  static const double rowGapBetweenTitleAndSubtitle = 4.0;
+
+  // Badge constants
+  static const double badgeHeight = 23.0;
+  static const double badgeExtraPadding = 11.5; // Half of badge height for overflow
+  static const double badgeHorizontalPadding = 12.0;
+  static const double badgeVerticalPadding = 4.0;
+  static const double badgeRightPadding = 12.0;
+  static const double badgeFontSize = 12.0;
+
+  // Feature comparison table constants
+  static const double featureTableIconPadding = 13.0;
+  static const double featureTableRowContentHeight = 24.0;
+  static const double featureTableContainerHeight = 195.0;
 
   // App bar
   static const double appBarHeight = 56.0;
@@ -80,5 +114,17 @@ class FigmaHelper {
     return size.width == FigmaConstants.designWidth &&
         size.height == FigmaConstants.designHeight;
   }
+}
+
+/// Extension on BuildContext for convenient Figma scaling
+extension FigmaScalingExtension on BuildContext {
+  /// Scale width from Figma design to current screen width
+  double sw(double figmaWidth) => FigmaHelper.scaleWidth(this, figmaWidth);
+
+  /// Scale height from Figma design to current screen height
+  double sh(double figmaHeight) => FigmaHelper.scaleHeight(this, figmaHeight);
+
+  /// Scale font size from Figma design
+  double sf(double figmaFontSize) => FigmaHelper.scaleFontSize(this, figmaFontSize);
 }
 

@@ -35,6 +35,9 @@ dependencies:
   cached_network_image: ^3.3.1
   flutter_svg: ^2.0.9
   
+  # Desktop Window
+  desktop_window: ^0.4.2
+  
   # Environment
   flutter_dotenv: ^5.1.0
   

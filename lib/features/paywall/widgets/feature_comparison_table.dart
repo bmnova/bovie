@@ -30,14 +30,14 @@ class FeatureComparisonTable extends StatelessWidget {
           text: appName,
           style: context.textTheme.titleLarge?.copyWith(
                 color: AppColors.white,
-                fontSize: FigmaHelper.scaleFontSize(context, 24),
+                fontSize: FigmaConstants.fontSize24,
                 fontWeight: FontWeight.bold,
               ),
           textAlign: TextAlign.center,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
-        SizedBox(height: FigmaHelper.scaleHeight(context, FigmaConstants.spacing16)),
+        SizedBox(height: FigmaConstants.spacing16),
         
         // Feature Comparison Table (includes headers)
         _FeatureTable(
@@ -70,48 +70,66 @@ class _FeatureTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Figma values: header padding=8px, icon padding=13px, icon=24px, gap between columns=12px, gap between items=16px
-    final headerPadding = FigmaHelper.scaleWidth(context, FigmaConstants.spacing8);
-    final iconPadding = FigmaHelper.scaleWidth(context, 13);
-    final iconSize = FigmaHelper.scaleWidth(context, 24);
-    final itemGap = FigmaHelper.scaleHeight(context, FigmaConstants.spacing16);
-    // Column width: max(header padding, icon padding) * 2 + icon = max(8px*2, 13px*2) + 24px = 50px
-    final iconColumnWidth = (iconPadding * 2) + iconSize;
-    final columnSpacing = FigmaHelper.scaleWidth(context, FigmaConstants.spacing12);
-    final containerHeight = FigmaHelper.scaleHeight(context, 195);
+    // Calculate column width based on text width + 8px padding on each side
+    final textStyle = context.textTheme.bodyLarge?.copyWith(
+      color: AppColors.white,
+      fontSize: FigmaConstants.fontSize16,
+      fontWeight: FontWeight.w600,
+    );
+
+    // Measure FREE text width
+    final freeTextPainter = TextPainter(
+      text: TextSpan(text: 'FREE', style: textStyle),
+      textDirection: TextDirection.ltr,
+    );
+    freeTextPainter.layout();
+    final freeHeaderWidth = freeTextPainter.width + (FigmaConstants.spacing8 * 2); // 8px left + 8px right
+
+    // Measure PRO text width
+    final proTextPainter = TextPainter(
+      text: TextSpan(text: 'PRO', style: textStyle),
+      textDirection: TextDirection.ltr,
+    );
+    proTextPainter.layout();
+    // PRO has gradient border with borderWidth (1.63px) padding on each side
+    // Add extra padding to ensure text fits properly (accounting for Stack/Padding constraints)
+    const borderWidth = 1.63;
+    final proHeaderWidth = proTextPainter.width + (FigmaConstants.spacing8 * 2) + (borderWidth * 2) + 4; // 8px left + 8px right + border padding + extra safety margin
+
+    // Icon column width: 8px padding * 2 + icon size = 8px * 2 + 24px = 40px
+    // Use header width which includes padding, but ensure minimum width for icons
+    final iconColumnMinWidth = (FigmaConstants.spacing8 * 2) + FigmaConstants.iconSize24; // 40px
+    final freeColumnWidth = freeHeaderWidth > iconColumnMinWidth ? freeHeaderWidth : iconColumnMinWidth;
+    final proColumnWidth = proHeaderWidth > iconColumnMinWidth ? proHeaderWidth : iconColumnMinWidth;
 
     return SizedBox(
-      height: containerHeight,
+      height: FigmaConstants.featureTableContainerHeight,
       child: Align(
         alignment: Alignment.bottomCenter,
         child: Table(
           defaultVerticalAlignment: TableCellVerticalAlignment.middle,
           columnWidths: {
             0: const FlexColumnWidth(1), // Feature names - flexible
-            1: FixedColumnWidth(columnSpacing), // Spacing between feature names and columns
-            2: FixedColumnWidth(iconColumnWidth), // FREE column
-            3: FixedColumnWidth(columnSpacing), // Spacing between FREE and PRO
-            4: FixedColumnWidth(iconColumnWidth), // PRO column
+            1: const FixedColumnWidth(FigmaConstants.spacing12), // Spacing between feature names and columns
+            2: FixedColumnWidth(freeColumnWidth), // FREE column
+            3: const FixedColumnWidth(FigmaConstants.spacing12), // Spacing between FREE and PRO
+            4: FixedColumnWidth(proColumnWidth), // PRO column
           },
           children: [
             // Header Row
             TableRow(
               children: [
                 const SizedBox(), // Feature names column
-                SizedBox(width: columnSpacing),
+                const SizedBox(width: FigmaConstants.spacing12),
                 _PlanHeaderCell(
                   planName: 'FREE',
-                  padding: headerPadding,
-                  itemGap: itemGap,
                   hasBorder: false,
                   isFirstRow: true,
                   isLastRow: features.isEmpty,
                 ),
-                SizedBox(width: columnSpacing),
+                const SizedBox(width: FigmaConstants.spacing12),
                 _PlanHeaderCell(
                   planName: 'PRO',
-                  padding: headerPadding,
-                  itemGap: itemGap,
                   hasBorder: true,
                   isFirstRow: true,
                   isLastRow: features.isEmpty,
@@ -128,27 +146,20 @@ class _FeatureTable extends StatelessWidget {
                 children: [
                   _FeatureNameCell(
                     feature: feature,
-                    itemGap: itemGap,
                     isFirstFeature: index == 0,
                     isLastFeature: isLastFeature,
                   ),
-                  SizedBox(width: columnSpacing),
+                  const SizedBox(width: FigmaConstants.spacing12),
                   _FeatureIconCell(
                     isAvailable: feature.isAvailableInFree,
                     isPro: false,
-                    iconSize: iconSize,
-                    padding: iconPadding,
-                    itemGap: itemGap,
                     isFirstRow: false,
                     isLastRow: isLastFeature,
                   ),
-                  SizedBox(width: columnSpacing),
+                  const SizedBox(width: FigmaConstants.spacing12),
                   _FeatureIconCell(
                     isAvailable: feature.isAvailableInPro,
                     isPro: true,
-                    iconSize: iconSize,
-                    padding: iconPadding,
-                    itemGap: itemGap,
                     isFirstRow: false,
                     isLastRow: isLastFeature,
                   ),
@@ -164,16 +175,12 @@ class _FeatureTable extends StatelessWidget {
 
 class _PlanHeaderCell extends StatelessWidget {
   final String planName;
-  final double padding;
-  final double itemGap;
   final bool hasBorder;
   final bool isFirstRow;
   final bool isLastRow;
 
   const _PlanHeaderCell({
     required this.planName,
-    required this.padding,
-    required this.itemGap,
     required this.hasBorder,
     this.isFirstRow = true,
     this.isLastRow = false,
@@ -182,9 +189,9 @@ class _PlanHeaderCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Row height: 24px content + 8px top padding + 8px bottom padding = 40px total
-    final rowPadding = padding; // 8px
-    final horizontalPadding = padding; // 8px
-    final rowHeight = FigmaHelper.scaleHeight(context, 24) + (rowPadding * 2); // 24 + 8 + 8 = 40px
+    final rowPadding = FigmaConstants.spacing8;
+    final horizontalPadding = FigmaConstants.spacing8;
+    final rowHeight = FigmaConstants.featureTableRowContentHeight + (rowPadding * 2); // 24 + 8 + 8 = 40px
     
     final titleWidget = hasBorder
         ? _GradientBorderTitle(text: planName)
@@ -269,16 +276,18 @@ class _GradientBorderTitle extends StatelessWidget {
                 borderRadius: BorderRadius.circular(4 - borderWidth),
               ),
               child: Center(
-                child: FittedText(
-                  text: text,
-                  style: context.textTheme.bodyLarge?.copyWith(
-                        color: AppColors.white,
-                        fontSize: FigmaHelper.scaleFontSize(context, 16),
-                        fontWeight: FontWeight.w600,
-                      ),
-                  textAlign: TextAlign.center,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+                child: UnconstrainedBox(
+                  constrainedAxis: Axis.vertical,
+                  child: Text(
+                    text,
+                    style: context.textTheme.bodyLarge?.copyWith(
+                          color: AppColors.white,
+                          fontSize: FigmaConstants.fontSize16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                  ),
                 ),
               ),
             ),
@@ -299,29 +308,26 @@ class _PlainTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FittedText(
-      text: text,
+    return Text(
+      text,
       style: context.textTheme.bodyLarge?.copyWith(
             color: AppColors.white,
-            fontSize: FigmaHelper.scaleFontSize(context, 16),
+            fontSize: FigmaConstants.fontSize16,
             fontWeight: FontWeight.w600,
           ),
       textAlign: TextAlign.center,
       maxLines: 1,
-      overflow: TextOverflow.ellipsis,
     );
   }
 }
 
 class _FeatureNameCell extends StatelessWidget {
   final FeatureItem feature;
-  final double itemGap;
   final bool isFirstFeature;
   final bool isLastFeature;
 
   const _FeatureNameCell({
     required this.feature,
-    required this.itemGap,
     this.isFirstFeature = false,
     this.isLastFeature = false,
   });
@@ -329,8 +335,8 @@ class _FeatureNameCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Row height: 24px content + 8px top padding + 8px bottom padding = 40px total
-    final rowPadding = FigmaHelper.scaleHeight(context, FigmaConstants.spacing8); // 8px
-    final rowHeight = FigmaHelper.scaleHeight(context, 24) + (rowPadding * 2); // 24 + 8 + 8 = 40px
+    final rowPadding = FigmaConstants.spacing8;
+    final rowHeight = FigmaConstants.featureTableRowContentHeight + (rowPadding * 2); // 24 + 8 + 8 = 40px
 
     return Container(
       height: rowHeight,
@@ -346,7 +352,7 @@ class _FeatureNameCell extends StatelessWidget {
             feature.name,
             style: context.textTheme.bodyMedium?.copyWith(
                   color: AppColors.white,
-                  fontSize: FigmaHelper.scaleFontSize(context, 14),
+                  fontSize: FigmaConstants.fontSize14,
                   fontWeight: FontWeight.w600,
                 ),
             maxLines: 2,
@@ -361,18 +367,12 @@ class _FeatureNameCell extends StatelessWidget {
 class _FeatureIconCell extends StatelessWidget {
   final bool isAvailable;
   final bool isPro;
-  final double iconSize;
-  final double padding;
-  final double itemGap;
   final bool isFirstRow;
   final bool isLastRow;
 
   const _FeatureIconCell({
     required this.isAvailable,
     required this.isPro,
-    required this.iconSize,
-    required this.padding,
-    required this.itemGap,
     this.isFirstRow = false,
     this.isLastRow = false,
   });
@@ -380,20 +380,20 @@ class _FeatureIconCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Row height: 24px content + 8px top padding + 8px bottom padding = 40px total
-    final rowPadding = FigmaHelper.scaleHeight(context, FigmaConstants.spacing8); // 8px
-    final rowHeight = FigmaHelper.scaleHeight(context, 24) + (rowPadding * 2); // 24 + 8 + 8 = 40px
+    final rowPadding = FigmaConstants.spacing8;
+    final rowHeight = FigmaConstants.featureTableRowContentHeight + (rowPadding * 2); // 24 + 8 + 8 = 40px
 
     Widget child = Container(
       height: rowHeight,
       padding: EdgeInsets.only(
-        left: padding, // 13px for icons (horizontal)
-        right: padding, // 13px for icons (horizontal)
-        top: rowPadding, // 8px
-        bottom: rowPadding, // 8px
+        left: FigmaConstants.spacing8,
+        right: FigmaConstants.spacing8,
+        top: rowPadding,
+        bottom: rowPadding,
       ),
       child: SizedBox(
-        width: iconSize,
-        height: iconSize,
+        width: FigmaConstants.iconSize24,
+        height: FigmaConstants.iconSize24,
         child: _FeatureIcon(
           isAvailable: isAvailable,
           isPro: isPro,
@@ -448,8 +448,6 @@ class _FeatureIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final iconSize = FigmaHelper.scaleWidth(context, 24);
-
     if (isAvailable) {
       // Checkmark icon - green for FREE, red for PRO
       if (isPro) {
@@ -458,21 +456,21 @@ class _FeatureIcon extends StatelessWidget {
         // replace with: BovieAssets.icons.circleCheckIconRed.svg(...)
         // For now, using green checkmark as fallback
         return BovieAssets.icons.circleCheckIconGreen.svg(
-          width: iconSize,
-          height: iconSize,
+          width: FigmaConstants.iconSize24,
+          height: FigmaConstants.iconSize24,
         );
       } else {
         // FREE: Use green checkmark icon
         return BovieAssets.icons.circleCheckIconGreen.svg(
-          width: iconSize,
-          height: iconSize,
+          width: FigmaConstants.iconSize24,
+          height: FigmaConstants.iconSize24,
         );
       }
     } else {
       // Cancel/X icon
       return BovieAssets.icons.circleCancelIcon.svg(
-        width: iconSize,
-        height: iconSize,
+        width: FigmaConstants.iconSize24,
+        height: FigmaConstants.iconSize24,
       );
     }
   }

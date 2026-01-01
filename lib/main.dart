@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:desktop_window/desktop_window.dart';
 import 'package:bovie/generated/l10n.dart';
 import 'package:bovie/app/router/router.dart';
 import 'package:bovie/app/di/di.dart';
@@ -11,6 +15,12 @@ import 'package:bovie/core/utils/globals.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  
+  // Set window size for macOS
+  if (Platform.isMacOS || kIsWeb) {
+    const windowSize = Size(375, 812);
+    await DesktopWindow.setWindowSize(windowSize);
+  }
   
   // Load .env file
   await dotenv.load(fileName: ".env");
