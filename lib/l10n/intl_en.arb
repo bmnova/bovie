@@ -1,9 +1,5 @@
 {
   "@@locale": "en",
-  "appName": "Bovie",
-  "@appName": {
-    "description": "The name of the application"
-  },
   "splashError": "An error occurred during initialization",
   "retry": "Retry",
   "pick3Movies": "Pick 3 Movies",

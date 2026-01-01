@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
-import 'package:bovie/app/di/di.dart';
 import 'package:bovie/app/router/router.dart';
-import 'package:bovie/generated/l10n.dart';
 import 'package:bovie/features/onboarding/presentation/onboarding_movies_store.dart';
 import 'package:bovie/features/onboarding/domain/get_popular_movies_usecase.dart';
 import 'package:bovie/core/utils/tmdb_image_url_builder.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:bovie/core/utils/globals.dart';
 
 class OnboardingMoviesScreen extends StatefulWidget {
   const OnboardingMoviesScreen({super.key});
@@ -24,7 +23,7 @@ class _OnboardingMoviesScreenState extends State<OnboardingMoviesScreen> {
   @override
   void initState() {
     super.initState();
-    _store = OnboardingMoviesStore(getIt<GetPopularMovies>());
+    _store = OnboardingMoviesStore(getPopularMovies);
     _store.fetchNextPage();
 
     _scrollController.addListener(() {
@@ -44,12 +43,12 @@ class _OnboardingMoviesScreenState extends State<OnboardingMoviesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.of(context).pick3Movies),
+        title: Text(localizations.pick3Movies),
         actions: [
           Observer(
             builder: (_) => TextButton(
               onPressed: _store.canContinue ? () => context.push(AppRoutes.onboardingGenres) : null,
-              child: Text(S.of(context).continueText),
+              child: Text(localizations.continueText),
             ),
           ),
         ],

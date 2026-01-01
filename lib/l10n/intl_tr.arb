@@ -1,6 +1,5 @@
 {
   "@@locale": "tr",
-  "appName": "Bovie",
   "splashError": "Başlatma sırasında bir hata oluştu",
   "retry": "Tekrar Dene",
   "pick3Movies": "3 Film Seç",

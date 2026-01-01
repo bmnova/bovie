@@ -50,16 +50,6 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Bovie`
-  String get appName {
-    return Intl.message(
-      'Bovie',
-      name: 'appName',
-      desc: 'The name of the application',
-      args: [],
-    );
-  }
-
   /// `An error occurred during initialization`
   String get splashError {
     return Intl.message(

@@ -1,17 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
-import 'package:bovie/app/di/di.dart';
 import 'package:bovie/app/theme/app_colors.dart';
 import 'package:bovie/core/utils/figma_constants.dart';
 import 'package:bovie/features/splash/splash_store.dart';
 import 'package:bovie/generated/assets.gen.dart';
 import 'package:bovie/core/utils/globals.dart';
 import 'package:mobx/mobx.dart';
-
-import '../../app/config/app_config.dart';
-import 'package:bovie/app/config/app_config.dart';
 
 class _SplashConstants {
   // Layout from Figma (375 × 812)
@@ -45,7 +40,6 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   late final SplashStore _store;
-  late final AppConfig _appConfig;
   final _disposers = <ReactionDisposer>[];
 
   @override
@@ -54,15 +48,14 @@ class _SplashScreenState extends State<SplashScreen> {
     // Hide system UI for full-screen splash
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     
-    _store = getIt<SplashStore>();
-    _appConfig = getIt<AppConfig>();
+    _store = splashStore;
     
     _disposers.add(
       reaction(
         (_) => _store.nextRoute,
         (String? nextRoute) {
           if (nextRoute != null && mounted) {
-         //   context.go(nextRoute);
+           context.go(nextRoute);
           }
         },
       ),
@@ -140,7 +133,7 @@ class _SplashScreenState extends State<SplashScreen> {
           
           // App Name
           Text(
-            'Bovie', 
+            appName, 
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
               color: AppColors.white,
               fontSize: FigmaHelper.scaleFontSize(context, _SplashConstants.appNameFontSize),

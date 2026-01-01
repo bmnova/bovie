@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
-import 'package:bovie/app/di/di.dart';
 import 'package:bovie/app/router/router.dart';
-import 'package:bovie/generated/l10n.dart';
 import 'package:bovie/features/onboarding/presentation/onboarding_genres_store.dart';
 import 'package:bovie/features/onboarding/domain/get_genres_usecase.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mobx/mobx.dart';
+import 'package:bovie/core/utils/globals.dart';
 
 class OnboardingGenresScreen extends StatefulWidget {
   const OnboardingGenresScreen({super.key});
@@ -25,7 +23,7 @@ class _OnboardingGenresScreenState extends State<OnboardingGenresScreen> {
   void initState() {
     super.initState();
     _store =
-        OnboardingGenresStore(getIt<GetGenres>(), getIt<SharedPreferences>());
+        OnboardingGenresStore(getGenres, prefs);
     _store.fetchGenres();
 
     _disposers.add(
@@ -52,7 +50,7 @@ class _OnboardingGenresScreenState extends State<OnboardingGenresScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.of(context).pick2Genres),
+        title: Text(localizations.pick2Genres),
         actions: [
           Observer(
             builder: (_) =>
@@ -64,7 +62,7 @@ class _OnboardingGenresScreenState extends State<OnboardingGenresScreen> {
                       ? const SizedBox(width: 20,
                       height: 20,
                       child: CircularProgressIndicator(strokeWidth: 2))
-                      : Text(S.of(context).finish),
+                      : Text(localizations.finish),
                 ),
           ),
         ],
