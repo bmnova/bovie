@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:bovie/app/router/router.dart';
 import 'package:bovie/app/di/di.dart';
 import 'package:bovie/app/config/app_config.dart';
+import 'package:bovie/app/theme/app_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -32,9 +33,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) => MaterialApp.router(
       title: 'Bovie',
       routerConfig: router,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: ThemeMode.light,
     );
 }
