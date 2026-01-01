@@ -8,6 +8,10 @@ import 'package:bovie/features/onboarding/domain/get_genres_usecase.dart';
 import 'package:mobx/mobx.dart';
 import 'package:bovie/core/utils/globals.dart';
 
+import '../../core/utils/figma_constants.dart';
+import '../../core/widgets/basic/app_button.dart';
+import '../../core/widgets/basic/movie_genre_card.dart';
+
 class OnboardingGenresScreen extends StatefulWidget {
   const OnboardingGenresScreen({super.key});
 
@@ -47,52 +51,43 @@ class _OnboardingGenresScreenState extends State<OnboardingGenresScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(
         title: Text(localizations.pick2Genres),
-        actions: [
-          Observer(
-            builder: (_) =>
-                TextButton(
-                  onPressed: _store.canContinue
-                      ? _store.completeOnboarding
-                      : null,
-                  child: _store.isLoading
-                      ? const SizedBox(width: 20,
-                      height: 20,
-                      child: CircularProgressIndicator(strokeWidth: 2))
-                      : Text(localizations.finish),
-                ),
-          ),
-        ],
       ),
       body: Observer(
         builder: (_) {
-          if (_store.isLoading && _store.genres.isEmpty) {
+          if (_store.isLoading) {
             return const Center(child: CircularProgressIndicator());
           }
 
-          if (_store.error != null) {
-            return Center(child: Text(_store.error!));
-          }
-
-          return ListView.builder(
-            padding: const EdgeInsets.all(16),
-            itemCount: _store.genres.length,
-            itemBuilder: (context, index) {
-              final genre = _store.genres[index];
-              final isSelected = _store.selectedGenreIds.contains(genre.id);
-
-              return CheckboxListTile(
-                title: Text(genre.name),
-                value: isSelected,
-                onChanged: (_) => _store.toggleSelection(genre.id),
-              );
-            },
+          return Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.all(FigmaConstants.spacing16),
+                  child: Wrap(
+                    spacing: FigmaConstants.spacing12,
+                    runSpacing: FigmaConstants.spacing12,
+                    children: _store.genres.map((genre) => MovieGenreCard(
+                        imageUrl: 'https://images.unsplash.com/photo-1485846234645-a62644ef7467?w=200',
+                        isSelected: _store.selectedGenreIds.contains(genre.id),
+                        onTap: () => _store.toggleSelection(genre.id),
+                      )).toList(),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(FigmaConstants.spacing16),
+                child: AppButton(
+                  text: localizations.next,
+                  isEnabled: _store.canContinue,
+                  onPressed: () => context.push(AppRoutes.onboardingMovies),
+                ),
+              ),
+            ],
           );
         },
       ),
     );
-  }
 }

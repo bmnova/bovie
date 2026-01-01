@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:bovie/core/utils/globals.dart';
 
+import '../../utils/figma_constants.dart';
+
 /// Chip component with selection state
 class AppChip extends StatelessWidget {
   final String label;
@@ -15,24 +17,26 @@ class AppChip extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
+  Widget build(BuildContext context) => GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.symmetric(
+          horizontal: FigmaConstants.spacing16,
+          vertical: FigmaConstants.spacing8,
+        ),
         decoration: BoxDecoration(
           color: isSelected ? context.colorScheme.primary : context.colorScheme.surfaceContainerHighest,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(FigmaConstants.radius20),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             if (isSelected)
               Padding(
-                padding: const EdgeInsets.only(right: 8),
+                padding: const EdgeInsets.only(right: FigmaConstants.spacing8),
                 child: Icon(
                   Icons.check,
-                  size: 16,
+                  size: FigmaConstants.iconSize16,
                   color: context.colorScheme.onPrimary,
                 ),
               ),
@@ -47,6 +51,5 @@ class AppChip extends StatelessWidget {
         ),
       ),
     );
-  }
 }
 

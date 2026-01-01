@@ -21,8 +21,7 @@ class ToggleRow extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return CustomRow(
+  Widget build(BuildContext context) => CustomRow(
       leadingWidget: FittedText(
         text: text,
         style: context.textTheme.bodyLarge?.copyWith(
@@ -37,7 +36,7 @@ class ToggleRow extends StatelessWidget {
       trailingWidget: Switch(
         value: value,
         onChanged: onChanged,
-        activeColor: AppColors.white,
+        activeThumbColor: AppColors.white,
         activeTrackColor: AppColors.grayDark,
         inactiveThumbColor: AppColors.white,
         inactiveTrackColor: AppColors.grayDark,
@@ -48,6 +47,5 @@ class ToggleRow extends StatelessWidget {
       verticalPadding: FigmaConstants.rowVerticalPaddingSmall,
       borderRadius: FigmaConstants.radius12,
     );
-  }
 }
 

@@ -9,15 +9,18 @@ class FigmaConstants {
   static const double designHeight = 812.0;
 
   // Spacing scale (from Figma)
+  static const double spacing2 = 2.0;
   static const double spacing4 = 4.0;
   static const double spacing8 = 8.0;
   static const double spacing12 = 12.0;
   static const double spacing16 = 16.0;
   static const double spacing20 = 20.0;
   static const double spacing24 = 24.0;
+  static const double spacing28 = 28.0;
   static const double spacing32 = 32.0;
   static const double spacing40 = 40.0;
   static const double spacing48 = 48.0;
+  static const double spacing200 = 200.0;
 
   // Component sizes (from Figma)
   static const double moviePosterWidth = 140.0;
@@ -51,6 +54,12 @@ class FigmaConstants {
 
   // Border width
   static const double borderWidth1 = 1.0;
+  static const double borderWidth2 = 2.0;
+  static const double borderWidthPro = 1.63;
+
+  // Elevation
+  static const double elevation0 = 0.0;
+  static const double elevation2 = 2.0;
 
   // Row component constants
   static const double rowHorizontalPadding = 20.0;
@@ -78,6 +87,15 @@ class FigmaConstants {
 
   // Bottom padding (safe area)
   static const double bottomPadding = 34.0; // iPhone X+ safe area
+
+  // Animation durations (from Figma)
+  static const Duration animationDurationFast = Duration(milliseconds: 200);
+  static const Duration animationDurationMedium = Duration(milliseconds: 400);
+  static const Duration animationDurationSlow = Duration(milliseconds: 600);
+
+  // Animation delays (from Figma)
+  static const Duration animationDelayShort = Duration(milliseconds: 100);
+  static const Duration animationDelayMedium = Duration(milliseconds: 200);
 }
 
 /// Helper class for responsive scaling based on Figma design

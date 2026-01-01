@@ -20,8 +20,7 @@ class FittedText extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
+  Widget build(BuildContext context) => LayoutBuilder(
       builder: (context, constraints) {
         final hasHeightConstraint = constraints.maxHeight.isFinite && constraints.maxHeight < double.infinity;
         final hasWidthConstraint = constraints.maxWidth.isFinite && constraints.maxWidth < double.infinity;
@@ -66,7 +65,6 @@ class FittedText extends StatelessWidget {
         );
       },
     );
-  }
 
   AlignmentGeometry _getAlignment(TextAlign? align) {
     switch (align) {

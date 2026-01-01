@@ -11,5 +11,28 @@
   "failedToLoadMovies": "Failed to load movies",
   "failedToLoadGenres": "Failed to load genres",
   "home": "Home",
-  "paywall": "Paywall"
+  "paywall": "Paywall",
+  "dailyMovieSuggestions": "Daily Movie Suggestions",
+  "aiPoweredMovieInsights": "AI-Powered Movie Insights",
+  "personalizedWatchlists": "Personalized Watchlists",
+  "adFreeExperience": "Ad-Free Experience",
+  "enableFreeTrial": "Enable Free Trial",
+  "autoRenewableCancelAnytime": "Auto Renewable, Cancel Anytime",
+  "threeDaysFree": "3 Days Free",
+  "noPaymentNow": "No Payment Now",
+  "unlockPro": "Unlock {appName} PRO",
+  "@unlockPro": {
+    "placeholders": {
+      "appName": {}
+    }
+  },
+  "termsOfUse": "Terms of Use",
+  "restorePurchase": "Restore Purchase",
+  "privacyPolicy": "Privacy Policy",
+  "bestValue": "Best Value",
+  "imagePlaceholder": "Image",
+  "openPaywall": "Open Paywall",
+  "free": "FREE",
+  "pro": "PRO",
+  "next": "Next"
 }

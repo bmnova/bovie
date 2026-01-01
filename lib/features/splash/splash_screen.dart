@@ -45,7 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
         (_) => _store.nextRoute,
         (String? nextRoute) {
           if (nextRoute != null && mounted) {
-            context.go(nextRoute);
+           context.go(AppRoutes.paywall);
           }
         },
       ),

@@ -35,7 +35,7 @@ class SubscriptionPlanRow extends StatelessWidget {
 
     // Add extra padding for badge space on all rows to keep consistent height
     Widget row = Padding(
-      padding: EdgeInsets.only(
+      padding: const EdgeInsets.only(
         top: FigmaConstants.badgeExtraPadding,
         bottom: FigmaConstants.badgeExtraPadding,
       ),
@@ -55,7 +55,7 @@ class SubscriptionPlanRow extends StatelessWidget {
 
       final badgeWidget = Container(
         height: FigmaConstants.badgeHeight,
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: FigmaConstants.badgeHorizontalPadding,
           vertical: FigmaConstants.badgeVerticalPadding,
         ),
@@ -66,7 +66,7 @@ class SubscriptionPlanRow extends StatelessWidget {
           ),
         ),
         child: Text(
-          'Best Value',
+          localizations.bestValue,
           style: context.textTheme.bodySmall?.copyWith(
             color: AppColors.white,
             fontSize: FigmaConstants.badgeFontSize,

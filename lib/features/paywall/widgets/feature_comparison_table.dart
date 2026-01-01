@@ -21,8 +21,7 @@ class FeatureComparisonTable extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
+  Widget build(BuildContext context) => Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         // App Name
@@ -37,7 +36,7 @@ class FeatureComparisonTable extends StatelessWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
-        SizedBox(height: FigmaConstants.spacing16),
+        const SizedBox(height: FigmaConstants.spacing16),
         
         // Feature Comparison Table (includes headers)
         _FeatureTable(
@@ -45,7 +44,6 @@ class FeatureComparisonTable extends StatelessWidget {
         ),
       ],
     );
-  }
 }
 
 /// Individual feature item in the comparison table
@@ -79,7 +77,7 @@ class _FeatureTable extends StatelessWidget {
 
     // Measure FREE text width
     final freeTextPainter = TextPainter(
-      text: TextSpan(text: 'FREE', style: textStyle),
+      text: TextSpan(text: localizations.free, style: textStyle),
       textDirection: TextDirection.ltr,
     );
     freeTextPainter.layout();
@@ -87,18 +85,18 @@ class _FeatureTable extends StatelessWidget {
 
     // Measure PRO text width
     final proTextPainter = TextPainter(
-      text: TextSpan(text: 'PRO', style: textStyle),
+      text: TextSpan(text: localizations.pro, style: textStyle),
       textDirection: TextDirection.ltr,
     );
     proTextPainter.layout();
     // PRO has gradient border with borderWidth (1.63px) padding on each side
     // Add extra padding to ensure text fits properly (accounting for Stack/Padding constraints)
-    const borderWidth = 1.63;
-    final proHeaderWidth = proTextPainter.width + (FigmaConstants.spacing8 * 2) + (borderWidth * 2) + 4; // 8px left + 8px right + border padding + extra safety margin
+    // PRO has gradient border with borderWidth (1.63px) padding on each side
+    // Add extra padding to ensure text fits properly (accounting for Stack/Padding constraints)
+    final proHeaderWidth = proTextPainter.width + (FigmaConstants.spacing8 * 2) + (FigmaConstants.borderWidthPro * 2) + FigmaConstants.spacing4; // 8px left + 8px right + border padding + extra safety margin
 
-    // Icon column width: 8px padding * 2 + icon size = 8px * 2 + 24px = 40px
     // Use header width which includes padding, but ensure minimum width for icons
-    final iconColumnMinWidth = (FigmaConstants.spacing8 * 2) + FigmaConstants.iconSize24; // 40px
+    const iconColumnMinWidth = (FigmaConstants.spacing8 * 2) + FigmaConstants.iconSize24; // 40px
     final freeColumnWidth = freeHeaderWidth > iconColumnMinWidth ? freeHeaderWidth : iconColumnMinWidth;
     final proColumnWidth = proHeaderWidth > iconColumnMinWidth ? proHeaderWidth : iconColumnMinWidth;
 
@@ -122,14 +120,14 @@ class _FeatureTable extends StatelessWidget {
                 const SizedBox(), // Feature names column
                 const SizedBox(width: FigmaConstants.spacing12),
                 _PlanHeaderCell(
-                  planName: 'FREE',
+                  planName: localizations.free,
                   hasBorder: false,
                   isFirstRow: true,
                   isLastRow: features.isEmpty,
                 ),
                 const SizedBox(width: FigmaConstants.spacing12),
                 _PlanHeaderCell(
-                  planName: 'PRO',
+                  planName: localizations.pro,
                   hasBorder: true,
                   isFirstRow: true,
                   isLastRow: features.isEmpty,
@@ -189,9 +187,9 @@ class _PlanHeaderCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Row height: 24px content + 8px top padding + 8px bottom padding = 40px total
-    final rowPadding = FigmaConstants.spacing8;
-    final horizontalPadding = FigmaConstants.spacing8;
-    final rowHeight = FigmaConstants.featureTableRowContentHeight + (rowPadding * 2); // 24 + 8 + 8 = 40px
+     const rowPadding = FigmaConstants.spacing8;
+     const horizontalPadding = FigmaConstants.spacing8;
+     const rowHeight = FigmaConstants.featureTableRowContentHeight + (rowPadding * 2); // 24 + 8 + 8 = 40px
     
     final titleWidget = hasBorder
         ? _GradientBorderTitle(text: planName)
@@ -206,13 +204,13 @@ class _PlanHeaderCell extends StatelessWidget {
       decoration: hasBorder
           ? BoxDecoration(
               border: Border(
-                left: const BorderSide(color: AppColors.redLight, width: 1),
-                right: const BorderSide(color: AppColors.redLight, width: 1),
+                left: const BorderSide(color: AppColors.redLight, width: FigmaConstants.borderWidth1),
+                right: const BorderSide(color: AppColors.redLight, width: FigmaConstants.borderWidth1),
                 top: isFirstRow
-                    ? const BorderSide(color: AppColors.redLight, width: 1)
+                    ? const BorderSide(color: AppColors.redLight, width: FigmaConstants.borderWidth1)
                     : BorderSide.none,
                 bottom: isLastRow
-                    ? const BorderSide(color: AppColors.redLight, width: 1)
+                    ? const BorderSide(color: AppColors.redLight, width: FigmaConstants.borderWidth1)
                     : BorderSide.none,
               ),
               borderRadius: isFirstRow && isLastRow
@@ -245,7 +243,7 @@ class _GradientBorderTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const borderWidth = 1.63;
+    const borderWidth = FigmaConstants.borderWidthPro;
     
     return Stack(
       children: [
@@ -263,7 +261,7 @@ class _GradientBorderTitle extends StatelessWidget {
               ],
               stops: [0.2, 0.5, 0.8],
             ),
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(FigmaConstants.radius4),
           ),
         ),
         // Inner container with black background (creates border effect)
@@ -273,7 +271,7 @@ class _GradientBorderTitle extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 color: AppColors.black,
-                borderRadius: BorderRadius.circular(4 - borderWidth),
+                borderRadius: BorderRadius.circular(FigmaConstants.radius4 - borderWidth),
               ),
               child: Center(
                 child: UnconstrainedBox(
@@ -307,8 +305,7 @@ class _PlainTitle extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return Text(
+  Widget build(BuildContext context) => Text(
       text,
       style: context.textTheme.bodyLarge?.copyWith(
             color: AppColors.white,
@@ -318,7 +315,6 @@ class _PlainTitle extends StatelessWidget {
       textAlign: TextAlign.center,
       maxLines: 1,
     );
-  }
 }
 
 class _FeatureNameCell extends StatelessWidget {
@@ -406,13 +402,13 @@ class _FeatureIconCell extends StatelessWidget {
       return Container(
         decoration: BoxDecoration(
           border: Border(
-            left: const BorderSide(color: AppColors.redLight, width: 1),
-            right: const BorderSide(color: AppColors.redLight, width: 1),
+            left: const BorderSide(color: AppColors.redLight, width: FigmaConstants.borderWidth1),
+            right: const BorderSide(color: AppColors.redLight, width: FigmaConstants.borderWidth1),
             top: isFirstRow
-                ? const BorderSide(color: AppColors.redLight, width: 1)
+                ? const BorderSide(color: AppColors.redLight, width: FigmaConstants.borderWidth1)
                 : BorderSide.none,
             bottom: isLastRow
-                ? const BorderSide(color: AppColors.redLight, width: 1)
+                ? const BorderSide(color: AppColors.redLight, width: FigmaConstants.borderWidth1)
                 : BorderSide.none,
           ),
           borderRadius: isFirstRow && isLastRow

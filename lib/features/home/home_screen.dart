@@ -8,8 +8,10 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  Widget build(BuildContext context) => Scaffold(
+      appBar: AppBar(
+        title: Text(S.of(context).home),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -17,14 +19,11 @@ class HomeScreen extends StatelessWidget {
             Text(S.of(context).home),
             const SizedBox(height: 24),
             AppButton(
-              text: 'Open Paywall',
-              onPressed: () {
-                context.push(AppRoutes.paywall);
-              },
+              text: S.of(context).openPaywall,
+              onPressed: () => context.push(AppRoutes.paywall),
             ),
           ],
         ),
       ),
     );
-  }
 }

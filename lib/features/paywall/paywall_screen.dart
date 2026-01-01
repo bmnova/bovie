@@ -23,48 +23,48 @@ class PaywallScreen extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: FigmaConstants.spacing20,
             ),
             child: Column(
               children: [
-                SizedBox(height: FigmaConstants.spacing16),
+                const SizedBox(height: FigmaConstants.spacing16),
                 // Feature Comparison Table
                 FeatureComparisonTable(
                   appName: appName,
-                  features: const [
+                  features: [
                     FeatureItem(
-                      name: 'Daily Movie Suggestions',
+                      name: localizations.dailyMovieSuggestions,
                       isAvailableInFree: true,
                       isAvailableInPro: true,
                     ),
                     FeatureItem(
-                      name: 'AI-Powered Movie Insights',
+                      name: localizations.aiPoweredMovieInsights,
                       isAvailableInFree: false,
                       isAvailableInPro: true,
                     ),
                     FeatureItem(
-                      name: 'Personalized Watchlists',
+                      name: localizations.personalizedWatchlists,
                       isAvailableInFree: false,
                       isAvailableInPro: false,
                     ),
                     FeatureItem(
-                      name: 'Ad-Free Experience',
+                      name: localizations.adFreeExperience,
                       isAvailableInFree: false,
                       isAvailableInPro: false,
                     ),
                   ],
                 ),
-                SizedBox(height: 28),
+                const SizedBox(height: FigmaConstants.spacing28),
                 // Enable Free Trial Toggle
                 Observer(
                   builder: (_) => ToggleRow(
-                    text: 'Enable Free Trial',
+                    text: localizations.enableFreeTrial,
                     value: store.isFreeTrialEnabled,
                     onChanged: store.setFreeTrialEnabled,
                   ),
                 ),
-                SizedBox(height: FigmaConstants.spacing16),
+                const SizedBox(height: FigmaConstants.spacing16),
                 // Weekly Plan
                 Observer(
                   builder: (_) => SubscriptionPlanRow(
@@ -73,7 +73,7 @@ class PaywallScreen extends StatelessWidget {
                     onTap: () => store.selectPlan(SubscriptionPlan.weekly),
                   ),
                 ),
-                SizedBox(height: FigmaConstants.spacing4),
+                const SizedBox(height: FigmaConstants.spacing4),
                 // Monthly Plan
                 Observer(
                   builder: (_) => SubscriptionPlanRow(
@@ -82,7 +82,7 @@ class PaywallScreen extends StatelessWidget {
                     onTap: () => store.selectPlan(SubscriptionPlan.monthly),
                   ),
                 ),
-                SizedBox(height: FigmaConstants.spacing4),
+                const SizedBox(height: FigmaConstants.spacing4),
                 // Yearly Plan (with Best Value badge)
                 Observer(
                   builder: (_) => SubscriptionPlanRow(
@@ -91,7 +91,7 @@ class PaywallScreen extends StatelessWidget {
                     onTap: () => store.selectPlan(SubscriptionPlan.yearly),
                   ),
                 ),
-                SizedBox(height: FigmaConstants.spacing24),
+                const SizedBox(height: FigmaConstants.spacing24),
                 // Auto Renewable text
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -100,9 +100,9 @@ class PaywallScreen extends StatelessWidget {
                       width: FigmaConstants.iconSize16,
                       height: FigmaConstants.iconSize16,
                     ),
-                    SizedBox(width: FigmaConstants.spacing4),
+                    const SizedBox(width: FigmaConstants.spacing4),
                     Text(
-                      'Auto Renewable, Cancel Anytime',
+                      localizations.autoRenewableCancelAnytime,
                       style: context.textTheme.bodySmall?.copyWith(
                         color: AppColors.white,
                         fontSize: FigmaConstants.fontSize10,
@@ -112,26 +112,34 @@ class PaywallScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: FigmaConstants.spacing16),
+                const SizedBox(height: FigmaConstants.spacing16),
                 // Unlock Button
                 Observer(
                   builder: (_) {
                     final isFreeTrialEnabled = store.isFreeTrialEnabled;
                     
                     return AppButton(
+                      backgroundColor: AppColors.redLight,
+                      foregroundColor: AppColors.white,
+                      height: FigmaConstants.buttonHeightLarge,
+                      borderRadius: FigmaConstants.radius12,
+                      enableAnimation: isFreeTrialEnabled,
+                      onPressed: () {
+                        // Handle unlock action
+                      },
                       child: isFreeTrialEnabled
                           ? Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(
-                                  '3 Days Free',
+                                  localizations.threeDaysFree,
                                   style: context.textTheme.labelLarge?.copyWith(
                                     fontWeight: FontWeight.w600,
                                     color: AppColors.white,
                                   ),
                                 ),
                                 Text(
-                                  'No Payment Now',
+                                  localizations.noPaymentNow,
                                   style: context.textTheme.bodySmall?.copyWith(
                                     fontWeight: FontWeight.normal,
                                     color: AppColors.white,
@@ -140,24 +148,17 @@ class PaywallScreen extends StatelessWidget {
                               ],
                             )
                           : Text(
-                              'Unlock MovieAI PRO',
+                              localizations.unlockPro(appName),
                               style: context.textTheme.labelLarge?.copyWith(
                                 fontWeight: FontWeight.w600,
                                 color: AppColors.white,
+                                fontSize: FigmaConstants.fontSize16,
                               ),
                             ),
-                      onPressed: () {
-                        // Handle unlock action
-                      },
-                      backgroundColor: AppColors.redLight,
-                      foregroundColor: AppColors.white,
-                      height: FigmaConstants.buttonHeightLarge,
-                      borderRadius: FigmaConstants.radius12,
-                      enableAnimation: isFreeTrialEnabled,
                     );
                   },
                 ),
-                SizedBox(height: FigmaConstants.spacing16),
+                const SizedBox(height: FigmaConstants.spacing16),
                 // Footer Links
                 // TODO: Convert footer links to proper buttons with navigation handlers
                 Row(
@@ -168,7 +169,7 @@ class PaywallScreen extends StatelessWidget {
                           // TODO: Navigate to Terms of Use
                         },
                         child: Text(
-                          'Terms of Use',
+                          localizations.termsOfUse,
                           textAlign: TextAlign.center,
                           style: context.textTheme.bodySmall?.copyWith(
                             color: AppColors.white,
@@ -178,14 +179,14 @@ class PaywallScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(width: FigmaConstants.spacing40),
+                    const SizedBox(width: FigmaConstants.spacing40),
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
                           // TODO: Handle Restore Purchase
                         },
                         child: Text(
-                          'Restore Purchase',
+                          localizations.restorePurchase,
                           textAlign: TextAlign.center,
                           style: context.textTheme.bodySmall?.copyWith(
                             color: AppColors.white,
@@ -195,14 +196,14 @@ class PaywallScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(width: FigmaConstants.spacing40),
+                    const SizedBox(width: FigmaConstants.spacing40),
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
                           // TODO: Navigate to Privacy Policy
                         },
                         child: Text(
-                          'Privacy Policy',
+                          localizations.privacyPolicy,
                           textAlign: TextAlign.center,
                           style: context.textTheme.bodySmall?.copyWith(
                             color: AppColors.white,
@@ -214,7 +215,7 @@ class PaywallScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: FigmaConstants.spacing16),
+                const SizedBox(height: FigmaConstants.spacing16),
               ],
             ),
           ),

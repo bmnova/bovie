@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:bovie/core/utils/globals.dart';
 
+import '../../utils/figma_constants.dart';
+
 /// Circular movie genre card component with selection state
 class MovieGenreCard extends StatelessWidget {
   final String? imageUrl;
@@ -13,13 +15,11 @@ class MovieGenreCard extends StatelessWidget {
     this.imageUrl,
     this.isSelected = false,
     this.onTap,
-    this.size = 140,
+    this.size = FigmaConstants.genreCardSize,
   });
 
   @override
-  Widget build(BuildContext context) {
-
-    return GestureDetector(
+  Widget build(BuildContext context) => GestureDetector(
       onTap: onTap,
       child: Stack(
         children: [
@@ -32,7 +32,7 @@ class MovieGenreCard extends StatelessWidget {
               border: isSelected
                   ? Border.all(
                       color: context.colorScheme.primary,
-                      width: 2,
+                      width: FigmaConstants.borderWidth2,
                     )
                   : null,
             ),
@@ -45,7 +45,7 @@ class MovieGenreCard extends StatelessWidget {
                         color: context.colorScheme.surfaceContainerHighest,
                         child: Center(
                           child: Text(
-                            'Image',
+                            localizations.imagePlaceholder,
                             style: context.textTheme.titleMedium?.copyWith(
                               color: context.colorScheme.onSurfaceVariant,
                             ),
@@ -57,7 +57,7 @@ class MovieGenreCard extends StatelessWidget {
                       color: context.colorScheme.surfaceContainerHighest,
                       child: Center(
                         child: Text(
-                          'Image',
+                          localizations.imagePlaceholder,
                           style: context.textTheme.titleMedium?.copyWith(
                             color: context.colorScheme.onSurfaceVariant,
                           ),
@@ -71,8 +71,8 @@ class MovieGenreCard extends StatelessWidget {
               right: 0,
               bottom: 0,
               child: Container(
-                width: 32,
-                height: 32,
+                width: FigmaConstants.iconSize32,
+                height: FigmaConstants.iconSize32,
                 decoration: BoxDecoration(
                   color: context.colorScheme.primary,
                   shape: BoxShape.circle,
@@ -80,13 +80,12 @@ class MovieGenreCard extends StatelessWidget {
                 child: Icon(
                   Icons.check_circle,
                   color: context.colorScheme.onPrimary,
-                  size: 32,
+                  size: FigmaConstants.iconSize32,
                 ),
               ),
             ),
         ],
       ),
     );
-  }
 }
 

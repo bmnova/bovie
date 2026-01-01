@@ -13,12 +13,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:bovie/core/utils/globals.dart';
 
+import 'core/utils/figma_constants.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
   // Set window size for macOS
   if (Platform.isMacOS || kIsWeb) {
-    const windowSize = Size(375, 812);
+    const windowSize = Size(FigmaConstants.designWidth, FigmaConstants.designHeight);
     await DesktopWindow.setWindowSize(windowSize);
   }
   

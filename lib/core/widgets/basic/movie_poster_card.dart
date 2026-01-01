@@ -3,6 +3,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:bovie/core/utils/tmdb_image_url_builder.dart';
 import 'package:bovie/core/utils/globals.dart';
 
+import '../../utils/figma_constants.dart';
+
 /// Movie poster card component with selection state
 class MoviePosterCard extends StatelessWidget {
   final String? imageUrl;
@@ -16,14 +18,12 @@ class MoviePosterCard extends StatelessWidget {
     this.imageUrl,
     this.isSelected = false,
     this.onTap,
-    this.width = 140,
-    this.height = 196,
+    this.width = FigmaConstants.moviePosterWidth,
+    this.height = FigmaConstants.moviePosterHeight,
   });
 
   @override
-  Widget build(BuildContext context) {
-
-    return GestureDetector(
+  Widget build(BuildContext context) => GestureDetector(
       onTap: onTap,
       child: Stack(
         children: [
@@ -34,11 +34,11 @@ class MoviePosterCard extends StatelessWidget {
               color: context.colorScheme.surface,
               borderRadius: BorderRadius.circular(8),
               border: isSelected
-                  ? Border.all(
-                      color: context.colorScheme.primary,
-                      width: 2,
-                    )
-                  : null,
+                   ? Border.all(
+                       color: context.colorScheme.primary,
+                       width: FigmaConstants.borderWidth2,
+                     )
+                   : null,
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
@@ -61,7 +61,7 @@ class MoviePosterCard extends StatelessWidget {
                         color: context.colorScheme.surfaceContainerHighest,
                         child: Center(
                           child: Text(
-                            'Image',
+                            localizations.imagePlaceholder,
                             style: context.textTheme.titleMedium?.copyWith(
                               color: context.colorScheme.onSurfaceVariant,
                             ),
@@ -87,8 +87,8 @@ class MoviePosterCard extends StatelessWidget {
               right: 8,
               bottom: 8,
               child: Container(
-                width: 32,
-                height: 32,
+                width: FigmaConstants.iconSize32,
+                height: FigmaConstants.iconSize32,
                 decoration: BoxDecoration(
                   color: context.colorScheme.primary,
                   shape: BoxShape.circle,
@@ -96,7 +96,7 @@ class MoviePosterCard extends StatelessWidget {
                 child: Icon(
                   Icons.check_circle,
                   color: context.colorScheme.onPrimary,
-                  size: 32,
+                  size: FigmaConstants.iconSize32,
                 ),
               ),
             ),
@@ -107,7 +107,7 @@ class MoviePosterCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                   boxShadow: [
                     BoxShadow(
-                      color: context.colorScheme.primary.withOpacity(0.3),
+                      color: context.colorScheme.primary.withValues(alpha: 0.3),
                       blurRadius: 24,
                       spreadRadius: 0,
                       offset: Offset.zero,
@@ -120,5 +120,5 @@ class MoviePosterCard extends StatelessWidget {
       ),
     );
   }
-}
+
 

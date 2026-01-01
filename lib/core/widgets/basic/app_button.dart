@@ -14,6 +14,7 @@ class AppButton extends StatefulWidget {
   final double? height;
   final double borderRadius;
   final bool enableAnimation;
+  final Widget? endingIcon;
 
   const AppButton({
     super.key,
@@ -26,6 +27,7 @@ class AppButton extends StatefulWidget {
     this.height,
     this.borderRadius = FigmaConstants.radius8,
     this.enableAnimation = false,
+    this.endingIcon,
   }) : assert(text != null || child != null, 'Either text or child must be provided');
 
   @override
@@ -43,11 +45,11 @@ class _AppButtonState extends State<AppButton>
     super.initState();
     _pulseController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 400),
+      duration: FigmaConstants.animationDurationMedium,
     );
     _pulseAnimation = Tween<double>(
-      begin: 1.0,
-      end: 0.95,
+      begin: _AppButtonConstants.pulseScaleBegin,
+      end: _AppButtonConstants.pulseScaleEnd,
     ).animate(
       CurvedAnimation(
         parent: _pulseController,
@@ -55,9 +57,9 @@ class _AppButtonState extends State<AppButton>
       ),
     );
 
-    // Start animation if enabled from the beginning (with 100ms delay)
+    // Start animation if enabled from the beginning (with delay)
     if (widget.enableAnimation) {
-      Future.delayed(const Duration(milliseconds: 100), () {
+      Future.delayed(FigmaConstants.animationDelayShort, () {
         if (mounted) {
           _pulseController.repeat(reverse: true);
           _previousAnimationState = true;
@@ -73,8 +75,8 @@ class _AppButtonState extends State<AppButton>
     if (_previousAnimationState != widget.enableAnimation) {
       _previousAnimationState = widget.enableAnimation;
       if (widget.enableAnimation) {
-        // Start animation with 100ms delay
-        Future.delayed(const Duration(milliseconds: 100), () {
+        // Start animation with delay
+        Future.delayed(FigmaConstants.animationDelayShort, () {
           if (mounted) {
             _pulseController.repeat(reverse: true);
           }
@@ -92,6 +94,31 @@ class _AppButtonState extends State<AppButton>
     super.dispose();
   }
 
+  Widget _buildButtonContent(BuildContext context) {
+    final content = widget.child ??
+        Text(
+          widget.text!,
+          style: context.textTheme.labelLarge?.copyWith(
+            fontWeight: FontWeight.w600,
+            color: widget.foregroundColor ?? AppColors.white,
+          ),
+        );
+
+    if (widget.endingIcon != null) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          content,
+          const SizedBox(width: FigmaConstants.spacing4),
+          widget.endingIcon!,
+        ],
+      );
+    }
+
+    return content;
+  }
+
   @override
   Widget build(BuildContext context) {
     final effectiveBackgroundColor = widget.backgroundColor ??
@@ -104,19 +131,16 @@ class _AppButtonState extends State<AppButton>
         onPressed: widget.isEnabled ? widget.onPressed : null,
         style: ElevatedButton.styleFrom(
           backgroundColor: effectiveBackgroundColor,
-          elevation: widget.isEnabled ? 2 : 0,
+          elevation: widget.isEnabled ? FigmaConstants.elevation2 : FigmaConstants.elevation0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(widget.borderRadius),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-        ),
-        child: widget.child ?? Text(
-          widget.text!,
-          style: context.textTheme.labelLarge?.copyWith(
-            fontWeight: FontWeight.w600,
-            color: widget.foregroundColor ?? AppColors.white,
+          padding: const EdgeInsets.symmetric(
+            horizontal: FigmaConstants.spacing24,
+            vertical: FigmaConstants.spacing12 + FigmaConstants.spacing2, // Approximate 14
           ),
         ),
+        child: _buildButtonContent(context),
       ),
     );
 
@@ -124,13 +148,11 @@ class _AppButtonState extends State<AppButton>
     if (widget.enableAnimation) {
       return AnimatedBuilder(
         animation: _pulseAnimation,
-        builder: (context, child) {
-          return Transform(
+        builder: (context, child) => Transform(
             alignment: Alignment.center,
-            transform: Matrix4.identity()..scale(_pulseAnimation.value, 1.0),
+            transform: Matrix4.diagonal3Values(_pulseAnimation.value, 1.0, 1.0),
             child: button,
-          );
-        },
+          ),
       );
     }
 
@@ -138,3 +160,8 @@ class _AppButtonState extends State<AppButton>
   }
 }
 
+class _AppButtonConstants {
+  // Scale values specific to AppButton pulse animation
+  static const double pulseScaleBegin = 1.0;
+  static const double pulseScaleEnd = 0.95;
+}

@@ -29,8 +29,7 @@ class SelectableRow extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
+  Widget build(BuildContext context) => GestureDetector(
       onTap: onTap,
       child: CustomRow(
         leadingWidget: Row(
@@ -52,7 +51,7 @@ class SelectableRow extends StatelessWidget {
                       ),
                     ),
                   ),
-            SizedBox(width: FigmaConstants.rowGapBetweenIconAndText),
+            const SizedBox(width: FigmaConstants.rowGapBetweenIconAndText),
             // Title and subtitle
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,7 +68,7 @@ class SelectableRow extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
-                SizedBox(height: FigmaConstants.rowGapBetweenTitleAndSubtitle),
+                const SizedBox(height: FigmaConstants.rowGapBetweenTitleAndSubtitle),
                 FittedText(
                   text: subtitle,
                   style: context.textTheme.bodySmall?.copyWith(
@@ -104,5 +103,5 @@ class SelectableRow extends StatelessWidget {
       ),
     );
   }
-}
+
 
