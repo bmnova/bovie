@@ -55,7 +55,7 @@ class PaywallScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: FigmaConstants.spacing16),
+                SizedBox(height: 28),
                 // Enable Free Trial Toggle
                 Observer(
                   builder: (_) => ToggleRow(
@@ -114,15 +114,48 @@ class PaywallScreen extends StatelessWidget {
                 ),
                 SizedBox(height: FigmaConstants.spacing16),
                 // Unlock Button
-                AppButton(
-                  text: 'Unlock MovieAI PRO',
-                  onPressed: () {
-                    // Handle unlock action
+                Observer(
+                  builder: (_) {
+                    final isFreeTrialEnabled = store.isFreeTrialEnabled;
+                    
+                    return AppButton(
+                      child: isFreeTrialEnabled
+                          ? Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  '3 Days Free',
+                                  style: context.textTheme.labelLarge?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColors.white,
+                                  ),
+                                ),
+                                Text(
+                                  'No Payment Now',
+                                  style: context.textTheme.bodySmall?.copyWith(
+                                    fontWeight: FontWeight.normal,
+                                    color: AppColors.white,
+                                  ),
+                                ),
+                              ],
+                            )
+                          : Text(
+                              'Unlock MovieAI PRO',
+                              style: context.textTheme.labelLarge?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.white,
+                              ),
+                            ),
+                      onPressed: () {
+                        // Handle unlock action
+                      },
+                      backgroundColor: AppColors.redLight,
+                      foregroundColor: AppColors.white,
+                      height: FigmaConstants.buttonHeightLarge,
+                      borderRadius: FigmaConstants.radius12,
+                      enableAnimation: isFreeTrialEnabled,
+                    );
                   },
-                  backgroundColor: AppColors.redLight,
-                  foregroundColor: AppColors.white,
-                  height: FigmaConstants.buttonHeightLarge,
-                  borderRadius: FigmaConstants.radius12,
                 ),
                 SizedBox(height: FigmaConstants.spacing16),
                 // Footer Links
