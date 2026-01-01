@@ -33,6 +33,11 @@ migrate_working_dir/
 /build/
 /coverage/
 
+# Generated files (code generation)
+# TODO: Uncomment and add freezed models before submit
+*.g.dart
+*.freezed.dart
+
 # Symbolication related
 app.*.symbols
 

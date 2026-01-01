@@ -1,0 +1,11 @@
+import 'package:bovie/core/result/result.dart';
+import 'package:bovie/features/onboarding/domain/genre.dart';
+import 'package:bovie/features/onboarding/domain/genres_repository.dart';
+
+class GetGenres {
+  final GenresRepository _repository;
+
+  GetGenres(this._repository);
+
+  Future<Result<List<Genre>>> call() => _repository.getGenres();
+}

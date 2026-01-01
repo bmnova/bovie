@@ -32,6 +32,10 @@ analyzer:
     - "**/pubspec_overrides.yaml"
     - "**/.venv/**"
     - "**/dylibs/**"
+  
+  errors:
+    # Freezed + JsonKey pattern triggers this warning but works correctly
+    invalid_annotation_target: ignore
 
 linter:
   # The lint rules applied to this project can be customized in the
