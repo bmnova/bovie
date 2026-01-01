@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:bovie/core/utils/tmdb_image_url_builder.dart';
+import 'package:bovie/core/utils/globals.dart';
 
 /// Movie poster card component with selection state
 class MoviePosterCard extends StatelessWidget {
@@ -21,8 +22,6 @@ class MoviePosterCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
 
     return GestureDetector(
       onTap: onTap,
@@ -32,11 +31,11 @@ class MoviePosterCard extends StatelessWidget {
             width: width,
             height: height,
             decoration: BoxDecoration(
-              color: colorScheme.surface,
+              color: context.colorScheme.surface,
               borderRadius: BorderRadius.circular(8),
               border: isSelected
                   ? Border.all(
-                      color: colorScheme.primary,
+                      color: context.colorScheme.primary,
                       width: 2,
                     )
                   : null,
@@ -48,35 +47,35 @@ class MoviePosterCard extends StatelessWidget {
                       imageUrl: TmdbImageUrlBuilder.build(imageUrl!, size: 'w500'),
                       fit: BoxFit.cover,
                       placeholder: (context, url) => Container(
-                        color: colorScheme.surfaceContainerHighest,
+                        color: context.colorScheme.surfaceContainerHighest,
                         child: Center(
                           child: Text(
                             'Image',
-                            style: textTheme.titleMedium?.copyWith(
-                              color: colorScheme.onSurfaceVariant,
+                            style: context.textTheme.titleMedium?.copyWith(
+                              color: context.colorScheme.onSurfaceVariant,
                             ),
                           ),
                         ),
                       ),
                       errorWidget: (context, url, error) => Container(
-                        color: colorScheme.surfaceContainerHighest,
+                        color: context.colorScheme.surfaceContainerHighest,
                         child: Center(
                           child: Text(
                             'Image',
-                            style: textTheme.titleMedium?.copyWith(
-                              color: colorScheme.onSurfaceVariant,
+                            style: context.textTheme.titleMedium?.copyWith(
+                              color: context.colorScheme.onSurfaceVariant,
                             ),
                           ),
                         ),
                       ),
                     )
                   : Container(
-                      color: colorScheme.surfaceContainerHighest,
+                      color: context.colorScheme.surfaceContainerHighest,
                       child: Center(
                         child: Text(
                           'Image',
-                          style: textTheme.titleMedium?.copyWith(
-                            color: colorScheme.onSurfaceVariant,
+                          style: context.textTheme.titleMedium?.copyWith(
+                            color: context.colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ),
@@ -91,12 +90,12 @@ class MoviePosterCard extends StatelessWidget {
                 width: 32,
                 height: 32,
                 decoration: BoxDecoration(
-                  color: colorScheme.primary,
+                  color: context.colorScheme.primary,
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
                   Icons.check_circle,
-                  color: colorScheme.onPrimary,
+                  color: context.colorScheme.onPrimary,
                   size: 32,
                 ),
               ),
@@ -108,7 +107,7 @@ class MoviePosterCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                   boxShadow: [
                     BoxShadow(
-                      color: colorScheme.primary.withOpacity(0.3),
+                      color: context.colorScheme.primary.withOpacity(0.3),
                       blurRadius: 24,
                       spreadRadius: 0,
                       offset: Offset.zero,

@@ -9,6 +9,8 @@ import 'package:bovie/generated/assets.gen.dart';
 import 'package:bovie/core/utils/globals.dart';
 import 'package:mobx/mobx.dart';
 
+import '../../app/router/router.dart';
+
 class _SplashConstants {
   // Layout from Figma (375 × 812)
   static const double logoWidth = 166.0;
@@ -43,7 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
         (_) => _store.nextRoute,
         (String? nextRoute) {
           if (nextRoute != null && mounted) {
-           context.go(nextRoute);
+           context.go(AppRoutes.paywall);
           }
         },
       ),
@@ -79,7 +81,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 children: [
                   Text(
                     _store.error ?? localizations.splashError,
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    style: context.textTheme.bodyLarge?.copyWith(
                       color: AppColors.redLight,
                     ),
                   ),
@@ -122,7 +124,7 @@ class _SplashScreenState extends State<SplashScreen> {
           // App Name
           Text(
             appName, 
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+            style: context.textTheme.headlineSmall?.copyWith(
               color: AppColors.white,
               fontSize: FigmaHelper.scaleFontSize(context, _SplashConstants.appNameFontSize),
               fontWeight: FontWeight.bold,

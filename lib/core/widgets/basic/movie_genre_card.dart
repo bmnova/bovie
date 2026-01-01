@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:bovie/core/utils/globals.dart';
 
 /// Circular movie genre card component with selection state
 class MovieGenreCard extends StatelessWidget {
@@ -17,8 +18,6 @@ class MovieGenreCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
 
     return GestureDetector(
       onTap: onTap,
@@ -28,11 +27,11 @@ class MovieGenreCard extends StatelessWidget {
             width: size,
             height: size,
             decoration: BoxDecoration(
-              color: colorScheme.surface,
+              color: context.colorScheme.surface,
               shape: BoxShape.circle,
               border: isSelected
                   ? Border.all(
-                      color: colorScheme.primary,
+                      color: context.colorScheme.primary,
                       width: 2,
                     )
                   : null,
@@ -43,24 +42,24 @@ class MovieGenreCard extends StatelessWidget {
                       imageUrl!,
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) => Container(
-                        color: colorScheme.surfaceContainerHighest,
+                        color: context.colorScheme.surfaceContainerHighest,
                         child: Center(
                           child: Text(
                             'Image',
-                            style: textTheme.titleMedium?.copyWith(
-                              color: colorScheme.onSurfaceVariant,
+                            style: context.textTheme.titleMedium?.copyWith(
+                              color: context.colorScheme.onSurfaceVariant,
                             ),
                           ),
                         ),
                       ),
                     )
                   : Container(
-                      color: colorScheme.surfaceContainerHighest,
+                      color: context.colorScheme.surfaceContainerHighest,
                       child: Center(
                         child: Text(
                           'Image',
-                          style: textTheme.titleMedium?.copyWith(
-                            color: colorScheme.onSurfaceVariant,
+                          style: context.textTheme.titleMedium?.copyWith(
+                            color: context.colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ),
@@ -75,12 +74,12 @@ class MovieGenreCard extends StatelessWidget {
                 width: 32,
                 height: 32,
                 decoration: BoxDecoration(
-                  color: colorScheme.primary,
+                  color: context.colorScheme.primary,
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
                   Icons.check_circle,
-                  color: colorScheme.onPrimary,
+                  color: context.colorScheme.onPrimary,
                   size: 32,
                 ),
               ),

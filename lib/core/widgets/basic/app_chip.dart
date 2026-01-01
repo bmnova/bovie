@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:bovie/core/utils/globals.dart';
 
 /// Chip component with selection state
 class AppChip extends StatelessWidget {
@@ -15,15 +16,12 @@ class AppChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-
     return GestureDetector(
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
-          color: isSelected ? colorScheme.primary : colorScheme.surfaceContainerHighest,
+          color: isSelected ? context.colorScheme.primary : context.colorScheme.surfaceContainerHighest,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Row(
@@ -35,13 +33,13 @@ class AppChip extends StatelessWidget {
                 child: Icon(
                   Icons.check,
                   size: 16,
-                  color: colorScheme.onPrimary,
+                  color: context.colorScheme.onPrimary,
                 ),
               ),
             Text(
               label,
-              style: textTheme.bodyMedium?.copyWith(
-                color: isSelected ? colorScheme.onPrimary : colorScheme.onSurface,
+              style: context.textTheme.bodyMedium?.copyWith(
+                color: isSelected ? context.colorScheme.onPrimary : context.colorScheme.onSurface,
                 fontWeight: FontWeight.normal,
               ),
             ),

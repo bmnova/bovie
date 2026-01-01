@@ -42,3 +42,14 @@ S get localizations => S.of(currentContext);
 extension LocalizationExtension on BuildContext {
   S get localizations => S.of(this);
 }
+
+extension ThemeExtension on BuildContext {
+  /// Get TextTheme directly from context
+  TextTheme get textTheme => Theme.of(this).textTheme;
+  
+  /// Get ColorScheme directly from context
+  ColorScheme get colorScheme => Theme.of(this).colorScheme;
+  
+  /// Get ThemeData directly from context
+  ThemeData get theme => Theme.of(this);
+}

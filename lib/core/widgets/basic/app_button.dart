@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:bovie/core/utils/globals.dart';
 
 /// Primary button component with enabled/disabled states
 class AppButton extends StatelessWidget {
@@ -15,14 +16,11 @@ class AppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-
     return ElevatedButton(
       onPressed: isEnabled ? onPressed : null,
       style: ElevatedButton.styleFrom(
-        backgroundColor: isEnabled ? colorScheme.primary : colorScheme.surfaceContainerHighest,
-        foregroundColor: isEnabled ? colorScheme.onPrimary : colorScheme.onSurfaceVariant,
+        backgroundColor: isEnabled ? context.colorScheme.primary : context.colorScheme.surfaceContainerHighest,
+        foregroundColor: isEnabled ? context.colorScheme.onPrimary : context.colorScheme.onSurfaceVariant,
         elevation: isEnabled ? 2 : 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
@@ -32,7 +30,7 @@ class AppButton extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: textTheme.labelLarge?.copyWith(
+        style: context.textTheme.labelLarge?.copyWith(
           fontWeight: FontWeight.w600,
         ),
       ),
