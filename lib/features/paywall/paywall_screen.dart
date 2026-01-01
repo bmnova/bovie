@@ -9,6 +9,8 @@ import 'package:bovie/features/paywall/widgets/subscription_plan_row.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:bovie/features/paywall/paywall_store.dart';
 
+import '../../generated/assets.gen.dart';
+
 class PaywallScreen extends StatelessWidget {
   const PaywallScreen({super.key});
 
@@ -94,10 +96,9 @@ class PaywallScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
-                      Icons.check_circle,
-                      size: FigmaConstants.iconSize16,
-                      color: AppColors.white,
+                    BovieAssets.icons.shieldGreen.svg(
+                      width: FigmaConstants.iconSize16,
+                      height: FigmaConstants.iconSize16,
                     ),
                     SizedBox(width: FigmaConstants.spacing4),
                     Text(
@@ -106,74 +107,75 @@ class PaywallScreen extends StatelessWidget {
                         color: AppColors.white,
                         fontSize: FigmaConstants.fontSize10,
                         fontWeight: FontWeight.normal,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ],
                 ),
                 SizedBox(height: FigmaConstants.spacing16),
                 // Unlock Button
-                SizedBox(
-                  width: double.infinity,
+                AppButton(
+                  text: 'Unlock MovieAI PRO',
+                  onPressed: () {
+                    // Handle unlock action
+                  },
+                  backgroundColor: AppColors.redLight,
+                  foregroundColor: AppColors.white,
                   height: FigmaConstants.buttonHeightLarge,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // Handle unlock action
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.redLight,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                          FigmaConstants.radius12,
-                        ),
-                      ),
-                    ),
-                    child: Text(
-                      'Unlock MovieAI PRO',
-                      style: context.textTheme.bodyLarge?.copyWith(
-                        color: AppColors.white,
-                        fontSize: FigmaConstants.fontSize16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
+                  borderRadius: FigmaConstants.radius12,
                 ),
                 SizedBox(height: FigmaConstants.spacing16),
                 // Footer Links
+                // TODO: Convert footer links to proper buttons with navigation handlers
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'Terms of Use',
-                        style: context.textTheme.bodySmall?.copyWith(
-                          color: AppColors.white,
-                          fontSize: FigmaConstants.fontSize8,
-                          fontWeight: FontWeight.normal,
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          // TODO: Navigate to Terms of Use
+                        },
+                        child: Text(
+                          'Terms of Use',
+                          textAlign: TextAlign.center,
+                          style: context.textTheme.bodySmall?.copyWith(
+                            color: AppColors.white,
+                            fontSize: FigmaConstants.fontSize8,
+                            fontWeight: FontWeight.normal,
+                          ),
                         ),
                       ),
                     ),
                     SizedBox(width: FigmaConstants.spacing40),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'Restore Purchase',
-                        style: context.textTheme.bodySmall?.copyWith(
-                          color: AppColors.white,
-                          fontSize: FigmaConstants.fontSize8,
-                          fontWeight: FontWeight.normal,
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          // TODO: Handle Restore Purchase
+                        },
+                        child: Text(
+                          'Restore Purchase',
+                          textAlign: TextAlign.center,
+                          style: context.textTheme.bodySmall?.copyWith(
+                            color: AppColors.white,
+                            fontSize: FigmaConstants.fontSize8,
+                            fontWeight: FontWeight.normal,
+                          ),
                         ),
                       ),
                     ),
                     SizedBox(width: FigmaConstants.spacing40),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'Privacy Policy',
-                        style: context.textTheme.bodySmall?.copyWith(
-                          color: AppColors.white,
-                          fontSize: FigmaConstants.fontSize8,
-                          fontWeight: FontWeight.normal,
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          // TODO: Navigate to Privacy Policy
+                        },
+                        child: Text(
+                          'Privacy Policy',
+                          textAlign: TextAlign.center,
+                          style: context.textTheme.bodySmall?.copyWith(
+                            color: AppColors.white,
+                            fontSize: FigmaConstants.fontSize8,
+                            fontWeight: FontWeight.normal,
+                          ),
                         ),
                       ),
                     ),

@@ -26,8 +26,11 @@ class $AssetsIconsGen {
   /// File path: assets/icons/circle_check_icon_red.svg
   SvgGenImage get circleCheckIconRed => const SvgGenImage('assets/icons/circle_check_icon_red.svg');
 
+  /// File path: assets/icons/shield_green.svg
+  SvgGenImage get shieldGreen => const SvgGenImage('assets/icons/shield_green.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [circleCancelIcon, circleCheckIconGreen, circleCheckIconRed];
+  List<SvgGenImage> get values => [circleCancelIcon, circleCheckIconGreen, circleCheckIconRed, shieldGreen];
 }
 
 class $AssetsImagesGen {
