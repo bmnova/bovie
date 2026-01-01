@@ -40,24 +40,30 @@ class TmdbApi {
     }
   }
 
-  Future<Result<Map<String, dynamic>>> getGenres() => _safeApiCall(
-        _dio.get('/genre/movie/list'),
-        (json) => json,
-      );
+  Future<Result<Map<String, dynamic>>> getGenres() {
+    return _safeApiCall(
+      _dio.get('/genre/movie/list'),
+      (json) => json,
+    );
+  }
 
-  Future<Result<Map<String, dynamic>>> getPopularMovies({int page = 1}) => _safeApiCall(
-        _dio.get('/movie/popular', queryParameters: {'page': page}),
-        (json) => json,
-      );
+  Future<Result<Map<String, dynamic>>> getPopularMovies({int page = 1}) {
+    return _safeApiCall(
+      _dio.get('/movie/popular', queryParameters: {'page': page}),
+      (json) => json,
+    );
+  }
 
-  Future<Result<Map<String, dynamic>>> discoverByGenre(int genreId, {int page = 1}) => _safeApiCall(
-        _dio.get(
-          '/discover/movie',
-          queryParameters: {
-            'with_genres': genreId,
-            'page': page,
-          },
-        ),
-        (json) => json,
-      );
+  Future<Result<Map<String, dynamic>>> discoverByGenre(int genreId, {int page = 1}) {
+    return _safeApiCall(
+      _dio.get(
+        '/discover/movie',
+        queryParameters: {
+          'with_genres': genreId,
+          'page': page,
+        },
+      ),
+      (json) => json,
+    );
+  }
 }

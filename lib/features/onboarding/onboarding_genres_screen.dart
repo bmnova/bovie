@@ -4,6 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bovie/app/di/di.dart';
 import 'package:bovie/app/router/router.dart';
+import 'package:bovie/generated/l10n.dart';
 import 'package:bovie/features/onboarding/presentation/onboarding_genres_store.dart';
 import 'package:bovie/features/onboarding/domain/get_genres_usecase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,13 +24,14 @@ class _OnboardingGenresScreenState extends State<OnboardingGenresScreen> {
   @override
   void initState() {
     super.initState();
-    _store = OnboardingGenresStore(getIt<GetGenres>(), getIt<SharedPreferences>());
+    _store =
+        OnboardingGenresStore(getIt<GetGenres>(), getIt<SharedPreferences>());
     _store.fetchGenres();
 
     _disposers.add(
       reaction(
-        (_) => _store.onboardingFinished,
-        (bool finished) {
+            (_) => _store.onboardingFinished,
+            (bool finished) {
           if (finished && mounted) {
             context.go(AppRoutes.paywall);
           }
@@ -47,15 +49,23 @@ class _OnboardingGenresScreenState extends State<OnboardingGenresScreen> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) {
+    return Scaffold(
       appBar: AppBar(
-        title: const Text('Pick 2 Genres'),
+        title: Text(S.of(context).pick2Genres),
         actions: [
           Observer(
-            builder: (_) => TextButton(
-              onPressed: _store.canContinue ? _store.completeOnboarding : null,
-              child: _store.isLoading ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2)) : const Text('Finish'),
-            ),
+            builder: (_) =>
+                TextButton(
+                  onPressed: _store.canContinue
+                      ? _store.completeOnboarding
+                      : null,
+                  child: _store.isLoading
+                      ? const SizedBox(width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(strokeWidth: 2))
+                      : Text(S.of(context).finish),
+                ),
           ),
         ],
       ),
@@ -87,4 +97,4 @@ class _OnboardingGenresScreenState extends State<OnboardingGenresScreen> {
       ),
     );
   }
-
+}

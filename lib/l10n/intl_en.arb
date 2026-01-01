@@ -1,0 +1,19 @@
+{
+  "@@locale": "en",
+  "appName": "Bovie",
+  "@appName": {
+    "description": "The name of the application"
+  },
+  "splashError": "An error occurred during initialization",
+  "retry": "Retry",
+  "pick3Movies": "Pick 3 Movies",
+  "pick2Genres": "Pick 2 Genres",
+  "continueText": "Continue",
+  "finish": "Finish",
+  "limitReachedMovies": "You can select up to 3 movies",
+  "limitReachedGenres": "You can select up to 2 genres",
+  "failedToLoadMovies": "Failed to load movies",
+  "failedToLoadGenres": "Failed to load genres",
+  "home": "Home",
+  "paywall": "Paywall"
+}

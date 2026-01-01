@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:bovie/generated/l10n.dart';
 import 'package:bovie/app/router/router.dart';
 import 'package:bovie/app/di/di.dart';
 import 'package:bovie/app/config/app_config.dart';
@@ -15,6 +17,7 @@ void main() async {
   final prefs = await SharedPreferences.getInstance();
 
   final config = AppConfig(
+    appName: dotenv.env['APP_NAME'] ?? 'Bovie',
     environment: AppEnvironment.dev,
     baseUrl: dotenv.env['TMDB_BASE_URL'] ?? 'https://api.themoviedb.org/3',
     tmdbToken: dotenv.env['TMDB_TOKEN'] ?? '',
@@ -36,5 +39,12 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.light,
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
     );
 }

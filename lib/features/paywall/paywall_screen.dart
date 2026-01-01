@@ -1,10 +1,13 @@
+import 'package:bovie/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 class PaywallScreen extends StatelessWidget {
   const PaywallScreen({super.key});
 
   @override
-  Widget build(BuildContext context) => const Scaffold(
-      body: Center(child: Text('Paywall Screen')),
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(child: Text(S.of(context).paywall)),
     );
+  }
 }

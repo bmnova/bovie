@@ -4,6 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bovie/app/di/di.dart';
 import 'package:bovie/app/router/router.dart';
+import 'package:bovie/generated/l10n.dart';
 import 'package:bovie/features/onboarding/presentation/onboarding_movies_store.dart';
 import 'package:bovie/features/onboarding/domain/get_popular_movies_usecase.dart';
 import 'package:bovie/core/utils/tmdb_image_url_builder.dart';
@@ -43,12 +44,12 @@ class _OnboardingMoviesScreenState extends State<OnboardingMoviesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pick 3 Movies'),
+        title: Text(S.of(context).pick3Movies),
         actions: [
           Observer(
             builder: (_) => TextButton(
               onPressed: _store.canContinue ? () => context.push(AppRoutes.onboardingGenres) : null,
-              child: const Text('Continue'),
+              child: Text(S.of(context).continueText),
             ),
           ),
         ],
@@ -90,7 +91,7 @@ class _OnboardingMoviesScreenState extends State<OnboardingMoviesScreen> {
                     ),
                     if (isSelected)
                       Container(
-                        color: Colors.blue.withValues(alpha: 0.5),
+                        color: Colors.blue.withOpacity(0.5),
                         child: const Icon(Icons.check_circle, color: Colors.white, size: 40),
                       ),
                   ],
