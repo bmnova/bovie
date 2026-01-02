@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:bovie/features/splash/splash_screen.dart';
-import 'package:bovie/features/onboarding/onboarding_movies_screen.dart';
-import 'package:bovie/features/onboarding/onboarding_genres_screen.dart';
-import 'package:bovie/features/paywall/paywall_screen.dart';
-import 'package:bovie/features/home/home_screen.dart';
+import 'package:bovie/ui/splash/splash_screen.dart';
+import 'package:bovie/ui/onboarding/presentation/onboarding_movies_screen.dart';
+import 'package:bovie/ui/onboarding/presentation/onboarding_genres_screen.dart';
+import 'package:bovie/ui/paywall/paywall_screen_a.dart';
+import 'package:bovie/ui/paywall/paywall_screen_b.dart';
+import 'package:bovie/core/ab_testing/ab_testing.dart';
+import 'package:bovie/core/utils/globals.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+
+import '../../ui/home/home_screen.dart';
 
 final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -35,7 +40,24 @@ final router = GoRouter(
     ),
     GoRoute(
       path: AppRoutes.paywall,
-      builder: (context, state) => const PaywallScreen(),
+      builder: (context, state) {
+        // Variant is already determined in splash screen via determineVariant()
+        // which uses UserIdRepository for deterministic A/B testing
+        // For testing random variants, use: paywallStore.selectRandomVariant();
+
+        return Observer(
+          builder: (_) {
+            // Show appropriate screen based on variant
+            switch (paywallStore.variant ?? PaywallVariant.testA) {
+              case PaywallVariant.control:
+              case PaywallVariant.testA:
+                return const PaywallScreenA();
+              case PaywallVariant.testB:
+                return const PaywallScreenB();
+            }
+          },
+        );
+      },
     ),
     GoRoute(
       path: AppRoutes.home,

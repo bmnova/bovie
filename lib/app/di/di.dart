@@ -5,13 +5,18 @@ import 'package:bovie/core/network/tmdb_api.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../features/onboarding/data/genres_repository_impl.dart';
-import '../../features/onboarding/data/movies_repository_impl.dart';
-import '../../features/onboarding/domain/genres_repository.dart';
-import '../../features/onboarding/domain/get_genres_usecase.dart';
-import '../../features/onboarding/domain/get_popular_movies_usecase.dart';
-import '../../features/onboarding/domain/movies_repository.dart';
-import '../../features/splash/splash_store.dart';
+import '../../core/repository/genres_repository_impl.dart';
+import '../../core/repository/movies_repository_impl.dart';
+import '../../core/domain/genres_repository.dart';
+import '../../core/domain/get_genres_usecase.dart';
+import '../../core/domain/get_popular_movies_usecase.dart';
+import '../../core/domain/movies_repository.dart';
+import '../../ui/onboarding/domain/onboarding_repository.dart';
+import '../../ui/onboarding/data/onboarding_repository_impl.dart';
+import '../../ui/splash/splash_store.dart';
+import '../../ui/paywall/paywall_store.dart';
+import '../../ui/user/domain/user_id_repository.dart';
+import '../../ui/user/data/user_id_repository_impl.dart';
 
 final getIt = GetIt.instance;
 
@@ -45,6 +50,13 @@ void setupDI(AppConfig config, SharedPreferences prefs) {
   getIt.registerLazySingleton<GenresRepository>(() => GenresRepositoryImpl(getIt<TmdbApi>()));
   getIt.registerLazySingleton<GetGenres>(() => GetGenres(getIt<GenresRepository>()));
 
+  // Onboarding
+  getIt.registerLazySingleton<OnboardingRepository>(() => OnboardingRepositoryImpl(getIt<SharedPreferences>()));
+
   // Splash
-  getIt.registerFactory<SplashStore>(() => SplashStore(getIt<GetGenres>(), getIt<SharedPreferences>()));
+  getIt.registerFactory<SplashStore>(() => SplashStore(getIt<GetGenres>(), getIt<PaywallStore>(), getIt<OnboardingRepository>()));
+
+  // Paywall
+  getIt.registerLazySingleton<UserIdRepository>(() => UserIdRepositoryImpl(getIt<SharedPreferences>()));
+  getIt.registerLazySingleton<PaywallStore>(() => PaywallStore(getIt<UserIdRepository>()));
 }

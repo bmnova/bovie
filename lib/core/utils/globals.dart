@@ -5,11 +5,13 @@ import 'package:bovie/generated/l10n.dart';
 import 'package:bovie/app/config/app_config.dart';
 import 'package:bovie/app/di/di.dart';
 import 'package:bovie/core/network/tmdb_api.dart';
-import 'package:bovie/features/onboarding/domain/movies_repository.dart';
-import 'package:bovie/features/onboarding/domain/genres_repository.dart';
-import 'package:bovie/features/onboarding/domain/get_popular_movies_usecase.dart';
-import 'package:bovie/features/onboarding/domain/get_genres_usecase.dart';
-import 'package:bovie/features/splash/splash_store.dart';
+import 'package:bovie/core/domain/movies_repository.dart';
+import 'package:bovie/core/domain/genres_repository.dart';
+import 'package:bovie/core/domain/get_popular_movies_usecase.dart';
+import 'package:bovie/core/domain/get_genres_usecase.dart';
+import 'package:bovie/ui/onboarding/domain/onboarding_repository.dart';
+import 'package:bovie/ui/splash/splash_store.dart';
+import 'package:bovie/ui/paywall/paywall_store.dart';
 import 'package:flutter/material.dart';
 
 /// Global context provider
@@ -25,6 +27,7 @@ TmdbApi get tmdbApi => getIt<TmdbApi>();
 /// Repositories
 MoviesRepository get moviesRepo => getIt<MoviesRepository>();
 GenresRepository get genresRepo => getIt<GenresRepository>();
+OnboardingRepository get onboardingRepository => getIt<OnboardingRepository>();
 
 /// Usecases
 GetPopularMovies get getPopularMovies => getIt<GetPopularMovies>();
@@ -32,6 +35,7 @@ GetGenres get getGenres => getIt<GetGenres>();
 
 /// Factories
 SplashStore get splashStore => getIt<SplashStore>();
+PaywallStore get paywallStore => getIt<PaywallStore>();
 
 /// Global accessors for theme and localizations
 ThemeData get theme => Theme.of(currentContext);
