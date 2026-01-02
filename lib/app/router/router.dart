@@ -9,7 +9,7 @@ import 'package:bovie/core/ab_testing/ab_testing.dart';
 import 'package:bovie/core/utils/globals.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-import '../../ui/home/home_screen.dart';
+import '../../ui/home/presentation/home_screen.dart';
 
 final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 
