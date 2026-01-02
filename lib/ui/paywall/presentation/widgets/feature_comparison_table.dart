@@ -8,20 +8,28 @@ import 'package:bovie/generated/assets.gen.dart';
 /// Feature comparison table widget for paywall screen
 /// 
 /// Displays a table comparing FREE and PRO plans with features and checkmarks/X icons
+/// When [showComparison] is false, displays a simple list with tick icons (for PaywallScreenB)
 class FeatureComparisonTable extends StatelessWidget {
   final String appName;
   final List<FeatureItem> features;
   final VoidCallback? onClose;
+  final bool showComparison;
+  final double? bottomPadding;
 
   const FeatureComparisonTable({
     super.key,
     required this.appName,
     required this.features,
     this.onClose,
+    this.showComparison = true,
+    this.bottomPadding,
   });
 
   @override
-  Widget build(BuildContext context) => Column(
+  Widget build(BuildContext context) {
+    if (showComparison) {
+      // Comparison table mode (PaywallScreenA)
+      return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         // App Name
@@ -45,6 +53,31 @@ class FeatureComparisonTable extends StatelessWidget {
         ),
       ],
     );
+    } else {
+      // Simple list mode (PaywallScreenB)
+      return Padding(
+        padding: EdgeInsets.only(bottom: bottomPadding ?? 0.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ...features.asMap().entries.map((entry) {
+              final index = entry.key;
+              final feature = entry.value;
+              return Column(
+                children: [
+                  if (index > 0) const SizedBox(height: FigmaConstants.spacing16),
+                  _FeatureListItem(
+                    text: feature.name,
+                  ),
+                ],
+              );
+            }),
+          ],
+        ),
+      );
+    }
+  }
 }
 
 /// Individual feature item in the comparison table
@@ -449,10 +482,7 @@ class _FeatureIcon extends StatelessWidget {
       // Checkmark icon - green for FREE, red for PRO
       if (isPro) {
         // PRO: Use red checkmark icon
-        // TODO: After running build_runner for circle_check_icon_red.svg,
-        // replace with: BovieAssets.icons.circleCheckIconRed.svg(...)
-        // For now, using green checkmark as fallback
-        return BovieAssets.icons.circleCheckIconGreen.svg(
+       return BovieAssets.icons.circleCheckIconGreen.svg(
           width: FigmaConstants.iconSize24,
           height: FigmaConstants.iconSize24,
         );
@@ -471,5 +501,35 @@ class _FeatureIcon extends StatelessWidget {
       );
     }
   }
+}
+
+/// Simple feature list item with tick icon (for PaywallScreenB)
+class _FeatureListItem extends StatelessWidget {
+  final String text;
+
+  const _FeatureListItem({
+    required this.text,
+  });
+
+  @override
+  Widget build(BuildContext context) => Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        BovieAssets.icons.tick.svg(
+          width: FigmaConstants.iconSize14,
+          height: FigmaConstants.iconSize14,
+        ),
+        const SizedBox(width: FigmaConstants.spacing12),
+        Text(
+          text,
+          style: context.textTheme.bodyMedium?.copyWith(
+            color: AppColors.white,
+            fontSize: FigmaConstants.fontSize14,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ],
+    );
 }
 

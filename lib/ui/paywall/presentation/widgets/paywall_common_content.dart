@@ -38,10 +38,12 @@ class PaywallCommonContent extends StatelessWidget {
 /// Monthly and Yearly subscription plans widget shared between paywall variants
 class PaywallMonthlyYearlyPlans extends StatelessWidget {
   final PaywallStore store;
+  final BadgePosition? badgePosition;
 
   const PaywallMonthlyYearlyPlans({
     super.key,
     required this.store,
+    this.badgePosition,
   });
 
   @override
@@ -63,6 +65,7 @@ class PaywallMonthlyYearlyPlans extends StatelessWidget {
             plan: SubscriptionPlan.yearly,
             isSelected: store.selectedPlan == SubscriptionPlan.yearly,
             onTap: () => store.selectPlan(SubscriptionPlan.yearly),
+            badgePosition: badgePosition,
           ),
         ),
       ],

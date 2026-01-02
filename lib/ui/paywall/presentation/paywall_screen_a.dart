@@ -109,6 +109,7 @@ class PaywallScreenA extends StatelessWidget {
           topContent: topContent,
           button: button,
           store: paywallStore,
+          badgePosition: BadgePosition.center,
           );
       },
     );

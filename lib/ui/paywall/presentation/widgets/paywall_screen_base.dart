@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:bovie/core/utils/figma_constants.dart';
 import 'package:bovie/app/theme/app_colors.dart';
 import 'package:bovie/ui/paywall/presentation/widgets/paywall_common_content.dart';
+import 'package:bovie/ui/paywall/presentation/widgets/subscription_plan_row.dart';
 import 'package:bovie/ui/paywall/presentation/paywall_store.dart';
 import 'package:bovie/generated/assets.gen.dart';
 
@@ -13,13 +14,15 @@ class PaywallScreenBase extends StatelessWidget {
   final Widget? topContent;
   final Widget button;
   final PaywallStore store;
+  final BadgePosition? badgePosition;
 
   const PaywallScreenBase({
     super.key,
     this.backgroundImage,
     this.topContent,
     required this.button,
-    required this.store
+    required this.store,
+    this.badgePosition,
   });
 
   @override
@@ -37,7 +40,10 @@ class PaywallScreenBase extends StatelessWidget {
               topContent!,
             ],
             // Monthly and Yearly Plans
-            PaywallMonthlyYearlyPlans(store: store),
+            PaywallMonthlyYearlyPlans(
+              store: store,
+              badgePosition: badgePosition,
+            ),
             const SizedBox(height: FigmaConstants.spacing16),
             // Common Content (Auto Renewable, Button, Footer Links)
             PaywallCommonContent(

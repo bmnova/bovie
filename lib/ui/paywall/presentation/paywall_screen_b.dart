@@ -1,3 +1,4 @@
+import 'package:bovie/ui/paywall/presentation/widgets/subscription_plan_row.dart';
 import 'package:flutter/material.dart';
 import 'package:bovie/core/widgets/widgets.dart';
 import 'package:bovie/core/utils/globals.dart';
@@ -17,14 +18,15 @@ class _FigmaConstants {
   static const double paywallImageTop = -250.0;
   static const double paywallImageLeft = -109.0;
 
-  // Bottom padding between footer and bottom edge
-  static const double bottomPadding = 20.0;
-
   // Gradient overlay
   static const double gradientOpacity = 0.76;
   static const double gradientStop1 = 0.0;
   static const double gradientStop2 = 0.447;
   static const double gradientStop3 = 0.797;
+
+  // Feature list spacing
+  static const double featureListTopPadding = 29.0;
+  static const double featureListBottomPadding = 52.0;
 }
 
 class PaywallScreenB extends StatelessWidget {
@@ -105,25 +107,32 @@ class PaywallScreenB extends StatelessWidget {
           ),
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: FigmaConstants.spacing16),
+        const SizedBox(height: _FigmaConstants.featureListTopPadding),
         // Feature List
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _FeatureListItem(
-              text: localizations.dailyMovieSuggestions,
+        FeatureComparisonTable(
+          appName: appName,
+          showComparison: false,
+          bottomPadding: _FigmaConstants.featureListBottomPadding,
+          features: [
+            FeatureItem(
+              name: localizations.dailyMovieSuggestions,
+              isAvailableInFree: true,
+              isAvailableInPro: true,
             ),
-            const SizedBox(height: FigmaConstants.spacing16),
-            _FeatureListItem(
-              text: localizations.aiPoweredMovieInsights,
+            FeatureItem(
+              name: localizations.aiPoweredMovieInsights,
+              isAvailableInFree: false,
+              isAvailableInPro: true,
             ),
-            const SizedBox(height: FigmaConstants.spacing16),
-            _FeatureListItem(
-              text: localizations.personalizedWatchlists,
+            FeatureItem(
+              name: localizations.personalizedWatchlists,
+              isAvailableInFree: false,
+              isAvailableInPro: false,
             ),
-            const SizedBox(height: FigmaConstants.spacing16),
-            _FeatureListItem(
-              text: localizations.adFreeExperience,
+            FeatureItem(
+              name: localizations.adFreeExperience,
+              isAvailableInFree: false,
+              isAvailableInPro: false,
             ),
           ],
         ),
@@ -134,35 +143,8 @@ class PaywallScreenB extends StatelessWidget {
       backgroundImage: backgroundImage,
       topContent: topContent,
       button: button,
-      store: paywallStore
+      store: paywallStore,
+      badgePosition: BadgePosition.right,
     );
   }
 }
-
-class _FeatureListItem extends StatelessWidget {
-  final String text;
-
-  const _FeatureListItem({
-    required this.text,
-  });
-
-  @override
-  Widget build(BuildContext context) => Row(
-      children: [
-        BovieAssets.icons.tick.svg(
-          width: FigmaConstants.iconSize16,
-          height: FigmaConstants.iconSize16,
-        ),
-        const SizedBox(width: FigmaConstants.spacing12),
-        Text(
-          text,
-          style: context.textTheme.bodyMedium?.copyWith(
-            color: AppColors.white,
-            fontSize: FigmaConstants.fontSize14,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ],
-    );
-}
-

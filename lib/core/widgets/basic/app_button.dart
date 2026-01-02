@@ -105,13 +105,15 @@ class _AppButtonState extends State<AppButton>
         );
 
     if (widget.endingIcon != null) {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
+      return Stack(
         children: [
-          content,
-          const SizedBox(width: FigmaConstants.spacing4),
-          widget.endingIcon!,
+          Center(child: content),
+          Positioned(
+            right: FigmaConstants.spacing16,
+            top: 0,
+            bottom: 0,
+            child: Center(child: widget.endingIcon!),
+          ),
         ],
       );
     }

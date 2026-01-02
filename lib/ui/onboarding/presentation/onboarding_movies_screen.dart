@@ -112,7 +112,7 @@ class _OnboardingMoviesScreenState extends State<OnboardingMoviesScreen> {
                       const SizedBox(height: FigmaConstants.spacing8),
                       AppButton(
                         text: 'Test Paywall',
-                        onPressed: () => context.push(AppRoutes.paywall),
+                        onPressed: () => context.pushPaywallWithRandomVariant(),
                       ),
                     ],
                   ),

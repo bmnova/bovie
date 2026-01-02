@@ -65,3 +65,18 @@ final router = GoRouter(
     ),
   ],
 );
+
+/// Extension for easy paywall navigation with random variant selection
+extension PaywallNavigationExtension on BuildContext {
+  /// Navigate to paywall with random variant selection (for testing)
+  void pushPaywallWithRandomVariant() {
+    // Select random variant for testing
+    paywallStore.selectRandomVariant();
+    // Wait for MobX Observer to update before navigating
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        push(AppRoutes.paywall);
+      }
+    });
+  }
+}

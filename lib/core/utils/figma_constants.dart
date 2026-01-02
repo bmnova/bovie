@@ -38,6 +38,7 @@ class FigmaConstants {
   static const double radius72 = 72.0; // For circular cards
 
   // Icon sizes
+  static const double iconSize14 = 14.0;
   static const double iconSize16 = 16.0;
   static const double iconSize24 = 24.0;
   static const double iconSize32 = 32.0;

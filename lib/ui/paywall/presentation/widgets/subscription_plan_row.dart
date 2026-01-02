@@ -51,8 +51,6 @@ class SubscriptionPlanRow extends StatelessWidget {
 
     // Add Best Value badge if needed
     if (planProps.hasBestValueBadge) {
-      final effectiveBadgePosition = badgePosition ?? BadgePosition.center;
-
       final badgeWidget = Container(
         height: FigmaConstants.badgeHeight,
         padding: const EdgeInsets.symmetric(
@@ -75,19 +73,31 @@ class SubscriptionPlanRow extends StatelessWidget {
         ),
       );
 
+      // Apply offset only for Paywall B (BadgePosition.center)
+      if (badgePosition == BadgePosition.center) {
+        return Stack(
+          clipBehavior: Clip.none,
+          children: [
+            row,
+            Positioned.fill(
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: badgeWidget,
+              ),
+            ),
+          ],
+        );
+      }
+
+      // Default position: top right (for Paywall A)
       return Stack(
         clipBehavior: Clip.none,
         children: [
           row,
           Positioned(
             top: 0,
-            left: effectiveBadgePosition == BadgePosition.center ? 0 : null,
-            right: effectiveBadgePosition == BadgePosition.right
-                ? FigmaConstants.badgeRightPadding
-                : effectiveBadgePosition == BadgePosition.center
-                    ? 0
-                    : null,
-            child: effectiveBadgePosition == BadgePosition.center ? Center(child: badgeWidget) : badgeWidget,
+            right: FigmaConstants.badgeRightPadding,
+            child: badgeWidget,
           ),
         ],
       );
@@ -95,4 +105,13 @@ class SubscriptionPlanRow extends StatelessWidget {
 
     return row;
   }
+}
+
+/// Constants for Best Value badge positioning
+class _BadgeConstants {
+  _BadgeConstants._();
+  
+  // Badge position for center alignment (from Figma: left: calc(50%+105px), top: calc(50%-29.5px))
+  static const double centerOffsetX = 105.0;
+  static const double centerOffsetY = -14.75; // Half of badge height (29.5 / 2)
 }
