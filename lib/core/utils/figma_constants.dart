@@ -20,7 +20,6 @@ class FigmaConstants {
   static const double spacing32 = 32.0;
   static const double spacing40 = 40.0;
   static const double spacing48 = 48.0;
-  static const double spacing200 = 200.0;
 
   // Component sizes (from Figma)
   static const double moviePosterWidth = 140.0;

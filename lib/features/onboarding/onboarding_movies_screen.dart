@@ -22,7 +22,7 @@ class OnboardingMoviesScreen extends StatefulWidget {
 class _OnboardingMoviesScreenState extends State<OnboardingMoviesScreen> {
   late final OnboardingMoviesStore _store;
   final ScrollController _scrollController = ScrollController();
-
+  final double scrollPadding = 200;
   @override
   void initState() {
     super.initState();
@@ -30,7 +30,7 @@ class _OnboardingMoviesScreenState extends State<OnboardingMoviesScreen> {
     _store.fetchNextPage();
 
     _scrollController.addListener(() {
-      if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent - FigmaConstants.spacing200) {
+      if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent - scrollPadding) {
         _store.fetchNextPage();
       }
     });
@@ -44,73 +44,73 @@ class _OnboardingMoviesScreenState extends State<OnboardingMoviesScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(
-        title: Text(localizations.pick3Movies),
-      ),
-      body: Observer(
-        builder: (_) {
-          if (_store.isLoading && _store.movies.isEmpty) {
-            return const Center(child: CircularProgressIndicator());
-          }
+        appBar: AppBar(
+          title: Text(localizations.pick3Movies),
+        ),
+        body: Observer(
+          builder: (_) {
+            if (_store.isLoading && _store.movies.isEmpty) {
+              return const Center(child: CircularProgressIndicator());
+            }
 
-          return Column(
-            children: [
-              Expanded(
-                child: GridView.builder(
-                  controller: _scrollController,
-                  padding: const EdgeInsets.all(FigmaConstants.spacing16),
-                  gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 0.7,
-                    crossAxisSpacing: FigmaConstants.spacing16,
-                    mainAxisSpacing: FigmaConstants.spacing16,
-                  ),
-                  itemCount: _store.movies.length + (_store.isLoading ? 1 : 0),
-                  itemBuilder: (context, index) {
-                    if (index == _store.movies.length) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
+            return Column(
+              children: [
+                Expanded(
+                  child: GridView.builder(
+                    controller: _scrollController,
+                    padding: const EdgeInsets.all(FigmaConstants.spacing16),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.7,
+                      crossAxisSpacing: FigmaConstants.spacing16,
+                      mainAxisSpacing: FigmaConstants.spacing16,
+                    ),
+                    itemCount: _store.movies.length + (_store.isLoading ? 1 : 0),
+                    itemBuilder: (context, index) {
+                      if (index == _store.movies.length) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
 
-                    final movie = _store.movies[index];
-                    final isSelected = _store.selectedMovieIds.contains(movie.id);
+                      final movie = _store.movies[index];
+                      final isSelected = _store.selectedMovieIds.contains(movie.id);
 
-                    return GestureDetector(
-                      onTap: () => _store.toggleSelection(movie.id),
-                      child: Stack(
-                        fit: StackFit.expand,
-                        children: [
-                          CachedNetworkImage(
-                            imageUrl: TmdbImageUrlBuilder.build(movie.posterPath, size: 'w500'),
-                            fit: BoxFit.cover,
-                            placeholder: (context, url) => Container(color: Colors.grey[300]),
-                            errorWidget: (context, url, error) => const Icon(Icons.error),
-                          ),
-                          if (isSelected)
-                            Container(
-                              color: context.colorScheme.primary.withValues(alpha: 0.5),
-                              child: Icon(
-                                Icons.check_circle,
-                                color: context.colorScheme.onPrimary,
-                                size: FigmaConstants.iconSize40,
-                              ),
+                      return GestureDetector(
+                        onTap: () => _store.toggleSelection(movie.id),
+                        child: Stack(
+                          fit: StackFit.expand,
+                          children: [
+                            CachedNetworkImage(
+                              imageUrl: TmdbImageUrlBuilder.build(movie.posterPath, size: 'w500'),
+                              fit: BoxFit.cover,
+                              placeholder: (context, url) => Container(color: Colors.grey[300]),
+                              errorWidget: (context, url, error) => const Icon(Icons.error),
                             ),
-                        ],
-                      ),
-                    );
-                  },
+                            if (isSelected)
+                              Container(
+                                color: context.colorScheme.primary.withValues(alpha: 0.5),
+                                child: Icon(
+                                  Icons.check_circle,
+                                  color: context.colorScheme.onPrimary,
+                                  size: FigmaConstants.iconSize40,
+                                ),
+                              ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(FigmaConstants.spacing16),
-                child: AppButton(
-                  text: localizations.next,
-                  isEnabled: _store.canContinue,
-                  onPressed: () => context.push(AppRoutes.onboardingGenres),
+                Padding(
+                  padding: const EdgeInsets.all(FigmaConstants.spacing16),
+                  child: AppButton(
+                    text: localizations.next,
+                    isEnabled: _store.canContinue,
+                    onPressed: () => context.push(AppRoutes.onboardingGenres),
+                  ),
                 ),
-              ),
-            ],
-          );
-        },
-      ),
-    );
+              ],
+            );
+          },
+        ),
+      );
 }
