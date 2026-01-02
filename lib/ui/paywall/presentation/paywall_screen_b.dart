@@ -1,13 +1,11 @@
-import 'package:bovie/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:bovie/core/widgets/widgets.dart';
 import 'package:bovie/core/utils/globals.dart';
 import 'package:bovie/app/theme/app_colors.dart';
 import 'package:bovie/core/utils/figma_constants.dart';
-import 'package:bovie/core/ab_testing/paywall_variant_constants.dart';
 import 'package:bovie/ui/paywall/presentation/widgets/paywall_screen_base.dart';
 
-import '../../generated/assets.gen.dart';
+import '../../../generated/assets.gen.dart';
 
 /// Figma constants specific to PaywallScreenB
 class _FigmaConstants {

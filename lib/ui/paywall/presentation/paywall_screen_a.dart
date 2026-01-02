@@ -9,15 +9,6 @@ import 'package:bovie/ui/paywall/presentation/widgets/paywall_screen_base.dart';
 import 'package:bovie/ui/paywall/presentation/widgets/subscription_plan_row.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-import '../../generated/assets.gen.dart';
-
-/// Figma constants specific to PaywallScreenA
-class _FigmaConstants {
-  _FigmaConstants._();
-
-  // Bottom padding between footer and bottom edge
-  static const double bottomPadding = 20.0;
-}
 
 class PaywallScreenA extends StatelessWidget {
   const PaywallScreenA({super.key});

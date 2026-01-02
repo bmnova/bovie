@@ -1,0 +1,161 @@
+---
+description: Bovie Clean Architecture and project structure rules
+globs:
+  - "**/*.dart"
+alwaysApply: true
+---
+
+# Bovie Architecture & Structure Rules
+
+## Feature Structure Pattern
+
+Each feature in `ui/` MUST follow this structure:
+
+```
+ui/feature_name/
+├── domain/              # Repository interface (if persistence needed)
+│   └── feature_repository.dart
+├── data/                # Repository implementation (if persistence needed)
+│   └── feature_repository_impl.dart
+└── presentation/        # UI + Stores + Feature-specific widgets
+    ├── feature_screen.dart
+    ├── feature_store.dart
+    └── widgets/         # Optional feature-specific widgets
+```
+
+## Examples
+
+### Onboarding Feature
+```
+ui/onboarding/
+├── domain/
+│   └── onboarding_repository.dart
+├── data/
+│   └── onboarding_repository_impl.dart
+└── presentation/
+    ├── onboarding_movies_screen.dart
+    ├── onboarding_movies_store.dart
+    ├── onboarding_genres_screen.dart
+    └── onboarding_genres_store.dart
+```
+
+### Paywall Feature
+```
+ui/paywall/
+└── presentation/
+    ├── paywall_screen_a.dart
+    ├── paywall_screen_b.dart
+    ├── paywall_store.dart
+    └── widgets/
+        ├── feature_comparison_table.dart
+        ├── paywall_auto_renewable_text.dart
+        ├── paywall_common_content.dart
+        ├── paywall_screen_base.dart
+        └── subscription_plan_row.dart
+```
+
+### Splash Feature
+```
+ui/splash/
+└── presentation/
+    ├── splash_screen.dart
+    └── splash_store.dart
+```
+
+## Layer Separation
+
+### Domain Layer (`core/domain/`, `ui/*/domain/`)
+- **Purpose**: Business logic and entities, framework-agnostic
+- **Rules**:
+  - ❌ NO Flutter imports
+  - ❌ NO Dio, SharedPreferences, or framework-specific code
+  - ✅ Pure Dart classes
+  - ✅ Repository interfaces
+  - ✅ Use cases
+
+### Data Layer (`core/data/`, `core/repository/`, `ui/*/data/`)
+- **Purpose**: Data sources, API clients, persistence
+- **Rules**:
+  - ✅ Implements Domain interfaces
+  - ✅ Maps DTOs to Domain entities
+  - ✅ Handles network errors and parsing
+  - ✅ Contains DTOs, repository implementations, API clients
+
+### Presentation Layer (`ui/*/presentation/`)
+- **Purpose**: UI and state management
+- **Rules**:
+  - ✅ Depends ONLY on Domain layer
+  - ❌ NEVER imports DTOs or Data layer directly
+  - ✅ All business logic in Stores (MobX)
+  - ❌ NO setState for business logic
+  - ✅ Contains Screens, Stores, Feature-specific widgets
+
+## Dependency Flow
+
+```
+Presentation → Domain ← Data
+     ↓
+   MobX Stores
+     ↓
+  Use Cases
+     ↓
+ Repositories (interface)
+     ↓
+Repositories (implementation)
+     ↓
+   API/Storage
+```
+
+## Import Rules
+
+### ✅ Allowed in Presentation
+- Domain entities: `import 'package:bovie/core/domain/movie.dart';`
+- Use cases: `import 'package:bovie/core/domain/get_popular_movies_usecase.dart';`
+- Repository interfaces: `import 'package:bovie/ui/onboarding/domain/onboarding_repository.dart';`
+- Core widgets: `import 'package:bovie/core/widgets/widgets.dart';`
+- Utils: `import 'package:bovie/core/utils/globals.dart';`
+
+### ❌ Forbidden in Presentation
+- DTOs: `import 'package:bovie/core/data/dto/movie_dto.dart';` ❌
+- Repository implementations: `import 'package:bovie/core/repository/movies_repository_impl.dart';` ❌
+- API clients: `import 'package:bovie/core/network/tmdb_api.dart';` ❌
+- SharedPreferences: `import 'package:shared_preferences/shared_preferences.dart';` ❌
+
+## File Organization Rules
+
+1. **Stores Location**: All MobX stores MUST be in `presentation/` folder
+   - ✅ `ui/paywall/presentation/paywall_store.dart`
+   - ❌ `ui/paywall/paywall_store.dart`
+
+2. **Screens Location**: All screens MUST be in `presentation/` folder
+   - ✅ `ui/splash/presentation/splash_screen.dart`
+   - ❌ `ui/splash/splash_screen.dart`
+
+3. **Widget Organization**:
+   - Reusable widgets → `core/widgets/`
+   - Feature-specific widgets → `ui/feature/presentation/widgets/`
+
+4. **Repository Pattern**:
+   - Interface in `domain/` (framework-agnostic, no Flutter/Dio imports)
+   - Implementation in `data/` (uses SharedPreferences, Dio, etc.)
+
+5. **Core Entities**: Shared entities (Movie, Genre) live in `core/domain/`, not in feature folders
+
+6. **Import Paths**: Always use full feature-based paths:
+   - ✅ `import 'package:bovie/ui/paywall/presentation/paywall_store.dart';`
+   - ❌ `import 'package:bovie/ui/paywall/paywall_store.dart';` (if in presentation folder)
+
+## State Management (MobX)
+
+- **Stores**: Located in `ui/*/presentation/*_store.dart`
+- **Pattern**: ViewModel pattern - stores contain business logic
+- **Constraint**: NO `setState` for business logic
+- **Observables**: UI state (loading, errors, selections, lists)
+- **Actions**: Business operations (fetch, select, toggle)
+- **Computed**: Derived state (canContinue, isSelected)
+
+## Dependency Injection
+
+- All dependencies resolved via `get_it` in `app/di/di.dart`
+- Stores obtain use cases via DI only
+- Global accessors in `core/utils/globals.dart` for convenience

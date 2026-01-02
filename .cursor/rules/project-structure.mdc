@@ -1,0 +1,10 @@
+---
+description: Bovie project structure rules (see architecture.mdc)
+globs:
+  - "**/*.dart"
+alwaysApply: true
+---
+
+# This file has been merged into architecture.mdc
+
+See `.cursor/rules/architecture.mdc` for all architecture and structure rules.
