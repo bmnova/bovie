@@ -4,10 +4,10 @@ import 'package:bovie/core/utils/globals.dart';
 import 'package:bovie/app/theme/app_colors.dart';
 import 'package:bovie/core/utils/figma_constants.dart';
 import 'package:bovie/core/widgets/widgets.dart';
-import 'package:bovie/ui/paywall/widgets/paywall_auto_renewable_text.dart';
-import 'package:bovie/ui/paywall/widgets/subscription_plan_row.dart';
+import 'package:bovie/ui/paywall/presentation/widgets/paywall_auto_renewable_text.dart';
+import 'package:bovie/ui/paywall/presentation/widgets/subscription_plan_row.dart';
 import 'package:bovie/core/ab_testing/paywall_variant_constants.dart';
-import 'package:bovie/ui/paywall/paywall_store.dart';
+import 'package:bovie/ui/paywall/presentation/paywall_store.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 /// Common content widget shared between paywall variants

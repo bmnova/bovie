@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:bovie/ui/splash/splash_screen.dart';
+import 'package:bovie/ui/splash/presentation/splash_screen.dart';
 import 'package:bovie/ui/onboarding/presentation/onboarding_movies_screen.dart';
 import 'package:bovie/ui/onboarding/presentation/onboarding_genres_screen.dart';
-import 'package:bovie/ui/paywall/paywall_screen_a.dart';
-import 'package:bovie/ui/paywall/paywall_screen_b.dart';
+import 'package:bovie/ui/paywall/presentation/paywall_screen_a.dart';
+import 'package:bovie/ui/paywall/presentation/paywall_screen_b.dart';
 import 'package:bovie/core/ab_testing/ab_testing.dart';
 import 'package:bovie/core/utils/globals.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';

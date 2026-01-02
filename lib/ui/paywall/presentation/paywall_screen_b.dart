@@ -5,7 +5,7 @@ import 'package:bovie/core/utils/globals.dart';
 import 'package:bovie/app/theme/app_colors.dart';
 import 'package:bovie/core/utils/figma_constants.dart';
 import 'package:bovie/core/ab_testing/paywall_variant_constants.dart';
-import 'package:bovie/ui/paywall/widgets/paywall_screen_base.dart';
+import 'package:bovie/ui/paywall/presentation/widgets/paywall_screen_base.dart';
 
 import '../../generated/assets.gen.dart';
 

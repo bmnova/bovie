@@ -10,8 +10,8 @@ import 'package:bovie/core/domain/genres_repository.dart';
 import 'package:bovie/core/domain/get_popular_movies_usecase.dart';
 import 'package:bovie/core/domain/get_genres_usecase.dart';
 import 'package:bovie/ui/onboarding/domain/onboarding_repository.dart';
-import 'package:bovie/ui/splash/splash_store.dart';
-import 'package:bovie/ui/paywall/paywall_store.dart';
+import 'package:bovie/ui/splash/presentation/splash_store.dart';
+import 'package:bovie/ui/paywall/presentation/paywall_store.dart';
 import 'package:flutter/material.dart';
 
 /// Global context provider

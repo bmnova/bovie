@@ -4,7 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bovie/app/theme/app_colors.dart';
 import 'package:bovie/core/utils/figma_constants.dart';
-import 'package:bovie/ui/splash/splash_store.dart';
+import 'package:bovie/ui/splash/presentation/splash_store.dart';
 import 'package:bovie/generated/assets.gen.dart';
 import 'package:bovie/core/utils/globals.dart';
 import 'package:mobx/mobx.dart';

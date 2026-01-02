@@ -10,7 +10,7 @@ export 'basic/movie_poster_card.dart';
 export 'basic/custom_row.dart';
 
 // Complex widgets
-export '../../ui/paywall/widgets/feature_comparison_table.dart';
+export '../../ui/paywall/presentation/widgets/feature_comparison_table.dart';
 export 'complex/toggle_row.dart';
 export 'complex/selectable_row.dart';
 

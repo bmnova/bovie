@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bovie/core/utils/figma_constants.dart';
 import 'package:bovie/app/theme/app_colors.dart';
-import 'package:bovie/ui/paywall/widgets/paywall_common_content.dart';
-import 'package:bovie/ui/paywall/paywall_store.dart';
+import 'package:bovie/ui/paywall/presentation/widgets/paywall_common_content.dart';
+import 'package:bovie/ui/paywall/presentation/paywall_store.dart';
 import 'package:bovie/generated/assets.gen.dart';
 
 /// Base paywall screen widget shared between variants
