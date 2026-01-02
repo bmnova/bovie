@@ -9,8 +9,8 @@ import 'package:bovie/core/utils/tmdb_image_url_builder.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:bovie/core/utils/globals.dart';
 
-import '../../core/utils/figma_constants.dart';
-import '../../core/widgets/basic/app_button.dart';
+import '../../../core/utils/figma_constants.dart';
+import '../../../core/widgets/basic/app_button.dart';
 
 class OnboardingMoviesScreen extends StatefulWidget {
   const OnboardingMoviesScreen({super.key});

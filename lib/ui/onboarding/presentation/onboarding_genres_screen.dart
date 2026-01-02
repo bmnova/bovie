@@ -7,6 +7,9 @@ import 'package:bovie/core/domain/get_genres_usecase.dart';
 import 'package:mobx/mobx.dart';
 import 'package:bovie/core/utils/globals.dart';
 
+import '../../../core/utils/figma_constants.dart';
+import '../../../core/widgets/basic/app_button.dart';
+import '../../../core/widgets/basic/movie_genre_card.dart';
 import 'onboarding_genres_store.dart';
 
 class OnboardingGenresScreen extends StatefulWidget {
