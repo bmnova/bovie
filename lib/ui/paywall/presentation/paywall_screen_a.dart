@@ -65,28 +65,7 @@ class PaywallScreenA extends StatelessWidget {
             // Feature Comparison Table
             FeatureComparisonTable(
               appName: appName,
-              features: [
-                FeatureItem(
-                  name: localizations.dailyMovieSuggestions,
-                  isAvailableInFree: true,
-                  isAvailableInPro: true,
-                ),
-                FeatureItem(
-                  name: localizations.aiPoweredMovieInsights,
-                  isAvailableInFree: false,
-                  isAvailableInPro: true,
-                ),
-                FeatureItem(
-                  name: localizations.personalizedWatchlists,
-                  isAvailableInFree: false,
-                  isAvailableInPro: false,
-                ),
-                FeatureItem(
-                  name: localizations.adFreeExperience,
-                  isAvailableInFree: false,
-                  isAvailableInPro: false,
-                ),
-              ],
+              features: PaywallFeatures.getDefault(),
             ),
             const SizedBox(height: FigmaConstants.spacing28),
             // Enable Free Trial Toggle

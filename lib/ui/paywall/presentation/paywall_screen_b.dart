@@ -113,28 +113,7 @@ class PaywallScreenB extends StatelessWidget {
           appName: appName,
           showComparison: false,
           bottomPadding: _FigmaConstants.featureListBottomPadding,
-          features: [
-            FeatureItem(
-              name: localizations.dailyMovieSuggestions,
-              isAvailableInFree: true,
-              isAvailableInPro: true,
-            ),
-            FeatureItem(
-              name: localizations.aiPoweredMovieInsights,
-              isAvailableInFree: false,
-              isAvailableInPro: true,
-            ),
-            FeatureItem(
-              name: localizations.personalizedWatchlists,
-              isAvailableInFree: false,
-              isAvailableInPro: false,
-            ),
-            FeatureItem(
-              name: localizations.adFreeExperience,
-              isAvailableInFree: false,
-              isAvailableInPro: false,
-            ),
-          ],
+          features: PaywallFeatures.getDefault(),
         ),
       ],
     );

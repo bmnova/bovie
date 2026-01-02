@@ -4,6 +4,7 @@ import 'package:bovie/core/utils/figma_constants.dart';
 import 'package:bovie/core/utils/globals.dart';
 import 'package:bovie/core/widgets/basic/fitted_text.dart';
 import 'package:bovie/generated/assets.gen.dart';
+import 'package:bovie/generated/l10n.dart';
 
 /// Feature comparison table widget for paywall screen
 /// 
@@ -91,6 +92,37 @@ class FeatureItem {
     required this.isAvailableInFree,
     required this.isAvailableInPro,
   });
+}
+
+/// Paywall features list shared between PaywallScreenA and PaywallScreenB
+class PaywallFeatures {
+  PaywallFeatures._();
+
+  /// Get the default list of paywall features
+  static List<FeatureItem> getDefault() {
+    return [
+      FeatureItem(
+        name: localizations.dailyMovieSuggestions,
+        isAvailableInFree: true,
+        isAvailableInPro: true,
+      ),
+      FeatureItem(
+        name: localizations.aiPoweredMovieInsights,
+        isAvailableInFree: false,
+        isAvailableInPro: true,
+      ),
+      FeatureItem(
+        name: localizations.personalizedWatchlists,
+        isAvailableInFree: false,
+        isAvailableInPro: false,
+      ),
+      FeatureItem(
+        name: localizations.adFreeExperience,
+        isAvailableInFree: false,
+        isAvailableInPro: false,
+      ),
+    ];
+  }
 }
 
 class _FeatureTable extends StatelessWidget {
