@@ -125,5 +125,5 @@ class PaywallScreenB extends StatelessWidget {
       store: paywallStore,
       badgePosition: BadgePosition.right,
     );
-  }
+}
 }

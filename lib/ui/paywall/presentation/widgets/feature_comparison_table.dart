@@ -514,7 +514,7 @@ class _FeatureIcon extends StatelessWidget {
       // Checkmark icon - green for FREE, red for PRO
       if (isPro) {
         // PRO: Use red checkmark icon
-       return BovieAssets.icons.circleCheckIconGreen.svg(
+        return BovieAssets.icons.circleCheckIconGreen.svg(
           width: FigmaConstants.iconSize24,
           height: FigmaConstants.iconSize24,
         );

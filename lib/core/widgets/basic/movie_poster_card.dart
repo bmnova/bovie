@@ -50,7 +50,7 @@ class MoviePosterCard extends StatelessWidget {
                         color: context.colorScheme.surfaceContainerHighest,
                         child: Center(
                           child: Text(
-                            'Image',
+                            localizations.imagePlaceholder,
                             style: context.textTheme.titleMedium?.copyWith(
                               color: context.colorScheme.onSurfaceVariant,
                             ),
@@ -73,7 +73,7 @@ class MoviePosterCard extends StatelessWidget {
                       color: context.colorScheme.surfaceContainerHighest,
                       child: Center(
                         child: Text(
-                          'Image',
+                          localizations.imagePlaceholder,
                           style: context.textTheme.titleMedium?.copyWith(
                             color: context.colorScheme.onSurfaceVariant,
                           ),
