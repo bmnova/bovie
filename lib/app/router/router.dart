@@ -48,10 +48,10 @@ final router = GoRouter(
         return Observer(
           builder: (_) {
             // Show appropriate screen based on variant
-            switch (paywallStore.variant ?? PaywallVariant.testA) {
+            switch (paywallStore.variant ?? PaywallVariant.testB) {
               case PaywallVariant.control:
               case PaywallVariant.testA:
-                return const PaywallScreenA();
+              //  return const PaywallScreenA();
               case PaywallVariant.testB:
                 return const PaywallScreenB();
             }

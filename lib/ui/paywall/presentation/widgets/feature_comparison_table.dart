@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:bovie/app/theme/app_colors.dart';
 import 'package:bovie/core/utils/figma_constants.dart';
 import 'package:bovie/core/utils/globals.dart';
 import 'package:bovie/core/widgets/basic/fitted_text.dart';
 import 'package:bovie/generated/assets.gen.dart';
+import 'package:bovie/core/ab_testing/paywall_variant_constants.dart';
+import 'package:bovie/core/ab_testing/paywall_config.dart';
+import 'package:bovie/ui/paywall/presentation/paywall_store.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 class _FigmaConstants {
   _FigmaConstants._();
@@ -12,12 +17,13 @@ class _FigmaConstants {
 }
 
 /// Feature comparison table widget for paywall screen
-/// 
+///
 /// Displays a table comparing FREE and PRO plans with features and checkmarks/X icons
 /// When [showComparison] is false, displays a simple list with tick icons (for PaywallScreenB)
 class FeatureComparisonTable extends StatelessWidget {
   final String appName;
-  final List<FeatureItem> features;
+  final List<FeatureItem>? features;
+  final PaywallStore? store;
   final VoidCallback? onClose;
   final bool showComparison;
   final double? bottomPadding;
@@ -25,49 +31,73 @@ class FeatureComparisonTable extends StatelessWidget {
   const FeatureComparisonTable({
     super.key,
     required this.appName,
-    required this.features,
+    this.features,
+    this.store,
     this.onClose,
     this.showComparison = true,
     this.bottomPadding,
-  });
+  }) : assert(
+          features != null || store != null,
+          'Either features or store must be provided',
+        );
 
   @override
   Widget build(BuildContext context) {
+    // If store is provided, use Observer to react to changes
+    if (store != null) {
+      return Observer(
+        builder: (_) {
+          final effectiveFeatures = PaywallFeatures.getFeaturesForStore(store!);
+          return _buildContent(context, effectiveFeatures);
+        },
+      );
+    } else {
+      // Use provided features directly
+      return _buildContent(context, features!);
+    }
+  }
+
+  Widget _buildContent(BuildContext context, List<FeatureItem> effectiveFeatures) {
     if (showComparison) {
       // Comparison table mode (PaywallScreenA)
       return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        // App Name
-        const SizedBox(height: FigmaConstants.spacing8),
-        FittedText(
-          text: appName,
-          style: context.textTheme.titleLarge?.copyWith(
-                color: context.colorScheme.onSurface,
-                fontSize: FigmaConstants.fontSize24,
-                fontWeight: FontWeight.bold,
-              ),
-          textAlign: TextAlign.center,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        ),
-        const SizedBox(height: FigmaConstants.spacing8),
-        
-        // Feature Comparison Table (includes headers)
-        _FeatureTable(
-          features: features,
-        ),
-      ],
-    );
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // App Name
+          const SizedBox(height: FigmaConstants.spacing8),
+          FittedText(
+            text: appName,
+            style: context.textTheme.titleLarge?.copyWith(
+              color: AppColors.white,
+              fontSize: FigmaConstants.fontSize24,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          const SizedBox(height: FigmaConstants.spacing8),
+
+          // Feature Comparison Table (includes headers)
+          _FeatureTable(
+            features: effectiveFeatures,
+          ),
+        ],
+      );
     } else {
       // Simple list mode (PaywallScreenB)
+      // Filter to show only active features (isAvailableInPro: true)
+      final activeFeatures = effectiveFeatures
+          .where((feature) => feature.isAvailableInPro)
+          .toList();
+      
       return Padding(
         padding: EdgeInsets.only(bottom: bottomPadding ?? 0.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ...features.asMap().entries.map((entry) {
+            ...activeFeatures.asMap().entries.map((entry) {
               final index = entry.key;
               final feature = entry.value;
               return Column(
@@ -99,33 +129,64 @@ class FeatureItem {
   });
 }
 
+
 /// Paywall features list shared between PaywallScreenA and PaywallScreenB
 class PaywallFeatures {
   PaywallFeatures._();
 
-  /// Get the default list of paywall features
+  /// Get the default list of paywall features (static, used for feature names)
+  static List<String> getFeatureNames() => [
+    localizations.dailyMovieSuggestions,
+    localizations.aiPoweredMovieInsights,
+    localizations.personalizedWatchlists,
+    localizations.adFreeExperience,
+  ];
+
+  /// Get features based on store state (plan and free trial status)
+  static List<FeatureItem> getFeaturesForStore(PaywallStore store) {
+    final featureNames = getFeatureNames();
+    final isFreeTrialEnabled = store.isFreeTrialEnabled;
+    
+    // If free trial is enabled, all features are available in PRO
+    final proFeatures = isFreeTrialEnabled
+        ? PaywallConfig.getFeaturesForFreeMode()
+        : PaywallConfig.getFeaturesForPlan(store.selectedPlan);
+    
+    // Free mode always has all features enabled
+    final freeFeatures = PaywallConfig.getFeaturesForFreeMode();
+    
+    return List.generate(featureNames.length, (index) {
+      return FeatureItem(
+        name: featureNames[index],
+        isAvailableInFree: freeFeatures[index],
+        isAvailableInPro: proFeatures[index],
+      );
+    });
+  }
+
+  /// Get the default list of paywall features (legacy method, kept for backward compatibility)
   static List<FeatureItem> getDefault() => [
-      FeatureItem(
-        name: localizations.dailyMovieSuggestions,
-        isAvailableInFree: true,
-        isAvailableInPro: true,
-      ),
-      FeatureItem(
-        name: localizations.aiPoweredMovieInsights,
-        isAvailableInFree: false,
-        isAvailableInPro: true,
-      ),
-      FeatureItem(
-        name: localizations.personalizedWatchlists,
-        isAvailableInFree: false,
-        isAvailableInPro: false,
-      ),
-      FeatureItem(
-        name: localizations.adFreeExperience,
-        isAvailableInFree: false,
-        isAvailableInPro: false,
-      ),
-    ];
+    FeatureItem(
+      name: localizations.dailyMovieSuggestions,
+      isAvailableInFree: true,
+      isAvailableInPro: true,
+    ),
+    FeatureItem(
+      name: localizations.aiPoweredMovieInsights,
+      isAvailableInFree: false,
+      isAvailableInPro: true,
+    ),
+    FeatureItem(
+      name: localizations.personalizedWatchlists,
+      isAvailableInFree: false,
+      isAvailableInPro: false,
+    ),
+    FeatureItem(
+      name: localizations.adFreeExperience,
+      isAvailableInFree: false,
+      isAvailableInPro: false,
+    ),
+  ];
 }
 
 class _FeatureTable extends StatelessWidget {
@@ -139,7 +200,7 @@ class _FeatureTable extends StatelessWidget {
   Widget build(BuildContext context) {
     // Calculate column width based on text width + 8px padding on each side
     final textStyle = context.textTheme.bodyLarge?.copyWith(
-      color: context.colorScheme.onSurface,
+      color: AppColors.white,
       fontSize: FigmaConstants.fontSize16,
       fontWeight: FontWeight.w600,
     );
@@ -256,10 +317,10 @@ class _PlanHeaderCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Row height: 24px content + 8px top padding + 8px bottom padding = 40px total
-     const rowPadding = FigmaConstants.spacing8;
-     const horizontalPadding = FigmaConstants.spacing8;
-     const rowHeight = FigmaConstants.featureTableRowContentHeight + (rowPadding * 2); // 24 + 8 + 8 = 40px
-    
+    const rowPadding = FigmaConstants.spacing8;
+    const horizontalPadding = FigmaConstants.spacing8;
+    const rowHeight = FigmaConstants.featureTableRowContentHeight + (rowPadding * 2); // 24 + 8 + 8 = 40px
+
     final titleWidget = hasBorder
         ? _GradientBorderTitle(text: planName)
         : _PlainTitle(text: planName);
@@ -272,30 +333,30 @@ class _PlanHeaderCell extends StatelessWidget {
       ),
       decoration: hasBorder
           ? BoxDecoration(
-              border: Border(
-                left:  BorderSide(color: context.colorScheme.primary, width: FigmaConstants.borderWidth1),
-                right:  BorderSide(color: context.colorScheme.primary, width: FigmaConstants.borderWidth1),
-                top: isFirstRow
-                    ?  BorderSide(color: context.colorScheme.primary, width: FigmaConstants.borderWidth1)
-                    : BorderSide.none,
-                bottom: isLastRow
-                    ?  BorderSide(color: context.colorScheme.primary, width: FigmaConstants.borderWidth1)
-                    : BorderSide.none,
-              ),
-              borderRadius: isFirstRow && isLastRow
-                  ? BorderRadius.circular(FigmaConstants.radius8)
-                  : isFirstRow
-                      ? const BorderRadius.only(
-                          topLeft: Radius.circular(FigmaConstants.radius8),
-                          topRight: Radius.circular(FigmaConstants.radius8),
-                        )
-                      : isLastRow
-                          ? const BorderRadius.only(
-                              bottomLeft: Radius.circular(FigmaConstants.radius8),
-                              bottomRight: Radius.circular(FigmaConstants.radius8),
-                            )
-                          : null,
-            )
+        border: Border(
+          left: const BorderSide(color: AppColors.redLight, width: FigmaConstants.borderWidth1),
+          right: const BorderSide(color: AppColors.redLight, width: FigmaConstants.borderWidth1),
+          top: isFirstRow
+              ? const BorderSide(color: AppColors.redLight, width: FigmaConstants.borderWidth1)
+              : BorderSide.none,
+          bottom: isLastRow
+              ? const BorderSide(color: AppColors.redLight, width: FigmaConstants.borderWidth1)
+              : BorderSide.none,
+        ),
+        borderRadius: isFirstRow && isLastRow
+            ? BorderRadius.circular(FigmaConstants.radius8)
+            : isFirstRow
+            ? const BorderRadius.only(
+          topLeft: Radius.circular(FigmaConstants.radius8),
+          topRight: Radius.circular(FigmaConstants.radius8),
+        )
+            : isLastRow
+            ? const BorderRadius.only(
+          bottomLeft: Radius.circular(FigmaConstants.radius8),
+          bottomRight: Radius.circular(FigmaConstants.radius8),
+        )
+            : null,
+      )
           : null,
       child: Center(child: titleWidget),
     );
@@ -313,19 +374,19 @@ class _GradientBorderTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const borderWidth = FigmaConstants.borderWidthPro;
-    
+
     return Stack(
       children: [
         // Gradient border (outer container)
         // Figma: linear-gradient(270deg, rgba(8, 9, 10, 0) 20%, #CB2C2C 50%, rgba(8, 9, 10, 0) 80%)
         Container(
           decoration: BoxDecoration(
-            gradient:  LinearGradient(
+            gradient: LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
-              colors: [
+              colors: const [
                 Colors.transparent, // rgba(8, 9, 10, 0) at 20%
-                context.colorScheme.primary, // #CB2C2C at 50%
+                AppColors.redLight, // #CB2C2C at 50%
                 Colors.transparent, // rgba(8, 9, 10, 0) at 80%
               ],
               stops: _FigmaConstants.proGradientStops,
@@ -339,7 +400,7 @@ class _GradientBorderTitle extends StatelessWidget {
             padding: const EdgeInsets.all(borderWidth),
             child: Container(
               decoration: BoxDecoration(
-                color: context.colorScheme.surface,
+                color: AppColors.black,
                 borderRadius: BorderRadius.circular(FigmaConstants.radius4 - borderWidth),
               ),
               child: Center(
@@ -348,10 +409,10 @@ class _GradientBorderTitle extends StatelessWidget {
                   child: Text(
                     text,
                     style: context.textTheme.bodyLarge?.copyWith(
-                          color: context.colorScheme.onSurface,
-                          fontSize: FigmaConstants.fontSize16,
-                          fontWeight: FontWeight.w600,
-                        ),
+                      color: AppColors.white,
+                      fontSize: FigmaConstants.fontSize16,
+                      fontWeight: FontWeight.w600,
+                    ),
                     textAlign: TextAlign.center,
                     maxLines: 1,
                   ),
@@ -375,15 +436,15 @@ class _PlainTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Text(
-      text,
-      style: context.textTheme.bodyLarge?.copyWith(
-            color: context.colorScheme.onSurface,
-            fontSize: FigmaConstants.fontSize16,
-            fontWeight: FontWeight.w600,
-          ),
-      textAlign: TextAlign.center,
-      maxLines: 1,
-    );
+    text,
+    style: context.textTheme.bodyLarge?.copyWith(
+      color: AppColors.white,
+      fontSize: FigmaConstants.fontSize16,
+      fontWeight: FontWeight.w600,
+    ),
+    textAlign: TextAlign.center,
+    maxLines: 1,
+  );
 }
 
 class _FeatureNameCell extends StatelessWidget {
@@ -416,10 +477,10 @@ class _FeatureNameCell extends StatelessWidget {
           child: Text(
             feature.name,
             style: context.textTheme.bodyMedium?.copyWith(
-                  color: context.colorScheme.onSurface,
-                  fontSize: FigmaConstants.fontSize14,
-                  fontWeight: FontWeight.w600,
-                ),
+              color: AppColors.white,
+              fontSize: FigmaConstants.fontSize14,
+              fontWeight: FontWeight.w600,
+            ),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
@@ -471,28 +532,28 @@ class _FeatureIconCell extends StatelessWidget {
       return Container(
         decoration: BoxDecoration(
           border: Border(
-            left:  BorderSide(color: context.colorScheme.primary, width: FigmaConstants.borderWidth1),
-            right:  BorderSide(color: context.colorScheme.primary, width: FigmaConstants.borderWidth1),
+            left: const BorderSide(color: AppColors.redLight, width: FigmaConstants.borderWidth1),
+            right: const BorderSide(color: AppColors.redLight, width: FigmaConstants.borderWidth1),
             top: isFirstRow
-                ?  BorderSide(color: context.colorScheme.primary, width: FigmaConstants.borderWidth1)
+                ? const BorderSide(color: AppColors.redLight, width: FigmaConstants.borderWidth1)
                 : BorderSide.none,
             bottom: isLastRow
-                ? BorderSide(color: context.colorScheme.primary, width: FigmaConstants.borderWidth1)
+                ? const BorderSide(color: AppColors.redLight, width: FigmaConstants.borderWidth1)
                 : BorderSide.none,
           ),
           borderRadius: isFirstRow && isLastRow
               ? BorderRadius.circular(FigmaConstants.radius8)
               : isFirstRow
-                  ? const BorderRadius.only(
-                      topLeft: Radius.circular(FigmaConstants.radius8),
-                      topRight: Radius.circular(FigmaConstants.radius8),
-                    )
-                  : isLastRow
-                      ? const BorderRadius.only(
-                          bottomLeft: Radius.circular(FigmaConstants.radius8),
-                          bottomRight: Radius.circular(FigmaConstants.radius8),
-                        )
-                      : null,
+              ? const BorderRadius.only(
+            topLeft: Radius.circular(FigmaConstants.radius8),
+            topRight: Radius.circular(FigmaConstants.radius8),
+          )
+              : isLastRow
+              ? const BorderRadius.only(
+            bottomLeft: Radius.circular(FigmaConstants.radius8),
+            bottomRight: Radius.circular(FigmaConstants.radius8),
+          )
+              : null,
         ),
         child: child,
       );
@@ -548,23 +609,23 @@ class _FeatureListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        BovieAssets.icons.tick.svg(
-          width: FigmaConstants.iconSize14,
-          height: FigmaConstants.iconSize14,
+    mainAxisAlignment: MainAxisAlignment.start,
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      BovieAssets.icons.tick.svg(
+        width: FigmaConstants.iconSize14,
+        height: FigmaConstants.iconSize14,
+      ),
+      const SizedBox(width: FigmaConstants.spacing12),
+      Text(
+        text,
+        style: context.textTheme.bodyMedium?.copyWith(
+          color: AppColors.white,
+          fontSize: FigmaConstants.fontSize14,
+          fontWeight: FontWeight.w600,
         ),
-        const SizedBox(width: FigmaConstants.spacing12),
-        Text(
-          text,
-          style: context.textTheme.bodyMedium?.copyWith(
-            color: context.colorScheme.onSurface,
-            fontSize: FigmaConstants.fontSize14,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ],
-    );
+      ),
+    ],
+  );
 }
 

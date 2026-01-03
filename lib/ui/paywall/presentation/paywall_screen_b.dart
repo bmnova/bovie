@@ -4,6 +4,9 @@ import 'package:bovie/core/widgets/widgets.dart';
 import 'package:bovie/core/utils/globals.dart';
 import 'package:bovie/app/theme/app_colors.dart';
 import 'package:bovie/core/utils/figma_constants.dart';
+import 'package:bovie/core/ab_testing/paywall_variant_constants.dart';
+import 'package:bovie/core/ab_testing/paywall_config.dart';
+import 'package:bovie/core/ab_testing/remote_variant_config.dart';
 import 'package:bovie/ui/paywall/presentation/widgets/paywall_screen_base.dart';
 
 import '../../../generated/assets.gen.dart';
@@ -29,8 +32,24 @@ class _FigmaConstants {
   static const double featureListBottomPadding = 52.0;
 }
 
-class PaywallScreenB extends StatelessWidget {
+class PaywallScreenB extends StatefulWidget {
   const PaywallScreenB({super.key});
+
+  @override
+  State<PaywallScreenB> createState() => _PaywallScreenBState();
+}
+
+class _PaywallScreenBState extends State<PaywallScreenB> {
+  @override
+  void initState() {
+    super.initState();
+    // Set default plan based on variant (PaywallScreenB = yearly)
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final variant = paywallStore.variant ?? PaywallVariant.testB;
+      final defaultPlan = PaywallConfig.getDefaultPlanForVariant(variant);
+      paywallStore.selectPlan(defaultPlan);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +132,7 @@ class PaywallScreenB extends StatelessWidget {
           appName: appName,
           showComparison: false,
           bottomPadding: _FigmaConstants.featureListBottomPadding,
-          features: PaywallFeatures.getDefault(),
+          store: paywallStore,
         ),
       ],
     );

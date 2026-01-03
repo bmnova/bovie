@@ -14,6 +14,7 @@
 library;
 
 export 'paywall_variant_constants.dart';
+export 'paywall_config.dart';
 export 'remote_variant_config.dart';
 export 'variant_decider.dart';
 export 'variant_factory.dart';
