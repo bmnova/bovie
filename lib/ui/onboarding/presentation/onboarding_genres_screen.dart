@@ -9,28 +9,13 @@ import 'package:bovie/core/utils/globals.dart';
 import 'package:bovie/generated/l10n.dart';
 
 import '../../../core/utils/figma_constants.dart';
-import '../../../core/widgets/basic/app_button.dart';
 import '../../../core/widgets/basic/movie_genre_card.dart';
 import 'onboarding_genres_store.dart';
+import 'widgets/onboarding_selection_screen_base.dart';
 
 /// Figma constants specific to OnboardingGenresScreen
 class _FigmaConstants {
   _FigmaConstants._();
-
-  // Header
-  static const double headerTopPadding = 36.0; // Padding after SafeArea
-  static const double headerLeft = 20.0; // Left position from Figma
-  static const double headerWidth = 335.0; // Width from Figma
-  static const double headerHeight = 65.0; // Height from Figma
-  static const double headerToGenreSpacing = 72.0; // Spacing from header to genre selection
-
-  // Button
-  static const double buttonBottomPadding = 57.0;
-  static const double buttonHorizontalPadding = 20.0;
-
-  // Font sizes
-  static const double titleFontSize = 24.0;
-  static const double subtitleFontSize = 20.0;
 
   // Gradient shadows
   static const double topGradientHeight = 59.0;
@@ -83,117 +68,41 @@ class _OnboardingGenresScreenState extends State<OnboardingGenresScreen> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        backgroundColor: AppColors.black,
-        body: SafeArea(
-          child: Observer(
-            builder: (_) {
-              if (_store.isLoading && _store.genres.isEmpty) {
-                return const Center(
-                  child: CircularProgressIndicator(color: AppColors.white),
-                );
-              }
-
-              final safeAreaTop = MediaQuery.of(context).padding.top;
-              final headerTop = safeAreaTop + _FigmaConstants.headerTopPadding;
-              final genreSelectionTop = headerTop + _FigmaConstants.headerHeight + _FigmaConstants.headerToGenreSpacing;
-              final topGradientTop = genreSelectionTop - _FigmaConstants.topGradientOffset;
-              final buttonTop = _FigmaConstants.buttonBottomPadding;
-
-              return Stack(
-                children: [
-                  // Header
-                  Positioned(
-                    top: headerTop,
-                    left: _FigmaConstants.headerLeft,
-                    width: _FigmaConstants.headerWidth,
-                    height: _FigmaConstants.headerHeight,
-                    child: _buildHeader(context),
-                  ),
-                  // Genre Selection (extends behind button)
-                  Positioned(
-                    top: genreSelectionTop,
-                    left: 0,
-                    right: 0,
-                    bottom: 0, // Extends to bottom of screen, behind button
-                    child: _buildGenreSelection(context),
-                  ),
-                  // Top gradient shadow (34px above genre selection start, overlay on top)
-                  Positioned(
-                    top: topGradientTop,
-                    left: 0,
-                    right: 0,
-                    height: _FigmaConstants.topGradientHeight,
-                    child: _buildTopGradient(),
-                  ),
-                  // Bottom gradient shadow (overlay on bottom, starts from bottom of screen)
-                  Positioned(
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    height: _FigmaConstants.bottomGradientHeight,
-                    child: _buildBottomGradient(),
-                  ),
-                  // Continue Button
-                  Positioned(
-                    bottom: _FigmaConstants.buttonBottomPadding,
-                    left: _FigmaConstants.buttonHorizontalPadding,
-                    right: _FigmaConstants.buttonHorizontalPadding,
-                    child: _buildButton(context),
-                  ),
-                ],
-              );
-            },
-          ),
-        ),
-      );
-
-  Widget _buildHeader(BuildContext context) {
-    return Observer(
-      builder: (_) {
-        final hasSelection = _store.selectedGenreIds.isNotEmpty;
-
-        if (hasSelection) {
-          // Thank you: vertical center in container
-          return Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              context.localizations.thankYou,
-              style: context.textTheme.headlineMedium?.copyWith(
-                color: AppColors.white,
-                fontSize: _FigmaConstants.titleFontSize,
-                fontWeight: FontWeight.bold,
-              ),
-              textAlign: TextAlign.start,
-            ),
-          );
-        } else {
-          // Welcome + Choose your 2 favorite genres: top aligned
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                context.localizations.welcome,
-                style: context.textTheme.headlineMedium?.copyWith(
-                  color: AppColors.white,
-                  fontSize: _FigmaConstants.titleFontSize,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                context.localizations.chooseYour2FavoriteGenres,
-                style: context.textTheme.titleMedium?.copyWith(
-                  color: AppColors.white,
-                  fontSize: _FigmaConstants.subtitleFontSize,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          );
-        }
-      },
+  Widget build(BuildContext context) {
+    return OnboardingSelectionScreenBase(
+      bodyBuilder: (context, contentTop) => _buildGenreSelection(context),
+      hasSelection: () => _store.selectedGenreIds.isNotEmpty,
+      canContinue: () => _store.canContinue,
+      onContinue: () => context.push(AppRoutes.onboardingMovies),
+      selectedTitle: S.of(context).thankYou,
+      welcomeTitle: S.of(context).welcome,
+      welcomeSubtitle: S.of(context).chooseYour2FavoriteGenres,
+      isLoading: () => _store.isLoading,
+      hasData: () => _store.genres.isNotEmpty,
+      overlayWidgetsBuilder: (contentTop) => _buildOverlayWidgets(context, contentTop),
     );
+  }
+
+  List<Widget> _buildOverlayWidgets(BuildContext context, double contentTop) {
+    final topGradientTop = contentTop - _FigmaConstants.topGradientOffset;
+    return [
+      // Top gradient shadow (34px above genre selection start, overlay on top)
+      Positioned(
+        top: topGradientTop,
+        left: 0,
+        right: 0,
+        height: _FigmaConstants.topGradientHeight,
+        child: _buildTopGradient(),
+      ),
+      // Bottom gradient shadow (overlay on bottom, starts from bottom of screen)
+      Positioned(
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: _FigmaConstants.bottomGradientHeight,
+        child: _buildBottomGradient(),
+      ),
+    ];
   }
 
   Widget _buildGenreSelection(BuildContext context) {
@@ -225,15 +134,6 @@ class _OnboardingGenresScreenState extends State<OnboardingGenresScreen> {
     );
   }
 
-  Widget _buildButton(BuildContext context) {
-    return Observer(
-      builder: (_) => AppButton(
-        text: localizations.continueText,
-        isEnabled: _store.canContinue,
-        onPressed: () => context.push(AppRoutes.onboardingMovies),
-      ),
-    );
-  }
 
   /// Top gradient shadow: linear-gradient(176.7deg, #0F0E0E 2.73%, rgba(15, 14, 14, 0) 97.28%)
   Widget _buildTopGradient() {

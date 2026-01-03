@@ -5,33 +5,18 @@ import 'package:bovie/app/router/router.dart';
 import 'package:bovie/app/theme/app_colors.dart';
 import 'package:bovie/ui/onboarding/presentation/onboarding_movies_store.dart';
 import 'package:bovie/ui/onboarding/presentation/widgets/curved_horizontal_scroll.dart';
-import 'package:bovie/core/domain/get_popular_movies_usecase.dart';
 import 'package:bovie/core/utils/globals.dart';
-import 'package:bovie/core/widgets/basic/app_button.dart';
 import 'package:bovie/core/widgets/basic/movie_poster_card.dart';
 import 'package:bovie/generated/l10n.dart';
+import 'widgets/onboarding_selection_screen_base.dart';
 
 /// Figma constants specific to OnboardingMoviesScreen
 class _FigmaConstants {
   _FigmaConstants._();
 
-  // Header
-  static const double headerTopPadding = 88.0;
-  static const double headerGap = 12.0;
-  static const double headerHorizontalPadding = 20.0;
-
   // Movie selection
-  static const double movieSelectionTopPosition = 288.0;
   static const double movieItemSpacing = 0.0;
   static const double moviePosterAspectRatio = 180.0 / 252.0; // width / height from Figma
-
-  // Button
-  static const double buttonBottomPadding = 57.0;
-  static const double buttonHorizontalPadding = 20.0;
-
-  // Font sizes
-  static const double titleFontSize = 24.0;
-  static const double subtitleFontSize = 20.0;
 
   // Scroll pagination threshold
   static const double scrollPaginationThreshold = 200.0;
@@ -70,11 +55,9 @@ class _OnboardingMoviesScreenState extends State<OnboardingMoviesScreen> {
   }
 
   void _onScroll() {
-    if (_scrollController.position.pixels >=
-        _scrollController.position.maxScrollExtent -
-            _FigmaConstants.scrollPaginationThreshold) {
-        _store.fetchNextPage();
-      }
+    if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent - _FigmaConstants.scrollPaginationThreshold) {
+      _store.fetchNextPage();
+    }
   }
 
   @override
@@ -86,91 +69,30 @@ class _OnboardingMoviesScreenState extends State<OnboardingMoviesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.black,
-      body: SafeArea(
-        child: Observer(
-          builder: (_) {
-            if (_store.isLoading && _store.movies.isEmpty) {
-              return const Center(
-                child: CircularProgressIndicator(color: AppColors.white),
-              );
-            }
-
-            return Stack(
-              children: [
-                // Header
-                Positioned(
-                  top: _FigmaConstants.headerTopPadding -
-                      MediaQuery.of(context).padding.top,
-                  left: _FigmaConstants.headerHorizontalPadding,
-                  right: _FigmaConstants.headerHorizontalPadding,
-                  child: _buildHeader(context),
-                ),
-                // Movie Selection with curved scroll
-                Positioned(
-                  top: _FigmaConstants.movieSelectionTopPosition -
-                      MediaQuery.of(context).padding.top,
-                  left: 0,
-                  right: 0,
-                  child: _buildMovieSelection(context),
-                ),
-                // Continue Button
-                Positioned(
-                  bottom: _FigmaConstants.buttonBottomPadding,
-                  left: _FigmaConstants.buttonHorizontalPadding,
-                  right: _FigmaConstants.buttonHorizontalPadding,
-                  child: _buildButton(context),
-                ),
-              ],
-            );
-          },
-        ),
-      ),
-    );
-  }
-
-  Widget _buildHeader(BuildContext context) {
-    return Observer(
-      builder: (_) {
-        final hasSelection = _store.selectedMovieIds.isNotEmpty;
-        final titleText = hasSelection
-            ? S.of(context).continueToNextStep
-            : S.of(context).welcome;
-        final subtitleText = hasSelection
-            ? null
-            : S.of(context).chooseYour3FavoriteMovies;
-
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              titleText,
-              style: context.textTheme.headlineMedium?.copyWith(
-                color: AppColors.white,
-                fontSize: _FigmaConstants.titleFontSize,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            if (subtitleText != null) ...[
-              const SizedBox(height: _FigmaConstants.headerGap),
-              Text(
-                subtitleText,
-                style: context.textTheme.titleLarge?.copyWith(
-                  color: AppColors.white,
-                  fontSize: _FigmaConstants.subtitleFontSize,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ],
-        );
-      },
+    return OnboardingSelectionScreenBase(
+      bodyBuilder: (context, contentTop) => _buildMovieSelection(context),
+      hasSelection: () => _store.selectedMovieIds.isNotEmpty,
+      canContinue: () => _store.canContinue,
+      onContinue: () => context.push(AppRoutes.onboardingGenres),
+      selectedTitle: S.of(context).continueToNextStep,
+      welcomeTitle: S.of(context).welcome,
+      welcomeSubtitle: S.of(context).chooseYour3FavoriteMovies,
+      isLoading: () => _store.isLoading,
+      hasData: () => _store.movies.isNotEmpty,
+      headerToContentSpacing: 135.0, // Movies için 135px spacing
+      extendBodyToBottom: false, // Movies için body bottom'a uzamaz, belirli yükseklikte
     );
   }
 
   Widget _buildMovieSelection(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final safeAreaTop = MediaQuery.of(context).padding.top;
+    final headerTop = safeAreaTop + 36.0; // headerTopPadding
+    final contentTop = headerTop + 65.0 + 135.0; // headerHeight + spacing
+    final buttonBottom = 57.0; // buttonBottomPadding
+    final buttonHeight = 56.0; // buttonHeightLarge
+
     final posterWidth = _FigmaConstants.calculatePosterWidth(screenWidth);
     final posterHeight = _FigmaConstants.calculatePosterHeight(posterWidth);
 
@@ -210,16 +132,6 @@ class _OnboardingMoviesScreenState extends State<OnboardingMoviesScreen> {
             },
           );
         },
-        ),
-      );
-  }
-
-  Widget _buildButton(BuildContext context) {
-    return Observer(
-      builder: (_) => AppButton(
-        text: localizations.continueText,
-        isEnabled: _store.canContinue,
-        onPressed: () => context.push(AppRoutes.onboardingGenres),
       ),
     );
   }

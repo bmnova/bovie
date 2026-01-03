@@ -45,42 +45,30 @@ class MoviePosterCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => GestureDetector(
-        onTap: onTap,
-        child: Stack(
-          children: [
+      onTap: onTap,
+      child: Stack(
+        children: [
             SizedBox(
-              width: width,
-              height: height,
-              child: ClipRRect(
+            width: width,
+            height: height,
+            child: ClipRRect(
                 borderRadius: BorderRadius.zero,
-                child: imageUrl != null
-                    ? CachedNetworkImage(
-                        imageUrl: TmdbImageUrlBuilder.build(imageUrl!, size: 'w500'),
-                        fit: BoxFit.cover,
-                        placeholder: (context, url) => Container(
-                          color: context.colorScheme.surfaceContainerHighest,
-                          child: Center(
-                            child: Text(
+              child: imageUrl != null
+                  ? CachedNetworkImage(
+                      imageUrl: TmdbImageUrlBuilder.build(imageUrl!, size: 'w500'),
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) => Container(
+                        color: context.colorScheme.surfaceContainerHighest,
+                        child: Center(
+                          child: Text(
                               localizations.imagePlaceholder,
-                              style: context.textTheme.titleMedium?.copyWith(
-                                color: context.colorScheme.onSurfaceVariant,
-                              ),
+                            style: context.textTheme.titleMedium?.copyWith(
+                              color: context.colorScheme.onSurfaceVariant,
                             ),
                           ),
                         ),
-                        errorWidget: (context, url, error) => Container(
-                          color: context.colorScheme.surfaceContainerHighest,
-                          child: Center(
-                            child: Text(
-                              localizations.imagePlaceholder,
-                              style: context.textTheme.titleMedium?.copyWith(
-                                color: context.colorScheme.onSurfaceVariant,
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                    : Container(
+                      ),
+                      errorWidget: (context, url, error) => Container(
                         color: context.colorScheme.surfaceContainerHighest,
                         child: Center(
                           child: Text(
@@ -91,29 +79,41 @@ class MoviePosterCard extends StatelessWidget {
                           ),
                         ),
                       ),
-              ),
+                    )
+                  : Container(
+                      color: context.colorScheme.surfaceContainerHighest,
+                      child: Center(
+                        child: Text(
+                            localizations.imagePlaceholder,
+                          style: context.textTheme.titleMedium?.copyWith(
+                            color: context.colorScheme.onSurfaceVariant,
+                          ),
+                        ),
+                      ),
+                    ),
             ),
+          ),
             // Inner shadow effect (inset shadow)
-            if (isSelected)
+          if (isSelected)
               Positioned.fill(
                 child: CustomPaint(
                   painter: _InnerShadowPainter(),
-                ),
               ),
+            ),
             // Checkmark icon at bottom right
-            if (isSelected)
+          if (isSelected)
               Positioned(
                 right: _FigmaConstants.selectedIconRightPadding,
                 bottom: _FigmaConstants.selectedIconBottomPadding,
                 child: BovieAssets.icons.circleCheckIconRed.svg(
                   width: FigmaConstants.iconSize32,
                   height: FigmaConstants.iconSize32,
-                ),
               ),
-          ],
-        ),
-      );
-}
+            ),
+        ],
+      ),
+    );
+  }
 
 /// Custom painter for inner shadow effect
 /// Simulates CSS inset shadow: 0px 0px 60px 24px #CB2C2C4D inset
