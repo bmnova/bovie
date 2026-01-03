@@ -1,7 +1,9 @@
 import 'dart:math';
 import 'package:mobx/mobx.dart';
 import 'package:bovie/core/domain/movie.dart';
+import 'package:bovie/core/domain/genre.dart';
 import 'package:bovie/core/domain/movies_repository.dart';
+import 'package:bovie/core/domain/get_genres_usecase.dart';
 import 'package:bovie/ui/onboarding/domain/onboarding_repository.dart';
 
 part 'home_store.g.dart';
@@ -26,10 +28,12 @@ class HomeStore = _HomeStoreBase with _$HomeStore;
 abstract class _HomeStoreBase with Store {
   final MoviesRepository _moviesRepository;
   final OnboardingRepository _onboardingRepository;
+  final GetGenres _getGenres;
 
   _HomeStoreBase(
     this._moviesRepository,
     this._onboardingRepository,
+    this._getGenres,
   );
 
   /// Active source types for "For You" section
@@ -52,10 +56,22 @@ abstract class _HomeStoreBase with Store {
   ObservableList<Movie> forYouMovies = ObservableList<Movie>();
 
   @observable
+  ObservableList<Genre> categories = ObservableList<Genre>();
+
+  @observable
+  ObservableMap<int, ObservableList<Movie>> categoryMovies = ObservableMap<int, ObservableList<Movie>>();
+
+  @observable
+  int? activeCategoryId; // For scroll tracking
+
+  @observable
   bool isLoading = false;
 
   @observable
   bool isLoadingMore = false;
+
+  @observable
+  bool isLoadingCategories = false;
 
   @observable
   bool hasMore = true;
@@ -68,6 +84,11 @@ abstract class _HomeStoreBase with Store {
   
   // Store all loaded movies (before shuffle) for pagination
   final Set<int> _loadedMovieIds = {};
+
+  // Track pagination state for each category
+  final Map<int, int> _categoryPages = {}; // Current page for each category
+  final Map<int, bool> _categoryHasMore = {}; // Has more movies for each category
+  final Map<int, bool> _categoryLoadingMore = {}; // Is loading more for each category
 
   /// Reset all onboarding selections and reload movies
   @action
@@ -182,9 +203,7 @@ abstract class _HomeStoreBase with Store {
   }
 
   /// Load movies from a specific source type
-  Future<List<Movie>> _loadMoviesFromSource(ForYouSourceType sourceType) async {
-    return _loadMoviesFromSourceWithPage(sourceType, page: 1);
-  }
+  Future<List<Movie>> _loadMoviesFromSource(ForYouSourceType sourceType) async => _loadMoviesFromSourceWithPage(sourceType, page: 1);
 
   /// Load movies from a specific source type with pagination
   Future<List<Movie>> _loadMoviesFromSourceWithPage(ForYouSourceType sourceType, {int page = 1}) async {
@@ -246,5 +265,123 @@ abstract class _HomeStoreBase with Store {
     }
     return allMovies;
   }
+
+  /// Load all categories
+  @action
+  Future<void> loadCategories() async {
+    if (isLoadingCategories) return; // Prevent multiple simultaneous loads
+    
+    isLoadingCategories = true;
+    error = null;
+
+    try {
+      final result = await _getGenres();
+      if (result.isSuccess) {
+        final genresList = result.dataOrNull!;
+        runInAction(() {
+          categories.clear();
+          categories.addAll(genresList);
+          // Set first category as active by default
+          if (categories.isNotEmpty && activeCategoryId == null) {
+            activeCategoryId = categories.first.id;
+          }
+        });
+        // Load movies for each category
+        for (final genre in genresList) {
+          await loadMoviesForCategory(genre.id);
+        }
+      } else {
+        runInAction(() {
+          error = result.errorOrNull?.message ?? 'Failed to load categories';
+        });
+      }
+    } catch (e) {
+      runInAction(() {
+        error = e.toString();
+      });
+    } finally {
+      runInAction(() {
+        isLoadingCategories = false;
+      });
+    }
+  }
+
+  /// Load movies for a specific category (initial 9 movies as per README)
+  @action
+  Future<void> loadMoviesForCategory(int genreId) async {
+    try {
+      final result = await _moviesRepository.discoverByGenre(genreId, page: 1);
+      if (result.isSuccess) {
+        final allMovies = result.dataOrNull!;
+        // Use all movies from the first page (usually 20) to ensure horizontal scrollability in 3-row layout
+        final movies = allMovies.toList(); 
+        runInAction(() {
+          categoryMovies[genreId] = ObservableList<Movie>.of(movies);
+          _categoryPages[genreId] = 1;
+          _categoryHasMore[genreId] = allMovies.length >= 20; // TMDB default page size is 20
+          _categoryLoadingMore[genreId] = false;
+        });
+      }
+    } catch (e) {
+      // Silently fail for individual category loads
+    }
+  }
+
+  /// Load more movies for a specific category (infinite scroll)
+  @action
+  Future<void> loadMoreMoviesForCategory(int genreId) async {
+    // Check if already loading or no more movies
+    if (_categoryLoadingMore[genreId] == true || _categoryHasMore[genreId] == false) {
+      return;
+    }
+
+    _categoryLoadingMore[genreId] = true;
+
+    try {
+      final currentPage = _categoryPages[genreId] ?? 1;
+      final nextPage = currentPage + 1;
+      
+      final result = await _moviesRepository.discoverByGenre(genreId, page: nextPage);
+      if (result.isSuccess) {
+        final newMovies = result.dataOrNull!;
+        
+        if (newMovies.isEmpty) {
+          runInAction(() {
+            _categoryHasMore[genreId] = false;
+            _categoryLoadingMore[genreId] = false;
+          });
+        } else {
+          runInAction(() {
+            final currentMovies = categoryMovies[genreId] ?? ObservableList<Movie>();
+            currentMovies.addAll(newMovies);
+            categoryMovies[genreId] = currentMovies;
+            _categoryPages[genreId] = nextPage;
+            _categoryHasMore[genreId] = newMovies.length >= 20; // Assume has more if full page returned
+            _categoryLoadingMore[genreId] = false;
+          });
+        }
+      } else {
+        runInAction(() {
+          _categoryHasMore[genreId] = false;
+          _categoryLoadingMore[genreId] = false;
+        });
+      }
+    } catch (e) {
+      runInAction(() {
+        _categoryHasMore[genreId] = false;
+        _categoryLoadingMore[genreId] = false;
+      });
+    }
+  }
+
+  /// Check if more movies are being loaded for a category
+  bool isCategoryLoadingMore(int genreId) => _categoryLoadingMore[genreId] ?? false;
+
+  /// Check if category has more movies to load
+  bool categoryHasMore(int genreId) => _categoryHasMore[genreId] ?? false;
+
+  /// Set active category (for scroll tracking)
+  @action
+  void setActiveCategory(int? categoryId) => activeCategoryId = categoryId;
 }
 

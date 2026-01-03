@@ -104,8 +104,7 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-  Widget _buildMainContent(BuildContext context, double scaleFactor) {
-    return Center(
+  Widget _buildMainContent(BuildContext context, double scaleFactor) => Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -131,9 +130,6 @@ class _SplashScreenState extends State<SplashScreen> {
         ],
       ),
     );
-  }
 
-  Widget _buildLogo(BuildContext context) {
-    return BovieAssets.images.clapperboard.image(fit: BoxFit.contain);
-  }
+  Widget _buildLogo(BuildContext context) => BovieAssets.images.clapperboard.image(fit: BoxFit.contain);
 }

@@ -4,6 +4,7 @@ import 'package:bovie/app/router/router.dart';
 import 'package:bovie/ui/paywall/presentation/paywall_store.dart';
 
 import '../../onboarding/domain/onboarding_repository.dart';
+import '../../home/presentation/home_store.dart';
 
 part 'splash_store.g.dart';
 
@@ -13,8 +14,14 @@ abstract class _SplashStoreBase with Store {
   final GetGenres _getGenres;
   final PaywallStore _paywallStore;
   final OnboardingRepository _onboardingRepository;
+  final HomeStore _homeStore;
 
-  _SplashStoreBase(this._getGenres, this._paywallStore, this._onboardingRepository);
+  _SplashStoreBase(
+    this._getGenres,
+    this._paywallStore,
+    this._onboardingRepository,
+    this._homeStore,
+  );
 
   @observable
   bool isLoading = true;
@@ -40,6 +47,15 @@ abstract class _SplashStoreBase with Store {
 
       // 3. Check Onboarding
       final isComplete = await _onboardingRepository.isOnboardingComplete();
+      
+      // 4. Preload Home Screen Data (if onboarding is complete)
+      if (isComplete) {
+        // Load "For You" movies and categories in parallel
+        await Future.wait([
+          _homeStore.loadForYouMovies(),
+          _homeStore.loadCategories(),
+        ]);
+      }
       
       // Delay for splash visibility
       await Future.delayed(const Duration(seconds: 2));

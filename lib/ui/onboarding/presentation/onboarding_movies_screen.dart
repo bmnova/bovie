@@ -92,12 +92,7 @@ class _OnboardingMoviesScreenState extends State<OnboardingMoviesScreen> {
 
   Widget _buildMovieSelection(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
     final safeAreaTop = MediaQuery.of(context).padding.top;
-    final headerTop = safeAreaTop + 36.0; // headerTopPadding
-    final contentTop = headerTop + 65.0 + 135.0; // headerHeight + spacing
-    final buttonBottom = 57.0; // buttonBottomPadding
-    final buttonHeight = 56.0; // buttonHeightLarge
 
     final posterWidth = _FigmaConstants.calculatePosterWidth(screenWidth);
     final posterHeight = _FigmaConstants.calculatePosterHeight(posterWidth);

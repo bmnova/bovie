@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:bovie/core/utils/figma_constants.dart';
 import 'package:bovie/app/theme/app_colors.dart';
 import 'package:bovie/core/utils/globals.dart';
 import 'package:bovie/core/domain/movie.dart';
 import 'package:bovie/core/widgets/widgets.dart';
-import 'package:bovie/generated/l10n.dart';
 
 /// Figma constants specific to ForYouSection
 class _FigmaConstants {
@@ -38,8 +36,7 @@ class ForYouSection extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
+  Widget build(BuildContext context) => Container(
       padding: const EdgeInsets.only(
         bottom: FigmaConstants.spacing20,
       ),
@@ -75,15 +72,17 @@ class ForYouSection extends StatelessWidget {
             itemBuilder: (context, index, movie) => CircularImageItem(
               imageUrl: movie.posterPath,
               size: _FigmaConstants.imageItemSize,
-            ),
+              ),
             itemSize: _FigmaConstants.imageItemSize,
             itemSpacing: FigmaConstants.spacing20,
             onLoadMore: onLoadMore,
             isLoadingMore: isLoadingMore,
+            padding: const EdgeInsets.symmetric(
+              horizontal: FigmaConstants.spacing20,
+            ),
             placeholderCount: _FigmaConstants.defaultItemCount,
           ),
         ],
       ),
     );
-  }
 }

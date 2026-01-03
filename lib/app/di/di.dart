@@ -54,13 +54,14 @@ void setupDI(AppConfig config, SharedPreferences prefs) {
   // Onboarding
   getIt.registerLazySingleton<OnboardingRepository>(() => OnboardingRepositoryImpl(getIt<SharedPreferences>()));
 
+  // Home (must be registered before Splash since Splash needs it)
+  // Use singleton so data loaded in Splash is available in HomeScreen
+  getIt.registerLazySingleton<HomeStore>(() => HomeStore(getIt<MoviesRepository>(), getIt<OnboardingRepository>(), getIt<GetGenres>()));
+
   // Splash
-  getIt.registerFactory<SplashStore>(() => SplashStore(getIt<GetGenres>(), getIt<PaywallStore>(), getIt<OnboardingRepository>()));
+  getIt.registerFactory<SplashStore>(() => SplashStore(getIt<GetGenres>(), getIt<PaywallStore>(), getIt<OnboardingRepository>(), getIt<HomeStore>()));
 
   // Paywall
   getIt.registerLazySingleton<UserIdRepository>(() => UserIdRepositoryImpl(getIt<SharedPreferences>()));
   getIt.registerLazySingleton<PaywallStore>(() => PaywallStore(getIt<UserIdRepository>()));
-
-  // Home
-  getIt.registerFactory<HomeStore>(() => HomeStore(getIt<MoviesRepository>(), getIt<OnboardingRepository>()));
 }

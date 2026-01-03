@@ -31,8 +31,9 @@ class MoviePosterCard extends StatelessWidget {
   final String? imageUrl;
   final bool isSelected;
   final VoidCallback? onTap;
-  final double width;
   final double height;
+  final double width;
+  final double borderRadius;
 
   const MoviePosterCard({
     super.key,
@@ -41,6 +42,7 @@ class MoviePosterCard extends StatelessWidget {
     this.onTap,
     this.width = FigmaConstants.moviePosterWidth,
     this.height = FigmaConstants.moviePosterHeight,
+    this.borderRadius = 0.0,
   });
 
   @override
@@ -52,7 +54,7 @@ class MoviePosterCard extends StatelessWidget {
             width: width,
             height: height,
             child: ClipRRect(
-                borderRadius: BorderRadius.zero,
+                borderRadius: BorderRadius.circular(borderRadius),
               child: imageUrl != null
                   ? CachedNetworkImage(
                       imageUrl: TmdbImageUrlBuilder.build(imageUrl!, size: 'w500'),

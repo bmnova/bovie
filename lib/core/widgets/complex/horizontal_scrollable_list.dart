@@ -27,18 +27,27 @@ import '../../../app/theme/app_colors.dart';
 /// )
 /// ```
 class HorizontalScrollableList<T> extends StatefulWidget {
-  /// Observable list of items to display
+  /// Horizontal scrollable list items
   final ObservableList<T> items;
   
   /// Builder function for each item
   final Widget Function(BuildContext context, int index, T item) itemBuilder;
   
-  /// Size of each item (width and height)
+  /// Height (for horizontal) or width (for vertical) of each item
   final double itemSize;
   
-  /// Spacing between items
+  /// Spacing between items in the main axis
   final double itemSpacing;
   
+  /// Number of items in the cross axis (rows for horizontal scroll)
+  final int crossAxisCount;
+
+  /// Spacing between items in the cross axis
+  final double crossAxisSpacing;
+
+  /// Aspect ratio of each item (width / height)
+  final double childAspectRatio;
+
   /// Callback when user scrolls near the end (for infinite scroll)
   final VoidCallback? onLoadMore;
   
@@ -57,6 +66,9 @@ class HorizontalScrollableList<T> extends StatefulWidget {
     required this.itemBuilder,
     required this.itemSize,
     this.itemSpacing = FigmaConstants.spacing20,
+    this.crossAxisCount = 1,
+    this.crossAxisSpacing = 0.0,
+    this.childAspectRatio = 1.0,
     this.onLoadMore,
     required this.isLoadingMore,
     this.padding,
@@ -97,41 +109,47 @@ class _HorizontalScrollableListState<T> extends State<HorizontalScrollableList<T
 
   @override
   Widget build(BuildContext context) {
+    // Total height for horizontal scroll or total width for vertical scroll
+    final totalCrossAxisExtent = (widget.itemSize * widget.crossAxisCount) + 
+        (widget.crossAxisSpacing * (widget.crossAxisCount - 1));
+
     return SizedBox(
-      height: widget.itemSize,
+      height: totalCrossAxisExtent,
       child: Observer(
         builder: (_) {
           final items = widget.items;
           final isLoading = widget.isLoadingMore();
+          
+          // If loading, we add placeholders to fill the last column or just show one loader
+          // For simplicity, we just add 1 item for the loader if it's the last one.
           final itemCount = items.isNotEmpty 
               ? items.length + (isLoading ? 1 : 0)
               : (widget.placeholderCount ?? 0);
           
-          return ListView.separated(
+          return GridView.builder(
             controller: _scrollController,
             scrollDirection: Axis.horizontal,
             padding: widget.padding ?? const EdgeInsets.symmetric(
               horizontal: FigmaConstants.spacing20,
             ),
-            itemCount: itemCount,
-            separatorBuilder: (context, index) => SizedBox(
-              width: widget.itemSpacing,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: widget.crossAxisCount,
+              mainAxisSpacing: widget.itemSpacing,
+              crossAxisSpacing: widget.crossAxisSpacing,
+              childAspectRatio: widget.childAspectRatio,
             ),
+            itemCount: itemCount,
             itemBuilder: (context, index) {
               // Loading indicator at the end
               if (isLoading && index == items.length) {
-                return SizedBox(
-                  width: widget.itemSize,
-                  height: widget.itemSize,
-                  child: const Center(
-                      child: SizedBox(
-                        width: 24,
-                        height: 24,
-                        child: CircularProgressIndicator(
-                          color: AppColors.white,
-                          strokeWidth: 2,
-                        ),
-                      ),
+                return const Center(
+                  child: SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: CircularProgressIndicator(
+                      color: AppColors.white,
+                      strokeWidth: 2,
+                    ),
                   ),
                 );
               }
@@ -141,10 +159,7 @@ class _HorizontalScrollableListState<T> extends State<HorizontalScrollableList<T
               }
               
               // Placeholder when items list is empty
-              return SizedBox(
-                width: widget.itemSize,
-                height: widget.itemSize,
-              );
+              return const SizedBox.shrink();
             },
           );
         },
