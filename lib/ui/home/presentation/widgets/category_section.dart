@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:bovie/core/widgets/widgets.dart';
-import 'package:bovie/ui/home/presentation/home_store.dart';
+import 'package:bovie/ui/home/domain/home_store.dart';
 import 'package:bovie/core/utils/figma_constants.dart';
 import 'package:bovie/core/domain/movie.dart';
 import 'package:bovie/core/domain/genre.dart';
@@ -39,15 +39,14 @@ class CategorySection extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => Container(
+  Widget build(BuildContext context) => SizedBox(
       height: HomeLayoutConstants.categorySectionHeight,
-      padding: const EdgeInsets.only(
-        top: HomeLayoutConstants.categorySectionTopSpacing,
-        bottom: HomeLayoutConstants.categorySectionBottomSpacing,
-      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
+          // Top spacing
+          SizedBox(height: HomeLayoutConstants.categorySectionTopSpacing),
           // Category title
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: FigmaConstants.spacing16),
@@ -68,7 +67,7 @@ class CategorySection extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: HomeLayoutConstants.categoryTitleBottomSpacing),
+          SizedBox(height: HomeLayoutConstants.categoryTitleBottomSpacing),
           // Movies horizontal list (3 rows) with infinite scroll
           SizedBox(
             height: HomeLayoutConstants.categoryGridHeight,
@@ -98,6 +97,8 @@ class CategorySection extends StatelessWidget {
               },
             ),
           ),
+          // Bottom spacing
+          SizedBox(height: HomeLayoutConstants.categorySectionBottomSpacing),
         ],
       ),
     );

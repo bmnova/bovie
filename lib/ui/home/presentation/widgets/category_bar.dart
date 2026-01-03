@@ -51,8 +51,8 @@ class _CategoryBarState extends State<CategoryBar> {
     final key = _chipKeys[widget.selectedGenreId];
     final context = key?.currentContext;
     if (context != null) {
-      Scrollable.ensureVisible(
-        context,
+      Scrollable.of(context)?.position.ensureVisible(
+        context.findRenderObject() as RenderObject,
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
         alignment: 0.5, // Center the chip if possible

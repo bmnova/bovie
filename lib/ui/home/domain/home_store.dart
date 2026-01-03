@@ -65,6 +65,10 @@ abstract class _HomeStoreBase with Store {
   int? activeCategoryId; // For scroll tracking
 
   @observable
+  double categoryFeedBottomPadding = 0.0; // Dynamic bottom padding based on main scroll
+
+
+  @observable
   bool isLoading = false;
 
   @observable
@@ -383,5 +387,23 @@ abstract class _HomeStoreBase with Store {
   /// Set active category (for scroll tracking)
   @action
   void setActiveCategory(int? categoryId) => activeCategoryId = categoryId;
+
+  /// Update bottom padding for Category Feed based on main scroll position
+  /// 
+  /// Linear interpolation: 0 when scroll is at top (0), categorySectionHeight when at max
+  @action
+  void updateCategoryFeedBottomPadding({
+    required double scrollPosition,
+    required double maxScroll,
+    required double categorySectionHeight,
+  }) {
+    if (maxScroll > 0) {
+      final progress = (scrollPosition / maxScroll).clamp(0.0, 1.0);
+      categoryFeedBottomPadding = progress * categorySectionHeight;
+    } else {
+      categoryFeedBottomPadding = 0.0;
+    }
+  }
+
 }
 
