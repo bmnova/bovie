@@ -50,5 +50,12 @@ class OnboardingRepositoryImpl implements OnboardingRepository {
       movieIds.map((e) => e.toString()).toList(),
     );
   }
+
+  @override
+  Future<void> resetAllSelections() async {
+    await _prefs.remove(_onboardingCompleteKey);
+    await _prefs.remove(_selectedGenresKey);
+    await _prefs.remove(_selectedMoviesKey);
+  }
 }
 

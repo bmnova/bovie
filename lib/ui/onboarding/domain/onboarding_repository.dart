@@ -19,5 +19,8 @@ abstract class OnboardingRepository {
   
   /// Save selected movie IDs from onboarding
   Future<void> setSelectedMovieIds(List<int> movieIds);
+  
+  /// Reset all onboarding selections (movies, genres, and completion status)
+  Future<void> resetAllSelections();
 }
 

@@ -69,6 +69,18 @@ abstract class _HomeStoreBase with Store {
   // Store all loaded movies (before shuffle) for pagination
   final Set<int> _loadedMovieIds = {};
 
+  /// Reset all onboarding selections and reload movies
+  @action
+  Future<void> resetAllSelections() async {
+    await _onboardingRepository.resetAllSelections();
+    // Clear current movies and reload
+    forYouMovies.clear();
+    _loadedMovieIds.clear();
+    _currentPage = 1;
+    hasMore = true;
+    await loadForYouMovies();
+  }
+
   @action
   Future<void> loadForYouMovies() async {
     isLoading = true;

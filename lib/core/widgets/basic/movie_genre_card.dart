@@ -4,6 +4,7 @@ import 'package:bovie/generated/assets.gen.dart';
 
 import '../../utils/figma_constants.dart';
 import '../../../app/theme/app_colors.dart';
+import 'circular_image_item.dart';
 
 /// Figma constants for movie genre card
 class _FigmaConstants {
@@ -34,28 +35,13 @@ class MovieGenreCard extends StatelessWidget {
       onTap: onTap,
       child: Stack(
         children: [
-          Container(
-            width: size,
-            height: size,
-            decoration: BoxDecoration(
-              color: context.colorScheme.surface,
-              shape: BoxShape.circle,
-              border: isSelected
-                  ? Border.all(
-                      color: AppColors.redLight, // #CB2C2C
-                      width: FigmaConstants.borderWidth2,
-                    )
-                  : null,
-            ),
-            child: ClipOval(
-              child: imageUrl != null
-                  ? Image.network(
-                      imageUrl!,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) => _buildGenreNamePlaceholder(context),
-                    )
-                  : _buildGenreNamePlaceholder(context),
-            ),
+          CircularImageItem(
+            imageUrl: imageUrl,
+            placeholderText: genreName,
+            size: size,
+            backgroundColor: context.colorScheme.surface,
+            borderColor: isSelected ? AppColors.redLight : null,
+            borderWidth: isSelected ? FigmaConstants.borderWidth2 : null,
           ),
           // Checkmark icon at bottom right
           if (isSelected)
@@ -70,22 +56,5 @@ class MovieGenreCard extends StatelessWidget {
         ],
       ),
     );
-
-  Widget _buildGenreNamePlaceholder(BuildContext context) {
-    return Container(
-      color: context.colorScheme.surfaceContainerHighest,
-      child: Center(
-        child: Text(
-          genreName ?? localizations.imagePlaceholder,
-          style: context.textTheme.titleMedium?.copyWith(
-            color: context.colorScheme.onSurfaceVariant,
-          ),
-          textAlign: TextAlign.center,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-        ),
-      ),
-    );
-  }
 }
 

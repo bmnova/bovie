@@ -8,9 +8,11 @@ export 'basic/app_chip.dart';
 export 'basic/movie_genre_card.dart';
 export 'basic/movie_poster_card.dart';
 export 'basic/custom_row.dart';
+export 'basic/circular_image_item.dart';
 
 // Complex widgets
 export '../../ui/paywall/presentation/widgets/feature_comparison_table.dart';
 export 'complex/toggle_row.dart';
 export 'complex/selectable_row.dart';
+export 'complex/horizontal_scrollable_list.dart';
 
