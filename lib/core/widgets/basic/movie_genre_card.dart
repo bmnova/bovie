@@ -42,7 +42,7 @@ class MovieGenreCard extends StatelessWidget {
             backgroundColor: context.colorScheme.surface,
             borderColor: isSelected ? AppColors.redLight : null,
             borderWidth: isSelected ? FigmaConstants.borderWidth2 : null,
-          ),
+                            ),
           // Checkmark icon at bottom right
           if (isSelected)
             Positioned(
