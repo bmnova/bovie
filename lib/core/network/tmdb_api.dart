@@ -66,4 +66,14 @@ class TmdbApi {
       (json) => json,
     );
   }
+
+  Future<Result<Map<String, dynamic>>> getSimilarMovies(int movieId, {int page = 1}) {
+    return _safeApiCall(
+      _dio.get(
+        '/movie/$movieId/similar',
+        queryParameters: {'page': page},
+      ),
+      (json) => json,
+    );
+  }
 }

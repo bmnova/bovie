@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
 import 'package:bovie/core/utils/figma_constants.dart';
 import 'package:bovie/app/theme/app_colors.dart';
 import 'package:bovie/core/utils/globals.dart';
@@ -17,19 +19,56 @@ class _FigmaConstants {
   // Image item dimensions
   static const double imageItemSize = 80.0;
 
-  // Default item count
+  // Default item count (for placeholder when movies list is empty)
+  // This should match HomeStore.maxForYouMovies
   static const int defaultItemCount = 5;
 }
 
 /// "For You" section widget for home screen
-/// Displays a horizontal scrollable list of recommended items
-class ForYouSection extends StatelessWidget {
-  final List<Movie> movies;
+/// Displays a horizontal scrollable list of recommended items with infinite scroll
+class ForYouSection extends StatefulWidget {
+  final ObservableList<Movie> movies;
+  final VoidCallback? onLoadMore;
+  final bool Function() isLoadingMore;
 
   const ForYouSection({
     super.key,
     required this.movies,
+    this.onLoadMore,
+    required this.isLoadingMore,
   });
+
+  @override
+  State<ForYouSection> createState() => _ForYouSectionState();
+}
+
+class _ForYouSectionState extends State<ForYouSection> {
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_onScroll);
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    if (!_scrollController.hasClients) return;
+    
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final currentScroll = _scrollController.position.pixels;
+    
+    // Load more when within 100px of the end
+    if (maxScroll > 0 && currentScroll >= maxScroll - 100) {
+      widget.onLoadMore?.call();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,25 +102,52 @@ class ForYouSection extends StatelessWidget {
             ),
           ),
           const SizedBox(height: FigmaConstants.spacing20),
-          // Horizontal scrollable list
+          // Horizontal scrollable list with Observer for reactive updates
           SizedBox(
             height: _FigmaConstants.imageItemSize,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(
-                horizontal: FigmaConstants.spacing20,
-              ),
-              itemCount: movies.isNotEmpty ? movies.length : _FigmaConstants.defaultItemCount,
-              separatorBuilder: (context, index) => const SizedBox(
-                width: FigmaConstants.spacing20,
-              ),
-              itemBuilder: (context, index) {
-                if (movies.isNotEmpty && index < movies.length) {
-                  return _ForYouImageItem(
-                    movie: movies[index],
-                  );
-                }
-                return const _ForYouImageItem();
+            child: Observer(
+              builder: (_) {
+                final movies = widget.movies;
+                final isLoading = widget.isLoadingMore();
+                return ListView.separated(
+                  controller: _scrollController,
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: FigmaConstants.spacing20,
+                  ),
+                  itemCount: movies.isNotEmpty 
+                      ? movies.length + (isLoading ? 1 : 0)
+                      : _FigmaConstants.defaultItemCount,
+                  separatorBuilder: (context, index) => const SizedBox(
+                    width: FigmaConstants.spacing20,
+                  ),
+                  itemBuilder: (context, index) {
+                    // Loading indicator at the end
+                    if (isLoading && index == movies.length) {
+                    return SizedBox(
+                      width: _FigmaConstants.imageItemSize,
+                      height: _FigmaConstants.imageItemSize,
+                      child: const Center(
+                        child: SizedBox(
+                          width: 24,
+                          height: 24,
+                          child: CircularProgressIndicator(
+                            color: AppColors.white,
+                            strokeWidth: 2,
+                          ),
+                        ),
+                      ),
+                    );
+                    }
+                    
+                    if (movies.isNotEmpty && index < movies.length) {
+                      return _ForYouImageItem(
+                        movie: movies[index],
+                      );
+                    }
+                    return const _ForYouImageItem();
+                  },
+                );
               },
             ),
           ),

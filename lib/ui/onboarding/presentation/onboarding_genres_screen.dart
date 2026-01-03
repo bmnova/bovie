@@ -3,7 +3,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bovie/app/router/router.dart';
 import 'package:bovie/app/theme/app_colors.dart';
-import 'package:bovie/core/domain/get_genres_usecase.dart';
 import 'package:mobx/mobx.dart';
 import 'package:bovie/core/utils/globals.dart';
 import 'package:bovie/generated/l10n.dart';
@@ -20,11 +19,11 @@ class _FigmaConstants {
   // Gradient shadows
   static const double topGradientHeight = 59.0;
   static const double bottomGradientHeight = 144.0;
-  static const double topGradientOffset = 34.0; // Shadow başlangıcı slider başlangıcından 34px yukarıda
+  static const double topGradientOffset = 34.0;
 
   // Genre spacing
-  static const double genreHorizontalSpacing = 55.0; // 2 genre widget'ı arasında
-  static const double genreVerticalSpacing = 24.0; // Satırlar arasında
+  static const double genreHorizontalSpacing = 55.0;
+  static const double genreVerticalSpacing = 24.0;
 }
 
 class OnboardingGenresScreen extends StatefulWidget {
@@ -68,8 +67,7 @@ class _OnboardingGenresScreenState extends State<OnboardingGenresScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return OnboardingSelectionScreenBase(
+  Widget build(BuildContext context) => OnboardingSelectionScreenBase(
       bodyBuilder: (context, contentTop) => _buildGenreSelection(context),
       hasSelection: () => _store.selectedGenreIds.isNotEmpty,
       canContinue: () => _store.canContinue,
@@ -81,7 +79,6 @@ class _OnboardingGenresScreenState extends State<OnboardingGenresScreen> {
       hasData: () => _store.genres.isNotEmpty,
       overlayWidgetsBuilder: (contentTop) => _buildOverlayWidgets(context, contentTop),
     );
-  }
 
   List<Widget> _buildOverlayWidgets(BuildContext context, double contentTop) {
     final topGradientTop = contentTop - _FigmaConstants.topGradientOffset;
@@ -105,22 +102,19 @@ class _OnboardingGenresScreenState extends State<OnboardingGenresScreen> {
     ];
   }
 
-  Widget _buildGenreSelection(BuildContext context) {
-    return Observer(
+  Widget _buildGenreSelection(BuildContext context) => Observer(
       builder: (_) => SingleChildScrollView(
         padding: const EdgeInsets.only(
           left: FigmaConstants.spacing16,
           right: FigmaConstants.spacing16,
           top: 0,
-          bottom: _FigmaConstants.bottomGradientHeight,
         ),
         child: Center(
           child: Wrap(
             spacing: _FigmaConstants.genreHorizontalSpacing,
             runSpacing: _FigmaConstants.genreVerticalSpacing,
             alignment: WrapAlignment.center,
-            children: _store.genres.map((genre) {
-              return Observer(
+            children: _store.genres.map((genre) => Observer(
                 builder: (_) {
                   final isSelected = _store.selectedGenreIds.contains(genre.id);
                   return MovieGenreCard(
@@ -129,18 +123,14 @@ class _OnboardingGenresScreenState extends State<OnboardingGenresScreen> {
                     onTap: () => _store.toggleSelection(genre.id),
                   );
                 },
-              );
-            }).toList(),
+              )).toList(),
           ),
         ),
       ),
     );
-  }
-
 
   /// Top gradient shadow: linear-gradient(176.7deg, #0F0E0E 2.73%, rgba(15, 14, 14, 0) 97.28%)
-  Widget _buildTopGradient() {
-    return IgnorePointer(
+  Widget _buildTopGradient() => IgnorePointer(
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -155,11 +145,9 @@ class _OnboardingGenresScreenState extends State<OnboardingGenresScreen> {
         ),
       ),
     );
-  }
 
   /// Bottom gradient shadow: linear-gradient(180deg, rgba(15, 14, 14, 0) 0%, #0F0E0E 100%)
-  Widget _buildBottomGradient() {
-    return IgnorePointer(
+  Widget _buildBottomGradient() => IgnorePointer(
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -174,5 +162,4 @@ class _OnboardingGenresScreenState extends State<OnboardingGenresScreen> {
         ),
       ),
     );
-  }
 }

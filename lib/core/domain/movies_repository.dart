@@ -3,5 +3,7 @@ import 'package:bovie/core/domain/movie.dart';
 
 abstract class MoviesRepository {
   Future<Result<List<Movie>>> getPopularMovies(int page);
+  Future<Result<List<Movie>>> discoverByGenre(int genreId, {int page = 1});
+  Future<Result<List<Movie>>> getSimilarMovies(int movieId, {int page = 1});
 }
 

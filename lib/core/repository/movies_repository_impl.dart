@@ -30,5 +30,49 @@ class MoviesRepositoryImpl implements MoviesRepository {
       return Failure(AppError(type: AppErrorType.parsing, originalError: e));
     }
   }
+
+  @override
+  Future<Result<List<Movie>>> discoverByGenre(int genreId, {int page = 1}) async {
+    final result = await _api.discoverByGenre(genreId, page: page);
+    
+    if (result.isFailure) {
+      return Failure(result.errorOrNull!);
+    }
+
+    try {
+      final dto = MoviesPageDto.fromJson(result.dataOrNull!);
+      final domainList = dto.results.map((e) => Movie(
+        id: e.id,
+        title: e.title,
+        posterPath: e.posterPath,
+        releaseDate: e.releaseDate,
+      )).toList();
+      return Success(domainList);
+    } catch (e) {
+      return Failure(AppError(type: AppErrorType.parsing, originalError: e));
+    }
+  }
+
+  @override
+  Future<Result<List<Movie>>> getSimilarMovies(int movieId, {int page = 1}) async {
+    final result = await _api.getSimilarMovies(movieId, page: page);
+    
+    if (result.isFailure) {
+      return Failure(result.errorOrNull!);
+    }
+
+    try {
+      final dto = MoviesPageDto.fromJson(result.dataOrNull!);
+      final domainList = dto.results.map((e) => Movie(
+        id: e.id,
+        title: e.title,
+        posterPath: e.posterPath,
+        releaseDate: e.releaseDate,
+      )).toList();
+      return Success(domainList);
+    } catch (e) {
+      return Failure(AppError(type: AppErrorType.parsing, originalError: e));
+    }
+  }
 }
 

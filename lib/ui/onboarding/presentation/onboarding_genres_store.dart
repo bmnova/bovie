@@ -64,7 +64,7 @@ abstract class _OnboardingGenresStoreBase with Store {
     // Persist onboarding status and selections
     await _onboardingRepository.setOnboardingComplete(true);
     await _onboardingRepository.setSelectedGenreIds(selectedGenreIds.toList());
-    
+
     onboardingFinished = true;
     isLoading = false;
   }

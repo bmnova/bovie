@@ -35,9 +35,9 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     // Hide system UI for full-screen splash
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    
+
     _store = splashStore;
-    
+
     _disposers.add(
       reaction(
         (_) => _store.nextRoute,
@@ -56,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void dispose() {
     // Restore system UI
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-    
+
     for (var disposer in _disposers) {
       disposer();
     }
@@ -67,7 +67,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final scaleFactor = screenSize.width / FigmaConstants.designWidth;
-    
+
     return Scaffold(
       backgroundColor: AppColors.black,
       body: Observer(
@@ -92,19 +92,18 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             );
           }
-          
+
           return Stack(
             children: [
-              
               // Main Content (Logo + App Name)
               _buildMainContent(context, scaleFactor),
-              
             ],
           );
         },
       ),
     );
   }
+
   Widget _buildMainContent(BuildContext context, double scaleFactor) {
     return Center(
       child: Column(
@@ -116,12 +115,12 @@ class _SplashScreenState extends State<SplashScreen> {
             height: FigmaHelper.scaleWidth(context, _SplashConstants.logoHeight),
             child: _buildLogo(context),
           ),
-          
+
           SizedBox(height: FigmaHelper.scaleHeight(context, _SplashConstants.appNameTopSpacing)),
-          
+
           // App Name
           Text(
-            appName, 
+            appName,
             style: context.textTheme.headlineSmall?.copyWith(
               color: AppColors.white,
               fontSize: FigmaHelper.scaleFontSize(context, _SplashConstants.appNameFontSize),

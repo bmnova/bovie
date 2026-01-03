@@ -4,11 +4,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:bovie/core/widgets/widgets.dart';
 import 'package:bovie/ui/home/presentation/widgets/for_you_section.dart';
 import 'package:bovie/app/theme/app_colors.dart';
-import 'package:bovie/core/domain/get_popular_movies_usecase.dart';
 import 'package:bovie/core/utils/globals.dart';
-import 'package:bovie/ui/onboarding/domain/onboarding_repository.dart';
 import 'package:bovie/ui/home/presentation/home_store.dart';
-import 'package:bovie/core/utils/tmdb_image_url_builder.dart';
+import 'package:bovie/app/di/di.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -23,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _store = HomeStore(getPopularMovies, onboardingRepository);
+    _store = getIt<HomeStore>();
     _store.loadForYouMovies();
   }
 
@@ -45,6 +43,8 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 ForYouSection(
                   movies: _store.forYouMovies,
+                  onLoadMore: _store.loadMoreForYouMovies,
+                  isLoadingMore: () => _store.isLoadingMore,
                 ),
                 // TODO: Add other sections here
               ],

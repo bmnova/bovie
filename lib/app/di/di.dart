@@ -17,6 +17,7 @@ import '../../ui/splash/presentation/splash_store.dart';
 import '../../ui/paywall/presentation/paywall_store.dart';
 import '../../ui/user/domain/user_id_repository.dart';
 import '../../ui/user/data/user_id_repository_impl.dart';
+import '../../ui/home/presentation/home_store.dart';
 
 final getIt = GetIt.instance;
 
@@ -59,4 +60,7 @@ void setupDI(AppConfig config, SharedPreferences prefs) {
   // Paywall
   getIt.registerLazySingleton<UserIdRepository>(() => UserIdRepositoryImpl(getIt<SharedPreferences>()));
   getIt.registerLazySingleton<PaywallStore>(() => PaywallStore(getIt<UserIdRepository>()));
+
+  // Home
+  getIt.registerFactory<HomeStore>(() => HomeStore(getIt<MoviesRepository>(), getIt<OnboardingRepository>()));
 }
