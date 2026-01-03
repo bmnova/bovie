@@ -119,13 +119,15 @@ class _OnboardingGenresScreenState extends State<OnboardingGenresScreen> {
             runSpacing: _FigmaConstants.genreVerticalSpacing,
             alignment: WrapAlignment.center,
             children: _store.genres.map((genre) {
-              final isSelected = _store.selectedGenreIds.contains(genre.id);
               return Observer(
-                builder: (_) => MovieGenreCard(
-                  imageUrl: 'https://images.unsplash.com/photo-1485846234645-a62644ef7467?w=200',
-                  isSelected: isSelected,
-                  onTap: () => _store.toggleSelection(genre.id),
-                ),
+                builder: (_) {
+                  final isSelected = _store.selectedGenreIds.contains(genre.id);
+                  return MovieGenreCard(
+                    genreName: genre.name,
+                    isSelected: isSelected,
+                    onTap: () => _store.toggleSelection(genre.id),
+                  );
+                },
               );
             }).toList(),
           ),

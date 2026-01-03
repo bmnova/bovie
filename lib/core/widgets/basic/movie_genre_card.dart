@@ -15,6 +15,7 @@ class _FigmaConstants {
 /// Circular movie genre card component with selection state
 class MovieGenreCard extends StatelessWidget {
   final String? imageUrl;
+  final String? genreName;
   final bool isSelected;
   final VoidCallback? onTap;
   final double size;
@@ -22,6 +23,7 @@ class MovieGenreCard extends StatelessWidget {
   const MovieGenreCard({
     super.key,
     this.imageUrl,
+    this.genreName,
     this.isSelected = false,
     this.onTap,
     this.size = FigmaConstants.genreCardSize,
@@ -50,29 +52,9 @@ class MovieGenreCard extends StatelessWidget {
                   ? Image.network(
                       imageUrl!,
                       fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) => Container(
-                        color: context.colorScheme.surfaceContainerHighest,
-                        child: Center(
-                          child: Text(
-                            localizations.imagePlaceholder,
-                            style: context.textTheme.titleMedium?.copyWith(
-                              color: context.colorScheme.onSurfaceVariant,
-                            ),
-                          ),
-                        ),
-                      ),
+                      errorBuilder: (context, error, stackTrace) => _buildGenreNamePlaceholder(context),
                     )
-                  : Container(
-                      color: context.colorScheme.surfaceContainerHighest,
-                      child: Center(
-                        child: Text(
-                          localizations.imagePlaceholder,
-                          style: context.textTheme.titleMedium?.copyWith(
-                            color: context.colorScheme.onSurfaceVariant,
-                          ),
-                        ),
-                      ),
-                    ),
+                  : _buildGenreNamePlaceholder(context),
             ),
           ),
           // Checkmark icon at bottom right
@@ -88,5 +70,22 @@ class MovieGenreCard extends StatelessWidget {
         ],
       ),
     );
+
+  Widget _buildGenreNamePlaceholder(BuildContext context) {
+    return Container(
+      color: context.colorScheme.surfaceContainerHighest,
+      child: Center(
+        child: Text(
+          genreName ?? localizations.imagePlaceholder,
+          style: context.textTheme.titleMedium?.copyWith(
+            color: context.colorScheme.onSurfaceVariant,
+          ),
+          textAlign: TextAlign.center,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ),
+    );
+  }
 }
 

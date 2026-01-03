@@ -9,6 +9,7 @@ class OnboardingRepositoryImpl implements OnboardingRepository {
   
   static const String _onboardingCompleteKey = 'onboarding_complete';
   static const String _selectedGenresKey = 'selected_genres';
+  static const String _selectedMoviesKey = 'selected_movies';
 
   OnboardingRepositoryImpl(this._prefs);
 
@@ -33,6 +34,20 @@ class OnboardingRepositoryImpl implements OnboardingRepository {
     await _prefs.setStringList(
       _selectedGenresKey,
       genreIds.map((e) => e.toString()).toList(),
+    );
+  }
+
+  @override
+  Future<List<int>> getSelectedMovieIds() async {
+    final movieIdsString = _prefs.getStringList(_selectedMoviesKey) ?? [];
+    return movieIdsString.map((e) => int.tryParse(e) ?? 0).where((e) => e != 0).toList();
+  }
+
+  @override
+  Future<void> setSelectedMovieIds(List<int> movieIds) async {
+    await _prefs.setStringList(
+      _selectedMoviesKey,
+      movieIds.map((e) => e.toString()).toList(),
     );
   }
 }

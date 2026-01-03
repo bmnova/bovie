@@ -13,5 +13,11 @@ abstract class OnboardingRepository {
   
   /// Save selected genre IDs from onboarding
   Future<void> setSelectedGenreIds(List<int> genreIds);
+  
+  /// Get selected movie IDs from onboarding
+  Future<List<int>> getSelectedMovieIds();
+  
+  /// Save selected movie IDs from onboarding
+  Future<void> setSelectedMovieIds(List<int> movieIds);
 }
 

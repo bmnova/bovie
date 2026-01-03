@@ -48,7 +48,7 @@ class _OnboardingMoviesScreenState extends State<OnboardingMoviesScreen> {
   @override
   void initState() {
     super.initState();
-    _store = OnboardingMoviesStore(getPopularMovies);
+    _store = OnboardingMoviesStore(getPopularMovies, onboardingRepository);
     _store.fetchNextPage();
 
     _scrollController.addListener(_onScroll);
@@ -73,7 +73,13 @@ class _OnboardingMoviesScreenState extends State<OnboardingMoviesScreen> {
       bodyBuilder: (context, contentTop) => _buildMovieSelection(context),
       hasSelection: () => _store.selectedMovieIds.isNotEmpty,
       canContinue: () => _store.canContinue,
-      onContinue: () => context.push(AppRoutes.onboardingGenres),
+      onContinue: () async {
+        // Save selected movies before navigating
+        await _store.saveSelectedMovies();
+        if (mounted) {
+          context.push(AppRoutes.onboardingGenres);
+        }
+      },
       selectedTitle: S.of(context).continueToNextStep,
       welcomeTitle: S.of(context).welcome,
       welcomeSubtitle: S.of(context).chooseYour3FavoriteMovies,

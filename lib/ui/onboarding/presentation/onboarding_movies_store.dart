@@ -1,6 +1,7 @@
 import 'package:mobx/mobx.dart';
 import 'package:bovie/core/domain/movie.dart';
 import 'package:bovie/core/domain/get_popular_movies_usecase.dart';
+import 'package:bovie/ui/onboarding/domain/onboarding_repository.dart';
 
 part 'onboarding_movies_store.g.dart';
 
@@ -8,8 +9,9 @@ class OnboardingMoviesStore = _OnboardingMoviesStoreBase with _$OnboardingMovies
 
 abstract class _OnboardingMoviesStoreBase with Store {
   final GetPopularMovies _getPopularMovies;
+  final OnboardingRepository _onboardingRepository;
 
-  _OnboardingMoviesStoreBase(this._getPopularMovies);
+  _OnboardingMoviesStoreBase(this._getPopularMovies, this._onboardingRepository);
 
   @observable
   ObservableList<Movie> movies = ObservableList<Movie>();
@@ -65,6 +67,11 @@ abstract class _OnboardingMoviesStoreBase with Store {
         error = 'You can select up to 3 movies';
       }
     }
+  }
+
+  @action
+  Future<void> saveSelectedMovies() async {
+    await _onboardingRepository.setSelectedMovieIds(selectedMovieIds.toList());
   }
 
   @computed
