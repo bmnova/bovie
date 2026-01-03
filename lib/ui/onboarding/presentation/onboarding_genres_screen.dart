@@ -52,7 +52,7 @@ class _OnboardingGenresScreenState extends State<OnboardingGenresScreen> {
         (_) => _store.onboardingFinished,
         (bool finished) {
           if (finished && mounted) {
-            context.go(AppRoutes.paywall);
+            context.go(AppRoutes.home);
           }
         },
       ),
@@ -73,7 +73,7 @@ class _OnboardingGenresScreenState extends State<OnboardingGenresScreen> {
       bodyBuilder: (context, contentTop) => _buildGenreSelection(context),
       hasSelection: () => _store.selectedGenreIds.isNotEmpty,
       canContinue: () => _store.canContinue,
-      onContinue: () => context.push(AppRoutes.onboardingMovies),
+      onContinue: () => _store.completeOnboarding(),
       selectedTitle: S.of(context).thankYou,
       welcomeTitle: S.of(context).welcome,
       welcomeSubtitle: S.of(context).chooseYour2FavoriteGenres,
@@ -108,10 +108,11 @@ class _OnboardingGenresScreenState extends State<OnboardingGenresScreen> {
   Widget _buildGenreSelection(BuildContext context) {
     return Observer(
       builder: (_) => SingleChildScrollView(
-        padding: EdgeInsets.only(
+        padding: const EdgeInsets.only(
           left: FigmaConstants.spacing16,
           right: FigmaConstants.spacing16,
           top: 0,
+          bottom: _FigmaConstants.bottomGradientHeight,
         ),
         child: Center(
           child: Wrap(
