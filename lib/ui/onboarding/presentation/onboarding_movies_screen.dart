@@ -131,27 +131,41 @@ class _OnboardingMoviesScreenState extends State<OnboardingMoviesScreen> {
   }
 
   Widget _buildHeader(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          S.of(context).welcome,
-          style: context.textTheme.headlineMedium?.copyWith(
-            color: AppColors.white,
-            fontSize: _FigmaConstants.titleFontSize,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        const SizedBox(height: _FigmaConstants.headerGap),
-        Text(
-          S.of(context).chooseYour3FavoriteMovies,
-          style: context.textTheme.titleLarge?.copyWith(
-            color: AppColors.white,
-            fontSize: _FigmaConstants.subtitleFontSize,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ],
+    return Observer(
+      builder: (_) {
+        final hasSelection = _store.selectedMovieIds.isNotEmpty;
+        final titleText = hasSelection
+            ? S.of(context).continueToNextStep
+            : S.of(context).welcome;
+        final subtitleText = hasSelection
+            ? null
+            : S.of(context).chooseYour3FavoriteMovies;
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              titleText,
+              style: context.textTheme.headlineMedium?.copyWith(
+                color: AppColors.white,
+                fontSize: _FigmaConstants.titleFontSize,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            if (subtitleText != null) ...[
+              const SizedBox(height: _FigmaConstants.headerGap),
+              Text(
+                subtitleText,
+                style: context.textTheme.titleLarge?.copyWith(
+                  color: AppColors.white,
+                  fontSize: _FigmaConstants.subtitleFontSize,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ],
+        );
+      },
     );
   }
 
@@ -181,16 +195,21 @@ class _OnboardingMoviesScreenState extends State<OnboardingMoviesScreen> {
           }
 
           final movie = _store.movies[index];
-          final isSelected = _store.selectedMovieIds.contains(movie.id);
 
-          return MoviePosterCard(
-            imageUrl: movie.posterPath,
-            isSelected: isSelected,
-            width: posterWidth,
-            height: posterHeight,
-            onTap: () => _store.toggleSelection(movie.id),
-            );
-          },
+          // Wrap each poster card with Observer to react to selection changes
+          return Observer(
+            builder: (_) {
+              final isSelected = _store.selectedMovieIds.contains(movie.id);
+              return MoviePosterCard(
+                imageUrl: movie.posterPath,
+                isSelected: isSelected,
+                width: posterWidth,
+                height: posterHeight,
+                onTap: () => _store.toggleSelection(movie.id),
+              );
+            },
+          );
+        },
         ),
       );
   }

@@ -133,6 +133,7 @@ class _AppButtonState extends State<AppButton>
         onPressed: widget.isEnabled ? widget.onPressed : null,
         style: ElevatedButton.styleFrom(
           backgroundColor: effectiveBackgroundColor,
+          disabledBackgroundColor: effectiveBackgroundColor, // Force redDark color when disabled
           elevation: widget.isEnabled ? FigmaConstants.elevation2 : FigmaConstants.elevation0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(widget.borderRadius),

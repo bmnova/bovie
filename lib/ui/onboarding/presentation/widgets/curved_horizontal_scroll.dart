@@ -66,7 +66,6 @@ class _CurvedHorizontalScrollState extends State<CurvedHorizontalScroll> {
     final screenCenterX = screenWidth / 2;
     final distanceFromCenter = itemCenterX - screenCenterX;
 
-    // ✅ clamp daha geç: kart tamamen çıkınca saturate et
     final maxDistance = (screenWidth / 2) + (widget.itemWidth / 2);
 
     final normalizedDistance =
@@ -132,7 +131,6 @@ class _CurvedHorizontalScrollState extends State<CurvedHorizontalScroll> {
 
     final m = Matrix4.identity()..setEntry(3, 2, _FigmaConstants.perspectiveDepth);
 
-    // translate() yerine multiply -> UnimplementedError yaşamazsın
     m.multiply(Matrix4.translationValues(dx, 0.0, zT));
     m.multiply(Matrix4.rotationY(angle));
     m.scale(scale, scale);
