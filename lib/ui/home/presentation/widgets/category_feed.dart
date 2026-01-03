@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:bovie/core/domain/movie.dart';
 import 'package:bovie/ui/home/presentation/widgets/category_section.dart';
 import 'package:bovie/ui/home/presentation/home_store.dart';
 import 'package:mobx/mobx.dart';
-import 'package:bovie/app/theme/app_colors.dart';
 import 'home_layout_constants.dart';
 
 /// Category feed widget displaying vertically stacked categories

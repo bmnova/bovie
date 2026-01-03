@@ -28,8 +28,7 @@ class CircularImageItem extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
+  Widget build(BuildContext context) => Container(
       width: size,
       height: size,
       decoration: BoxDecoration(
@@ -55,10 +54,8 @@ class CircularImageItem extends StatelessWidget {
             : _buildPlaceholder(context),
       ),
     );
-  }
 
-  Widget _buildPlaceholder(BuildContext context) {
-    return Container(
+  Widget _buildPlaceholder(BuildContext context) => Container(
       color: context.colorScheme.surfaceContainerHighest,
       child: Padding(
         padding: const EdgeInsets.all(FigmaConstants.spacing32),
@@ -68,6 +65,5 @@ class CircularImageItem extends StatelessWidget {
         ),
       ),
     );
-  }
 }
 

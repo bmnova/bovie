@@ -1,9 +1,7 @@
-import 'package:bovie/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:bovie/core/utils/globals.dart';
 import 'package:bovie/app/theme/app_colors.dart';
 import 'package:bovie/core/utils/figma_constants.dart';
-import 'package:bovie/core/widgets/widgets.dart';
 import 'package:bovie/ui/paywall/presentation/widgets/paywall_auto_renewable_text.dart';
 import 'package:bovie/ui/paywall/presentation/widgets/subscription_plan_row.dart';
 import 'package:bovie/core/ab_testing/paywall_variant_constants.dart';
@@ -21,18 +19,16 @@ class PaywallCommonContent extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
+  Widget build(BuildContext context) => Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         const PaywallAutoRenewableText(),
-        SizedBox(height: FigmaConstants.spacing16),
+        const SizedBox(height: FigmaConstants.spacing16),
         button,
-        SizedBox(height: FigmaConstants.spacing16),
+        const SizedBox(height: FigmaConstants.spacing16),
         const PaywallFooterLinks(),
       ],
     );
-  }
 }
 
 /// Monthly and Yearly subscription plans widget shared between paywall variants
@@ -47,8 +43,7 @@ class PaywallMonthlyYearlyPlans extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
+  Widget build(BuildContext context) => Column(
       children: [
         // Monthly Plan
         Observer(
@@ -70,7 +65,6 @@ class PaywallMonthlyYearlyPlans extends StatelessWidget {
         ),
       ],
     );
-  }
 }
 
 /// Footer links widget shared between paywall variants
@@ -78,8 +72,7 @@ class PaywallFooterLinks extends StatelessWidget {
   const PaywallFooterLinks({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Row(
+  Widget build(BuildContext context) => Row(
       children: [
         Expanded(
           child: GestureDetector(
@@ -133,6 +126,5 @@ class PaywallFooterLinks extends StatelessWidget {
         ),
       ],
     );
-  }
 }
 

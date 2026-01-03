@@ -14,9 +14,7 @@ class OnboardingRepositoryImpl implements OnboardingRepository {
   OnboardingRepositoryImpl(this._prefs);
 
   @override
-  Future<bool> isOnboardingComplete() async {
-    return _prefs.getBool(_onboardingCompleteKey) ?? false;
-  }
+  Future<bool> isOnboardingComplete() async => _prefs.getBool(_onboardingCompleteKey) ?? false;
 
   @override
   Future<void> setOnboardingComplete(bool value) async {

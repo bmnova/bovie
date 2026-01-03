@@ -4,7 +4,6 @@ import 'package:bovie/core/utils/figma_constants.dart';
 import 'package:bovie/core/utils/globals.dart';
 import 'package:bovie/core/widgets/basic/fitted_text.dart';
 import 'package:bovie/generated/assets.gen.dart';
-import 'package:bovie/generated/l10n.dart';
 
 /// Feature comparison table widget for paywall screen
 /// 
@@ -99,8 +98,7 @@ class PaywallFeatures {
   PaywallFeatures._();
 
   /// Get the default list of paywall features
-  static List<FeatureItem> getDefault() {
-    return [
+  static List<FeatureItem> getDefault() => [
       FeatureItem(
         name: localizations.dailyMovieSuggestions,
         isAvailableInFree: true,
@@ -122,7 +120,6 @@ class PaywallFeatures {
         isAvailableInPro: false,
       ),
     ];
-  }
 }
 
 class _FeatureTable extends StatelessWidget {
@@ -263,7 +260,7 @@ class _PlanHeaderCell extends StatelessWidget {
 
     return Container(
       height: rowHeight,
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         horizontal: horizontalPadding,
         vertical: rowPadding,
       ),
@@ -397,12 +394,12 @@ class _FeatureNameCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Row height: 24px content + 8px top padding + 8px bottom padding = 40px total
-    final rowPadding = FigmaConstants.spacing8;
-    final rowHeight = FigmaConstants.featureTableRowContentHeight + (rowPadding * 2); // 24 + 8 + 8 = 40px
+    const rowPadding = FigmaConstants.spacing8;
+    const rowHeight = FigmaConstants.featureTableRowContentHeight + (rowPadding * 2); // 24 + 8 + 8 = 40px
 
     return Container(
       height: rowHeight,
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         vertical: rowPadding,
       ),
       child: Align(
@@ -442,12 +439,12 @@ class _FeatureIconCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Row height: 24px content + 8px top padding + 8px bottom padding = 40px total
-    final rowPadding = FigmaConstants.spacing8;
-    final rowHeight = FigmaConstants.featureTableRowContentHeight + (rowPadding * 2); // 24 + 8 + 8 = 40px
+    const rowPadding = FigmaConstants.spacing8;
+    const rowHeight = FigmaConstants.featureTableRowContentHeight + (rowPadding * 2); // 24 + 8 + 8 = 40px
 
     Widget child = Container(
       height: rowHeight,
-      padding: EdgeInsets.only(
+      padding: const EdgeInsets.only(
         left: FigmaConstants.spacing8,
         right: FigmaConstants.spacing8,
         top: rowPadding,

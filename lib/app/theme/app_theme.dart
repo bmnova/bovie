@@ -22,7 +22,7 @@ class AppTheme {
         surfaceContainerHighest: AppColors.gray,
         onSurfaceVariant: AppColors.grayDarkText,
         outline: AppColors.grayDark,
-        shadow: AppColors.black.withOpacity(0.1),
+        shadow: AppColors.black.withValues(alpha: 0.1),
       );
 
   /// Color scheme for dark theme
@@ -42,12 +42,11 @@ class AppTheme {
         surfaceContainerHighest: AppColors.grayDark,
         onSurfaceVariant: AppColors.grayLightMedium,
         outline: AppColors.grayDark,
-        shadow: AppColors.black.withOpacity(0.3),
+        shadow: AppColors.black.withValues(alpha: 0.3),
       );
 
   /// Text theme configuration using Inter font
-  static TextTheme _createTextTheme(ColorScheme colorScheme) {
-    return TextTheme(
+  static TextTheme _createTextTheme(ColorScheme colorScheme) => TextTheme(
       // Display styles
       displayLarge: TextStyle(
         fontFamily: 'Inter',
@@ -148,11 +147,9 @@ class AppTheme {
         color: colorScheme.onSurfaceVariant,
       ),
     );
-  }
 
   /// App bar theme
-  static AppBarTheme _createAppBarTheme(ColorScheme colorScheme) {
-    return AppBarTheme(
+  static AppBarTheme _createAppBarTheme(ColorScheme colorScheme) => AppBarTheme(
       backgroundColor: colorScheme.surface,
       foregroundColor: colorScheme.onSurface,
       elevation: 0,
@@ -164,11 +161,9 @@ class AppTheme {
         color: colorScheme.onSurface,
       ),
     );
-  }
 
   /// Elevated button theme
-  static ElevatedButtonThemeData _createElevatedButtonTheme(ColorScheme colorScheme) {
-    return ElevatedButtonThemeData(
+  static ElevatedButtonThemeData _createElevatedButtonTheme(ColorScheme colorScheme) => ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         foregroundColor: colorScheme.onPrimary,
         backgroundColor: colorScheme.primary,
@@ -177,36 +172,32 @@ class AppTheme {
           borderRadius: BorderRadius.circular(8),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        textStyle: TextStyle(
+        textStyle: const TextStyle(
           fontFamily: 'Inter',
           fontSize: 14,
           fontWeight: FontWeight.w600,
         ),
       ),
     );
-  }
 
   /// Text button theme
-  static TextButtonThemeData _createTextButtonTheme(ColorScheme colorScheme) {
-    return TextButtonThemeData(
+  static TextButtonThemeData _createTextButtonTheme(ColorScheme colorScheme) => TextButtonThemeData(
       style: TextButton.styleFrom(
         foregroundColor: colorScheme.primary,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        textStyle: TextStyle(
+        textStyle: const TextStyle(
           fontFamily: 'Inter',
           fontSize: 14,
           fontWeight: FontWeight.w600,
         ),
       ),
     );
-  }
 
   /// Input decoration theme
-  static InputDecorationTheme _createInputDecorationTheme(ColorScheme colorScheme) {
-    return InputDecorationTheme(
+  static InputDecorationTheme _createInputDecorationTheme(ColorScheme colorScheme) => InputDecorationTheme(
       filled: true,
       fillColor: colorScheme.surfaceContainerHighest,
       labelStyle: TextStyle(
@@ -235,18 +226,15 @@ class AppTheme {
       ),
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
     );
-  }
 
   /// Card theme
-  static CardThemeData _createCardTheme(ColorScheme colorScheme) {
-    return CardThemeData(
+  static CardThemeData _createCardTheme(ColorScheme colorScheme) => CardThemeData(
       elevation: 2,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
       color: colorScheme.surface,
     );
-  }
 
   /// Light theme
   static ThemeData get lightTheme {

@@ -27,15 +27,11 @@ class PaywallVariantProps {
 
   /// Format weekly price as string with currency symbol
   /// Example: formatWeeklyPrice() returns "$4.99"
-  String formatWeeklyPrice() {
-    return '$currencySymbol${weeklyPrice.toStringAsFixed(2)}';
-  }
+  String formatWeeklyPrice() => '$currencySymbol${weeklyPrice.toStringAsFixed(2)}';
 
   /// Format yearly price as string with currency symbol
   /// Example: formatYearlyPrice() returns "$29.99"
-  String formatYearlyPrice() {
-    return '$currencySymbol${yearlyPrice.toStringAsFixed(2)}';
-  }
+  String formatYearlyPrice() => '$currencySymbol${yearlyPrice.toStringAsFixed(2)}';
 }
 
 /// Factory for creating variant-specific properties
@@ -55,8 +51,7 @@ class VariantFactory {
   /// to avoid magic numbers in the codebase.
   /// 
   /// All variants use the same pricing - only the variantType differs.
-  static PaywallVariantProps getProps(PaywallVariant variant) {
-    return PaywallVariantProps(
+  static PaywallVariantProps getProps(PaywallVariant variant) => PaywallVariantProps(
       weeklyPrice: PaywallVariantConstants.weeklyPrice,
       yearlyPrice: PaywallVariantConstants.yearlyPrice,
       currencyCode: PaywallVariantConstants.currencyCode,
@@ -64,5 +59,4 @@ class VariantFactory {
       variantType: variant,
       hasTrial: PaywallVariantConstants.hasTrial,
     );
-  }
 }

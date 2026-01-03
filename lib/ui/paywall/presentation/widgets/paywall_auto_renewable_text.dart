@@ -10,8 +10,7 @@ class PaywallAutoRenewableText extends StatelessWidget {
   const PaywallAutoRenewableText({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Row(
+  Widget build(BuildContext context) => Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         BovieAssets.icons.shieldGreen.svg(
@@ -30,6 +29,5 @@ class PaywallAutoRenewableText extends StatelessWidget {
         ),
       ],
     );
-  }
 }
 

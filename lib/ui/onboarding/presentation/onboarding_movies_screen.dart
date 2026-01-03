@@ -24,14 +24,10 @@ class _FigmaConstants {
   /// Calculate poster width so that exactly 2 posters + 1 gap fit on screen
   /// Formula: 2 * posterWidth + gap = screenWidth
   /// posterWidth = (screenWidth - gap) / 2
-  static double calculatePosterWidth(double screenWidth) {
-    return (screenWidth - movieItemSpacing) / 2;
-  }
+  static double calculatePosterWidth(double screenWidth) => (screenWidth - movieItemSpacing) / 2;
 
   /// Calculate poster height based on aspect ratio
-  static double calculatePosterHeight(double posterWidth) {
-    return posterWidth / moviePosterAspectRatio;
-  }
+  static double calculatePosterHeight(double posterWidth) => posterWidth / moviePosterAspectRatio;
 }
 
 class OnboardingMoviesScreen extends StatefulWidget {
@@ -68,8 +64,7 @@ class _OnboardingMoviesScreenState extends State<OnboardingMoviesScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return OnboardingSelectionScreenBase(
+  Widget build(BuildContext context) => OnboardingSelectionScreenBase(
       bodyBuilder: (context, contentTop) => _buildMovieSelection(context),
       hasSelection: () => _store.selectedMovieIds.isNotEmpty,
       canContinue: () => _store.canContinue,
@@ -88,7 +83,6 @@ class _OnboardingMoviesScreenState extends State<OnboardingMoviesScreen> {
       headerToContentSpacing: 135.0, // Movies için 135px spacing
       extendBodyToBottom: false, // Movies için body bottom'a uzamaz, belirli yükseklikte
     );
-  }
 
   Widget _buildMovieSelection(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;

@@ -1,4 +1,3 @@
-import 'package:bovie/core/utils/figma_constants.dart';
 
 /// Constants for Home layout dimensions
 class HomeLayoutConstants {

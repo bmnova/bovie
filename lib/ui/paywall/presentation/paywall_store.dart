@@ -1,6 +1,5 @@
 import 'dart:math';
 import 'package:mobx/mobx.dart';
-import 'package:bovie/core/ab_testing/paywall_variant_constants.dart';
 import 'package:bovie/core/ab_testing/ab_testing.dart';
 import 'package:bovie/ui/user/domain/user_id_repository.dart';
 
@@ -70,7 +69,7 @@ abstract class _PaywallStoreBase with Store {
   @action
   void selectRandomVariant() {
     final random = Random();
-    final variants = PaywallVariant.values;
+    const variants = PaywallVariant.values;
     variant = variants[random.nextInt(variants.length)];
   }
 }

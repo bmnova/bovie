@@ -133,7 +133,7 @@ class _CurvedHorizontalScrollState extends State<CurvedHorizontalScroll> {
 
     m.multiply(Matrix4.translationValues(dx, 0.0, zT));
     m.multiply(Matrix4.rotationY(angle));
-    m.scale(scale, scale);
+    m.multiply(Matrix4.diagonal3Values(scale, scale, 1.0));
 
     return m;
   }

@@ -4,6 +4,7 @@ library widgets;
 // Basic widgets
 export 'basic/fitted_text.dart';
 export 'basic/app_button.dart';
+export 'basic/app_search_bar.dart';
 export 'basic/app_chip.dart';
 export 'basic/movie_genre_card.dart';
 export 'basic/movie_poster_card.dart';

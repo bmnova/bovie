@@ -7,6 +7,7 @@
 /// Currency/metric formatting should be handled in the UI layer.
 /// 
 /// Note: All variants use the same pricing. Variants represent different designs/layouts only.
+library;
 
 /// Subscription plan types
 enum SubscriptionPlan {
@@ -48,8 +49,7 @@ class PaywallVariantConstants {
   static const bool hasTrial = true;
 
   // Subscription Plan Properties
-  static SubscriptionPlanProps getWeeklyPlan() {
-    return SubscriptionPlanProps(
+  static SubscriptionPlanProps getWeeklyPlan() => SubscriptionPlanProps(
       plan: SubscriptionPlan.weekly,
       title: 'Weekly',
       subtitle: 'Only \$${_formatPrice(weeklyPrice)} per week',
@@ -57,10 +57,9 @@ class PaywallVariantConstants {
       priceDisplay: '\$${_formatPrice(weeklyPrice)} / week',
       hasBestValueBadge: false,
     );
-  }
 
   static SubscriptionPlanProps getMonthlyPlan() {
-    final weeklyEquivalent = monthlyPrice / 4;
+    const weeklyEquivalent = monthlyPrice / 4;
     return SubscriptionPlanProps(
       plan: SubscriptionPlan.monthly,
       title: 'Monthly',
@@ -72,7 +71,7 @@ class PaywallVariantConstants {
   }
 
   static SubscriptionPlanProps getYearlyPlan() {
-    final weeklyEquivalent = yearlyPrice / 52;
+    const weeklyEquivalent = yearlyPrice / 52;
     return SubscriptionPlanProps(
       plan: SubscriptionPlan.yearly,
       title: 'Yearly',
@@ -84,9 +83,7 @@ class PaywallVariantConstants {
   }
 
   /// Format price with comma as decimal separator (Figma design uses comma)
-  static String _formatPrice(double price) {
-    return price.toStringAsFixed(2).replaceAll('.', ',');
-  }
+  static String _formatPrice(double price) => price.toStringAsFixed(2).replaceAll('.', ',');
 
   /// Get properties for a specific subscription plan
   static SubscriptionPlanProps getPlanProps(SubscriptionPlan plan) {

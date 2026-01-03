@@ -123,9 +123,7 @@ class FigmaHelper {
   }
 
   /// Get responsive spacing (scales with screen size)
-  static double spacing(BuildContext context, double figmaSpacing) {
-    return scaleWidth(context, figmaSpacing);
-  }
+  static double spacing(BuildContext context, double figmaSpacing) => scaleWidth(context, figmaSpacing);
 
   /// Check if current device matches design reference
   static bool isDesignReference(BuildContext context) {

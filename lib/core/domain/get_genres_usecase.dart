@@ -7,8 +7,6 @@ class GetGenres {
 
   GetGenres(this._repository);
 
-  Future<Result<List<Genre>>> call() {
-    return _repository.getGenres();
-  }
+  Future<Result<List<Genre>>> call() => _repository.getGenres();
 }
 

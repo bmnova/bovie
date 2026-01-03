@@ -1,4 +1,3 @@
-import 'package:bovie/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:bovie/core/widgets/widgets.dart';
 import 'package:bovie/core/utils/globals.dart';
@@ -14,8 +13,7 @@ class PaywallScreenA extends StatelessWidget {
   const PaywallScreenA({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Observer(
+  Widget build(BuildContext context) => Observer(
       builder: (_) {
         final isFreeTrialEnabled = paywallStore.isFreeTrialEnabled;
         
@@ -92,5 +90,4 @@ class PaywallScreenA extends StatelessWidget {
           );
       },
     );
-  }
 }

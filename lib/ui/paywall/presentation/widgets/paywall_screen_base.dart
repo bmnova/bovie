@@ -49,7 +49,7 @@ class PaywallScreenBase extends StatelessWidget {
             PaywallCommonContent(
               button: button
             ),
-            SizedBox(height: FigmaConstants.spacing16,),
+            const SizedBox(height: FigmaConstants.spacing16,),
           ],
         ),
       ),
