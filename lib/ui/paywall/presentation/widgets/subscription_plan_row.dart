@@ -107,11 +107,3 @@ class SubscriptionPlanRow extends StatelessWidget {
   }
 }
 
-/// Constants for Best Value badge positioning
-class _BadgeConstants {
-  _BadgeConstants._();
-  
-  // Badge position for center alignment (from Figma: left: calc(50%+105px), top: calc(50%-29.5px))
-  static const double centerOffsetX = 105.0;
-  static const double centerOffsetY = -14.75; // Half of badge height (29.5 / 2)
-}

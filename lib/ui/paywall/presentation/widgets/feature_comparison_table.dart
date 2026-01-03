@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:bovie/app/theme/app_colors.dart';
 import 'package:bovie/core/utils/figma_constants.dart';
 import 'package:bovie/core/utils/globals.dart';
 import 'package:bovie/core/widgets/basic/fitted_text.dart';
 import 'package:bovie/generated/assets.gen.dart';
+
+class _FigmaConstants {
+  _FigmaConstants._();
+
+  // Pro gradient border stops
+  static const List<double> proGradientStops = [0.2, 0.5, 0.8];
+}
 
 /// Feature comparison table widget for paywall screen
 /// 
@@ -37,7 +43,7 @@ class FeatureComparisonTable extends StatelessWidget {
         FittedText(
           text: appName,
           style: context.textTheme.titleLarge?.copyWith(
-                color: AppColors.white,
+                color: context.colorScheme.onSurface,
                 fontSize: FigmaConstants.fontSize24,
                 fontWeight: FontWeight.bold,
               ),
@@ -133,7 +139,7 @@ class _FeatureTable extends StatelessWidget {
   Widget build(BuildContext context) {
     // Calculate column width based on text width + 8px padding on each side
     final textStyle = context.textTheme.bodyLarge?.copyWith(
-      color: AppColors.white,
+      color: context.colorScheme.onSurface,
       fontSize: FigmaConstants.fontSize16,
       fontWeight: FontWeight.w600,
     );
@@ -267,13 +273,13 @@ class _PlanHeaderCell extends StatelessWidget {
       decoration: hasBorder
           ? BoxDecoration(
               border: Border(
-                left: const BorderSide(color: AppColors.redLight, width: FigmaConstants.borderWidth1),
-                right: const BorderSide(color: AppColors.redLight, width: FigmaConstants.borderWidth1),
+                left:  BorderSide(color: context.colorScheme.primary, width: FigmaConstants.borderWidth1),
+                right:  BorderSide(color: context.colorScheme.primary, width: FigmaConstants.borderWidth1),
                 top: isFirstRow
-                    ? const BorderSide(color: AppColors.redLight, width: FigmaConstants.borderWidth1)
+                    ?  BorderSide(color: context.colorScheme.primary, width: FigmaConstants.borderWidth1)
                     : BorderSide.none,
                 bottom: isLastRow
-                    ? const BorderSide(color: AppColors.redLight, width: FigmaConstants.borderWidth1)
+                    ?  BorderSide(color: context.colorScheme.primary, width: FigmaConstants.borderWidth1)
                     : BorderSide.none,
               ),
               borderRadius: isFirstRow && isLastRow
@@ -314,15 +320,15 @@ class _GradientBorderTitle extends StatelessWidget {
         // Figma: linear-gradient(270deg, rgba(8, 9, 10, 0) 20%, #CB2C2C 50%, rgba(8, 9, 10, 0) 80%)
         Container(
           decoration: BoxDecoration(
-            gradient: const LinearGradient(
+            gradient:  LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
               colors: [
                 Colors.transparent, // rgba(8, 9, 10, 0) at 20%
-                AppColors.redLight, // #CB2C2C at 50%
+                context.colorScheme.primary, // #CB2C2C at 50%
                 Colors.transparent, // rgba(8, 9, 10, 0) at 80%
               ],
-              stops: [0.2, 0.5, 0.8],
+              stops: _FigmaConstants.proGradientStops,
             ),
             borderRadius: BorderRadius.circular(FigmaConstants.radius4),
           ),
@@ -333,7 +339,7 @@ class _GradientBorderTitle extends StatelessWidget {
             padding: const EdgeInsets.all(borderWidth),
             child: Container(
               decoration: BoxDecoration(
-                color: AppColors.black,
+                color: context.colorScheme.surface,
                 borderRadius: BorderRadius.circular(FigmaConstants.radius4 - borderWidth),
               ),
               child: Center(
@@ -342,7 +348,7 @@ class _GradientBorderTitle extends StatelessWidget {
                   child: Text(
                     text,
                     style: context.textTheme.bodyLarge?.copyWith(
-                          color: AppColors.white,
+                          color: context.colorScheme.onSurface,
                           fontSize: FigmaConstants.fontSize16,
                           fontWeight: FontWeight.w600,
                         ),
@@ -371,7 +377,7 @@ class _PlainTitle extends StatelessWidget {
   Widget build(BuildContext context) => Text(
       text,
       style: context.textTheme.bodyLarge?.copyWith(
-            color: AppColors.white,
+            color: context.colorScheme.onSurface,
             fontSize: FigmaConstants.fontSize16,
             fontWeight: FontWeight.w600,
           ),
@@ -410,7 +416,7 @@ class _FeatureNameCell extends StatelessWidget {
           child: Text(
             feature.name,
             style: context.textTheme.bodyMedium?.copyWith(
-                  color: AppColors.white,
+                  color: context.colorScheme.onSurface,
                   fontSize: FigmaConstants.fontSize14,
                   fontWeight: FontWeight.w600,
                 ),
@@ -465,13 +471,13 @@ class _FeatureIconCell extends StatelessWidget {
       return Container(
         decoration: BoxDecoration(
           border: Border(
-            left: const BorderSide(color: AppColors.redLight, width: FigmaConstants.borderWidth1),
-            right: const BorderSide(color: AppColors.redLight, width: FigmaConstants.borderWidth1),
+            left:  BorderSide(color: context.colorScheme.primary, width: FigmaConstants.borderWidth1),
+            right:  BorderSide(color: context.colorScheme.primary, width: FigmaConstants.borderWidth1),
             top: isFirstRow
-                ? const BorderSide(color: AppColors.redLight, width: FigmaConstants.borderWidth1)
+                ?  BorderSide(color: context.colorScheme.primary, width: FigmaConstants.borderWidth1)
                 : BorderSide.none,
             bottom: isLastRow
-                ? const BorderSide(color: AppColors.redLight, width: FigmaConstants.borderWidth1)
+                ? BorderSide(color: context.colorScheme.primary, width: FigmaConstants.borderWidth1)
                 : BorderSide.none,
           ),
           borderRadius: isFirstRow && isLastRow
@@ -553,7 +559,7 @@ class _FeatureListItem extends StatelessWidget {
         Text(
           text,
           style: context.textTheme.bodyMedium?.copyWith(
-            color: AppColors.white,
+            color: context.colorScheme.onSurface,
             fontSize: FigmaConstants.fontSize14,
             fontWeight: FontWeight.w600,
           ),

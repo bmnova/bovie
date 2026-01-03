@@ -18,8 +18,8 @@ class PaywallScreenA extends StatelessWidget {
         final isFreeTrialEnabled = paywallStore.isFreeTrialEnabled;
         
         final button = AppButton(
-          backgroundColor: AppColors.redLight,
-          foregroundColor: AppColors.white,
+          backgroundColor: context.colorScheme.primary,
+          foregroundColor: context.colorScheme.onPrimary,
           height: FigmaConstants.buttonHeightLarge,
           borderRadius: FigmaConstants.radius12,
           enableAnimation: isFreeTrialEnabled,
@@ -35,14 +35,14 @@ class PaywallScreenA extends StatelessWidget {
                       localizations.threeDaysFree,
                       style: context.textTheme.labelLarge?.copyWith(
                         fontWeight: FontWeight.w600,
-                        color: AppColors.white,
+                        color: context.colorScheme.onPrimary,
                       ),
                     ),
                     Text(
                       localizations.noPaymentNow,
                       style: context.textTheme.bodySmall?.copyWith(
                         fontWeight: FontWeight.normal,
-                        color: AppColors.white,
+                        color: context.colorScheme.onPrimary,
                       ),
                     ),
                   ],
@@ -51,7 +51,7 @@ class PaywallScreenA extends StatelessWidget {
                   localizations.unlockPro(appName),
                   style: context.textTheme.labelLarge?.copyWith(
                     fontWeight: FontWeight.w600,
-                    color: AppColors.white,
+                    color: context.colorScheme.onPrimary,
                     fontSize: FigmaConstants.fontSize16,
                   ),
                 ),

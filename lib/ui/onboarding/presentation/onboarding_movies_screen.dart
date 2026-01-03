@@ -20,6 +20,8 @@ class _FigmaConstants {
 
   // Scroll pagination threshold
   static const double scrollPaginationThreshold = 200.0;
+  
+  static const double headerToContentSpacing = 135.0;
 
   /// Calculate poster width so that exactly 2 posters + 1 gap fit on screen
   /// Formula: 2 * posterWidth + gap = screenWidth
@@ -80,7 +82,7 @@ class _OnboardingMoviesScreenState extends State<OnboardingMoviesScreen> {
       welcomeSubtitle: S.of(context).chooseYour3FavoriteMovies,
       isLoading: () => _store.isLoading,
       hasData: () => _store.movies.isNotEmpty,
-      headerToContentSpacing: 135.0, // Movies için 135px spacing
+      headerToContentSpacing: _FigmaConstants.headerToContentSpacing, // Movies için 135px spacing
       extendBodyToBottom: false, // Movies için body bottom'a uzamaz, belirli yükseklikte
     );
 
@@ -105,8 +107,8 @@ class _OnboardingMoviesScreenState extends State<OnboardingMoviesScreen> {
             return SizedBox(
               width: posterWidth,
               height: posterHeight,
-              child: const Center(
-                child: CircularProgressIndicator(color: AppColors.white),
+              child: Center(
+                child: CircularProgressIndicator(color: Theme.of(context).colorScheme.onSurface),
               ),
             );
           }
