@@ -51,7 +51,7 @@ final router = GoRouter(
             switch (paywallStore.variant ?? PaywallVariant.testB) {
               case PaywallVariant.control:
               case PaywallVariant.testA:
-              //  return const PaywallScreenA();
+                return const PaywallScreenA();
               case PaywallVariant.testB:
                 return const PaywallScreenB();
             }

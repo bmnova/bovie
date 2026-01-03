@@ -17,7 +17,7 @@ class _FigmaConstants {
 }
 
 /// Feature comparison table widget for paywall screen
-///
+/// 
 /// Displays a table comparing FREE and PRO plans with features and checkmarks/X icons
 /// When [showComparison] is false, displays a simple list with tick icons (for PaywallScreenB)
 class FeatureComparisonTable extends StatelessWidget {
@@ -61,29 +61,30 @@ class FeatureComparisonTable extends StatelessWidget {
     if (showComparison) {
       // Comparison table mode (PaywallScreenA)
       return Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // App Name
-          const SizedBox(height: FigmaConstants.spacing8),
-          FittedText(
-            text: appName,
-            style: context.textTheme.titleLarge?.copyWith(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // App Name
+        const SizedBox(height: FigmaConstants.spacing8),
+        FittedText(
+          text: appName,
+          style: context.textTheme.titleLarge?.copyWith(
               color: AppColors.white,
-              fontSize: FigmaConstants.fontSize24,
-              fontWeight: FontWeight.bold,
-            ),
-            textAlign: TextAlign.center,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-          const SizedBox(height: FigmaConstants.spacing8),
-
-          // Feature Comparison Table (includes headers)
-          _FeatureTable(
+                fontSize: FigmaConstants.fontSize24,
+                fontWeight: FontWeight.bold,
+              ),
+          textAlign: TextAlign.center,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        const SizedBox(height: FigmaConstants.spacing8),
+        
+        // Feature Comparison Table (includes headers)
+        _FeatureTable(
             features: effectiveFeatures,
-          ),
-        ],
-      );
+            store: store,
+        ),
+      ],
+    );
     } else {
       // Simple list mode (PaywallScreenB)
       // Filter to show only active features (isAvailableInPro: true)
@@ -166,34 +167,36 @@ class PaywallFeatures {
 
   /// Get the default list of paywall features (legacy method, kept for backward compatibility)
   static List<FeatureItem> getDefault() => [
-    FeatureItem(
-      name: localizations.dailyMovieSuggestions,
-      isAvailableInFree: true,
-      isAvailableInPro: true,
-    ),
-    FeatureItem(
-      name: localizations.aiPoweredMovieInsights,
-      isAvailableInFree: false,
-      isAvailableInPro: true,
-    ),
-    FeatureItem(
-      name: localizations.personalizedWatchlists,
-      isAvailableInFree: false,
-      isAvailableInPro: false,
-    ),
-    FeatureItem(
-      name: localizations.adFreeExperience,
-      isAvailableInFree: false,
-      isAvailableInPro: false,
-    ),
-  ];
+      FeatureItem(
+        name: localizations.dailyMovieSuggestions,
+        isAvailableInFree: true,
+        isAvailableInPro: true,
+      ),
+      FeatureItem(
+        name: localizations.aiPoweredMovieInsights,
+        isAvailableInFree: false,
+        isAvailableInPro: true,
+      ),
+      FeatureItem(
+        name: localizations.personalizedWatchlists,
+        isAvailableInFree: false,
+        isAvailableInPro: false,
+      ),
+      FeatureItem(
+        name: localizations.adFreeExperience,
+        isAvailableInFree: false,
+        isAvailableInPro: false,
+      ),
+    ];
 }
 
 class _FeatureTable extends StatelessWidget {
   final List<FeatureItem> features;
+  final PaywallStore? store;
 
   const _FeatureTable({
     required this.features,
+    this.store,
   });
 
   @override
@@ -283,6 +286,8 @@ class _FeatureTable extends StatelessWidget {
                     isPro: false,
                     isFirstRow: false,
                     isLastRow: isLastFeature,
+                    featureIndex: index,
+                    store: store,
                   ),
                   const SizedBox(width: FigmaConstants.spacing12),
                   _FeatureIconCell(
@@ -290,6 +295,8 @@ class _FeatureTable extends StatelessWidget {
                     isPro: true,
                     isFirstRow: false,
                     isLastRow: isLastFeature,
+                    featureIndex: index,
+                    store: store,
                   ),
                 ],
               );
@@ -317,10 +324,10 @@ class _PlanHeaderCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Row height: 24px content + 8px top padding + 8px bottom padding = 40px total
-    const rowPadding = FigmaConstants.spacing8;
-    const horizontalPadding = FigmaConstants.spacing8;
-    const rowHeight = FigmaConstants.featureTableRowContentHeight + (rowPadding * 2); // 24 + 8 + 8 = 40px
-
+     const rowPadding = FigmaConstants.spacing8;
+     const horizontalPadding = FigmaConstants.spacing8;
+     const rowHeight = FigmaConstants.featureTableRowContentHeight + (rowPadding * 2); // 24 + 8 + 8 = 40px
+    
     final titleWidget = hasBorder
         ? _GradientBorderTitle(text: planName)
         : _PlainTitle(text: planName);
@@ -333,30 +340,30 @@ class _PlanHeaderCell extends StatelessWidget {
       ),
       decoration: hasBorder
           ? BoxDecoration(
-        border: Border(
+              border: Border(
           left: const BorderSide(color: AppColors.redLight, width: FigmaConstants.borderWidth1),
           right: const BorderSide(color: AppColors.redLight, width: FigmaConstants.borderWidth1),
-          top: isFirstRow
+                top: isFirstRow
               ? const BorderSide(color: AppColors.redLight, width: FigmaConstants.borderWidth1)
-              : BorderSide.none,
-          bottom: isLastRow
+                    : BorderSide.none,
+                bottom: isLastRow
               ? const BorderSide(color: AppColors.redLight, width: FigmaConstants.borderWidth1)
-              : BorderSide.none,
-        ),
-        borderRadius: isFirstRow && isLastRow
-            ? BorderRadius.circular(FigmaConstants.radius8)
-            : isFirstRow
-            ? const BorderRadius.only(
-          topLeft: Radius.circular(FigmaConstants.radius8),
-          topRight: Radius.circular(FigmaConstants.radius8),
-        )
-            : isLastRow
-            ? const BorderRadius.only(
-          bottomLeft: Radius.circular(FigmaConstants.radius8),
-          bottomRight: Radius.circular(FigmaConstants.radius8),
-        )
-            : null,
-      )
+                    : BorderSide.none,
+              ),
+              borderRadius: isFirstRow && isLastRow
+                  ? BorderRadius.circular(FigmaConstants.radius8)
+                  : isFirstRow
+                      ? const BorderRadius.only(
+                          topLeft: Radius.circular(FigmaConstants.radius8),
+                          topRight: Radius.circular(FigmaConstants.radius8),
+                        )
+                      : isLastRow
+                          ? const BorderRadius.only(
+                              bottomLeft: Radius.circular(FigmaConstants.radius8),
+                              bottomRight: Radius.circular(FigmaConstants.radius8),
+                            )
+                          : null,
+            )
           : null,
       child: Center(child: titleWidget),
     );
@@ -374,7 +381,7 @@ class _GradientBorderTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const borderWidth = FigmaConstants.borderWidthPro;
-
+    
     return Stack(
       children: [
         // Gradient border (outer container)
@@ -410,9 +417,9 @@ class _GradientBorderTitle extends StatelessWidget {
                     text,
                     style: context.textTheme.bodyLarge?.copyWith(
                       color: AppColors.white,
-                      fontSize: FigmaConstants.fontSize16,
-                      fontWeight: FontWeight.w600,
-                    ),
+                          fontSize: FigmaConstants.fontSize16,
+                          fontWeight: FontWeight.w600,
+                        ),
                     textAlign: TextAlign.center,
                     maxLines: 1,
                   ),
@@ -436,15 +443,15 @@ class _PlainTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Text(
-    text,
-    style: context.textTheme.bodyLarge?.copyWith(
+      text,
+      style: context.textTheme.bodyLarge?.copyWith(
       color: AppColors.white,
-      fontSize: FigmaConstants.fontSize16,
-      fontWeight: FontWeight.w600,
-    ),
-    textAlign: TextAlign.center,
-    maxLines: 1,
-  );
+            fontSize: FigmaConstants.fontSize16,
+            fontWeight: FontWeight.w600,
+          ),
+      textAlign: TextAlign.center,
+      maxLines: 1,
+    );
 }
 
 class _FeatureNameCell extends StatelessWidget {
@@ -478,9 +485,9 @@ class _FeatureNameCell extends StatelessWidget {
             feature.name,
             style: context.textTheme.bodyMedium?.copyWith(
               color: AppColors.white,
-              fontSize: FigmaConstants.fontSize14,
-              fontWeight: FontWeight.w600,
-            ),
+                  fontSize: FigmaConstants.fontSize14,
+                  fontWeight: FontWeight.w600,
+                ),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
@@ -495,12 +502,16 @@ class _FeatureIconCell extends StatelessWidget {
   final bool isPro;
   final bool isFirstRow;
   final bool isLastRow;
+  final int featureIndex;
+  final PaywallStore? store;
 
   const _FeatureIconCell({
     required this.isAvailable,
     required this.isPro,
     this.isFirstRow = false,
     this.isLastRow = false,
+    this.featureIndex = 0,
+    this.store,
   });
 
   @override
@@ -508,6 +519,47 @@ class _FeatureIconCell extends StatelessWidget {
     // Row height: 24px content + 8px top padding + 8px bottom padding = 40px total
     const rowPadding = FigmaConstants.spacing8;
     const rowHeight = FigmaConstants.featureTableRowContentHeight + (rowPadding * 2); // 24 + 8 + 8 = 40px
+
+    // Check if we need animation (only for PRO column, features 3 and 4, weekly <-> monthly transitions)
+    final needsAnimation = isPro && 
+        store != null && 
+        store!.previousPlan != null &&
+        (featureIndex == 2 || featureIndex == 3) && // 3rd and 4th features (0-indexed: 2, 3)
+        ((store!.previousPlan == SubscriptionPlan.weekly && store!.selectedPlan == SubscriptionPlan.monthly) ||
+         (store!.previousPlan == SubscriptionPlan.monthly && store!.selectedPlan == SubscriptionPlan.weekly));
+
+    // Get previous state for animation
+    bool? previousAvailable;
+    if (needsAnimation && store != null && store!.previousPlan != null) {
+      final previousFeatures = PaywallConfig.getFeaturesForPlan(store!.previousPlan!);
+      previousAvailable = previousFeatures[featureIndex];
+    }
+
+    Widget iconWidget = _FeatureIcon(
+      isAvailable: isAvailable,
+      isPro: isPro,
+    );
+
+    // Apply animation for 3rd and 4th features during weekly <-> monthly transitions
+    if (needsAnimation) {
+      if (featureIndex == 2) {
+        // 3rd feature: Slide from bottom + shake animation
+        iconWidget = _AnimatedFeatureIcon(
+          isAvailable: isAvailable,
+          isPro: isPro,
+          previousAvailable: previousAvailable,
+          animationType: _FeatureAnimationType.slideUpShake,
+        );
+      } else if (featureIndex == 3) {
+        // 4th feature: Shake up animation
+        iconWidget = _AnimatedFeatureIcon(
+          isAvailable: isAvailable,
+          isPro: isPro,
+          previousAvailable: previousAvailable,
+          animationType: _FeatureAnimationType.shakeUp,
+        );
+      }
+    }
 
     Widget child = Container(
       height: rowHeight,
@@ -520,10 +572,7 @@ class _FeatureIconCell extends StatelessWidget {
       child: SizedBox(
         width: FigmaConstants.iconSize24,
         height: FigmaConstants.iconSize24,
-        child: _FeatureIcon(
-          isAvailable: isAvailable,
-          isPro: isPro,
-        ),
+        child: iconWidget,
       ),
     );
 
@@ -544,22 +593,149 @@ class _FeatureIconCell extends StatelessWidget {
           borderRadius: isFirstRow && isLastRow
               ? BorderRadius.circular(FigmaConstants.radius8)
               : isFirstRow
-              ? const BorderRadius.only(
-            topLeft: Radius.circular(FigmaConstants.radius8),
-            topRight: Radius.circular(FigmaConstants.radius8),
-          )
-              : isLastRow
-              ? const BorderRadius.only(
-            bottomLeft: Radius.circular(FigmaConstants.radius8),
-            bottomRight: Radius.circular(FigmaConstants.radius8),
-          )
-              : null,
+                  ? const BorderRadius.only(
+                      topLeft: Radius.circular(FigmaConstants.radius8),
+                      topRight: Radius.circular(FigmaConstants.radius8),
+                    )
+                  : isLastRow
+                      ? const BorderRadius.only(
+                          bottomLeft: Radius.circular(FigmaConstants.radius8),
+                          bottomRight: Radius.circular(FigmaConstants.radius8),
+                        )
+                      : null,
         ),
         child: child,
       );
     }
 
     return child;
+  }
+}
+
+enum _FeatureAnimationType {
+  slideUpShake,
+  shakeUp,
+}
+
+class _AnimatedFeatureIcon extends StatefulWidget {
+  final bool isAvailable;
+  final bool isPro;
+  final bool? previousAvailable;
+  final _FeatureAnimationType animationType;
+
+  const _AnimatedFeatureIcon({
+    required this.isAvailable,
+    required this.isPro,
+    this.previousAvailable,
+    required this.animationType,
+  });
+
+  @override
+  State<_AnimatedFeatureIcon> createState() => _AnimatedFeatureIconState();
+}
+
+class _AnimatedFeatureIconState extends State<_AnimatedFeatureIcon>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _slideAnimation;
+  late Animation<double> _shakeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 600),
+      vsync: this,
+    );
+
+    if (widget.animationType == _FeatureAnimationType.slideUpShake) {
+      // Slide from bottom + shake
+      _slideAnimation = Tween<double>(begin: 1.0, end: 0.0).animate(
+        CurvedAnimation(
+          parent: _controller,
+          curve: const Interval(0.0, 0.4, curve: Curves.easeOut),
+        ),
+      );
+      _shakeAnimation = TweenSequence<double>([
+        TweenSequenceItem(tween: Tween<double>(begin: 0.0, end: -3.0), weight: 1),
+        TweenSequenceItem(tween: Tween<double>(begin: -3.0, end: 3.0), weight: 1),
+        TweenSequenceItem(tween: Tween<double>(begin: 3.0, end: -2.0), weight: 1),
+        TweenSequenceItem(tween: Tween<double>(begin: -2.0, end: 1.0), weight: 1),
+        TweenSequenceItem(tween: Tween<double>(begin: 1.0, end: 0.0), weight: 1),
+      ]).animate(
+        CurvedAnimation(
+          parent: _controller,
+          curve: const Interval(0.2, 1.0, curve: Curves.elasticOut),
+        ),
+      );
+    } else {
+      // Shake up
+      _shakeAnimation = TweenSequence<double>([
+        TweenSequenceItem(tween: Tween<double>(begin: 0.0, end: -2.0), weight: 1),
+        TweenSequenceItem(tween: Tween<double>(begin: -2.0, end: 2.0), weight: 1),
+        TweenSequenceItem(tween: Tween<double>(begin: 2.0, end: -1.5), weight: 1),
+        TweenSequenceItem(tween: Tween<double>(begin: -1.5, end: 1.0), weight: 1),
+        TweenSequenceItem(tween: Tween<double>(begin: 1.0, end: 0.0), weight: 1),
+      ]).animate(
+        CurvedAnimation(
+          parent: _controller,
+          curve: Curves.elasticOut,
+        ),
+      );
+      _slideAnimation = const AlwaysStoppedAnimation(0.0);
+    }
+
+    // Start animation when transitioning between weekly and monthly
+    _controller.forward(from: 0.0);
+  }
+
+  @override
+  void didUpdateWidget(_AnimatedFeatureIcon oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.isAvailable != widget.isAvailable || 
+        oldWidget.previousAvailable != widget.previousAvailable) {
+      _controller.reset();
+      _controller.forward();
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) {
+        Widget icon = _FeatureIcon(
+          isAvailable: widget.isAvailable,
+          isPro: widget.isPro,
+        );
+
+        if (widget.animationType == _FeatureAnimationType.slideUpShake) {
+          // Slide from bottom + shake (3rd feature)
+          return Transform.translate(
+            offset: Offset(
+              _shakeAnimation.value,
+              _slideAnimation.value * 15 + _shakeAnimation.value * 0.3,
+            ),
+            child: icon,
+          );
+        } else {
+          // Shake up (4th feature)
+          return Transform.translate(
+            offset: Offset(
+              _shakeAnimation.value * 0.5, // Less horizontal shake
+              _shakeAnimation.value * -2.0, // Shake upward more
+            ),
+            child: icon,
+          );
+        }
+      },
+    );
   }
 }
 
@@ -609,23 +785,23 @@ class _FeatureListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Row(
-    mainAxisAlignment: MainAxisAlignment.start,
-    mainAxisSize: MainAxisSize.min,
-    children: [
-      BovieAssets.icons.tick.svg(
-        width: FigmaConstants.iconSize14,
-        height: FigmaConstants.iconSize14,
-      ),
-      const SizedBox(width: FigmaConstants.spacing12),
-      Text(
-        text,
-        style: context.textTheme.bodyMedium?.copyWith(
-          color: AppColors.white,
-          fontSize: FigmaConstants.fontSize14,
-          fontWeight: FontWeight.w600,
+      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        BovieAssets.icons.tick.svg(
+          width: FigmaConstants.iconSize14,
+          height: FigmaConstants.iconSize14,
         ),
-      ),
-    ],
-  );
+        const SizedBox(width: FigmaConstants.spacing12),
+        Text(
+          text,
+          style: context.textTheme.bodyMedium?.copyWith(
+          color: AppColors.white,
+            fontSize: FigmaConstants.fontSize14,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ],
+    );
 }
 

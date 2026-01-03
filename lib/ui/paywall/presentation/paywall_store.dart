@@ -16,7 +16,10 @@ abstract class _PaywallStoreBase with Store {
   bool isFreeTrialEnabled = false;
 
   @observable
-  SubscriptionPlan selectedPlan = SubscriptionPlan.weekly;
+  SubscriptionPlan selectedPlan = SubscriptionPlan.yearly;
+
+  @observable
+  SubscriptionPlan? previousPlan;
 
   @observable
   PaywallVariant? variant;
@@ -31,6 +34,7 @@ abstract class _PaywallStoreBase with Store {
 
   @action
   void selectPlan(SubscriptionPlan plan) {
+    previousPlan = selectedPlan;
     selectedPlan = plan;
   }
 
