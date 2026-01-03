@@ -25,7 +25,7 @@ class AppButton extends StatefulWidget {
     this.backgroundColor,
     this.foregroundColor,
     this.height,
-    this.borderRadius = FigmaConstants.radius8,
+    this.borderRadius = FigmaConstants.radius16,
     this.enableAnimation = false,
     this.endingIcon,
   }) : assert(text != null || child != null, 'Either text or child must be provided');

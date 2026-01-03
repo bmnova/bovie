@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:bovie/core/utils/globals.dart';
+import 'package:bovie/generated/assets.gen.dart';
 
 import '../../utils/figma_constants.dart';
+import '../../../app/theme/app_colors.dart';
+
+/// Figma constants for movie genre card
+class _FigmaConstants {
+  // Selected state icon positioning
+  static const double selectedIconRightPadding = 8.0;
+  static const double selectedIconBottomPadding = 8.0;
+}
 
 /// Circular movie genre card component with selection state
 class MovieGenreCard extends StatelessWidget {
@@ -31,7 +40,7 @@ class MovieGenreCard extends StatelessWidget {
               shape: BoxShape.circle,
               border: isSelected
                   ? Border.all(
-                      color: context.colorScheme.primary,
+                      color: AppColors.redLight, // #CB2C2C
                       width: FigmaConstants.borderWidth2,
                     )
                   : null,
@@ -66,22 +75,14 @@ class MovieGenreCard extends StatelessWidget {
                     ),
             ),
           ),
+          // Checkmark icon at bottom right
           if (isSelected)
             Positioned(
-              right: 0,
-              bottom: 0,
-              child: Container(
+              right: _FigmaConstants.selectedIconRightPadding,
+              bottom: _FigmaConstants.selectedIconBottomPadding,
+              child: BovieAssets.icons.circleCheckIconRed.svg(
                 width: FigmaConstants.iconSize32,
                 height: FigmaConstants.iconSize32,
-                decoration: BoxDecoration(
-                  color: context.colorScheme.primary,
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  Icons.check_circle,
-                  color: context.colorScheme.onPrimary,
-                  size: FigmaConstants.iconSize32,
-                ),
               ),
             ),
         ],
