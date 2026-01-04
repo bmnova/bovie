@@ -40,13 +40,11 @@ class _OnboardingGenresScreenState extends State<OnboardingGenresScreen> {
   @override
   void initState() {
     super.initState();
-    print('[OnboardingGenresScreen] initState() called');
     _store = OnboardingGenresStore(
       getGenres,
       onboardingRepository,
       homeStore,
     );
-    print('[OnboardingGenresScreen] Store created, calling fetchGenres()...');
     _store.fetchGenres();
 
     // Note: Navigation to paywall is now handled directly in onContinue callback
@@ -74,22 +72,22 @@ class _OnboardingGenresScreenState extends State<OnboardingGenresScreen> {
 
   @override
   Widget build(BuildContext context) => OnboardingSelectionScreenBase(
-      bodyBuilder: (context, contentTop) => _buildGenreSelection(context),
-      hasSelection: () => _store.selectedGenreIds.isNotEmpty,
-      canContinue: () => _store.canContinue,
-      onContinue: () async {
-        await _store.completeOnboarding();
-        if (mounted) {
-          context.go(AppRoutes.paywall);
-        }
-      },
-      selectedTitle: S.of(context).thankYou,
-      welcomeTitle: S.of(context).welcome,
-      welcomeSubtitle: S.of(context).chooseYour2FavoriteGenres,
-      isLoading: () => _store.isLoading,
-      hasData: () => _store.genres.isNotEmpty,
-      overlayWidgetsBuilder: (contentTop) => _buildOverlayWidgets(context, contentTop),
-    );
+        bodyBuilder: (context, contentTop) => _buildGenreSelection(context),
+        hasSelection: () => _store.selectedGenreIds.isNotEmpty,
+        canContinue: () => _store.canContinue,
+        onContinue: () async {
+          await _store.completeOnboarding();
+          if (mounted) {
+            context.go(AppRoutes.paywall);
+          }
+        },
+        selectedTitle: S.of(context).thankYou,
+        welcomeTitle: S.of(context).welcome,
+        welcomeSubtitle: S.of(context).chooseYour2FavoriteGenres,
+        isLoading: () => _store.isLoading,
+        hasData: () => _store.genres.isNotEmpty,
+        overlayWidgetsBuilder: (contentTop) => _buildOverlayWidgets(context, contentTop),
+      );
 
   List<Widget> _buildOverlayWidgets(BuildContext context, double contentTop) {
     final topGradientTop = contentTop - _FigmaConstants.topGradientOffset;
@@ -114,78 +112,73 @@ class _OnboardingGenresScreenState extends State<OnboardingGenresScreen> {
   }
 
   Widget _buildGenreSelection(BuildContext context) => Observer(
-      builder: (_) {
-        print('[OnboardingGenresScreen] _buildGenreSelection() - isLoading: ${_store.isLoading}, genres count: ${_store.genres.length}');
-        if (_store.genres.isNotEmpty) {
-          print('[OnboardingGenresScreen] First genre name: ${_store.genres.first.name}');
-        }
-        return SingleChildScrollView(
-          padding: const EdgeInsets.only(
-            left: FigmaConstants.spacing16,
-            right: FigmaConstants.spacing16,
-            top: 0,
-          ),
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Wrap(
-                  spacing: _FigmaConstants.genreHorizontalSpacing,
-                  runSpacing: _FigmaConstants.genreVerticalSpacing,
-                  alignment: WrapAlignment.center,
-                  children: _store.genres.map((genre) => Observer(
-                      builder: (_) {
-                        final isSelected = _store.selectedGenreIds.contains(genre.id);
-                        return MovieGenreCard(
-                          genreName: genre.name,
-                          isSelected: isSelected,
-                          onTap: () => _store.toggleSelection(genre.id),
-                        );
-                      },
-                    )).toList(),
-                ),
-                // Bottom padding: 1 chip height + vertical spacing for better scrollability
-                SizedBox(
-                  height: (FigmaConstants.genreCardSize + _FigmaConstants.genreVerticalSpacing).h(context),
-                ),
-              ],
+      builder: (_) => SingleChildScrollView(
+            padding: const EdgeInsets.only(
+              left: FigmaConstants.spacing16,
+              right: FigmaConstants.spacing16,
+              top: 0,
             ),
-          ),
-        );
-      },
-    );
+            child: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Wrap(
+                    spacing: _FigmaConstants.genreHorizontalSpacing,
+                    runSpacing: _FigmaConstants.genreVerticalSpacing,
+                    alignment: WrapAlignment.center,
+                    children: _store.genres
+                        .map((genre) => Observer(
+                              builder: (_) {
+                                final isSelected = _store.selectedGenreIds.contains(genre.id);
+                                return MovieGenreCard(
+                                  genreName: genre.name,
+                                  isSelected: isSelected,
+                                  onTap: () => _store.toggleSelection(genre.id),
+                                );
+                              },
+                            ))
+                        .toList(),
+                  ),
+                  // Bottom padding: 1 chip height + vertical spacing for better scrollability
+                  SizedBox(
+                    height: (FigmaConstants.genreCardSize + _FigmaConstants.genreVerticalSpacing).h(context),
+                  ),
+                ],
+              ),
+            ),
+          ));
 
   /// Top gradient shadow: linear-gradient(176.7deg, #0F0E0E 2.73%, rgba(15, 14, 14, 0) 97.28%)
   Widget _buildTopGradient() => IgnorePointer(
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              AppColors.black, // #0F0E0E at 2.73%
-              AppColors.black.withValues(alpha: 0.0), // rgba(15, 14, 14, 0) at 97.28%
-            ],
-            stops: const [0.0273, 0.9728],
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                AppColors.black, // #0F0E0E at 2.73%
+                AppColors.black.withValues(alpha: 0.0), // rgba(15, 14, 14, 0) at 97.28%
+              ],
+              stops: const [0.0273, 0.9728],
+            ),
           ),
         ),
-      ),
-    );
+      );
 
   /// Bottom gradient shadow: linear-gradient(180deg, rgba(15, 14, 14, 0) 0%, #0F0E0E 100%)
   Widget _buildBottomGradient() => IgnorePointer(
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              AppColors.black.withValues(alpha: 0.0), // rgba(15, 14, 14, 0) at 0%
-              AppColors.black, // #0F0E0E at 100%
-            ],
-            stops: const [0.0, 1.0],
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                AppColors.black.withValues(alpha: 0.0), // rgba(15, 14, 14, 0) at 0%
+                AppColors.black, // #0F0E0E at 100%
+              ],
+              stops: const [0.0, 1.0],
+            ),
           ),
         ),
-      ),
-    );
+      );
 }

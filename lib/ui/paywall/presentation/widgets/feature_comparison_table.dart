@@ -219,6 +219,7 @@ class _FeatureTable extends StatelessWidget {
         alignment: Alignment.bottomCenter,
         child: Table(
           defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+          border: TableBorder(), // Remove default table borders to avoid lines between rows
           columnWidths: {
             0: const FlexColumnWidth(1),
             1: FixedColumnWidth(FigmaConstants.spacing12.sw(context)),
@@ -602,6 +603,8 @@ class _FeatureIconCell extends StatelessWidget {
     }
 
     if (isPro) {
+      // Only show borders on left, right, top (first row), and bottom (last row)
+      // No borders between rows to avoid lines between features
       final decorated = Container(
         decoration: BoxDecoration(
           border: Border(

@@ -37,16 +37,11 @@ class _CategoryBarState extends State<CategoryBar> {
   @override
   void didUpdateWidget(CategoryBar oldWidget) {
     super.didUpdateWidget(oldWidget);
-    print('CategoryBar didUpdateWidget: old=${oldWidget.selectedGenreId}, new=${widget.selectedGenreId}');
     if (widget.selectedGenreId != oldWidget.selectedGenreId && widget.selectedGenreId != null) {
-      print('Selected genre changed, scheduling scroll to chip');
       // Use post frame callback to ensure the widget is built and keys are available
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted) {
-          print('PostFrameCallback: calling _scrollToSelectedChip');
           _scrollToSelectedChip();
-        } else {
-          print('PostFrameCallback: widget not mounted');
         }
       });
     }
@@ -59,32 +54,23 @@ class _CategoryBarState extends State<CategoryBar> {
   }
 
   void _scrollToSelectedChip() {
-    print('_scrollToSelectedChip called');
-    print('  hasClients: ${_scrollController.hasClients}');
-    print('  selectedGenreId: ${widget.selectedGenreId}');
-    
     if (!_scrollController.hasClients) {
-      print('  ERROR: ScrollController has no clients');
       return;
     }
     
     if (widget.selectedGenreId == null) {
-      print('  ERROR: selectedGenreId is null');
       return;
     }
     
     // Find the chip's index
     final index = widget.genres.indexWhere((g) => g.id == widget.selectedGenreId);
-    print('  chip index: $index');
     if (index == -1) {
-      print('  ERROR: chip index not found');
       return;
     }
     
     // Calculate the position by measuring all chips up to this index
     // We need to measure each chip's width
     double totalWidth = _FigmaConstants.categoryBarHorizontalPadding; // Start with left padding
-    print('  starting totalWidth: $totalWidth');
     
     // First, try to measure visible chips
     bool allChipsMeasured = true;
@@ -96,18 +82,14 @@ class _CategoryBarState extends State<CategoryBar> {
         if (chipRenderObject != null && chipRenderObject is RenderBox) {
           final chipWidth = chipRenderObject.size.width;
           totalWidth += chipWidth;
-          print('  chip $i width: $chipWidth, totalWidth: $totalWidth');
           if (i < index - 1) {
             totalWidth += _FigmaConstants.chipGap; // Add gap between chips
-            print('  added gap, totalWidth: $totalWidth');
           }
         } else {
           allChipsMeasured = false;
-          print('  WARNING: chip $i renderObject is null or not RenderBox');
         }
       } else {
         allChipsMeasured = false;
-        print('  WARNING: chip $i context is null (not visible)');
       }
     }
     
@@ -120,13 +102,11 @@ class _CategoryBarState extends State<CategoryBar> {
       final selectedChipRenderObject = selectedChipContext.findRenderObject();
       if (selectedChipRenderObject != null && selectedChipRenderObject is RenderBox) {
         selectedChipWidth = selectedChipRenderObject.size.width;
-        print('  selected chip width: $selectedChipWidth');
       }
     }
     
     // If we couldn't measure all chips, use estimated width
     if (!allChipsMeasured || selectedChipWidth == 0) {
-      print('  Using estimated chip width');
       // Estimate chip width based on average text length
       // Average chip width is approximately 80-120px depending on text
       const estimatedChipWidth = 100.0;
@@ -141,7 +121,6 @@ class _CategoryBarState extends State<CategoryBar> {
         }
       }
       selectedChipWidth = estimatedSelectedChipWidth;
-      print('  estimated totalWidth: $totalWidth, selectedChipWidth: $selectedChipWidth');
     }
     
     // Calculate target scroll offset to position chip at start with 20px padding
@@ -151,18 +130,11 @@ class _CategoryBarState extends State<CategoryBar> {
     final maxScroll = _scrollController.position.maxScrollExtent;
     final clampedOffset = targetOffset.clamp(0.0, maxScroll);
     
-    print('  chipStart: $chipStart');
-    print('  startPadding: $startPadding');
-    print('  targetOffset: $targetOffset');
-    print('  maxScroll: $maxScroll');
-    print('  clampedOffset: $clampedOffset');
-    
     _scrollController.animateTo(
       clampedOffset,
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
     );
-    print('  animateTo called');
   }
 
   @override

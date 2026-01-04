@@ -77,9 +77,9 @@ class _OnboardingMoviesScreenState extends State<OnboardingMoviesScreen> {
           context.push(AppRoutes.onboardingGenres);
         }
       },
-      selectedTitle: S.of(context).continueToNextStep,
-      welcomeTitle: S.of(context).welcome,
-      welcomeSubtitle: S.of(context).chooseYour3FavoriteMovies,
+      selectedTitle: context.localizations.continueToNextStep,
+      welcomeTitle: context.localizations.welcome,
+      welcomeSubtitle: context.localizations.chooseYour3FavoriteMovies,
       isLoading: () => _store.isLoading,
       hasData: () => _store.movies.isNotEmpty,
       headerToContentSpacing: _FigmaConstants.headerToContentSpacing, // Movies için 135px spacing

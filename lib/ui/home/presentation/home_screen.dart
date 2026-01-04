@@ -156,7 +156,6 @@ class _HomeScreenState extends State<HomeScreen> {
               right: FigmaConstants.spacing16.sw(context),
               child: GestureDetector(
                 onTap: () async {
-                  print("Resetting onboarding data");
                   // Reset onboarding data in SharedPreferences
                   await onboardingRepository.resetAllSelections();
                   // Reset splash store state

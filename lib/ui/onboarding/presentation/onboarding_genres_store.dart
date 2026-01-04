@@ -36,28 +36,21 @@ abstract class _OnboardingGenresStoreBase with Store {
 
   @action
   Future<void> fetchGenres() async {
-    print('[OnboardingGenresStore] fetchGenres() called');
     runInAction(() {
       isLoading = true;
       error = null;
-      print('[OnboardingGenresStore] isLoading set to true, genres count: ${genres.length}');
     });
 
     final result = await _getGenres();
-    print('[OnboardingGenresStore] getGenres() result: isSuccess=${result.isSuccess}, dataOrNull length=${result.dataOrNull?.length ?? 0}');
 
     runInAction(() {
       if (result.isSuccess) {
         genres.clear();
         genres.addAll(result.dataOrNull!);
-        print('[OnboardingGenresStore] Genres added: ${genres.length} genres');
-        print('[OnboardingGenresStore] First genre: ${genres.isNotEmpty ? genres.first.name : "N/A"}');
       } else {
         error = result.errorOrNull?.message ?? 'Failed to load genres';
-        print('[OnboardingGenresStore] Error: $error');
       }
       isLoading = false;
-      print('[OnboardingGenresStore] isLoading set to false, genres count: ${genres.length}');
     });
   }
 
@@ -83,12 +76,10 @@ abstract class _OnboardingGenresStoreBase with Store {
 
     // Load homepage movies and categories after onboarding is complete
     // This ensures homepage has data when user navigates from paywall
-    print('[OnboardingGenresStore] Loading homepage movies and categories...');
     await Future.wait([
       _homeStore.loadForYouMovies(),
       _homeStore.loadCategories(),
     ]);
-    print('[OnboardingGenresStore] Homepage data loaded successfully');
 
     onboardingFinished = true;
     isLoading = false;

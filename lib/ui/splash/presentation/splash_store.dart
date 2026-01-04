@@ -56,7 +56,6 @@ abstract class _SplashStoreBase with Store {
 
       // 3. Check Onboarding
       final isComplete = await _onboardingRepository.isOnboardingComplete();
-      print("isComplete: $isComplete");
       // 4. Preload Home Screen Data (if onboarding is complete)
       if (isComplete) {
         // Load "For You" movies and categories in parallel
