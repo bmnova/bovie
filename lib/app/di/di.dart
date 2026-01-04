@@ -11,13 +11,13 @@ import '../../core/domain/genres_repository.dart';
 import '../../core/domain/get_genres_usecase.dart';
 import '../../core/domain/get_popular_movies_usecase.dart';
 import '../../core/domain/movies_repository.dart';
+import '../../ui/home/presentation/home_store.dart';
 import '../../ui/onboarding/domain/onboarding_repository.dart';
 import '../../ui/onboarding/data/onboarding_repository_impl.dart';
 import '../../ui/splash/presentation/splash_store.dart';
 import '../../ui/paywall/presentation/paywall_store.dart';
 import '../../ui/user/domain/user_id_repository.dart';
 import '../../ui/user/data/user_id_repository_impl.dart';
-import '../../ui/home/presentation/home_store.dart';
 
 final getIt = GetIt.instance;
 

@@ -129,8 +129,8 @@ class _HorizontalScrollableListState<T> extends State<HorizontalScrollableList<T
           return GridView.builder(
             controller: _scrollController,
             scrollDirection: Axis.horizontal,
-            padding: widget.padding ?? const EdgeInsets.symmetric(
-              horizontal: FigmaConstants.spacing20,
+            padding: widget.padding ?? EdgeInsets.symmetric(
+              horizontal: FigmaConstants.spacing20.sw(context),
             ),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: widget.crossAxisCount,

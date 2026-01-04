@@ -115,10 +115,10 @@ class FigmaHelper {
     return (figmaHeight / FigmaConstants.designHeight) * screenHeight;
   }
 
-  /// Scale font size from Figma design
+  /// Scale font size from Figma design (based on screen height)
   static double scaleFontSize(BuildContext context, double figmaFontSize) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final scaleFactor = screenWidth / FigmaConstants.designWidth;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final scaleFactor = screenHeight / FigmaConstants.designHeight;
     return figmaFontSize * scaleFactor;
   }
 
@@ -143,5 +143,29 @@ extension FigmaScalingExtension on BuildContext {
 
   /// Scale font size from Figma design
   double sf(double figmaFontSize) => FigmaHelper.scaleFontSize(this, figmaFontSize);
+}
+
+/// Extension on double for responsive scaling with BuildContext
+/// Allows calling FigmaConstants values directly with context
+extension ResponsiveDoubleExtension on double {
+  /// Scale this value as width (based on screen width / 375)
+  /// Example: 375 width screen = 1.0x, 412.5 width screen = 1.1x
+  double w(BuildContext context) => FigmaHelper.scaleWidth(context, this);
+
+  /// Scale this value as height (based on screen height / 812)
+  /// Example: 812 height screen = 1.0x, 893.2 height screen = 1.1x
+  double h(BuildContext context) => FigmaHelper.scaleHeight(context, this);
+
+  /// Scale this value as font size (based on screen height / 812)
+  /// Font sizes scale with screen height to maintain readability
+  double f(BuildContext context) => FigmaHelper.scaleFontSize(context, this);
+
+  /// Scale this value as horizontal spacing/padding (based on screen width / 375)
+  /// Use for horizontal spacing, horizontal padding, left/right padding
+  double sw(BuildContext context) => FigmaHelper.scaleWidth(context, this);
+
+  /// Scale this value as vertical spacing/padding (based on screen height / 812)
+  /// Use for vertical spacing, vertical padding, top/bottom padding
+  double sh(BuildContext context) => FigmaHelper.scaleHeight(context, this);
 }
 

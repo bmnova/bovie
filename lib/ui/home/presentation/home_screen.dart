@@ -1,17 +1,15 @@
-import 'package:bovie/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:go_router/go_router.dart';
 import 'package:bovie/ui/home/presentation/widgets/for_you_section.dart';
 import 'package:bovie/ui/home/presentation/widgets/category_header_section.dart';
 import 'package:bovie/ui/home/presentation/widgets/category_bar.dart';
 import 'package:bovie/ui/home/presentation/widgets/category_feed.dart';
 import 'package:bovie/app/theme/app_colors.dart';
-import 'package:bovie/ui/home/presentation/home_store.dart';
 import 'package:bovie/app/di/di.dart';
-import 'package:bovie/app/router/router.dart';
 
 import '../../../core/utils/figma_constants.dart';
+import 'home_store.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -47,9 +45,9 @@ class _HomeScreenState extends State<HomeScreen> {
     final availableHeight = screenHeight - statusBarHeight - appBarHeight;
 
     // Calculate Category Bar height
-    const categoryBarHeight = 32.0 + FigmaConstants.spacing20; // From CategoryBar
+    final categoryBarHeight = 32.0 + FigmaConstants.spacing20.sh(context); // From CategoryBar
     // Calculate Category Feed height: total height - Category Bar - spacing
-    final categoryFeedHeight = availableHeight - categoryBarHeight + FigmaConstants.spacing40;
+    final categoryFeedHeight = availableHeight - categoryBarHeight + FigmaConstants.spacing40.sh(context);
 
     return Scaffold(
       backgroundColor: AppColors.black,
@@ -59,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
             controller: _scrollController,
             slivers: [
               SliverToBoxAdapter(
-                child: const SizedBox(height: FigmaConstants.spacing20),
+                child: SizedBox(height: FigmaConstants.spacing20.sh(context)),
               ),
               // For You Section
               SliverToBoxAdapter(
@@ -70,14 +68,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               SliverToBoxAdapter(
-                child: const SizedBox(height: FigmaConstants.spacing20),
+                child: SizedBox(height: FigmaConstants.spacing20.sh(context)),
               ),
               // Category Header (Title + Search Bar)
               const SliverToBoxAdapter(
                 child: CategoryHeaderSection(),
               ),
               SliverToBoxAdapter(
-                child: const SizedBox(height: FigmaConstants.spacing20),
+                child: SizedBox(height: FigmaConstants.spacing20.sh(context)),
               ),
               // Category Bar (Sticky at top when scrolled)
               SliverAppBar(

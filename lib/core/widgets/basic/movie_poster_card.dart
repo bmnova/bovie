@@ -35,15 +35,16 @@ class MoviePosterCard extends StatelessWidget {
   final double width;
   final double borderRadius;
 
-  const MoviePosterCard({
+  MoviePosterCard({
     super.key,
     this.imageUrl,
     this.isSelected = false,
     this.onTap,
-    this.width = FigmaConstants.moviePosterWidth,
-    this.height = FigmaConstants.moviePosterHeight,
+    double? width,
+    double? height,
     this.borderRadius = 0.0,
-  });
+  })  : width = width ?? FigmaConstants.moviePosterWidth,
+        height = height ?? FigmaConstants.moviePosterHeight;
 
   @override
   Widget build(BuildContext context) => GestureDetector(
@@ -105,11 +106,11 @@ class MoviePosterCard extends StatelessWidget {
             // Checkmark icon at bottom right
           if (isSelected)
               Positioned(
-                right: _FigmaConstants.selectedIconRightPadding,
-                bottom: _FigmaConstants.selectedIconBottomPadding,
+                right: _FigmaConstants.selectedIconRightPadding.w(context),
+                bottom: _FigmaConstants.selectedIconBottomPadding.h(context),
                 child: BovieAssets.icons.circleCheckIconRed.svg(
-                  width: FigmaConstants.iconSize32,
-                  height: FigmaConstants.iconSize32,
+                  width: FigmaConstants.iconSize32.w(context),
+                  height: FigmaConstants.iconSize32.h(context),
               ),
             ),
         ],

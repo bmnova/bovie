@@ -109,7 +109,7 @@ class _AppButtonState extends State<AppButton>
         children: [
           Center(child: content),
           Positioned(
-            right: FigmaConstants.spacing16,
+            right: FigmaConstants.spacing16.sw(context),
             top: 0,
             bottom: 0,
             child: Center(child: widget.endingIcon!),
@@ -128,7 +128,7 @@ class _AppButtonState extends State<AppButton>
 
     Widget button = SizedBox(
       width: double.infinity,
-      height: widget.height ?? FigmaConstants.buttonHeight,
+      height: widget.height ?? FigmaConstants.buttonHeight.h(context),
       child: ElevatedButton(
         onPressed: widget.isEnabled ? widget.onPressed : null,
         style: ElevatedButton.styleFrom(
@@ -138,9 +138,9 @@ class _AppButtonState extends State<AppButton>
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(widget.borderRadius),
           ),
-          padding: const EdgeInsets.symmetric(
-            horizontal: FigmaConstants.spacing24,
-            vertical: FigmaConstants.spacing12 + FigmaConstants.spacing2, // Approximate 14
+          padding: EdgeInsets.symmetric(
+            horizontal: FigmaConstants.spacing24.sw(context),
+            vertical: (FigmaConstants.spacing12 + FigmaConstants.spacing2).sh(context), // Approximate 14
           ),
         ),
         child: _buildButtonContent(context),

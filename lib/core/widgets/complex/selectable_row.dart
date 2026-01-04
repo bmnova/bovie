@@ -37,12 +37,12 @@ class SelectableRow extends StatelessWidget {
             // Selection icon
             isSelected
                 ? BovieAssets.icons.circleCheckIconRed.svg(
-                    width: FigmaConstants.iconSize16,
-                    height: FigmaConstants.iconSize16,
+                    width: FigmaConstants.iconSize16.w(context),
+                    height: FigmaConstants.iconSize16.h(context),
                   )
                 : Container(
-                    width: FigmaConstants.iconSize16,
-                    height: FigmaConstants.iconSize16,
+                    width: FigmaConstants.iconSize16.w(context),
+                    height: FigmaConstants.iconSize16.h(context),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
@@ -51,7 +51,7 @@ class SelectableRow extends StatelessWidget {
                       ),
                     ),
                   ),
-            const SizedBox(width: FigmaConstants.rowGapBetweenIconAndText),
+            SizedBox(width: FigmaConstants.rowGapBetweenIconAndText.sw(context)),
             // Title and subtitle
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,19 +61,19 @@ class SelectableRow extends StatelessWidget {
                   text: title,
                   style: context.textTheme.bodyLarge?.copyWith(
                     color: AppColors.white,
-                    fontSize: FigmaConstants.fontSize16,
+                    fontSize: FigmaConstants.fontSize16.f(context),
                     fontWeight: FontWeight.w600,
                   ),
                   textAlign: TextAlign.left,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
-                const SizedBox(height: FigmaConstants.rowGapBetweenTitleAndSubtitle),
+                SizedBox(height: FigmaConstants.rowGapBetweenTitleAndSubtitle.sh(context)),
                 FittedText(
                   text: subtitle,
                   style: context.textTheme.bodySmall?.copyWith(
                     color: AppColors.grayDark,
-                    fontSize: FigmaConstants.fontSize12,
+                    fontSize: FigmaConstants.fontSize12.f(context),
                     fontWeight: FontWeight.normal,
                   ),
                   textAlign: TextAlign.left,
@@ -88,7 +88,7 @@ class SelectableRow extends StatelessWidget {
           text: endingText,
           style: context.textTheme.bodyLarge?.copyWith(
             color: AppColors.white,
-            fontSize: FigmaConstants.fontSize16,
+            fontSize: FigmaConstants.fontSize16.f(context),
             fontWeight: FontWeight.w600,
           ),
           textAlign: TextAlign.right,
@@ -97,7 +97,7 @@ class SelectableRow extends StatelessWidget {
         ),
         hasBorder: true,
         borderColor: isSelected ? AppColors.redLight : AppColors.grayDark,
-        horizontalPadding: FigmaConstants.rowHorizontalPadding,
+        horizontalPadding: FigmaConstants.rowHorizontalPadding.sw(context),
         verticalPadding: verticalPadding,
         borderRadius: FigmaConstants.radius12,
       ),

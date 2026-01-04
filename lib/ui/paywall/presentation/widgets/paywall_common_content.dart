@@ -23,9 +23,9 @@ class PaywallCommonContent extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         const PaywallAutoRenewableText(),
-        const SizedBox(height: FigmaConstants.spacing16),
+        SizedBox(height: FigmaConstants.spacing16.sh(context)),
         button,
-        const SizedBox(height: FigmaConstants.spacing16),
+        SizedBox(height: FigmaConstants.spacing16.sh(context)),
         const PaywallFooterLinks(),
       ],
     );
@@ -53,7 +53,7 @@ class PaywallMonthlyYearlyPlans extends StatelessWidget {
             onTap: () => store.selectPlan(SubscriptionPlan.monthly),
           ),
         ),
-        const SizedBox(height: FigmaConstants.spacing4),
+        SizedBox(height: FigmaConstants.spacing4.sh(context)),
         // Yearly Plan (with Best Value badge)
         Observer(
           builder: (_) => SubscriptionPlanRow(
@@ -84,13 +84,13 @@ class PaywallFooterLinks extends StatelessWidget {
               textAlign: TextAlign.center,
               style: context.textTheme.bodySmall?.copyWith(
                 color: AppColors.white,
-                fontSize: FigmaConstants.fontSize8,
+                fontSize: FigmaConstants.fontSize8.f(context),
                 fontWeight: FontWeight.normal,
               ),
             ),
           ),
         ),
-        const SizedBox(width: FigmaConstants.spacing40),
+        SizedBox(width: FigmaConstants.spacing40.sw(context)),
         Expanded(
           child: GestureDetector(
             onTap: () {
@@ -101,13 +101,13 @@ class PaywallFooterLinks extends StatelessWidget {
               textAlign: TextAlign.center,
               style: context.textTheme.bodySmall?.copyWith(
                 color: AppColors.white,
-                fontSize: FigmaConstants.fontSize8,
+                fontSize: FigmaConstants.fontSize8.f(context),
                 fontWeight: FontWeight.normal,
               ),
             ),
           ),
         ),
-        const SizedBox(width: FigmaConstants.spacing40),
+        SizedBox(width: FigmaConstants.spacing40.sw(context)),
         Expanded(
           child: GestureDetector(
             onTap: () {
@@ -118,7 +118,7 @@ class PaywallFooterLinks extends StatelessWidget {
               textAlign: TextAlign.center,
               style: context.textTheme.bodySmall?.copyWith(
                 color: AppColors.white,
-                fontSize: FigmaConstants.fontSize8,
+                fontSize: FigmaConstants.fontSize8.f(context),
                 fontWeight: FontWeight.normal,
               ),
             ),

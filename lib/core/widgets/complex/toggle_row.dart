@@ -21,12 +21,19 @@ class ToggleRow extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => CustomRow(
+  Widget build(BuildContext context) {
+    // Calculate row height: vertical padding * 2 + content height
+    // Content height is approximately the height of Switch (around 20px on design)
+    // Using chipHeight as reference for row height
+    final rowHeight = (FigmaConstants.rowVerticalPaddingSmall.sh(context) * 2) + 
+                      FigmaConstants.chipHeight.h(context);
+    
+    return CustomRow(
       leadingWidget: FittedText(
         text: text,
         style: context.textTheme.bodyLarge?.copyWith(
           color: AppColors.white,
-          fontSize: FigmaConstants.fontSize16,
+          fontSize: FigmaConstants.fontSize16.f(context),
           fontWeight: FontWeight.w600,
         ),
         textAlign: TextAlign.left,
@@ -43,9 +50,11 @@ class ToggleRow extends StatelessWidget {
       ),
       hasBorder: true,
       borderColor: AppColors.redLight,
-      horizontalPadding: FigmaConstants.rowHorizontalPadding,
-      verticalPadding: FigmaConstants.rowVerticalPaddingSmall,
+      horizontalPadding: FigmaConstants.rowHorizontalPadding.sw(context),
+      verticalPadding: FigmaConstants.rowVerticalPaddingSmall.sh(context),
+      height: rowHeight,
       borderRadius: FigmaConstants.radius12,
     );
+  }
 }
 

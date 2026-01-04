@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:bovie/core/widgets/widgets.dart';
-import 'package:bovie/ui/home/presentation/home_store.dart';
 import 'package:bovie/core/utils/figma_constants.dart';
 import 'package:bovie/core/domain/movie.dart';
 import 'package:bovie/core/domain/genre.dart';
@@ -9,6 +8,7 @@ import 'package:mobx/mobx.dart';
 
 import '../../../../app/theme/app_colors.dart';
 
+import '../../presentation/home_store.dart';
 import 'home_layout_constants.dart';
 
 /// Figma constants for category section
@@ -49,16 +49,16 @@ class CategorySection extends StatelessWidget {
           SizedBox(height: HomeLayoutConstants.categorySectionTopSpacing),
           // Category title
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: FigmaConstants.spacing16),
+            padding: EdgeInsets.symmetric(horizontal: FigmaConstants.spacing16.sw(context)),
             child: SizedBox(
               height: HomeLayoutConstants.categoryTitleHeight,
               child: Text(
                 genre.name,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
+                style: TextStyle(
                   fontFamily: _FigmaConstants.categoryTitleFontFamily,
-                  fontSize: _FigmaConstants.categoryTitleFontSize,
+                  fontSize: _FigmaConstants.categoryTitleFontSize.f(context),
                   fontWeight: _FigmaConstants.categoryTitleFontWeight,
                   height: _FigmaConstants.categoryTitleLineHeight,
                   letterSpacing: _FigmaConstants.categoryTitleLetterSpacing,
@@ -81,7 +81,7 @@ class CategorySection extends StatelessWidget {
                   items: movies,
                   itemBuilder: (context, index, movie) => MoviePosterCard(
                     imageUrl: movie.posterPath,
-                    width: _FigmaConstants.moviePosterWidth,
+                    width: _FigmaConstants.moviePosterWidth.w(context),
                     height: HomeLayoutConstants.moviePosterHeight,
                     borderRadius: 8.0,
                   ),
@@ -92,7 +92,7 @@ class CategorySection extends StatelessWidget {
                   childAspectRatio: HomeLayoutConstants.moviePosterHeight / 100.0, // Height / Width for horizontal grid
                   onLoadMore: hasMore ? () => store.loadMoreMoviesForCategory(genre.id) : null,
                   isLoadingMore: () => isLoadingMore,
-                  padding: const EdgeInsets.symmetric(horizontal: FigmaConstants.spacing16),
+                  padding: EdgeInsets.symmetric(horizontal: FigmaConstants.spacing16.sw(context)),
                 );
               },
             ),

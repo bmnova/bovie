@@ -58,7 +58,7 @@ class CircularImageItem extends StatelessWidget {
   Widget _buildPlaceholder(BuildContext context) => Container(
       color: context.colorScheme.surfaceContainerHighest,
       child: Padding(
-        padding: const EdgeInsets.all(FigmaConstants.spacing32),
+        padding: EdgeInsets.all(FigmaConstants.spacing32.sw(context)),
         child: CircularProgressIndicator(
           color: AppColors.redLight.withValues(alpha: 0.5),
           strokeWidth: 2,

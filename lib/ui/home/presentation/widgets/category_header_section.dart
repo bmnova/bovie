@@ -22,14 +22,14 @@ class CategoryHeaderSection extends StatelessWidget {
       children: [
         // Header title
         Padding(
-          padding: const EdgeInsets.only(
-            left: FigmaConstants.spacing16,
-            bottom: FigmaConstants.spacing20,
+          padding: EdgeInsets.only(
+            left: FigmaConstants.spacing16.sw(context),
+            bottom: FigmaConstants.spacing20.sh(context),
           ),
           child: Text(
             'Movies 🎬',
             style: context.textTheme.headlineSmall?.copyWith(
-              fontSize: _FigmaConstants.headerTitleFontSize,
+              fontSize: _FigmaConstants.headerTitleFontSize.f(context),
               color: _FigmaConstants.headerTitleColor,
               fontWeight: FontWeight.bold,
             ),
@@ -37,8 +37,8 @@ class CategoryHeaderSection extends StatelessWidget {
         ),
         // Search bar
         Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: FigmaConstants.spacing16,
+          padding: EdgeInsets.symmetric(
+            horizontal: FigmaConstants.spacing16.sw(context),
           ),
           child: AppSearchBar(
             hintText: localizations.search,

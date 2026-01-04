@@ -26,7 +26,7 @@ class _PaywallScreenAState extends State<PaywallScreenA> {
         final button = AppButton(
           backgroundColor: context.colorScheme.primary,
           foregroundColor: context.colorScheme.onPrimary,
-          height: FigmaConstants.buttonHeightLarge,
+          height: FigmaConstants.buttonHeightLarge.h(context),
           borderRadius: FigmaConstants.radius12,
           enableAnimation: isFreeTrialEnabled,
           onPressed: () {
@@ -58,27 +58,27 @@ class _PaywallScreenAState extends State<PaywallScreenA> {
                   style: context.textTheme.labelLarge?.copyWith(
                     fontWeight: FontWeight.w600,
                     color: context.colorScheme.onPrimary,
-                    fontSize: FigmaConstants.fontSize16,
+                    fontSize: FigmaConstants.fontSize16.f(context),
                   ),
                 ),
         );
 
         final topContent = Column(
           children: [
-            const SizedBox(height: FigmaConstants.spacing16),
+            SizedBox(height: FigmaConstants.spacing16.sh(context)),
             // Feature Comparison Table
             FeatureComparisonTable(
               appName: appName,
               store: paywallStore,
             ),
-            const SizedBox(height: FigmaConstants.spacing28),
+            SizedBox(height: FigmaConstants.spacing28.sh(context)),
             // Enable Free Trial Toggle
             ToggleRow(
               text: localizations.enableFreeTrial,
               value: paywallStore.isFreeTrialEnabled,
               onChanged: paywallStore.setFreeTrialEnabled,
             ),
-            const SizedBox(height: FigmaConstants.spacing16),
+            SizedBox(height: FigmaConstants.spacing16.sh(context)),
             // Weekly Plan
             SubscriptionPlanRow(
               plan: SubscriptionPlan.weekly,

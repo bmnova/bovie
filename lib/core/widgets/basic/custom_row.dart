@@ -13,25 +13,28 @@ class CustomRow extends StatelessWidget {
   final Color? borderColor;
   final double horizontalPadding;
   final double verticalPadding;
+  final double? height;
   final double borderRadius;
 
-  const CustomRow({
+  CustomRow({
     super.key,
     this.leadingWidget,
     this.middleWidget,
     this.trailingWidget,
     this.hasBorder = false,
     this.borderColor,
-    this.horizontalPadding = FigmaConstants.rowHorizontalPadding,
-    this.verticalPadding = FigmaConstants.rowVerticalPaddingDefault,
+    double? horizontalPadding,
+    double? verticalPadding,
+    this.height,
     this.borderRadius = FigmaConstants.radius12,
-  });
+  })  : horizontalPadding = horizontalPadding ?? FigmaConstants.rowHorizontalPadding,
+        verticalPadding = verticalPadding ?? FigmaConstants.rowVerticalPaddingDefault;
 
   @override
   Widget build(BuildContext context) {
     final effectiveBorderColor = borderColor ?? AppColors.redLight;
 
-    return Container(
+    Widget container = Container(
       padding: EdgeInsets.symmetric(
         horizontal: horizontalPadding,
         vertical: verticalPadding,
@@ -67,6 +70,15 @@ class CustomRow extends StatelessWidget {
         ],
       ),
     );
+
+    if (height != null) {
+      container = SizedBox(
+        height: height,
+        child: container,
+      );
+    }
+
+    return container;
   }
 }
 

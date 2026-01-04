@@ -37,8 +37,8 @@ class ForYouSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-      padding: const EdgeInsets.only(
-        bottom: FigmaConstants.spacing20,
+      padding: EdgeInsets.only(
+        bottom: FigmaConstants.spacing20.sh(context),
       ),
       decoration: const BoxDecoration(
         border: Border(
@@ -53,32 +53,32 @@ class ForYouSection extends StatelessWidget {
         children: [
           // Title
           Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: FigmaConstants.spacing20,
+            padding: EdgeInsets.symmetric(
+              horizontal: FigmaConstants.spacing20.sw(context),
             ),
             child: Text(
               localizations.forYou,
               style: context.textTheme.headlineSmall?.copyWith(
                 color: AppColors.white,
-                fontSize: FigmaConstants.fontSize24,
+                fontSize: FigmaConstants.fontSize24.f(context),
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
-          const SizedBox(height: FigmaConstants.spacing20),
+          SizedBox(height: FigmaConstants.spacing20.sh(context)),
           // Horizontal scrollable list
           HorizontalScrollableList<Movie>(
             items: movies,
             itemBuilder: (context, index, movie) => CircularImageItem(
               imageUrl: movie.posterPath,
-              size: _FigmaConstants.imageItemSize,
+              size: _FigmaConstants.imageItemSize.w(context),
               ),
-            itemSize: _FigmaConstants.imageItemSize,
-            itemSpacing: FigmaConstants.spacing20,
+            itemSize: _FigmaConstants.imageItemSize.w(context),
+            itemSpacing: FigmaConstants.spacing20.sw(context),
             onLoadMore: onLoadMore,
             isLoadingMore: isLoadingMore,
-            padding: const EdgeInsets.symmetric(
-              horizontal: FigmaConstants.spacing20,
+            padding: EdgeInsets.symmetric(
+              horizontal: FigmaConstants.spacing20.sw(context),
             ),
             placeholderCount: _FigmaConstants.defaultItemCount,
           ),

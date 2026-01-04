@@ -21,14 +21,14 @@ class MovieGenreCard extends StatelessWidget {
   final VoidCallback? onTap;
   final double size;
 
-  const MovieGenreCard({
+  MovieGenreCard({
     super.key,
     this.imageUrl,
     this.genreName,
     this.isSelected = false,
     this.onTap,
-    this.size = FigmaConstants.genreCardSize,
-  });
+    double? size,
+  }) : size = size ?? FigmaConstants.genreCardSize;
 
   @override
   Widget build(BuildContext context) => GestureDetector(
@@ -46,11 +46,11 @@ class MovieGenreCard extends StatelessWidget {
           // Checkmark icon at bottom right
           if (isSelected)
             Positioned(
-              right: _FigmaConstants.selectedIconRightPadding,
-              bottom: _FigmaConstants.selectedIconBottomPadding,
+              right: _FigmaConstants.selectedIconRightPadding.w(context),
+              bottom: _FigmaConstants.selectedIconBottomPadding.h(context),
               child: BovieAssets.icons.circleCheckIconRed.svg(
-                width: FigmaConstants.iconSize32,
-                height: FigmaConstants.iconSize32,
+                width: FigmaConstants.iconSize32.w(context),
+                height: FigmaConstants.iconSize32.h(context),
               ),
             ),
         ],

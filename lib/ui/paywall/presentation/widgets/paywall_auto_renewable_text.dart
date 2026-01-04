@@ -14,15 +14,15 @@ class PaywallAutoRenewableText extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         BovieAssets.icons.shieldGreen.svg(
-          width: FigmaConstants.iconSize16,
-          height: FigmaConstants.iconSize16,
+          width: FigmaConstants.iconSize16.w(context),
+          height: FigmaConstants.iconSize16.h(context),
         ),
-        const SizedBox(width: FigmaConstants.spacing4),
+        SizedBox(width: FigmaConstants.spacing4.sw(context)),
         Text(
           localizations.autoRenewableCancelAnytime,
           style: context.textTheme.bodySmall?.copyWith(
             color: AppColors.white,
-            fontSize: FigmaConstants.fontSize10,
+            fontSize: FigmaConstants.fontSize10.f(context),
             fontWeight: FontWeight.normal,
             overflow: TextOverflow.ellipsis,
           ),

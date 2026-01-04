@@ -35,9 +35,9 @@ class SubscriptionPlanRow extends StatelessWidget {
 
     // Add extra padding for badge space on all rows to keep consistent height
     Widget row = Padding(
-      padding: const EdgeInsets.only(
-        top: FigmaConstants.badgeExtraPadding,
-        bottom: FigmaConstants.badgeExtraPadding,
+      padding: EdgeInsets.only(
+        top: FigmaConstants.badgeExtraPadding.sh(context),
+        bottom: FigmaConstants.badgeExtraPadding.sh(context),
       ),
       child: SelectableRow(
         title: planProps.title,
@@ -45,17 +45,17 @@ class SubscriptionPlanRow extends StatelessWidget {
         endingText: planProps.priceDisplay,
         isSelected: isSelected,
         onTap: onTap,
-        verticalPadding: FigmaConstants.rowVerticalPaddingMedium,
+        verticalPadding: FigmaConstants.rowVerticalPaddingMedium.sh(context),
       ),
     );
 
     // Add Best Value badge if needed
     if (planProps.hasBestValueBadge) {
       final badgeWidget = Container(
-        height: FigmaConstants.badgeHeight,
-        padding: const EdgeInsets.symmetric(
-          horizontal: FigmaConstants.badgeHorizontalPadding,
-          vertical: FigmaConstants.badgeVerticalPadding,
+        height: FigmaConstants.badgeHeight.h(context),
+        padding: EdgeInsets.symmetric(
+          horizontal: FigmaConstants.badgeHorizontalPadding.sw(context),
+          vertical: FigmaConstants.badgeVerticalPadding.sh(context),
         ),
         decoration: BoxDecoration(
           color: AppColors.redLight,
@@ -67,7 +67,7 @@ class SubscriptionPlanRow extends StatelessWidget {
           localizations.bestValue,
           style: context.textTheme.bodySmall?.copyWith(
             color: AppColors.white,
-            fontSize: FigmaConstants.badgeFontSize,
+            fontSize: FigmaConstants.badgeFontSize.f(context),
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -96,7 +96,7 @@ class SubscriptionPlanRow extends StatelessWidget {
           row,
           Positioned(
             top: 0,
-            right: FigmaConstants.badgeRightPadding,
+            right: FigmaConstants.badgeRightPadding.sw(context),
             child: badgeWidget,
           ),
         ],

@@ -45,10 +45,10 @@ class AppChip extends StatelessWidget {
   Widget build(BuildContext context) => GestureDetector(
       onTap: onTap,
       child: Container(
-        height: _FigmaConstants.chipHeight,
-        padding: const EdgeInsets.symmetric(
-          horizontal: _FigmaConstants.chipHorizontalPadding,
-          vertical: _FigmaConstants.chipVerticalPadding,
+        height: _FigmaConstants.chipHeight.h(context),
+        padding: EdgeInsets.symmetric(
+          horizontal: _FigmaConstants.chipHorizontalPadding.sw(context),
+          vertical: _FigmaConstants.chipVerticalPadding.sh(context),
         ),
         decoration: BoxDecoration(
           color: isSelected
@@ -61,10 +61,10 @@ class AppChip extends StatelessWidget {
           children: [
             if (isSelected) ...[
               BovieAssets.icons.tick.svg(
-                width: _FigmaConstants.checkmarkIconSize,
-                height: _FigmaConstants.checkmarkIconSize,
+                width: _FigmaConstants.checkmarkIconSize.w(context),
+                height: _FigmaConstants.checkmarkIconSize.h(context),
               ),
-              const SizedBox(width: _FigmaConstants.checkmarkIconGap),
+              SizedBox(width: _FigmaConstants.checkmarkIconGap.sw(context)),
             ],
             Text(
               label,
@@ -72,7 +72,7 @@ class AppChip extends StatelessWidget {
                 color: isSelected
                     ? _FigmaConstants.selectedTextColor
                     : _FigmaConstants.unselectedTextColor,
-                fontSize: FigmaConstants.fontSize16,
+                fontSize: FigmaConstants.fontSize16.f(context),
                 fontWeight: FontWeight.normal,
               ),
             ),

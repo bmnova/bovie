@@ -29,9 +29,9 @@ class PaywallScreenBase extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget content = SafeArea(
       child: Padding(
-        padding: const EdgeInsets.only(
-          left: FigmaConstants.spacing20,
-          right: FigmaConstants.spacing20,
+        padding: EdgeInsets.only(
+          left: FigmaConstants.spacing20.sw(context),
+          right: FigmaConstants.spacing20.sw(context),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -44,12 +44,12 @@ class PaywallScreenBase extends StatelessWidget {
               store: store,
               badgePosition: badgePosition,
             ),
-            const SizedBox(height: FigmaConstants.spacing16),
+            SizedBox(height: FigmaConstants.spacing16.sh(context)),
             // Common Content (Auto Renewable, Button, Footer Links)
             PaywallCommonContent(
               button: button
             ),
-            const SizedBox(height: FigmaConstants.spacing16,),
+            SizedBox(height: FigmaConstants.spacing16.sh(context)),
           ],
         ),
       ),
@@ -57,14 +57,14 @@ class PaywallScreenBase extends StatelessWidget {
 
     // Close button positioned at top right
     final closeButton = Positioned(
-      top: 18.0,
-      right: 20.0,
+      top: 18.0.w(context),
+      right: 20.0.sw(context),
       child: SafeArea(
         child: GestureDetector(
           onTap: () => context.pop(),
           child: BovieAssets.icons.close.svg(
-            width: FigmaConstants.iconSize24,
-            height: FigmaConstants.iconSize24,
+            width: FigmaConstants.iconSize24.w(context),
+            height: FigmaConstants.iconSize24.h(context),
           ),
         ),
       ),

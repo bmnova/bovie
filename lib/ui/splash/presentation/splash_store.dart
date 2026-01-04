@@ -3,8 +3,8 @@ import 'package:bovie/core/domain/get_genres_usecase.dart';
 import 'package:bovie/app/router/router.dart';
 import 'package:bovie/ui/paywall/presentation/paywall_store.dart';
 
-import '../../onboarding/domain/onboarding_repository.dart';
 import '../../home/presentation/home_store.dart';
+import '../../onboarding/domain/onboarding_repository.dart';
 
 part 'splash_store.g.dart';
 

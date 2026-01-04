@@ -85,7 +85,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       color: AppColors.redLight,
                     ),
                   ),
-                  SizedBox(height: FigmaHelper.scaleHeight(context, FigmaConstants.spacing16)),
+                  SizedBox(height: FigmaConstants.spacing16.sh(context)),
                   ElevatedButton(
                     onPressed: _store.init,
                     child: Text(localizations.retry),

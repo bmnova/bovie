@@ -46,18 +46,18 @@ class _PaywallScreenBState extends State<PaywallScreenB> {
       children: [
         // Background image
         Positioned(
-          top: _FigmaConstants.paywallImageTop,
-          left: _FigmaConstants.paywallImageLeft,
-          width: _FigmaConstants.paywallImageWidth,
-          height: _FigmaConstants.paywallImageHeight,
+          top: _FigmaConstants.paywallImageTop.h(context),
+          left: _FigmaConstants.paywallImageLeft.w(context),
+          width: _FigmaConstants.paywallImageWidth.w(context),
+          height: _FigmaConstants.paywallImageHeight.h(context),
           child: BovieAssets.images.paywallImage.image(
             fit: BoxFit.cover,
-            width: _FigmaConstants.paywallImageWidth,
-            height: _FigmaConstants.paywallImageHeight,
+            width: _FigmaConstants.paywallImageWidth.w(context),
+            height: _FigmaConstants.paywallImageHeight.h(context),
             errorBuilder: (context, error, stackTrace) => Container(
               color: AppColors.black,
-              width: _FigmaConstants.paywallImageWidth,
-              height: _FigmaConstants.paywallImageHeight,
+              width: _FigmaConstants.paywallImageWidth.w(context),
+              height: _FigmaConstants.paywallImageHeight.h(context),
             ),
           ),
         ),
@@ -92,11 +92,11 @@ class _PaywallScreenBState extends State<PaywallScreenB> {
       },
       backgroundColor: AppColors.redLight,
       foregroundColor: AppColors.white,
-      height: FigmaConstants.buttonHeightLarge,
+      height: FigmaConstants.buttonHeightLarge.h(context),
       borderRadius: FigmaConstants.radius12,
-      endingIcon: const Icon(
+      endingIcon: Icon(
         Icons.arrow_forward,
-        size: FigmaConstants.iconSize16,
+        size: FigmaConstants.iconSize16.w(context),
         color: AppColors.white,
       ),
     );
@@ -109,17 +109,17 @@ class _PaywallScreenBState extends State<PaywallScreenB> {
           appName,
           style: context.textTheme.headlineMedium?.copyWith(
             color: AppColors.white,
-            fontSize: FigmaConstants.fontSize24,
+            fontSize: FigmaConstants.fontSize24.f(context),
             fontWeight: FontWeight.bold,
           ),
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: _FigmaConstants.featureListTopPadding),
+        SizedBox(height: _FigmaConstants.featureListTopPadding.h(context)),
         // Feature List
         FeatureComparisonTable(
           appName: appName,
           showComparison: false,
-          bottomPadding: _FigmaConstants.featureListBottomPadding,
+          bottomPadding: _FigmaConstants.featureListBottomPadding.h(context),
           store: paywallStore,
         ),
       ],
