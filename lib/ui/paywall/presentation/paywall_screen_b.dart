@@ -1,5 +1,6 @@
 import 'package:bovie/ui/paywall/presentation/widgets/subscription_plan_row.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:bovie/core/widgets/widgets.dart';
 import 'package:bovie/core/utils/globals.dart';
 import 'package:bovie/app/theme/app_colors.dart';
@@ -7,6 +8,7 @@ import 'package:bovie/core/utils/figma_constants.dart';
 import 'package:bovie/core/ab_testing/paywall_variant_constants.dart';
 import 'package:bovie/core/ab_testing/remote_variant_config.dart';
 import 'package:bovie/ui/paywall/presentation/widgets/paywall_screen_base.dart';
+import 'package:bovie/app/router/router.dart';
 
 import '../../../generated/assets.gen.dart';
 
@@ -87,8 +89,12 @@ class _PaywallScreenBState extends State<PaywallScreenB> {
 
     final button = AppButton(
       text: localizations.continueText,
-      onPressed: () {
-        // Handle continue action
+      onPressed: () async {
+        // Mark onboarding as complete and navigate to home
+        await onboardingRepository.setOnboardingComplete(true);
+        if (mounted) {
+          context.go(AppRoutes.home);
+        }
       },
       backgroundColor: AppColors.redLight,
       foregroundColor: AppColors.white,

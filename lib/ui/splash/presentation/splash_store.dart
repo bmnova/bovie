@@ -60,7 +60,9 @@ abstract class _SplashStoreBase with Store {
       // Delay for splash visibility
       await Future.delayed(const Duration(seconds: 2));
 
-      _nextRoute = isComplete ? AppRoutes.home : AppRoutes.onboardingMovies;
+      // If onboarding is complete, go to paywall (user can skip or subscribe)
+      // If onboarding is not complete, go to onboarding flow
+      _nextRoute = isComplete ? AppRoutes.paywall : AppRoutes.onboardingMovies;
     } catch (e) {
       error = e.toString();
     } finally {

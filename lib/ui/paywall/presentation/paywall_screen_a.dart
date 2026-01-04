@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:bovie/core/widgets/widgets.dart';
 import 'package:bovie/core/utils/globals.dart';
 import 'package:bovie/app/theme/app_colors.dart';
@@ -7,6 +8,7 @@ import 'package:bovie/core/ab_testing/paywall_variant_constants.dart';
 import 'package:bovie/core/ab_testing/remote_variant_config.dart';
 import 'package:bovie/ui/paywall/presentation/widgets/paywall_screen_base.dart';
 import 'package:bovie/ui/paywall/presentation/widgets/subscription_plan_row.dart';
+import 'package:bovie/app/router/router.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 
@@ -29,8 +31,12 @@ class _PaywallScreenAState extends State<PaywallScreenA> {
           height: FigmaConstants.buttonHeightLarge.h(context),
           borderRadius: FigmaConstants.radius12,
           enableAnimation: isFreeTrialEnabled,
-          onPressed: () {
-            // Handle unlock action
+          onPressed: () async {
+            // Mark onboarding as complete and navigate to home
+            await onboardingRepository.setOnboardingComplete(true);
+            if (mounted) {
+              context.go(AppRoutes.home);
+            }
           },
           child: isFreeTrialEnabled
               ? Column(

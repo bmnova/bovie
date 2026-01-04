@@ -46,12 +46,15 @@ class _OnboardingGenresScreenState extends State<OnboardingGenresScreen> {
     );
     _store.fetchGenres();
 
+    // Note: Navigation to paywall is now handled directly in onContinue callback
+    // This reaction is kept for backwards compatibility but may not be needed
     _disposers.add(
       reaction(
         (_) => _store.onboardingFinished,
         (bool finished) {
           if (finished && mounted) {
-            context.go(AppRoutes.home);
+            // Navigation is handled in onContinue, but keep this as fallback
+            context.go(AppRoutes.paywall);
           }
         },
       ),
@@ -71,7 +74,12 @@ class _OnboardingGenresScreenState extends State<OnboardingGenresScreen> {
       bodyBuilder: (context, contentTop) => _buildGenreSelection(context),
       hasSelection: () => _store.selectedGenreIds.isNotEmpty,
       canContinue: () => _store.canContinue,
-      onContinue: () => _store.completeOnboarding(),
+      onContinue: () async {
+        await _store.completeOnboarding();
+        if (mounted) {
+          context.go(AppRoutes.paywall);
+        }
+      },
       selectedTitle: S.of(context).thankYou,
       welcomeTitle: S.of(context).welcome,
       welcomeSubtitle: S.of(context).chooseYour2FavoriteGenres,

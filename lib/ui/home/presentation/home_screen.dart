@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:go_router/go_router.dart';
 import 'package:bovie/ui/home/presentation/widgets/for_you_section.dart';
 import 'package:bovie/ui/home/presentation/widgets/category_header_section.dart';
 import 'package:bovie/ui/home/presentation/widgets/category_bar.dart';
 import 'package:bovie/ui/home/presentation/widgets/category_feed.dart';
 import 'package:bovie/app/theme/app_colors.dart';
 import 'package:bovie/app/di/di.dart';
+import 'package:bovie/core/utils/globals.dart';
+import 'package:bovie/app/router/router.dart';
+import 'package:bovie/app/config/app_config.dart';
 
 import '../../../core/utils/figma_constants.dart';
 import 'home_store.dart';
@@ -53,6 +57,33 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: AppColors.black,
       body: Stack(
         children: [
+          // Reset button (only in dev mode)
+          if (config.environment == AppEnvironment.dev)
+            Positioned(
+              top: MediaQuery.of(context).padding.top + FigmaConstants.spacing8.sh(context),
+              right: FigmaConstants.spacing16.sw(context),
+              child: SafeArea(
+                child: GestureDetector(
+                  onTap: () async {
+                    // Reset onboarding data
+                    await onboardingRepository.resetAllSelections();
+                    // Navigate back to splash to restart flow
+                    if (mounted) {
+                      context.go(AppRoutes.splash);
+                    }
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(FigmaConstants.spacing8.sw(context)),
+                  
+                    child: Icon(
+                      Icons.refresh,
+                      color: AppColors.white,
+                      size: FigmaConstants.iconSize24.w(context),
+                    ),
+                  ),
+                ),
+              ),
+            ),
           CustomScrollView(
             controller: _scrollController,
             slivers: [
