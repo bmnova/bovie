@@ -6,11 +6,19 @@ import 'package:bovie/core/domain/movies_repository.dart';
 
 class MoviesRepositoryImpl implements MoviesRepository {
   final TmdbApi _api;
+  
+  // Cache for first page of popular movies (loaded during splash)
+  List<Movie>? _cachedFirstPageMovies;
 
   MoviesRepositoryImpl(this._api);
 
   @override
   Future<Result<List<Movie>>> getPopularMovies(int page) async {
+    // Return cached first page if available
+    if (page == 1 && _cachedFirstPageMovies != null) {
+      return Success(_cachedFirstPageMovies!);
+    }
+    
     final result = await _api.getPopularMovies(page: page);
     
     if (result.isFailure) {
@@ -25,6 +33,12 @@ class MoviesRepositoryImpl implements MoviesRepository {
         posterPath: e.posterPath,
         releaseDate: e.releaseDate,
       )).toList();
+      
+      // Cache first page for subsequent calls
+      if (page == 1) {
+        _cachedFirstPageMovies = domainList;
+      }
+      
       return Success(domainList);
     } catch (e) {
       return Failure(AppError(type: AppErrorType.parsing, originalError: e));

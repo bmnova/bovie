@@ -58,32 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Stack(
         children: [
           // Reset button (only in dev mode)
-          if (config.environment == AppEnvironment.dev)
-            Positioned(
-              top: MediaQuery.of(context).padding.top + FigmaConstants.spacing8.sh(context),
-              right: FigmaConstants.spacing16.sw(context),
-              child: SafeArea(
-                child: GestureDetector(
-                  onTap: () async {
-                    // Reset onboarding data
-                    await onboardingRepository.resetAllSelections();
-                    // Navigate back to splash to restart flow
-                    if (mounted) {
-                      context.go(AppRoutes.splash);
-                    }
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(FigmaConstants.spacing8.sw(context)),
-                  
-                    child: Icon(
-                      Icons.refresh,
-                      color: AppColors.white,
-                      size: FigmaConstants.iconSize24.w(context),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+
           CustomScrollView(
             controller: _scrollController,
             slivers: [
@@ -175,6 +150,34 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
+          if (config.environment == AppEnvironment.dev)
+            Positioned(
+              top: MediaQuery.of(context).padding.top + FigmaConstants.spacing8.sh(context),
+              right: FigmaConstants.spacing16.sw(context),
+              child: GestureDetector(
+                onTap: () async {
+                  print("Resetting onboarding data");
+                  // Reset onboarding data in SharedPreferences
+                  await onboardingRepository.resetAllSelections();
+                  // Reset splash store state
+                  splashStore.reset();
+                  // Navigate back to splash to restart flow
+                  // Splash will detect onboarding is not complete and show onboarding screens
+                  if (mounted) {
+                    context.go(AppRoutes.splash);
+                  }
+                },
+                child: Container(
+                  padding: EdgeInsets.all(FigmaConstants.spacing8.sw(context)),
+
+                  child: Icon(
+                    Icons.refresh,
+                    color: AppColors.white,
+                    size: FigmaConstants.iconSize24.w(context),
+                  ),
+                ),
+              ),
+            ),
         ],
       ),
     );

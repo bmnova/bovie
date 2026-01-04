@@ -40,10 +40,13 @@ class _OnboardingGenresScreenState extends State<OnboardingGenresScreen> {
   @override
   void initState() {
     super.initState();
+    print('[OnboardingGenresScreen] initState() called');
     _store = OnboardingGenresStore(
       getGenres,
       onboardingRepository,
+      homeStore,
     );
+    print('[OnboardingGenresScreen] Store created, calling fetchGenres()...');
     _store.fetchGenres();
 
     // Note: Navigation to paywall is now handled directly in onContinue callback
@@ -111,30 +114,45 @@ class _OnboardingGenresScreenState extends State<OnboardingGenresScreen> {
   }
 
   Widget _buildGenreSelection(BuildContext context) => Observer(
-      builder: (_) => SingleChildScrollView(
-        padding: const EdgeInsets.only(
-          left: FigmaConstants.spacing16,
-          right: FigmaConstants.spacing16,
-          top: 0,
-        ),
-        child: Center(
-          child: Wrap(
-            spacing: _FigmaConstants.genreHorizontalSpacing,
-            runSpacing: _FigmaConstants.genreVerticalSpacing,
-            alignment: WrapAlignment.center,
-            children: _store.genres.map((genre) => Observer(
-                builder: (_) {
-                  final isSelected = _store.selectedGenreIds.contains(genre.id);
-                  return MovieGenreCard(
-                    genreName: genre.name,
-                    isSelected: isSelected,
-                    onTap: () => _store.toggleSelection(genre.id),
-                  );
-                },
-              )).toList(),
+      builder: (_) {
+        print('[OnboardingGenresScreen] _buildGenreSelection() - isLoading: ${_store.isLoading}, genres count: ${_store.genres.length}');
+        if (_store.genres.isNotEmpty) {
+          print('[OnboardingGenresScreen] First genre name: ${_store.genres.first.name}');
+        }
+        return SingleChildScrollView(
+          padding: const EdgeInsets.only(
+            left: FigmaConstants.spacing16,
+            right: FigmaConstants.spacing16,
+            top: 0,
           ),
-        ),
-      ),
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Wrap(
+                  spacing: _FigmaConstants.genreHorizontalSpacing,
+                  runSpacing: _FigmaConstants.genreVerticalSpacing,
+                  alignment: WrapAlignment.center,
+                  children: _store.genres.map((genre) => Observer(
+                      builder: (_) {
+                        final isSelected = _store.selectedGenreIds.contains(genre.id);
+                        return MovieGenreCard(
+                          genreName: genre.name,
+                          isSelected: isSelected,
+                          onTap: () => _store.toggleSelection(genre.id),
+                        );
+                      },
+                    )).toList(),
+                ),
+                // Bottom padding: 1 chip height + vertical spacing for better scrollability
+                SizedBox(
+                  height: (FigmaConstants.genreCardSize + _FigmaConstants.genreVerticalSpacing).h(context),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
 
   /// Top gradient shadow: linear-gradient(176.7deg, #0F0E0E 2.73%, rgba(15, 14, 14, 0) 97.28%)

@@ -86,11 +86,16 @@ class OnboardingSelectionScreenBase extends StatelessWidget {
       body: SafeArea(
         child: Observer(
           builder: (_) {
-            if (isLoading() && !hasData()) {
+            final loading = isLoading();
+            final hasDataValue = hasData();
+            print('[OnboardingSelectionScreenBase] isLoading: $loading, hasData: $hasDataValue');
+            if (loading && !hasDataValue) {
+              print('[OnboardingSelectionScreenBase] Showing loading indicator');
               return const Center(
                 child: CircularProgressIndicator(color: AppColors.white),
               );
             }
+            print('[OnboardingSelectionScreenBase] Showing content (not loading)');
 
             final safeAreaTop = MediaQuery.of(context).padding.top;
             final headerTop = safeAreaTop + _OnboardingSelectionConstants.headerTopPadding;

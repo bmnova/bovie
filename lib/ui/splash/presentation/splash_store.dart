@@ -1,5 +1,7 @@
 import 'package:mobx/mobx.dart';
 import 'package:bovie/core/domain/get_genres_usecase.dart';
+import 'package:bovie/core/domain/get_popular_movies_usecase.dart';
+import 'package:bovie/core/result/result.dart';
 import 'package:bovie/app/router/router.dart';
 import 'package:bovie/ui/paywall/presentation/paywall_store.dart';
 
@@ -12,12 +14,14 @@ class SplashStore = _SplashStoreBase with _$SplashStore;
 
 abstract class _SplashStoreBase with Store {
   final GetGenres _getGenres;
+  final GetPopularMovies _getPopularMovies;
   final PaywallStore _paywallStore;
   final OnboardingRepository _onboardingRepository;
   final HomeStore _homeStore;
 
   _SplashStoreBase(
     this._getGenres,
+    this._getPopularMovies,
     this._paywallStore,
     this._onboardingRepository,
     this._homeStore,
@@ -35,8 +39,13 @@ abstract class _SplashStoreBase with Store {
       isLoading = true;
       error = null;
 
-      // 1. Prefetch Genres
-      final genresResult = await _getGenres();
+      // 1. Prefetch Genres and first page of popular movies (for onboarding)
+      final results = await Future.wait([
+        _getGenres(),
+        _getPopularMovies(1), // Prefetch first page for onboarding
+      ]);
+      
+      final genresResult = results[0] as Result<List>;
       if (genresResult.isFailure) {
         error = 'Failed to load initial data';
         return;
@@ -47,7 +56,7 @@ abstract class _SplashStoreBase with Store {
 
       // 3. Check Onboarding
       final isComplete = await _onboardingRepository.isOnboardingComplete();
-      
+      print("isComplete: $isComplete");
       // 4. Preload Home Screen Data (if onboarding is complete)
       if (isComplete) {
         // Load "For You" movies and categories in parallel
@@ -75,4 +84,12 @@ abstract class _SplashStoreBase with Store {
 
   @computed
   String? get nextRoute => _nextRoute;
+
+  /// Reset store state (useful when restarting the app flow)
+  @action
+  void reset() {
+    _nextRoute = null;
+    isLoading = true;
+    error = null;
+  }
 }

@@ -63,8 +63,8 @@ class PaywallScreenBase extends StatelessWidget {
         child: GestureDetector(
           onTap: () => context.pop(),
           child: BovieAssets.icons.close.svg(
-            width: FigmaConstants.iconSize24.w(context),
-            height: FigmaConstants.iconSize24.h(context),
+            width: FigmaConstants.iconSize12.w(context),
+            height: FigmaConstants.iconSize12.h(context),
           ),
         ),
       ),

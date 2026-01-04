@@ -55,7 +55,28 @@ class CircularImageItem extends StatelessWidget {
       ),
     );
 
-  Widget _buildPlaceholder(BuildContext context) => Container(
+  Widget _buildPlaceholder(BuildContext context) {
+    // If placeholderText is provided, show text instead of loading indicator
+    if (placeholderText != null && placeholderText!.isNotEmpty) {
+      return Container(
+        color: AppColors.white, // Chip background color
+        alignment: Alignment.center,
+        child: Text(
+          placeholderText!,
+          style: context.textTheme.bodyMedium?.copyWith(
+            color: AppColors.black, // Text color
+            fontSize: FigmaConstants.fontSize20.f(context), // Font size 20
+            fontWeight: FontWeight.w600,
+          ),
+          textAlign: TextAlign.center,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+        ),
+      );
+    }
+    
+    // Show loading indicator only if no placeholder text
+    return Container(
       color: context.colorScheme.surfaceContainerHighest,
       child: Padding(
         padding: EdgeInsets.all(FigmaConstants.spacing32.sw(context)),
@@ -65,5 +86,6 @@ class CircularImageItem extends StatelessWidget {
         ),
       ),
     );
+  }
 }
 

@@ -12,6 +12,7 @@ import 'package:bovie/core/domain/get_genres_usecase.dart';
 import 'package:bovie/ui/onboarding/domain/onboarding_repository.dart';
 import 'package:bovie/ui/splash/presentation/splash_store.dart';
 import 'package:bovie/ui/paywall/presentation/paywall_store.dart';
+import 'package:bovie/ui/home/presentation/home_store.dart';
 import 'package:flutter/material.dart';
 
 /// Global context provider
@@ -36,6 +37,7 @@ GetGenres get getGenres => getIt<GetGenres>();
 /// Factories
 SplashStore get splashStore => getIt<SplashStore>();
 PaywallStore get paywallStore => getIt<PaywallStore>();
+HomeStore get homeStore => getIt<HomeStore>();
 
 /// Global accessors for theme and localizations
 ThemeData get theme => Theme.of(currentContext);

@@ -31,6 +31,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   late final SplashStore _store;
   final _disposers = <ReactionDisposer>[];
+  bool _hasInitialized = false;
 
   @override
   void initState() {
@@ -50,8 +51,16 @@ class _SplashScreenState extends State<SplashScreen> {
         },
       ),
     );
+  }
 
-    _store.init();
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Initialize on first build or when returning to splash
+    if (!_hasInitialized || _store.nextRoute == null) {
+      _hasInitialized = true;
+      _store.init();
+    }
   }
 
   @override

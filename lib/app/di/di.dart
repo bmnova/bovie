@@ -59,7 +59,7 @@ void setupDI(AppConfig config, SharedPreferences prefs) {
   getIt.registerLazySingleton<HomeStore>(() => HomeStore(getIt<MoviesRepository>(), getIt<OnboardingRepository>(), getIt<GetGenres>()));
 
   // Splash
-  getIt.registerFactory<SplashStore>(() => SplashStore(getIt<GetGenres>(), getIt<PaywallStore>(), getIt<OnboardingRepository>(), getIt<HomeStore>()));
+  getIt.registerFactory<SplashStore>(() => SplashStore(getIt<GetGenres>(), getIt<GetPopularMovies>(), getIt<PaywallStore>(), getIt<OnboardingRepository>(), getIt<HomeStore>()));
 
   // Paywall
   getIt.registerLazySingleton<UserIdRepository>(() => UserIdRepositoryImpl(getIt<SharedPreferences>()));

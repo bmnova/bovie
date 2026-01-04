@@ -39,6 +39,7 @@ class FigmaConstants {
   static const double radius72 = 72.0; // For circular cards
 
   // Icon sizes
+  static const double iconSize12 = 12.0;
   static const double iconSize14 = 14.0;
   static const double iconSize16 = 16.0;
   static const double iconSize24 = 24.0;
@@ -51,6 +52,7 @@ class FigmaConstants {
   static const double fontSize12 = 12.0;
   static const double fontSize14 = 14.0;
   static const double fontSize16 = 16.0;
+  static const double fontSize20 = 20.0;
   static const double fontSize24 = 24.0;
 
   // Border width
