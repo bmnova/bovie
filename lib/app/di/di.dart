@@ -17,7 +17,7 @@ import '../../ui/splash/presentation/splash_store.dart';
 import '../../ui/paywall/presentation/paywall_store.dart';
 import '../../ui/user/domain/user_id_repository.dart';
 import '../../ui/user/data/user_id_repository_impl.dart';
-import '../../ui/home/domain/home_store.dart';
+import '../../ui/home/presentation/home_store.dart';
 
 final getIt = GetIt.instance;
 

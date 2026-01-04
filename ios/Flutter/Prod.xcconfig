@@ -1,0 +1,7 @@
+#include "Generated.xcconfig"
+#include "Release.xcconfig"
+
+FLUTTER_TARGET=lib/main_prod.dart
+APP_DISPLAY_NAME=Bovie
+PRODUCT_BUNDLE_IDENTIFIER=com.busramercan.bovie.bovie
+

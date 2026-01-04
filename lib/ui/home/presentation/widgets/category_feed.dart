@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:bovie/ui/home/presentation/widgets/category_section.dart';
-import 'package:bovie/ui/home/domain/home_store.dart';
+import 'package:bovie/ui/home/presentation/home_store.dart';
 import 'package:mobx/mobx.dart';
 import 'home_layout_constants.dart';
 

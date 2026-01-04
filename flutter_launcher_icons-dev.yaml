@@ -1,0 +1,6 @@
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/app_icon_dev.png"
+  # You can add flavor-specific icons here if you had the assets
+  # For this demo, we'll use same image but different configs for demonstration

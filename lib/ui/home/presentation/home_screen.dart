@@ -7,7 +7,7 @@ import 'package:bovie/ui/home/presentation/widgets/category_header_section.dart'
 import 'package:bovie/ui/home/presentation/widgets/category_bar.dart';
 import 'package:bovie/ui/home/presentation/widgets/category_feed.dart';
 import 'package:bovie/app/theme/app_colors.dart';
-import 'package:bovie/ui/home/domain/home_store.dart';
+import 'package:bovie/ui/home/presentation/home_store.dart';
 import 'package:bovie/app/di/di.dart';
 import 'package:bovie/app/router/router.dart';
 

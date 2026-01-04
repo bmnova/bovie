@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:bovie/core/widgets/widgets.dart';
-import 'package:bovie/ui/home/domain/home_store.dart';
+import 'package:bovie/ui/home/presentation/home_store.dart';
 import 'package:bovie/core/utils/figma_constants.dart';
 import 'package:bovie/core/domain/movie.dart';
 import 'package:bovie/core/domain/genre.dart';

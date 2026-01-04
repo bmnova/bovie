@@ -15,7 +15,7 @@ import 'package:bovie/core/utils/globals.dart';
 
 import 'core/utils/figma_constants.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
   // Set window size for macOS
@@ -30,15 +30,18 @@ void main() async {
   final prefs = await SharedPreferences.getInstance();
 
   final config = AppConfig(
-    appName: dotenv.env['APP_NAME'] ?? 'Bovie',
+    appName: '${dotenv.env['APP_NAME'] ?? 'Bovie'} (Dev)',
     environment: AppEnvironment.dev,
     baseUrl: dotenv.env['TMDB_BASE_URL'] ?? 'https://api.themoviedb.org/3',
     tmdbToken: dotenv.env['TMDB_TOKEN'] ?? '',
     logEnabled: true,
   );
 
-  setupDI(config, prefs);
+  bootstrap(config, prefs);
+}
 
+void bootstrap(AppConfig config, SharedPreferences prefs) {
+  setupDI(config, prefs);
   runApp(const MyApp());
 }
 
