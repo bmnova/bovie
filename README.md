@@ -210,6 +210,33 @@ For detailed architecture documentation, see [ARCHITECTURE.md](ARCHITECTURE.md).
 - Reduced API calls
 - Better user experience
 
+#### 9. Challenge 2: API v2 Breaking Change (Architecture Test) ✅
+
+**Objective**: Demonstrate Clean Architecture resilience by adapting to API structure changes without breaking existing functionality.
+
+**Implementation**:
+- **API v2 Simulation**: Created transformation layer in `TmdbApi` that converts v1 responses to v2 format
+  - `id` → `film_id`
+  - `title` → `film_title`
+  - `poster_path` → `poster_image`
+  - `release_date` → `release`
+- **DTO Updates**: Updated `MovieDto` with new `@JsonKey` annotations for v2 field names
+  - **Key Point**: Property names remained unchanged (`id`, `title`, `posterPath`, `releaseDate`)
+  - This ensures mapper code doesn't need changes
+- **Repository Layer**: `MoviesRepositoryImpl` mapper code **remained completely unchanged**
+  - Still uses `e.id`, `e.title`, `e.posterPath`, `e.releaseDate`
+  - Works because DTO property names stayed the same
+- **Domain Layer**: No changes required ✅
+- **Presentation Layer**: No changes required ✅
+
+**Result**: 
+- Only Data layer (DTO + API transformation) changed
+- Domain and Presentation layers untouched
+- Zero breaking changes to business logic or UI
+- Demonstrates true Clean Architecture isolation
+
+**Git Commit**: `refactor: adapt to api v2 structure`
+
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -361,17 +388,18 @@ Based on the original roadmap, the following items are planned for future implem
 
 #### Phase 5: Polishing & Bonus
 - [x] Flavor-specific app icons
-- [ ] **Challenge 2: API v2 Breaking Change Simulation**
-  - Create mock scenario with changed JSON structure
-  - Refactor Data/Mapper layers only
-  - Prove architecture isolation
-  - Git commit: `refactor: adapt to api v2 structure`
+- [x] **Challenge 2: API v2 Breaking Change Simulation** ✅
+  - ✅ Created mock scenario with changed JSON structure (film_id, film_title, poster_image, release)
+  - ✅ Refactored Data layer only (DTO @JsonKey annotations and API transformation)
+  - ✅ Proved architecture isolation (Domain and Presentation layers unchanged)
+  - ✅ Mapper code remained unchanged (property names stayed the same)
+  - ✅ Git commit: `refactor: adapt to api v2 structure`
 - [x] Documentation
 - [x] Final verification
 
 ### Future Enhancements
 
-- [ ] Implement Challenge 2 (API v2 breaking change scenario)
+- [x] Implement Challenge 2 (API v2 breaking change scenario) ✅
 - [ ] Add unit tests for stores and use cases
 - [ ] Add widget tests for critical UI components
 - [ ] Implement remote configuration for A/B testing
