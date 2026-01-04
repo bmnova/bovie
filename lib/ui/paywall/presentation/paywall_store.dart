@@ -30,6 +30,9 @@ abstract class _PaywallStoreBase with Store {
   @action
   void setFreeTrialEnabled(bool value) {
     isFreeTrialEnabled = value;
+    if (value) {
+      selectPlan(SubscriptionPlan.yearly);
+    }
   }
 
   @action
