@@ -16,11 +16,7 @@ import '../../../generated/assets.gen.dart';
 class _FigmaConstants {
   _FigmaConstants._();
 
-  // Background image positioning
-  static const double paywallImageWidth = 594.0;
-  static const double paywallImageHeight = 1063.0;
-  static const double paywallImageTop = -250.0;
-  static const double paywallImageLeft = -109.0;
+  // Background image: full screen fit, no padding
 
   // Gradient overlay
   static const double gradientOpacity = 0.76;
@@ -43,23 +39,15 @@ class PaywallScreenB extends StatefulWidget {
 class _PaywallScreenBState extends State<PaywallScreenB> {
   @override
   Widget build(BuildContext context) {
-    // Background image with gradient overlay
+    // Background image with gradient overlay (no padding, full screen fit)
     final backgroundImage = Stack(
       children: [
-        // Background image
-        Positioned(
-          top: _FigmaConstants.paywallImageTop.h(context),
-          left: _FigmaConstants.paywallImageLeft.w(context),
-          width: _FigmaConstants.paywallImageWidth.w(context),
-          height: _FigmaConstants.paywallImageHeight.h(context),
+        // Background image - full screen, no padding
+        Positioned.fill(
           child: BovieAssets.images.paywallImage.image(
             fit: BoxFit.cover,
-            width: _FigmaConstants.paywallImageWidth.w(context),
-            height: _FigmaConstants.paywallImageHeight.h(context),
             errorBuilder: (context, error, stackTrace) => Container(
               color: AppColors.black,
-              width: _FigmaConstants.paywallImageWidth.w(context),
-              height: _FigmaConstants.paywallImageHeight.h(context),
             ),
           ),
         ),
