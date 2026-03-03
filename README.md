@@ -26,7 +26,7 @@ Bovie is a movie discovery app that provides personalized movie recommendations 
 - **MobX** for state management (no setState for business logic)
 - **A/B Testing** infrastructure for paywall variants
 - **Build Flavors** for Dev, Staging, and Production environments
-- **Responsive Design** with pixel-perfect Figma implementation
+- **Responsive Design** with pixel-perfect implementation
 - **High-fidelity Animations** for paywall interactions
 
 ## 🏗️ Architecture
@@ -164,7 +164,7 @@ For detailed architecture documentation, see [ARCHITECTURE.md](ARCHITECTURE.md).
 
 #### 6. Responsive Layout System
 
-**Figma-Based Scaling**
+**Responsive Scaling**
 - Reference design: 375 × 812 (iPhone X/11/12/13/14)
 - Responsive extensions for all dimensions:
   - `.w(context)` - Width scaling (based on screen width / 375)
@@ -244,7 +244,7 @@ For detailed architecture documentation, see [ARCHITECTURE.md](ARCHITECTURE.md).
 - Flutter SDK (latest stable version)
 - Dart SDK
 - Android Studio / Xcode (for platform-specific builds)
-- TMDB API Bearer Token (provided in assessment)
+- TMDB API Bearer Token (see `.env.example`)
 
 ### Installation
 
@@ -254,12 +254,18 @@ git clone <repository-url>
 cd bovie
 ```
 
-2. Install dependencies:
+2. Set up environment variables:
+```bash
+cp .env.example .env
+# Edit .env and add your TMDB Bearer Token
+```
+
+3. Install dependencies:
 ```bash
 flutter pub get
 ```
 
-3. Generate code (MobX, Freezed, etc.):
+4. Generate code (MobX, Freezed, etc.):
 ```bash
 flutter pub run build_runner build --delete-conflicting-outputs
 ```
@@ -319,7 +325,7 @@ lib/
 │   ├── network/          # API client (TMDB)
 │   ├── repository/       # Repository implementations
 │   ├── result/           # Result type for error handling
-│   ├── utils/            # Utilities (Figma constants, globals)
+│   ├── utils/            # Utilities (design constants, globals)
 │   └── widgets/          # Reusable UI widgets
 │
 └── ui/                    # Feature-based UI modules
@@ -412,9 +418,9 @@ Based on the original roadmap, the following items are planned for future implem
 
 ## 🎨 Design System
 
-### Figma Reference
+### Design Reference
 - Design size: 375 × 812 (iPhone X/11/12/13/14)
-- All spacing, sizes, and typography based on Figma specs
+- All spacing, sizes, and typography based on the original design specs
 - Responsive scaling for different screen sizes
 
 ### Colors
@@ -447,12 +453,16 @@ The app uses TMDB (The Movie Database) API for movie data.
 - [BUILD_ENVIRONMENTS.md](BUILD_ENVIRONMENTS.md) - Build flavors and CI/CD setup
 - [ASSET_OPTIMIZATION_GUIDE.md](ASSET_OPTIMIZATION_GUIDE.md) - Asset optimization guidelines
 - [ios_setup_flavors.md](ios_setup_flavors.md) - iOS flavor setup instructions
-- [ASSESMENT.md](ASSESMENT.md) - Original assessment requirements
+- [ASSESMENT.md](ASSESMENT.md) - Assessment requirements and bonus challenges
 
+## 📦 Related Packages
+
+- **Carousel Package** (pub.dev) — `YOUR_CAROUSEL_PACKAGE_LINK_HERE`
+  A Flutter carousel widget package published separately during this project.
 
 ## 📄 License
 
-This project is part of a mobile developer assessment.
+This project was built as a mobile developer job assessment, demonstrating Clean Architecture, MobX state management, and A/B testing in Flutter.
 
 ---
 
