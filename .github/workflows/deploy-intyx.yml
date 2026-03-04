@@ -34,13 +34,13 @@ jobs:
           echo "VERCEL_PROJECT_ID=$(echo '${{ secrets.VERCEL_PROJECT_ID_INTYX }}' | tr -d '[:space:]')" >> $GITHUB_ENV
 
       - name: Pull Vercel project settings
-        working-directory: websites
+        working-directory: websites/apps/intyx
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Build project
-        working-directory: websites
+        working-directory: websites/apps/intyx
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy to Vercel
-        working-directory: websites
+        working-directory: websites/apps/intyx
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
