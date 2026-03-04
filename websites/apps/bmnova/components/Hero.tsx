@@ -108,16 +108,14 @@ export function Hero() {
         {/* Stats strip */}
         <motion.div
           variants={fadeInUp}
-          className="mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs"
+          className="mt-12 flex items-center justify-center divide-x divide-muted/20 text-xs"
         >
-          <span className="flex items-center gap-1.5">
+          <span className="flex items-center gap-1.5 px-5">
             <span className="font-bold text-primary">6+</span>
             <span className="text-muted">products shipped</span>
           </span>
-          <span className="select-none text-muted/30">·</span>
-          <span className="font-medium text-muted">Flutter · AI · Next.js</span>
-          <span className="select-none text-muted/30">·</span>
-          <span className="flex items-center gap-1.5">
+          <span className="px-5 font-medium text-muted">Flutter · AI · Next.js</span>
+          <span className="flex items-center gap-1.5 px-5">
             <span className="font-bold text-primary">indie</span>
             <span className="text-muted">team</span>
           </span>
