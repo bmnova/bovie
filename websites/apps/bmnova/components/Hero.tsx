@@ -61,11 +61,12 @@ export function Hero() {
         initial="hidden"
         animate="visible"
       >
-        <motion.div variants={fadeInUp}>
-          <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accent">
-            AI · Mobile · SaaS
-          </span>
-        </motion.div>
+        <motion.p
+          variants={fadeInUp}
+          className="mb-6 text-sm font-medium text-muted"
+        >
+          Istanbul, Turkey &mdash; indie studio
+        </motion.p>
 
         <motion.h1
           variants={blurIn}
@@ -111,13 +112,13 @@ export function Hero() {
           className="mt-12 flex items-center justify-center divide-x divide-muted/20 text-xs"
         >
           <span className="flex items-center gap-1.5 px-5">
-            <span className="font-bold text-primary">6+</span>
+            <span className="font-bold text-primary">6</span>
             <span className="text-muted">products shipped</span>
           </span>
-          <span className="px-5 font-medium text-muted">Flutter · AI · Next.js</span>
+          <span className="px-5 font-medium text-muted">Flutter · Next.js · AI</span>
           <span className="flex items-center gap-1.5 px-5">
-            <span className="font-bold text-primary">indie</span>
-            <span className="text-muted">team</span>
+            <span className="font-bold text-primary">2</span>
+            <span className="text-muted">founders</span>
           </span>
         </motion.div>
       </motion.div>

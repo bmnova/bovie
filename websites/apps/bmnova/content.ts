@@ -9,8 +9,8 @@ export const nav: NavLink[] = [
 ];
 
 export const hero = {
-  tagline: "Building user-friendly AI apps,\nmobile & SaaS products.",
-  sub: "We turn complex ideas into clean, delightful software — from AI-powered platforms to cross-platform mobile apps.",
+  tagline: "We ship products.\nNot just prototypes.",
+  sub: "We're Bilal and Nova — a two-person studio based in Istanbul. Six products shipped, more in the works. We handle everything ourselves: product, code, design.",
   cta: { label: "See our work", href: "#projects" },
   ctaSecondary: { label: "Get in touch", href: "#contact" },
 };
@@ -18,24 +18,13 @@ export const hero = {
 export const projects: Project[] = projectsData;
 
 export const about = {
-  heading: "We build software people love.",
-  body: "BM Nova is a small, focused team obsessed with user experience and AI. We combine deep technical expertise with a designer's eye to ship products that feel as good as they work.",
-  values: [
-    {
-      icon: "✦",
-      title: "User-First",
-      description: "Every decision starts with the end user in mind.",
-    },
-    {
-      icon: "⬡",
-      title: "AI-Native",
-      description: "We embed intelligence where it adds real value.",
-    },
-    {
-      icon: "◈",
-      title: "Craftsmanship",
-      description: "Clean code, thoughtful design, zero shortcuts.",
-    },
+  heading: "Two people, no VC, six products.",
+  body: "We founded BM Nova in 2023. Since then we've been building and shipping our own software — AI tools, Flutter apps, SaaS platforms. We do everything ourselves: product decisions, code, design, support.",
+  stack: [
+    { label: "Mobile", items: "Flutter · Dart · Expo" },
+    { label: "Web", items: "Next.js · Tailwind · TypeScript" },
+    { label: "Backend", items: "Supabase · FastAPI · OpenAI" },
+    { label: "Design", items: "Figma · Framer" },
   ],
   team: [
     { name: "Bilal M.", role: "Co-founder & Engineering", initials: "BM" },
@@ -44,8 +33,8 @@ export const about = {
 };
 
 export const contact = {
-  heading: "Let's build something together.",
-  sub: "Have an idea? We'd love to hear it.",
+  heading: "Got a project in mind?",
+  sub: "We have capacity for 1–2 new projects. Reach out and we'll get back within 24 hours.",
   email: "hello@bmnova.com",
   links: [
     { label: "GitHub", href: "https://github.com/bmnova" },

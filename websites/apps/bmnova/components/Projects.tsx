@@ -37,9 +37,13 @@ export function Projects() {
             variants={staggerContainerFast}
             className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
           >
-            {projects.map((project) => (
-              <motion.div key={project.title} variants={fadeInUp}>
-                <ProjectCard project={project} />
+            {projects.map((project, i) => (
+              <motion.div
+                key={project.title}
+                variants={fadeInUp}
+                className={i === 0 ? "md:col-span-2 lg:col-span-2" : ""}
+              >
+                <ProjectCard project={project} featured={i === 0} />
               </motion.div>
             ))}
           </motion.div>
@@ -51,6 +55,7 @@ export function Projects() {
 
 function ProjectCard({
   project,
+  featured = false,
 }: {
   project: {
     title: string;
@@ -60,6 +65,7 @@ function ProjectCard({
     color?: string;
     image?: string;
   };
+  featured?: boolean;
 }) {
   const inner = (
     <motion.div
@@ -71,13 +77,13 @@ function ProjectCard({
         <img
           src={project.image}
           alt={project.title}
-          className="h-36 w-full object-cover"
+          className={`w-full object-cover ${featured ? "h-52" : "h-36"}`}
         />
       ) : (
         <Thumbnail
           color={project.color}
           label={project.title}
-          className="h-36 w-full"
+          className={`w-full ${featured ? "h-52" : "h-36"}`}
         />
       )}
 
@@ -92,7 +98,9 @@ function ProjectCard({
             </span>
           ))}
         </div>
-        <h3 className="mb-2 text-lg font-bold text-primary transition-colors group-hover:text-accent">
+        <h3
+          className={`mb-2 font-bold text-primary transition-colors group-hover:text-accent ${featured ? "text-xl" : "text-lg"}`}
+        >
           {project.title}
         </h3>
         <p className="flex-1 text-sm leading-relaxed text-muted">
