@@ -12,6 +12,8 @@
     "@websites/shared": "workspace:*",
     "framer-motion": "^11.18.2",
     "geist": "^1.7.0",
+    "gray-matter": "^4.0.3",
+    "marked": "^17.0.3",
     "next": "^14.2.29",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
