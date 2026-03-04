@@ -34,13 +34,10 @@ jobs:
           echo "VERCEL_PROJECT_ID=$(echo '${{ secrets.VERCEL_PROJECT_ID_BMNOVA }}' | tr -d '[:space:]')" >> $GITHUB_ENV
 
       - name: Pull Vercel project settings
-        working-directory: websites/apps/bmnova
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Build project
-        working-directory: websites/apps/bmnova
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy to Vercel
-        working-directory: websites/apps/bmnova
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
