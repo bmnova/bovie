@@ -1,5 +1,5 @@
 {
-  "installCommand": "cd ../../.. && pnpm install",
-  "buildCommand": "cd ../../.. && pnpm turbo build --filter=bmnova",
+  "installCommand": "cd ../.. && pnpm install",
+  "buildCommand": "cd ../.. && pnpm turbo build --filter=bmnova",
   "outputDirectory": ".next"
 }
