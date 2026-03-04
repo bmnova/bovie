@@ -63,7 +63,7 @@ function ProjectCard({
 }) {
   const inner = (
     <motion.div
-      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white transition-all duration-300 hover:shadow-xl hover:shadow-accent/8"
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:border-accent/20 hover:shadow-xl"
       whileHover={{ y: -4 }}
     >
       {project.image ? (
@@ -86,7 +86,7 @@ function ProjectCard({
           {project.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full bg-accent/8 px-2.5 py-0.5 text-xs font-semibold text-accent"
+              className="rounded-full bg-accent/10 px-2.5 py-0.5 text-xs font-semibold text-accent"
             >
               {tag}
             </span>
