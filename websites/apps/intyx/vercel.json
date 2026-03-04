@@ -1,1 +1,5 @@
-{}
+{
+  "installCommand": "cd ../../.. && pnpm install",
+  "buildCommand": "cd ../../.. && pnpm turbo build --filter=intyx",
+  "outputDirectory": ".next"
+}
