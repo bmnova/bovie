@@ -1,19 +1,57 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { fadeInUp, staggerContainer } from "@websites/shared/animations";
+import { blurIn, fadeInUp, staggerContainer } from "@websites/shared/animations";
+import { Squiggle } from "@websites/shared/assets";
 import { hero } from "@/content";
 
 export function Hero() {
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-hero-gradient px-6">
-      {/* Background grid */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.03]"
+      {/* Organic animated blob 1 */}
+      <motion.div
+        className="pointer-events-none absolute -left-40 top-1/4 h-[520px] w-[520px]"
         style={{
-          backgroundImage:
-            "linear-gradient(#0f172a 1px, transparent 1px), linear-gradient(90deg, #0f172a 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
+          background: "radial-gradient(ellipse at center, #6366F118, transparent 70%)",
+          borderRadius: "60% 40% 70% 30% / 50% 60% 40% 50%",
+          filter: "blur(70px)",
+        }}
+        animate={{
+          borderRadius: [
+            "60% 40% 70% 30% / 50% 60% 40% 50%",
+            "40% 60% 30% 70% / 60% 40% 60% 40%",
+            "55% 45% 65% 35% / 45% 55% 45% 55%",
+            "60% 40% 70% 30% / 50% 60% 40% 50%",
+          ],
+        }}
+        transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* Organic animated blob 2 */}
+      <motion.div
+        className="pointer-events-none absolute -right-32 bottom-1/4 h-[400px] w-[400px]"
+        style={{
+          background: "radial-gradient(ellipse at center, #818CF812, transparent 70%)",
+          borderRadius: "40% 60% 30% 70% / 60% 40% 60% 40%",
+          filter: "blur(55px)",
+        }}
+        animate={{
+          borderRadius: [
+            "40% 60% 30% 70% / 60% 40% 60% 40%",
+            "60% 40% 70% 30% / 50% 60% 40% 50%",
+            "35% 65% 55% 45% / 50% 35% 65% 50%",
+            "40% 60% 30% 70% / 60% 40% 60% 40%",
+          ],
+        }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+      />
+
+      {/* Dot grid */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.04]"
+        style={{
+          backgroundImage: "radial-gradient(circle, #0f172a 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
         }}
       />
 
@@ -30,12 +68,17 @@ export function Hero() {
         </motion.div>
 
         <motion.h1
-          variants={fadeInUp}
-          className="mb-6 text-5xl font-bold leading-[1.1] tracking-tight text-primary md:text-7xl"
+          variants={blurIn}
+          className="mb-4 text-5xl font-bold leading-[1.1] tracking-tight text-primary md:text-7xl"
           style={{ whiteSpace: "pre-line" }}
         >
           {hero.tagline}
         </motion.h1>
+
+        {/* Hand-drawn accent underline */}
+        <motion.div variants={fadeInUp} className="mb-8 flex justify-center">
+          <Squiggle className="w-48 opacity-40" color="#6366F1" />
+        </motion.div>
 
         <motion.p
           variants={fadeInUp}
@@ -61,6 +104,24 @@ export function Hero() {
             {hero.ctaSecondary.label}
           </a>
         </motion.div>
+
+        {/* Stats strip */}
+        <motion.div
+          variants={fadeInUp}
+          className="mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs"
+        >
+          <span className="flex items-center gap-1.5">
+            <span className="font-bold text-primary">6+</span>
+            <span className="text-muted">products shipped</span>
+          </span>
+          <span className="select-none text-muted/30">·</span>
+          <span className="font-medium text-muted">Flutter · AI · Next.js</span>
+          <span className="select-none text-muted/30">·</span>
+          <span className="flex items-center gap-1.5">
+            <span className="font-bold text-primary">indie</span>
+            <span className="text-muted">team</span>
+          </span>
+        </motion.div>
       </motion.div>
 
       {/* Scroll indicator */}
@@ -71,7 +132,7 @@ export function Hero() {
         transition={{ delay: 1.2 }}
       >
         <motion.div
-          className="h-10 w-6 rounded-full border-2 border-muted/30 flex items-start justify-center pt-2"
+          className="flex h-10 w-6 items-start justify-center rounded-full border-2 border-muted/30 pt-2"
           animate={{ opacity: [0.4, 1, 0.4] }}
           transition={{ duration: 2, repeat: Infinity }}
         >

@@ -1,4 +1,5 @@
 import type { Project, TeamMember, NavLink } from "@websites/shared/types";
+import projectsData from "@/config/projects.json";
 
 export const nav: NavLink[] = [
   { label: "Projects", href: "#projects" },
@@ -14,34 +15,7 @@ export const hero = {
   ctaSecondary: { label: "Get in touch", href: "#contact" },
 };
 
-export const projects: Project[] = [
-  {
-    title: "intyx.ai",
-    description:
-      "Upload your data and let AI do the heavy lifting. Instant insights, beautiful charts, and smart recommendations — built for content creators and analysts.",
-    tags: ["AI", "SaaS", "Web App"],
-    href: "https://intyx.ai",
-  },
-  {
-    title: "dynamic.intyx.ai",
-    description:
-      "A Flutter package that lets AI agents control your UI at runtime. Powered by MCP protocol — ship dynamic, agent-driven widget experiences.",
-    tags: ["Flutter", "AI", "Open Source"],
-    href: "https://dynamic.intyx.ai",
-  },
-  {
-    title: "Bovie",
-    description:
-      "A modern movie discovery app built with Flutter. Personalized recommendations, genre browsing, and a beautiful adaptive UI.",
-    tags: ["Flutter", "Mobile", "TMDB"],
-  },
-  {
-    title: "More Coming Soon",
-    description:
-      "We're constantly building. New products and tools are in the pipeline — stay tuned.",
-    tags: ["In Progress"],
-  },
-];
+export const projects: Project[] = projectsData;
 
 export const about = {
   heading: "We build software people love.",

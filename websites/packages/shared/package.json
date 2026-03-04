@@ -5,6 +5,7 @@
   "exports": {
     "./components": "./components/index.tsx",
     "./animations": "./animations/variants.ts",
+    "./assets": "./assets/index.ts",
     "./fonts": "./fonts/index.ts",
     "./types": "./types/index.ts"
   },

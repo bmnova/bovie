@@ -1,7 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { fadeInUp, staggerContainer, scaleIn } from "@websites/shared/animations";
+import {
+  blurIn,
+  fadeInUp,
+  staggerContainer,
+  staggerContainerFast,
+} from "@websites/shared/animations";
+import { Thumbnail } from "@websites/shared/assets";
 import { projects } from "@/content";
 
 export function Projects() {
@@ -21,19 +27,22 @@ export function Projects() {
             Our Work
           </motion.p>
           <motion.h2
-            variants={fadeInUp}
+            variants={blurIn}
             className="mb-16 text-4xl font-bold tracking-tight text-primary md:text-5xl"
           >
             Products & Projects
           </motion.h2>
 
-          <div className="grid gap-6 md:grid-cols-2">
+          <motion.div
+            variants={staggerContainerFast}
+            className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+          >
             {projects.map((project) => (
-              <motion.div key={project.title} variants={scaleIn}>
+              <motion.div key={project.title} variants={fadeInUp}>
                 <ProjectCard project={project} />
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
@@ -43,39 +52,73 @@ export function Projects() {
 function ProjectCard({
   project,
 }: {
-  project: { title: string; description: string; tags: string[]; href?: string };
+  project: {
+    title: string;
+    description: string;
+    tags: string[];
+    href?: string;
+    color?: string;
+    image?: string;
+  };
 }) {
   const inner = (
-    <div className="group rounded-2xl border border-border bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/10 h-full">
-      <div className="mb-4 flex flex-wrap gap-2">
-        {project.tags.map((tag) => (
-          <span
-            key={tag}
-            className="rounded-full bg-accent/8 px-3 py-1 text-xs font-semibold text-accent"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
-      <h3 className="mb-3 text-xl font-bold text-primary group-hover:text-accent transition-colors">
-        {project.title}
-      </h3>
-      <p className="text-sm leading-relaxed text-muted">{project.description}</p>
-      {project.href && (
-        <div className="mt-6 flex items-center gap-1 text-xs font-semibold text-accent">
-          Visit →
-        </div>
+    <motion.div
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white transition-all duration-300 hover:shadow-xl hover:shadow-accent/8"
+      whileHover={{ y: -4 }}
+    >
+      {project.image ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={project.image}
+          alt={project.title}
+          className="h-36 w-full object-cover"
+        />
+      ) : (
+        <Thumbnail
+          color={project.color}
+          label={project.title}
+          className="h-36 w-full"
+        />
       )}
-    </div>
+
+      <div className="flex flex-1 flex-col p-6">
+        <div className="mb-3 flex flex-wrap gap-1.5">
+          {project.tags.map((tag) => (
+            <span
+              key={tag}
+              className="rounded-full bg-accent/8 px-2.5 py-0.5 text-xs font-semibold text-accent"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+        <h3 className="mb-2 text-lg font-bold text-primary transition-colors group-hover:text-accent">
+          {project.title}
+        </h3>
+        <p className="flex-1 text-sm leading-relaxed text-muted">
+          {project.description}
+        </p>
+        {project.href && (
+          <div className="mt-5 flex items-center gap-1 text-xs font-semibold text-accent">
+            Visit →
+          </div>
+        )}
+      </div>
+    </motion.div>
   );
 
   if (project.href) {
     return (
-      <a href={project.href} target="_blank" rel="noopener noreferrer" className="block h-full">
+      <a
+        href={project.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block h-full"
+      >
         {inner}
       </a>
     );
   }
 
-  return inner;
+  return <div className="block h-full">{inner}</div>;
 }
