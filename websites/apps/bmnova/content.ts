@@ -3,6 +3,7 @@ import type { Project, TeamMember, NavLink } from "@websites/shared/types";
 export const nav: NavLink[] = [
   { label: "Projects", href: "#projects" },
   { label: "About", href: "#about" },
+  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "#contact" },
 ];
 

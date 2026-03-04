@@ -3,6 +3,7 @@ import type { Feature, NavLink } from "@websites/shared/types";
 export const nav: NavLink[] = [
   { label: "Products", href: "#products" },
   { label: "Features", href: "#features" },
+  { label: "Packages", href: "#packages" },
   { label: "Mobile", href: "#mobile" },
 ];
 
@@ -84,6 +85,44 @@ export const features: Feature[] = [
     description: "Your data never trains our models. Zero retention.",
   },
 ];
+
+export const flutterPackages = {
+  heading: "Flutter Packages",
+  items: [
+    {
+      id: "dynamic-flutter",
+      label: "dynamic_intyx",
+      badge: "Coming Soon",
+      tagline: "Agent-controlled UI for Flutter.",
+      description:
+        "Let AI agents render and orchestrate your Flutter widget tree at runtime via the MCP protocol. Ship dynamic, agent-driven experiences without hardcoded logic.",
+      highlights: [
+        "MCP protocol bridge",
+        "Runtime widget orchestration",
+        "Agent-controlled state",
+        "Pub.dev ready",
+      ],
+      href: "https://dynamic.intyx.ai",
+      color: "#A78BFA",
+    },
+    {
+      id: "intyx-flutter-sdk",
+      label: "intyx_sdk",
+      badge: "Coming Soon",
+      tagline: "intyx AI insights in your Flutter app.",
+      description:
+        "First-class Flutter SDK for the intyx AI platform. Upload data, fetch AI-generated insights, and render beautiful charts — all from your mobile app.",
+      highlights: [
+        "Native intyx API integration",
+        "AI insight widgets",
+        "CSV & JSON data upload",
+        "Offline caching",
+      ],
+      href: null,
+      color: "#7C3AED",
+    },
+  ],
+};
 
 export const mobile = {
   heading: "Mobile Apps",
