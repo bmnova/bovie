@@ -3,6 +3,8 @@ export interface Project {
   description: string;
   tags: string[];
   href?: string;
+  color?: string;
+  image?: string;
 }
 
 export interface TeamMember {

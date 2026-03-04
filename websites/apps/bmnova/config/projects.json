@@ -3,22 +3,38 @@
     "title": "intyx.ai",
     "description": "Upload your data and let AI do the heavy lifting. Instant insights, beautiful charts, and smart recommendations — built for content creators and analysts.",
     "tags": ["AI", "SaaS", "Web App"],
-    "href": "https://intyx.ai"
+    "href": "https://intyx.ai",
+    "color": "#A78BFA"
   },
   {
     "title": "dynamic.intyx.ai",
     "description": "A Flutter package that lets AI agents control your UI at runtime. Powered by MCP protocol — ship dynamic, agent-driven widget experiences.",
     "tags": ["Flutter", "AI", "Open Source"],
-    "href": "https://dynamic.intyx.ai"
+    "href": "https://dynamic.intyx.ai",
+    "color": "#7C3AED"
   },
   {
     "title": "Bovie",
     "description": "A modern movie discovery app built with Flutter. Personalized recommendations, genre browsing, and a beautiful adaptive UI.",
-    "tags": ["Flutter", "Mobile", "TMDB"]
+    "tags": ["Flutter", "Mobile", "TMDB"],
+    "color": "#6366F1"
   },
   {
-    "title": "More Coming Soon",
-    "description": "We're constantly building. New products and tools are in the pipeline — stay tuned.",
-    "tags": ["In Progress"]
+    "title": "Clarity CRM",
+    "description": "A clean, minimalist CRM for small teams. Real-time pipelines, smart follow-up reminders, and a UI that stays out of your way.",
+    "tags": ["SaaS", "Next.js", "Supabase"],
+    "color": "#10B981"
+  },
+  {
+    "title": "ShopFlow",
+    "description": "Cross-platform e-commerce app for boutique brands. Flutter frontend with Stripe integration, inventory management, and one-tap checkout.",
+    "tags": ["Flutter", "Mobile", "E-commerce"],
+    "color": "#F59E0B"
+  },
+  {
+    "title": "WriteAI",
+    "description": "AI writing assistant that learns your brand voice. Draft blog posts, social content, and emails — then refine them through conversation.",
+    "tags": ["AI", "SaaS", "In Progress"],
+    "color": "#EC4899"
   }
 ]

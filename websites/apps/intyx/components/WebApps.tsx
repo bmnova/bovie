@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { fadeInUp, staggerContainer } from "@websites/shared/animations";
+import { blurIn, fadeInUp, staggerContainer, staggerContainerFast } from "@websites/shared/animations";
+import { Thumbnail } from "@websites/shared/assets";
 import { products } from "@/content";
 
 const categoryOrder = ["Web", "Flutter Package", "Mobile"];
@@ -28,7 +29,7 @@ export function WebApps() {
             {products.heading}
           </motion.p>
           <motion.h2
-            variants={fadeInUp}
+            variants={blurIn}
             className="mb-16 text-4xl font-bold tracking-tight text-primary md:text-5xl"
           >
             Everything we ship.
@@ -42,11 +43,11 @@ export function WebApps() {
                 <p className="mb-5 text-xs font-semibold uppercase tracking-widest text-muted">
                   {category}
                 </p>
-                <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                <motion.div variants={staggerContainerFast} className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                   {items.map((product) => (
                     <ProductCard key={product.id} product={product} />
                   ))}
-                </div>
+                </motion.div>
               </motion.div>
             ))}
           </div>
@@ -74,17 +75,12 @@ function ProductCard({
 
   const inner = (
     <motion.div
-      className="relative h-full overflow-hidden rounded-2xl border border-border bg-surface-2 p-6 transition-all duration-300 group-hover:border-accent/30"
+      className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface-2 transition-all duration-300 group-hover:border-accent/30"
       whileHover={product.href ? { y: -3 } : undefined}
     >
-      {/* Top glow */}
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-px opacity-50"
-        style={{
-          background: `linear-gradient(90deg, transparent, ${product.color}60, transparent)`,
-        }}
-      />
+      <Thumbnail color={product.color} label={product.label} className="h-28 w-full" />
 
+      <div className="flex flex-1 flex-col p-6">
       <div className="mb-4 flex items-start justify-between">
         <span
           className="inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold"
@@ -118,6 +114,7 @@ function ProductCard({
           <span className="text-xs text-muted/60">In development</span>
         </div>
       )}
+      </div>
     </motion.div>
   );
 

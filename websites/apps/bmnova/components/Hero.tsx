@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { fadeInUp, staggerContainer } from "@websites/shared/animations";
+import { blurIn, fadeInUp, staggerContainer } from "@websites/shared/animations";
 import { hero } from "@/content";
 
 export function Hero() {
@@ -30,7 +30,7 @@ export function Hero() {
         </motion.div>
 
         <motion.h1
-          variants={fadeInUp}
+          variants={blurIn}
           className="mb-6 text-5xl font-bold leading-[1.1] tracking-tight text-primary md:text-7xl"
           style={{ whiteSpace: "pre-line" }}
         >
