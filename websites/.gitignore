@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+.next/
+out/
+dist/
+
+# Turbo
+.turbo/
+
+# Environment
+.env
+.env.local
+.env.production
+
+# Misc
+.DS_Store
+*.pem
