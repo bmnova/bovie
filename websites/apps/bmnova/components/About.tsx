@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { fadeInUp, staggerContainer, slideInLeft, slideInRight } from "@websites/shared/animations";
+import { fadeInUp, staggerContainer } from "@websites/shared/animations";
 import { about } from "@/content";
 
 export function About() {
@@ -20,32 +20,37 @@ export function About() {
           >
             About Us
           </motion.p>
-          <motion.h2
-            variants={fadeInUp}
-            className="mb-6 max-w-2xl text-4xl font-bold tracking-tight text-white md:text-5xl"
-          >
-            {about.heading}
-          </motion.h2>
-          <motion.p
-            variants={fadeInUp}
-            className="mb-16 max-w-2xl text-lg leading-relaxed text-white/60"
-          >
-            {about.body}
-          </motion.p>
 
-          {/* Values */}
-          <div className="mb-20 grid gap-6 md:grid-cols-3">
-            {about.values.map((value, i) => (
-              <motion.div
-                key={value.title}
-                variants={i % 2 === 0 ? slideInLeft : slideInRight}
-                className="rounded-2xl border border-white/10 bg-white/5 p-6"
+          {/* Two-column: text left, stack right */}
+          <div className="mb-20 grid gap-12 md:grid-cols-[1fr_auto]">
+            <div>
+              <motion.h2
+                variants={fadeInUp}
+                className="mb-6 text-4xl font-bold tracking-tight text-white md:text-5xl"
               >
-                <span className="mb-4 block text-2xl text-accent">{value.icon}</span>
-                <h3 className="mb-2 text-lg font-semibold text-white">{value.title}</h3>
-                <p className="text-sm leading-relaxed text-white/50">{value.description}</p>
-              </motion.div>
-            ))}
+                {about.heading}
+              </motion.h2>
+              <motion.p
+                variants={fadeInUp}
+                className="max-w-xl text-lg leading-relaxed text-white/60"
+              >
+                {about.body}
+              </motion.p>
+            </div>
+
+            <motion.div
+              variants={fadeInUp}
+              className="flex flex-col justify-center gap-6 md:min-w-[200px]"
+            >
+              {about.stack.map((item) => (
+                <div key={item.label}>
+                  <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-white/30">
+                    {item.label}
+                  </p>
+                  <p className="text-sm text-white/70">{item.items}</p>
+                </div>
+              ))}
+            </motion.div>
           </div>
 
           {/* Team */}
