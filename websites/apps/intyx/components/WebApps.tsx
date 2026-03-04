@@ -2,9 +2,16 @@
 
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@websites/shared/animations";
-import { webApps } from "@/content";
+import { products } from "@/content";
+
+const categoryOrder = ["Web", "Flutter Package", "Mobile"];
 
 export function WebApps() {
+  const grouped = categoryOrder.map((cat) => ({
+    category: cat,
+    items: products.items.filter((p) => p.category === cat),
+  }));
+
   return (
     <section id="products" className="relative px-6 py-28 md:px-12">
       <div className="mx-auto max-w-6xl">
@@ -18,21 +25,28 @@ export function WebApps() {
             variants={fadeInUp}
             className="mb-3 text-xs font-semibold uppercase tracking-widest text-accent"
           >
-            {webApps.heading}
+            {products.heading}
           </motion.p>
           <motion.h2
             variants={fadeInUp}
             className="mb-16 text-4xl font-bold tracking-tight text-primary md:text-5xl"
           >
-            Two products.
+            Everything we ship.
             <br />
-            <span className="text-muted">One vision.</span>
+            <span className="text-muted">Web, Flutter, Mobile.</span>
           </motion.h2>
 
-          <div className="grid gap-8 lg:grid-cols-2">
-            {webApps.items.map((app) => (
-              <motion.div key={app.id} variants={fadeInUp}>
-                <AppCard app={app} />
+          <div className="space-y-14">
+            {grouped.map(({ category, items }) => (
+              <motion.div key={category} variants={fadeInUp}>
+                <p className="mb-5 text-xs font-semibold uppercase tracking-widest text-muted">
+                  {category}
+                </p>
+                <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                  {items.map((product) => (
+                    <ProductCard key={product.id} product={product} />
+                  ))}
+                </div>
               </motion.div>
             ))}
           </div>
@@ -42,65 +56,83 @@ export function WebApps() {
   );
 }
 
-function AppCard({
-  app,
+function ProductCard({
+  product,
 }: {
-  app: {
+  product: {
     label: string;
-    badge: string;
+    status: string;
     tagline: string;
     description: string;
-    highlights: string[];
-    href: string;
+    href: string | null;
     color: string;
+    category: string;
   };
 }) {
-  return (
-    <a href={app.href} target="_blank" rel="noopener noreferrer" className="block group">
-      <motion.div
-        className="relative h-full overflow-hidden rounded-3xl border border-border bg-surface-2 p-8 transition-all duration-300 group-hover:border-accent/30"
-        whileHover={{ y: -4 }}
-      >
-        {/* Top glow */}
-        <div
-          className="pointer-events-none absolute inset-x-0 top-0 h-px opacity-60"
-          style={{
-            background: `linear-gradient(90deg, transparent, ${app.color}60, transparent)`,
-          }}
-        />
+  const isLive = product.status === "Live";
+  const isPackage = product.category === "Flutter Package";
 
-        <div className="mb-6 flex items-start justify-between">
-          <div>
-            <span
-              className="mb-3 inline-block rounded-full px-3 py-1 text-xs font-semibold"
-              style={{ background: `${app.color}20`, color: app.color }}
-            >
-              {app.badge}
-            </span>
-            <h3 className="text-2xl font-bold text-primary">{app.label}</h3>
-            <p className="mt-1 text-sm font-medium" style={{ color: app.color }}>
-              {app.tagline}
-            </p>
-          </div>
+  const inner = (
+    <motion.div
+      className="relative h-full overflow-hidden rounded-2xl border border-border bg-surface-2 p-6 transition-all duration-300 group-hover:border-accent/30"
+      whileHover={product.href ? { y: -3 } : undefined}
+    >
+      {/* Top glow */}
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-px opacity-50"
+        style={{
+          background: `linear-gradient(90deg, transparent, ${product.color}60, transparent)`,
+        }}
+      />
+
+      <div className="mb-4 flex items-start justify-between">
+        <span
+          className="inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold"
+          style={{ background: `${product.color}20`, color: product.color }}
+        >
+          {product.status}
+        </span>
+        {product.href && (
           <span
-            className="text-xl transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
-            style={{ color: app.color }}
+            className="text-base transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+            style={{ color: product.color }}
           >
             ↗
           </span>
+        )}
+      </div>
+
+      <h3
+        className={`mb-1 text-lg font-bold text-primary${isPackage ? " font-mono" : ""}`}
+      >
+        {product.label}
+      </h3>
+      <p className="mb-3 text-xs font-medium" style={{ color: product.color }}>
+        {product.tagline}
+      </p>
+      <p className="text-sm leading-relaxed text-muted">{product.description}</p>
+
+      {!isLive && (
+        <div className="mt-4 flex items-center gap-1.5">
+          <span className="h-1.5 w-1.5 rounded-full bg-muted/50" />
+          <span className="text-xs text-muted/60">In development</span>
         </div>
-
-        <p className="mb-6 text-sm leading-relaxed text-muted">{app.description}</p>
-
-        <ul className="space-y-2">
-          {app.highlights.map((item) => (
-            <li key={item} className="flex items-center gap-2 text-sm text-primary/70">
-              <span style={{ color: app.color }}>✓</span>
-              {item}
-            </li>
-          ))}
-        </ul>
-      </motion.div>
-    </a>
+      )}
+    </motion.div>
   );
+
+  if (product.href) {
+    return (
+      <a
+        href={product.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group block h-full"
+      >
+        {inner}
+      </a>
+    );
+  }
+
+  return <div className="group block h-full">{inner}</div>;
 }

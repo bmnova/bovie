@@ -3,8 +3,6 @@ import type { Feature, NavLink } from "@websites/shared/types";
 export const nav: NavLink[] = [
   { label: "Products", href: "#products" },
   { label: "Features", href: "#features" },
-  { label: "Packages", href: "#packages" },
-  { label: "Mobile", href: "#mobile" },
 ];
 
 export const hero = {
@@ -15,40 +13,74 @@ export const hero = {
   ctaSecondary: { label: "dynamic package →", href: "https://dynamic.intyx.ai" },
 };
 
-export const webApps = {
-  heading: "Web Apps",
+export const products = {
+  heading: "Products",
   items: [
     {
       id: "intyx-ai",
+      category: "Web",
       label: "intyx.ai",
-      badge: "Live",
+      status: "Live",
       tagline: "Data meets intelligence.",
       description:
-        "Upload CSV, JSON, or connect an API. intyx.ai processes your data with advanced AI models and returns beautifully visualized insights, executive summaries, and smart recommendations — in seconds.",
-      highlights: [
-        "One-click data upload (CSV, JSON, API)",
-        "AI-generated charts & dashboards",
-        "Natural language querying",
-        "Export-ready reports",
-      ],
+        "Upload CSV, JSON, or connect an API. Get AI-generated charts, executive summaries, and smart recommendations in seconds.",
       href: "https://intyx.ai",
       color: "#A78BFA",
     },
     {
-      id: "dynamic-intyx",
+      id: "dynamic-intyx-web",
+      category: "Web",
       label: "dynamic.intyx.ai",
-      badge: "Flutter Package",
+      status: "Live",
       tagline: "AI agents that control your UI.",
       description:
-        "A Flutter package that bridges AI agents and your widget tree via the Model Context Protocol (MCP). Let your AI agent render, update, and orchestrate UI components at runtime — no hardcoded logic required.",
-      highlights: [
-        "MCP protocol integration",
-        "Agent-controlled dynamic widgets",
-        "Runtime UI orchestration",
-        "Pub.dev ready",
-      ],
+        "Documentation and playground for the dynamic_intyx Flutter package. MCP protocol bridge between AI agents and your widget tree.",
       href: "https://dynamic.intyx.ai",
       color: "#7C3AED",
+    },
+    {
+      id: "dynamic-intyx-pkg",
+      category: "Flutter Package",
+      label: "dynamic_intyx",
+      status: "Coming Soon",
+      tagline: "Agent-controlled widgets at runtime.",
+      description:
+        "Let AI agents render and orchestrate your Flutter widget tree via the MCP protocol — no hardcoded logic required.",
+      href: "https://dynamic.intyx.ai",
+      color: "#A78BFA",
+    },
+    {
+      id: "intyx-sdk",
+      category: "Flutter Package",
+      label: "intyx_sdk",
+      status: "Coming Soon",
+      tagline: "intyx AI in your Flutter app.",
+      description:
+        "First-class Flutter SDK for the intyx platform. Upload data, fetch AI insights, and render beautiful charts from mobile.",
+      href: null,
+      color: "#7C3AED",
+    },
+    {
+      id: "intyx-ios",
+      category: "Mobile",
+      label: "intyx for iOS",
+      status: "Coming Soon",
+      tagline: "AI insights on the go.",
+      description:
+        "Native iOS experience for the intyx platform. Full AI data analysis and visualization in your pocket.",
+      href: null,
+      color: "#6D28D9",
+    },
+    {
+      id: "intyx-android",
+      category: "Mobile",
+      label: "intyx for Android",
+      status: "Coming Soon",
+      tagline: "AI insights on the go.",
+      description:
+        "Native Android experience for the intyx platform. Full AI data analysis and visualization in your pocket.",
+      href: null,
+      color: "#5B21B6",
     },
   ],
 };
@@ -85,47 +117,3 @@ export const features: Feature[] = [
     description: "Your data never trains our models. Zero retention.",
   },
 ];
-
-export const flutterPackages = {
-  heading: "Flutter Packages",
-  items: [
-    {
-      id: "dynamic-flutter",
-      label: "dynamic_intyx",
-      badge: "Coming Soon",
-      tagline: "Agent-controlled UI for Flutter.",
-      description:
-        "Let AI agents render and orchestrate your Flutter widget tree at runtime via the MCP protocol. Ship dynamic, agent-driven experiences without hardcoded logic.",
-      highlights: [
-        "MCP protocol bridge",
-        "Runtime widget orchestration",
-        "Agent-controlled state",
-        "Pub.dev ready",
-      ],
-      href: "https://dynamic.intyx.ai",
-      color: "#A78BFA",
-    },
-    {
-      id: "intyx-flutter-sdk",
-      label: "intyx_sdk",
-      badge: "Coming Soon",
-      tagline: "intyx AI insights in your Flutter app.",
-      description:
-        "First-class Flutter SDK for the intyx AI platform. Upload data, fetch AI-generated insights, and render beautiful charts — all from your mobile app.",
-      highlights: [
-        "Native intyx API integration",
-        "AI insight widgets",
-        "CSV & JSON data upload",
-        "Offline caching",
-      ],
-      href: null,
-      color: "#7C3AED",
-    },
-  ],
-};
-
-export const mobile = {
-  heading: "Mobile Apps",
-  sub: "Cross-platform mobile experiences powered by Flutter. Coming soon.",
-  placeholder: "We're bringing intyx intelligence to iOS and Android. Stay tuned.",
-};
