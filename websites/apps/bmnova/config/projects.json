@@ -1,40 +1,67 @@
 [
   {
+    "title": "Offer",
+    "description": "Connect with people around you by offering them drinks, snacks, or other items at local businesses. Break the ice, discover new places, and make real connections.",
+    "tags": ["Mobile", "Flutter", "Social"],
+    "href": "/projects/offer",
+    "color": "#F59E0B"
+  },
+  {
+    "title": "DietPal",
+    "description": "AI-powered diet app that personalizes your plan based on your needs and lifestyle. Track food, exercise, and well-being — then get actionable insights to hit your goals.",
+    "tags": ["Mobile", "Flutter", "AI"],
+    "href": "/projects/dietpal",
+    "color": "#10B981"
+  },
+  {
+    "title": "Pixvibe",
+    "description": "Outstanding AI-powered photo editing: erase objects, cut subjects, swap backgrounds, and generate AI images. Built for Pixvibe's mobile and web platforms.",
+    "tags": ["Partner", "Flutter", "AI", "Web"],
+    "href": "https://www.everpixel.org/apps/pixvibe",
+    "color": "#8B5CF6"
+  },
+  {
+    "title": "Collagevibe",
+    "description": "Generate and customize photos as collages with ease. Edit, arrange, and personalize your pictures exactly how you want. Developed for Collagevibe's mobile platform.",
+    "tags": ["Partner", "Flutter", "Photo"],
+    "color": "#EC4899"
+  },
+  {
     "title": "intyx.ai",
-    "description": "Upload your data and let AI do the heavy lifting. Instant insights, beautiful charts, and smart recommendations — built for content creators and analysts.",
-    "tags": ["AI", "SaaS", "Web App"],
+    "description": "Upload CSV, JSON, or connect an API. Get AI-generated charts, executive summaries, and smart recommendations in seconds.",
+    "tags": ["Partner", "AI", "Web"],
     "href": "https://intyx.ai",
     "color": "#A78BFA"
   },
   {
     "title": "dynamic.intyx.ai",
-    "description": "A Flutter package that lets AI agents control your UI at runtime. Powered by MCP protocol — ship dynamic, agent-driven widget experiences.",
-    "tags": ["Flutter", "AI", "Open Source"],
+    "description": "Documentation and playground for the dynamic_intyx Flutter package. MCP protocol bridge between AI agents and your widget tree.",
+    "tags": ["Partner", "Flutter", "Web"],
     "href": "https://dynamic.intyx.ai",
     "color": "#7C3AED"
   },
   {
-    "title": "Bovie",
-    "description": "A modern movie discovery app built with Flutter. Personalized recommendations, genre browsing, and a beautiful adaptive UI.",
-    "tags": ["Flutter", "Mobile", "TMDB"],
-    "color": "#6366F1"
+    "title": "dynamic_intyx",
+    "description": "Let AI agents render and orchestrate your Flutter widget tree via the MCP protocol — no hardcoded logic required.",
+    "tags": ["Partner", "Flutter", "Package"],
+    "color": "#A78BFA"
   },
   {
-    "title": "Clarity CRM",
-    "description": "A clean, minimalist CRM for small teams. Real-time pipelines, smart follow-up reminders, and a UI that stays out of your way.",
-    "tags": ["SaaS", "Next.js", "Supabase"],
-    "color": "#10B981"
+    "title": "intyx_sdk",
+    "description": "First-class Flutter SDK for the intyx platform. Upload data, fetch AI insights, and render beautiful charts from mobile.",
+    "tags": ["Partner", "Flutter", "Package"],
+    "color": "#7C3AED"
   },
   {
-    "title": "ShopFlow",
-    "description": "Cross-platform e-commerce app for boutique brands. Flutter frontend with Stripe integration, inventory management, and one-tap checkout.",
-    "tags": ["Flutter", "Mobile", "E-commerce"],
-    "color": "#F59E0B"
+    "title": "intyx for iOS",
+    "description": "Native iOS experience for the intyx platform. Full AI data analysis and visualization in your pocket.",
+    "tags": ["Partner", "Mobile", "AI"],
+    "color": "#6D28D9"
   },
   {
-    "title": "WriteAI",
-    "description": "AI writing assistant that learns your brand voice. Draft blog posts, social content, and emails — then refine them through conversation.",
-    "tags": ["AI", "SaaS", "In Progress"],
-    "color": "#EC4899"
+    "title": "intyx for Android",
+    "description": "Native Android experience for the intyx platform. Full AI data analysis and visualization in your pocket.",
+    "tags": ["Partner", "Mobile", "AI"],
+    "color": "#5B21B6"
   }
 ]
