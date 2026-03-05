@@ -25,5 +25,19 @@
     "description": "Generate and customize photos as collages with ease. Edit, arrange, and personalize your pictures exactly how you want. Developed for Collagevibe's mobile platform.",
     "tags": ["Partner", "Flutter", "Photo"],
     "color": "#EC4899"
+  },
+  {
+    "title": "Intyx",
+    "description": "Upload your CSV file and watch as AI creates beautiful, interactive dashboards in seconds. No coding required — just instant insights from your data.",
+    "tags": ["Partner", "AI", "Web"],
+    "href": "https://intyx.ai",
+    "color": "#3B82F6"
+  },
+  {
+    "title": "Dynamic Intyx",
+    "description": "Update your app's content in real time without shipping a new build. Predefined widget templates dynamically populated via live signals — drop one component, reach every user.",
+    "tags": ["Partner", "Flutter", "Mobile"],
+    "href": "https://dynamic.intyx.ai",
+    "color": "#06B6D4"
   }
 ]
