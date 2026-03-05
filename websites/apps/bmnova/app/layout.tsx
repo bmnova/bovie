@@ -21,6 +21,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: "history.scrollRestoration='manual'" }} />
+      </head>
       <body>{children}</body>
     </html>
   );

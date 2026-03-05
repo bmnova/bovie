@@ -6,6 +6,7 @@ export const nav: NavLink[] = [
   { label: "Services", href: "#services" },
   { label: "About", href: "#about" },
   { label: "Blog", href: "/blog" },
+  { label: "Careers", href: "/careers" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -22,9 +23,10 @@ export const about = {
   heading: "A lean team. Serious products.",
   body: "We are a software, technology, and innovation company. We develop mobile/web projects and AI-powered solutions. Founded in 2025 and based at Ostim Teknokent in Ankara, our vision is to become a driving force in digital transformation — a globally recognized, innovation-led company shaping the future of intelligent digital systems.",
   stack: [
-    { label: "Mobile", items: "Flutter · Dart" },
-    { label: "Web", items: "Next.js · Tailwind · TypeScript" },
-    { label: "Backend", items: "Supabase · FastAPI · OpenAI" },
+    { label: "Mobile", items: "Flutter · Dart · Onyx" },
+    { label: "Web", items: "Next.js · TypeScript" },
+    { label: "Backend", items: "Supabase · Firebase" },
+    { label: "AI", items: "RAG · YOLO · LLM Integration" },
     { label: "Design", items: "Figma · Framer" },
   ],
   team: [
@@ -48,7 +50,7 @@ export const services = [
   {
     icon: "🤖",
     title: "AI Powered Projects",
-    description: "We build AI-driven features and products — from intelligent recommendations to data analysis tools powered by the latest LLM technology.",
+    description: "We build AI-driven products using RAG pipelines, computer vision with YOLO, and LLM integrations — from intelligent search to real-time object detection.",
   },
   {
     icon: "📱",
