@@ -3,6 +3,7 @@ import projectsData from "@/config/projects.json";
 
 export const nav: NavLink[] = [
   { label: "Projects", href: "#projects" },
+  { label: "Services", href: "#services" },
   { label: "About", href: "#about" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "#contact" },
@@ -32,6 +33,24 @@ export const about = {
     { name: "Özgür", role: "Backend Developer", initials: "Ö" },
   ] satisfies TeamMember[],
 };
+
+export const services = [
+  {
+    icon: "🤖",
+    title: "AI Powered Projects",
+    description: "We build AI-driven features and products — from intelligent recommendations to data analysis tools powered by the latest LLM technology.",
+  },
+  {
+    icon: "📱",
+    title: "Application Development",
+    description: "We develop mobile, desktop, and web applications using Flutter, Next.js, and modern backend stacks.",
+  },
+  {
+    icon: "☁️",
+    title: "SaaS",
+    description: "We design and build scalable SaaS products — from architecture to launch — helping ideas become investable digital businesses.",
+  },
+];
 
 export const contact = {
   heading: "Got a project in mind?",
