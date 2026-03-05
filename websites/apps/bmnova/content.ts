@@ -10,7 +10,7 @@ export const nav: NavLink[] = [
 
 export const hero = {
   tagline: "We ship products.\nNot just prototypes.",
-  sub: "We're Bilal and Nova — a two-person studio based in Istanbul. Six products shipped, more in the works. We handle everything ourselves: product, code, design.",
+  sub: "We're a two-person studio based in Ankara. We build our own products and help partners ship theirs — mobile apps, AI tools, and everything in between.",
   cta: { label: "See our work", href: "#projects" },
   ctaSecondary: { label: "Get in touch", href: "#contact" },
 };
@@ -18,10 +18,10 @@ export const hero = {
 export const projects: Project[] = projectsData;
 
 export const about = {
-  heading: "Two people, no VC, six products.",
-  body: "We founded BM Nova in 2023. Since then we've been building and shipping our own software — AI tools, Flutter apps, SaaS platforms. We do everything ourselves: product decisions, code, design, support.",
+  heading: "Two people, no VC, four products.",
+  body: "We founded BM Nova in 2025, based at Ostim Teknokent in Ankara. We build and ship our own products, and help partners bring their ideas to life — from AI-powered mobile apps to cross-platform platforms.",
   stack: [
-    { label: "Mobile", items: "Flutter · Dart · Expo" },
+    { label: "Mobile", items: "Flutter · Dart" },
     { label: "Web", items: "Next.js · Tailwind · TypeScript" },
     { label: "Backend", items: "Supabase · FastAPI · OpenAI" },
     { label: "Design", items: "Figma · Framer" },

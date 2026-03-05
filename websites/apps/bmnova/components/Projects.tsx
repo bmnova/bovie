@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   blurIn,
@@ -108,7 +109,7 @@ function ProjectCard({
         </p>
         {project.href && (
           <div className="mt-5 flex items-center gap-1 text-xs font-semibold text-accent">
-            Visit →
+            {project.href.startsWith("/") ? "Learn more →" : "Visit →"}
           </div>
         )}
       </div>
@@ -116,6 +117,14 @@ function ProjectCard({
   );
 
   if (project.href) {
+    const isInternal = project.href.startsWith("/");
+    if (isInternal) {
+      return (
+        <Link href={project.href} className="block h-full">
+          {inner}
+        </Link>
+      );
+    }
     return (
       <a
         href={project.href}

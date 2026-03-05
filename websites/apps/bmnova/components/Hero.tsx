@@ -66,7 +66,7 @@ export function Hero() {
           {/* Text */}
           <div className="flex-1 text-center lg:text-left">
             <motion.p variants={fadeInUp} className="mb-6 text-sm font-medium text-muted">
-              Istanbul, Turkey &mdash; indie studio
+              Ankara, Turkey &mdash; Ostim Teknokent
             </motion.p>
 
             <motion.h1
@@ -115,7 +115,7 @@ export function Hero() {
               className="mt-12 flex items-center justify-center divide-x divide-muted/20 text-xs lg:justify-start"
             >
               <span className="flex items-center gap-1.5 px-5 first:pl-0">
-                <CountUp to={6} delay={900} className="font-bold text-primary" />
+                <CountUp to={4} delay={900} className="font-bold text-primary" />
                 <span className="text-muted">products shipped</span>
               </span>
               <span className="px-5 font-medium text-muted">Flutter · Next.js · AI</span>
