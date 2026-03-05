@@ -22,7 +22,7 @@ export const about = {
   heading: "A lean team. Serious products.",
   body: "We are a software, technology, and innovation company. We develop mobile/web projects and AI-powered solutions. Founded in 2025 and based at Ostim Teknokent in Ankara, our vision is to become a driving force in digital transformation — a globally recognized, innovation-led company shaping the future of intelligent digital systems.",
   stack: [
-    { label: "Mobile", items: "Flutter · Dart" },
+    { label: "Mobile", items: "Flutter · Dart · Onyx" },
     { label: "Web", items: "Next.js · TypeScript" },
     { label: "Backend", items: "Supabase · Firebase" },
     { label: "AI", items: "RAG · YOLO · LLM Integration" },
