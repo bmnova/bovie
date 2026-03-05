@@ -11,6 +11,9 @@ export interface TeamMember {
   name: string;
   role: string;
   initials: string;
+  twitter?: string;
+  linkedin?: string;
+  background?: Array<{ place: string; years: string }>;
 }
 
 export interface NavLink {

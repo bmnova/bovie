@@ -58,15 +58,36 @@ export function About() {
             <p className="mb-8 text-sm font-semibold uppercase tracking-widest text-white/40">
               The Team
             </p>
-            <div className="flex flex-wrap gap-6">
+            <div className="flex flex-wrap gap-8">
               {about.team.map((member) => (
-                <div key={member.name} className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/20 text-sm font-bold text-accent">
+                <div key={member.name} className="flex items-start gap-4">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent/20 text-sm font-bold text-accent">
                     {member.initials}
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-white">{member.name}</p>
-                    <p className="text-xs text-white/40">{member.role}</p>
+                    <p className="mb-2 text-xs text-white/40">{member.role}</p>
+                    {member.background && (
+                      <div className="mb-2 flex flex-col gap-0.5">
+                        {member.background.map((bg) => (
+                          <p key={bg.place} className="text-xs text-white/30">
+                            {bg.place} · {bg.years}
+                          </p>
+                        ))}
+                      </div>
+                    )}
+                    <div className="flex gap-3">
+                      {member.twitter && (
+                        <a href={member.twitter} target="_blank" rel="noopener noreferrer" className="text-xs text-white/30 hover:text-white/60 transition-colors">
+                          X
+                        </a>
+                      )}
+                      {member.linkedin && (
+                        <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="text-xs text-white/30 hover:text-white/60 transition-colors">
+                          LinkedIn
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
               ))}

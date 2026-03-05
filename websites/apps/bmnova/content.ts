@@ -28,7 +28,17 @@ export const about = {
     { label: "Design", items: "Figma · Framer" },
   ],
   team: [
-    { name: "Ali Mertcan Karaman", role: "Co-Founder", initials: "AK" },
+    {
+      name: "Ali Mertcan Karaman",
+      role: "Co-Founder",
+      initials: "AK",
+      twitter: "https://x.com/alimertcank?s=21",
+      linkedin: "https://www.linkedin.com/in/ali-mertcan-karaman",
+      background: [
+        { place: "Marmara University", years: "2016–2020" },
+        { place: "TUSAŞ", years: "2020–2025" },
+      ],
+    },
     { name: "Büşra Mercan", role: "Co-Founder", initials: "BM" },
     { name: "Özgür", role: "Backend Developer", initials: "Ö" },
   ] satisfies TeamMember[],
@@ -58,7 +68,7 @@ export const contact = {
   email: "contact@bmnova.com",
   links: [
     { label: "GitHub", href: "https://github.com/bmnova" },
-    { label: "Twitter / X", href: "https://x.com/bmnova" },
+    { label: "Twitter / X", href: "https://x.com/alimertcank?s=21" },
     { label: "LinkedIn", href: "https://linkedin.com/company/bmnova" },
   ],
 };
