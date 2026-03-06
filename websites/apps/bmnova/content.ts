@@ -73,6 +73,7 @@ export const contentMap = {
     projects: {
       eyebrow: "Our Work",
       heading: "Products & Projects",
+      longPressToViewFull: "Long press to view full",
       items: buildProjects("en"),
     },
     services: {
@@ -299,6 +300,7 @@ export const contentMap = {
     projects: {
       eyebrow: "Çalışmalarımız",
       heading: "Ürünler & Projeler",
+      longPressToViewFull: "Tam görmek için basılı tutun",
       items: buildProjects("tr"),
     },
     services: {

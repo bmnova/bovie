@@ -12,7 +12,7 @@ export function Hero() {
   const { hero } = contentMap[locale];
 
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-hero-gradient px-6">
+    <section className="relative flex min-h-[85dvh] items-center justify-center overflow-hidden bg-hero-gradient px-6 md:min-h-screen">
       {/* Organic animated blob 1 */}
       <motion.div
         className="pointer-events-none absolute -left-40 top-1/4 h-[520px] w-[520px]"
