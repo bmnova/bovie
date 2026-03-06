@@ -27,6 +27,12 @@
     "color": "#EC4899"
   },
   {
+    "title": "FitVibe",
+    "description": "A personalized fitness tracking app built with Flutter. Track workouts, monitor progress, and stay motivated with smart insights tailored to your activity level.",
+    "tags": ["Partner", "Flutter", "Fitness"],
+    "color": "#F97316"
+  },
+  {
     "title": "intyx.ai",
     "description": "Upload CSV, JSON, or connect an API. Get AI-generated charts, executive summaries, and smart recommendations in seconds.",
     "tags": ["Partner", "AI", "Web"],

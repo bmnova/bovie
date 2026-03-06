@@ -9,9 +9,13 @@ import {
   staggerContainerFast,
 } from "@websites/shared/animations";
 import { Thumbnail } from "@websites/shared/assets";
-import { projects } from "@/content";
+import { contentMap } from "@/content";
+import { useLocale } from "@/app/locale-context";
 
 export function Projects() {
+  const { locale } = useLocale();
+  const { projects } = contentMap[locale];
+
   return (
     <section id="projects" className="px-6 py-28 md:px-12">
       <div className="mx-auto max-w-6xl">
@@ -25,20 +29,20 @@ export function Projects() {
             variants={fadeInUp}
             className="mb-3 text-xs font-semibold uppercase tracking-widest text-accent"
           >
-            Our Work
+            {projects.eyebrow}
           </motion.p>
           <motion.h2
             variants={blurIn}
             className="mb-16 text-4xl font-bold tracking-tight text-primary md:text-5xl"
           >
-            Products & Projects
+            {projects.heading}
           </motion.h2>
 
           <motion.div
             variants={staggerContainerFast}
             className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
           >
-            {projects.map((project, i) => (
+            {projects.items.map((project, i) => (
               <motion.div
                 key={project.title}
                 variants={fadeInUp}

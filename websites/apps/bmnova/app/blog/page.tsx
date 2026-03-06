@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getAllPosts } from "@/lib/posts";
+import { BlogHeader } from "./BlogHeader";
 
 export const metadata = {
   title: "Blog — BM Nova",
@@ -12,19 +13,7 @@ export default function BlogPage() {
   return (
     <main className="min-h-screen bg-surface px-6 py-28 md:px-12">
       <div className="mx-auto max-w-2xl">
-        <Link
-          href="/"
-          className="mb-12 inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent"
-        >
-          ← bmnova.com
-        </Link>
-
-        <h1 className="mb-2 text-4xl font-bold tracking-tight text-primary">
-          Blog
-        </h1>
-        <p className="mb-16 text-lg text-muted">
-          Thoughts on AI, Flutter, and building software.
-        </p>
+        <BlogHeader />
 
         {posts.length === 0 ? (
           <p className="text-muted">No posts yet. Check back soon.</p>

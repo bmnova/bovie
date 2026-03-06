@@ -2,9 +2,13 @@
 
 import { motion } from "framer-motion";
 import { blurIn, fadeInUp, staggerContainer, staggerContainerFast } from "@websites/shared/animations";
-import { services } from "@/content";
+import { contentMap } from "@/content";
+import { useLocale } from "@/app/locale-context";
 
 export function Services() {
+  const { locale } = useLocale();
+  const { services } = contentMap[locale];
+
   return (
     <section id="services" className="px-6 py-28 md:px-12">
       <div className="mx-auto max-w-6xl">
@@ -18,20 +22,20 @@ export function Services() {
             variants={fadeInUp}
             className="mb-3 text-xs font-semibold uppercase tracking-widest text-accent"
           >
-            What We Do
+            {services.eyebrow}
           </motion.p>
           <motion.h2
             variants={blurIn}
             className="mb-16 text-4xl font-bold tracking-tight text-primary md:text-5xl"
           >
-            Our Services
+            {services.heading}
           </motion.h2>
 
           <motion.div
             variants={staggerContainerFast}
             className="grid gap-6 md:grid-cols-3"
           >
-            {services.map((service) => (
+            {services.items.map((service) => (
               <motion.div
                 key={service.title}
                 variants={fadeInUp}
