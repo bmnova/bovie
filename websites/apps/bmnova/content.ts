@@ -14,7 +14,7 @@ const projectImages: Record<string, string> = {
   Offer: "/projects/offer.avif",
   DietPal: "/projects/dietpal.png",
   Pixvibe: "/projects/pixvibe.avif",
-  Collagevibe: "/projects/collagevibe.avif",
+  Collagevibe: "/projects/collagevibe.png",
   FitVibe: "/projects/fitvibe.png",
 };
 
@@ -117,7 +117,7 @@ export const contentMap = {
           role: "Co-Founder",
           initials: "AK",
           twitter: "https://x.com/alimertcank?s=21",
-          linkedin: "https://www.linkedin.com/in/ali-mertcan-karaman",
+          linkedin: "https://www.linkedin.com/in/ali-mertcan-karaman-088582133/",
           background: [
             { place: "Marmara University", years: "2016–2020" },
             { place: "TUSAŞ", years: "2020–2025" },
@@ -343,7 +343,7 @@ export const contentMap = {
           role: "Kurucu Ortak",
           initials: "AK",
           twitter: "https://x.com/alimertcank?s=21",
-          linkedin: "https://www.linkedin.com/in/ali-mertcan-karaman",
+          linkedin: "https://www.linkedin.com/in/ali-mertcan-karaman-088582133/",
           background: [
             { place: "Marmara Üniversitesi", years: "2016–2020" },
             { place: "TUSAŞ", years: "2020–2025" },

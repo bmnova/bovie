@@ -69,6 +69,25 @@ export function Hero() {
         <div className="flex flex-col items-center gap-16 lg:flex-row lg:items-center lg:gap-20">
           {/* Text */}
           <div className="flex-1 text-center lg:text-left">
+            {/* Logo + BMNova Innovations — above title, not in navbar */}
+            <motion.div
+              variants={fadeInUp}
+              className="mb-10 flex items-center justify-center gap-3 lg:justify-start"
+            >
+              <div
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-sm font-bold text-accent"
+                style={{
+                  background: "linear-gradient(135deg, #0F172A 0%, #1E293B 100%)",
+                  boxShadow: "0 2px 8px rgba(15, 23, 42, 0.4)",
+                }}
+              >
+                BM
+              </div>
+              <span className="font-mono text-lg font-semibold tracking-tight text-primary">
+                BMNova Innovations
+              </span>
+            </motion.div>
+
             <motion.p variants={fadeInUp} className="mb-6 text-sm font-medium text-muted">
               Ankara, Turkey &mdash; Ostim Teknokent
             </motion.p>
