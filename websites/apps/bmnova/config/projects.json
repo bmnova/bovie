@@ -45,29 +45,5 @@
     "tags": ["Partner", "Flutter", "Web"],
     "href": "https://dynamic.intyx.ai",
     "color": "#7C3AED"
-  },
-  {
-    "title": "dynamic_intyx",
-    "description": "Let AI agents render and orchestrate your Flutter widget tree via the MCP protocol — no hardcoded logic required.",
-    "tags": ["Partner", "Flutter", "Package"],
-    "color": "#A78BFA"
-  },
-  {
-    "title": "intyx_sdk",
-    "description": "First-class Flutter SDK for the intyx platform. Upload data, fetch AI insights, and render beautiful charts from mobile.",
-    "tags": ["Partner", "Flutter", "Package"],
-    "color": "#7C3AED"
-  },
-  {
-    "title": "intyx for iOS",
-    "description": "Native iOS experience for the intyx platform. Full AI data analysis and visualization in your pocket.",
-    "tags": ["Partner", "Mobile", "AI"],
-    "color": "#6D28D9"
-  },
-  {
-    "title": "intyx for Android",
-    "description": "Native Android experience for the intyx platform. Full AI data analysis and visualization in your pocket.",
-    "tags": ["Partner", "Mobile", "AI"],
-    "color": "#5B21B6"
   }
 ]

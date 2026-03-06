@@ -28,14 +28,6 @@ const trProjectDescriptions: Record<string, string> = {
     "CSV, JSON yükleyin veya bir API bağlayın. Saniyeler içinde yapay zeka tarafından oluşturulan grafikler, yönetici özetleri ve akıllı öneriler alın.",
   "dynamic.intyx.ai":
     "dynamic_intyx Flutter paketi için dokümantasyon ve oyun alanı. Yapay zeka ajanları ile widget ağacınız arasında MCP protokol köprüsü.",
-  dynamic_intyx:
-    "Yapay zeka ajanlarının MCP protokolü aracılığıyla Flutter widget ağacınızı oluşturmasını ve düzenlemesini sağlayın — sabit kodlanmış mantık gerekmez.",
-  intyx_sdk:
-    "intyx platformu için birinci sınıf Flutter SDK'sı. Mobil'den veri yükleyin, yapay zeka içgörüleri alın ve güzel grafikler oluşturun.",
-  "intyx for iOS":
-    "intyx platformu için yerel iOS deneyimi. Cebinizde tam yapay zeka veri analizi ve görselleştirme.",
-  "intyx for Android":
-    "intyx platformu için yerel Android deneyimi. Cebinizde tam yapay zeka veri analizi ve görselleştirme.",
 };
 
 function buildProjects(locale: Locale) {
