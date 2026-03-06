@@ -69,7 +69,7 @@ export function Contact() {
         className="mx-auto mt-16 max-w-4xl overflow-hidden rounded-2xl border border-border"
       >
         <iframe
-          src="https://maps.google.com/maps?q=OSTİM+OSB+MAH.+CEVAT+DÜNDAR+CAD.+NO:1,+Yenimahalle,+Ankara,+Turkey&output=embed&hl=tr"
+          src="https://maps.google.com/maps?q=Cevat+D%C3%BCndar+Cd.+17%2F1+Ostim+06374+Yenimahalle+Ankara&output=embed&hl=tr"
           width="100%"
           height="320"
           style={{ border: 0, display: "block" }}
