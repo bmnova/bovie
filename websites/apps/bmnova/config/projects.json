@@ -4,14 +4,16 @@
     "description": "Connect with people around you by offering them drinks, snacks, or other items at local businesses. Break the ice, discover new places, and make real connections.",
     "tags": ["Mobile", "Flutter", "Social"],
     "href": "/projects/offer",
-    "color": "#F59E0B"
+    "color": "#F59E0B",
+    "status": "in_review"
   },
   {
     "title": "DietPal",
     "description": "AI-powered diet app that personalizes your plan based on your needs and lifestyle. Track food, exercise, and well-being — then get actionable insights to hit your goals.",
     "tags": ["Mobile", "Flutter", "AI"],
     "href": "/projects/dietpal",
-    "color": "#10B981"
+    "color": "#10B981",
+    "status": "in_review"
   },
   {
     "title": "Pixvibe",
@@ -30,19 +32,20 @@
     "title": "FitVibe",
     "description": "AI-powered wardrobe app. Add clothes with automatic background removal, build outfits with AI, get personalized style recommendations, discover what's missing from your wardrobe, and virtually try on looks.",
     "tags": ["Partner", "Flutter", "AI", "Fashion"],
-    "color": "#F97316"
+    "color": "#F97316",
+    "status": "in_review"
   },
   {
     "title": "intyx.ai",
-    "description": "Upload CSV, JSON, or connect an API. Get AI-generated charts, executive summaries, and smart recommendations in seconds.",
-    "tags": ["Partner", "AI", "Web"],
+    "description": "Transform your data into instant dashboards. Upload a CSV and AI creates beautiful, interactive charts in seconds — no coding required. Early access is open.",
+    "tags": ["Partner", "AI", "Web", "Early Access"],
     "href": "https://intyx.ai",
     "color": "#A78BFA"
   },
   {
     "title": "dynamic.intyx.ai",
-    "description": "Documentation and playground for the dynamic_intyx Flutter package. MCP protocol bridge between AI agents and your widget tree.",
-    "tags": ["Partner", "Flutter", "Web"],
+    "description": "Update your app's content in real time without shipping a new build. Drop one Flutter component; the AI decision layer picks the right content for each user.",
+    "tags": ["Partner", "Flutter", "Web", "Experimental"],
     "href": "https://dynamic.intyx.ai",
     "color": "#7C3AED"
   }
