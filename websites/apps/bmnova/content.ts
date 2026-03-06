@@ -14,7 +14,7 @@ const projectImages: Record<string, string> = {
   Offer: "/projects/offer.avif",
   DietPal: "/projects/dietpal.png",
   Pixvibe: "/projects/pixvibe.avif",
-  Collagevibe: "/projects/collagevibe.avif",
+  Collagevibe: "/projects/collagevibe.png",
   FitVibe: "/projects/fitvibe.png",
 };
 
