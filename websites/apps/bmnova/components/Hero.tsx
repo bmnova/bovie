@@ -149,10 +149,10 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Phone mockup — desktop only */}
+          {/* Phone mockup — visible in portrait and landscape */}
           <motion.div
             variants={fadeInUp}
-            className="hidden shrink-0 lg:block"
+            className="flex shrink-0 justify-center max-sm:scale-90"
           >
             <AppMockup />
           </motion.div>
@@ -198,12 +198,22 @@ function AppMockup() {
   const [step, setStep] = useState(0);
 
   useEffect(() => {
-    const timers = [
-      setTimeout(() => setStep(1), 1000),
-      setTimeout(() => setStep(2), 2200),
-      setTimeout(() => setStep(3), 3200),
-    ];
-    return () => timers.forEach(clearTimeout);
+    let timeoutIds: ReturnType<typeof setTimeout>[] = [];
+    const clearAll = () => {
+      timeoutIds.forEach(clearTimeout);
+      timeoutIds.length = 0;
+    };
+    const runCycle = () => {
+      clearAll();
+      setStep(0);
+      timeoutIds.push(setTimeout(() => setStep(1), 1000));
+      timeoutIds.push(setTimeout(() => setStep(2), 2200));
+      timeoutIds.push(setTimeout(() => setStep(3), 3200));
+      // After sequence + pause on result, restart from step 0
+      timeoutIds.push(setTimeout(runCycle, 7000));
+    };
+    runCycle();
+    return clearAll;
   }, []);
 
   const bars = [
