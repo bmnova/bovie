@@ -68,27 +68,38 @@ function ProjectCard({
     href?: string;
     color?: string;
     image?: string;
+    status?: string;
   };
 }) {
+  const { locale } = useLocale();
+  const inReviewLabel = locale === "tr" ? "İncelemede" : "In Review";
+
   const inner = (
     <motion.div
       className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:border-accent/20 hover:shadow-xl"
       whileHover={{ y: -4 }}
     >
-      {project.image ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full object-cover"
-        />
-      ) : (
-        <Thumbnail
-          color={project.color}
-          label={project.title}
-          className="w-full h-44"
-        />
-      )}
+      <div className="relative">
+        {project.image ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full object-cover"
+          />
+        ) : (
+          <Thumbnail
+            color={project.color}
+            label={project.title}
+            className="w-full h-44"
+          />
+        )}
+        {project.status === "in_review" && (
+          <span className="absolute right-3 top-3 rounded-full bg-black/60 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white backdrop-blur-sm">
+            {inReviewLabel}
+          </span>
+        )}
+      </div>
 
       <div className="flex flex-1 flex-col p-6">
         <div className="mb-3 flex flex-wrap gap-1.5">
