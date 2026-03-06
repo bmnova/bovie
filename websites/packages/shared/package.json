@@ -6,6 +6,7 @@
     "./components": "./components/index.tsx",
     "./animations": "./animations/variants.ts",
     "./assets": "./assets/index.ts",
+    "./assets/*": "./assets/*",
     "./fonts": "./fonts/index.ts",
     "./types": "./types/index.ts"
   },

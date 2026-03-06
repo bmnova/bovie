@@ -4,9 +4,13 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { blurIn, fadeInUp, staggerContainer } from "@websites/shared/animations";
 import { Squiggle } from "@websites/shared/assets";
-import { hero } from "@/content";
+import { contentMap } from "@/content";
+import { useLocale } from "@/app/locale-context";
 
 export function Hero() {
+  const { locale } = useLocale();
+  const { hero } = contentMap[locale];
+
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-hero-gradient px-6">
       {/* Organic animated blob 1 */}
@@ -116,12 +120,12 @@ export function Hero() {
             >
               <span className="flex items-center gap-1.5 px-5 first:pl-0">
                 <CountUp to={4} delay={900} className="font-bold text-primary" />
-                <span className="text-muted">products shipped</span>
+                <span className="text-muted">{hero.stats.products}</span>
               </span>
-              <span className="px-5 font-medium text-muted">Flutter · Next.js · AI</span>
+              <span className="px-5 font-medium text-muted">{hero.stats.techStack}</span>
               <span className="flex items-center gap-1.5 px-5">
                 <CountUp to={2} delay={1100} className="font-bold text-primary" />
-                <span className="text-muted">founders</span>
+                <span className="text-muted">{hero.stats.founders}</span>
               </span>
             </motion.div>
           </div>

@@ -2,10 +2,17 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { nav } from "@/content";
+import { contentMap } from "@/content";
+import { useLocale, type Locale } from "@/app/locale-context";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const { locale, setLocale } = useLocale();
+  const { nav, navbar } = contentMap[locale];
+
+  function toggleLocale() {
+    setLocale(locale === "en" ? "tr" : "en");
+  }
 
   return (
     <>
@@ -34,11 +41,20 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-3">
+          {/* Locale toggle */}
+          <button
+            onClick={toggleLocale}
+            className="text-xs font-semibold text-muted transition-colors hover:text-accent"
+            aria-label="Switch language"
+          >
+            {locale === "en" ? "TR" : "EN"}
+          </button>
+
           <a
             href="#contact"
             className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-80"
           >
-            Hire us
+            {navbar.hireUs}
           </a>
 
           {/* Mobile hamburger */}
@@ -94,3 +110,6 @@ export function Navbar() {
     </>
   );
 }
+
+// Re-export Locale type for convenience
+export type { Locale };

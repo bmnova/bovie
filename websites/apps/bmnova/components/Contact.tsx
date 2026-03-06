@@ -2,9 +2,13 @@
 
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@websites/shared/animations";
-import { contact } from "@/content";
+import { contentMap } from "@/content";
+import { useLocale } from "@/app/locale-context";
 
 export function Contact() {
+  const { locale } = useLocale();
+  const { contact } = contentMap[locale];
+
   return (
     <section id="contact" className="px-6 py-28 md:px-12">
       <div className="mx-auto max-w-3xl text-center">
@@ -18,7 +22,7 @@ export function Contact() {
             variants={fadeInUp}
             className="mb-3 text-xs font-semibold uppercase tracking-widest text-accent"
           >
-            Contact
+            {contact.eyebrow}
           </motion.p>
           <motion.h2
             variants={fadeInUp}

@@ -2,9 +2,13 @@
 
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@websites/shared/animations";
-import { about } from "@/content";
+import { contentMap } from "@/content";
+import { useLocale } from "@/app/locale-context";
 
 export function About() {
+  const { locale } = useLocale();
+  const { about } = contentMap[locale];
+
   return (
     <section id="about" className="bg-primary px-6 py-28 md:px-12">
       <div className="mx-auto max-w-6xl">
@@ -18,7 +22,7 @@ export function About() {
             variants={fadeInUp}
             className="mb-3 text-xs font-semibold uppercase tracking-widest text-accent"
           >
-            About Us
+            {about.eyebrow}
           </motion.p>
 
           {/* Two-column: text left, stack right */}
@@ -56,7 +60,7 @@ export function About() {
           {/* Team */}
           <motion.div variants={fadeInUp}>
             <p className="mb-8 text-sm font-semibold uppercase tracking-widest text-white/40">
-              The Team
+              {about.teamLabel}
             </p>
             <div className="flex flex-wrap gap-8">
               {about.team.map((member) => (
