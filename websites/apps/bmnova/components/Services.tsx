@@ -13,6 +13,7 @@ export function Services() {
     <section id="services" className="px-6 py-28 md:px-12">
       <div className="mx-auto max-w-6xl">
         <motion.div
+          key={locale}
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
