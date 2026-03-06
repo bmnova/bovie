@@ -40,15 +40,15 @@ export function Projects() {
 
           <motion.div
             variants={staggerContainerFast}
-            className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+            className="columns-1 gap-6 md:columns-2 lg:columns-3"
           >
-            {projects.items.map((project, i) => (
+            {projects.items.map((project) => (
               <motion.div
                 key={project.title}
                 variants={fadeInUp}
-                className={i === 0 ? "md:col-span-2 lg:col-span-2" : ""}
+                className="mb-6 break-inside-avoid"
               >
-                <ProjectCard project={project} featured={i === 0} />
+                <ProjectCard project={project} />
               </motion.div>
             ))}
           </motion.div>
@@ -60,7 +60,6 @@ export function Projects() {
 
 function ProjectCard({
   project,
-  featured = false,
 }: {
   project: {
     title: string;
@@ -70,7 +69,6 @@ function ProjectCard({
     color?: string;
     image?: string;
   };
-  featured?: boolean;
 }) {
   const inner = (
     <motion.div
@@ -78,33 +76,17 @@ function ProjectCard({
       whileHover={{ y: -4 }}
     >
       {project.image ? (
-        <div className={`relative w-full overflow-hidden ${featured ? "h-56" : "h-44"}`}>
-          {/* Blurred background fills the empty sides */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={project.image}
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-0 h-full w-full scale-110 object-cover blur-2xl"
-          />
-          {/* Subtle color tint over blur */}
-          <div
-            className="absolute inset-0"
-            style={{ backgroundColor: project.color ? `${project.color}30` : "rgba(0,0,0,0.1)" }}
-          />
-          {/* Sharp portrait image centered on top */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={project.image}
-            alt={project.title}
-            className="relative z-10 mx-auto h-full w-auto object-contain drop-shadow-2xl"
-          />
-        </div>
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={project.image}
+          alt={project.title}
+          className="w-full object-cover"
+        />
       ) : (
         <Thumbnail
           color={project.color}
           label={project.title}
-          className={`w-full ${featured ? "h-56" : "h-44"}`}
+          className="w-full h-44"
         />
       )}
 
@@ -119,9 +101,7 @@ function ProjectCard({
             </span>
           ))}
         </div>
-        <h3
-          className={`mb-2 font-bold text-primary transition-colors group-hover:text-accent ${featured ? "text-xl" : "text-lg"}`}
-        >
+        <h3 className="mb-2 text-lg font-bold text-primary transition-colors group-hover:text-accent">
           {project.title}
         </h3>
         <p className="flex-1 text-sm leading-relaxed text-muted">
