@@ -4,6 +4,11 @@ import type { Locale } from "@/app/locale-context";
 
 export { type Locale };
 
+const partners = [
+  { name: "EverPixel", href: "https://www.everpixel.org" },
+  { name: "Nefes Mühendislik", href: null as string | null },
+];
+
 // Project image URLs served from public/projects/
 const projectImages: Record<string, string> = {
   Offer: "/projects/offer.avif",
@@ -46,7 +51,7 @@ export const contentMap = {
     nav: [
       { label: "Projects", href: "#projects" },
       { label: "Services", href: "#services" },
-      { label: "About", href: "#about" },
+      { label: "About", href: "/about-us" },
       { label: "Blog", href: "/blog" },
       { label: "Careers", href: "/careers" },
       { label: "Contact", href: "#contact" },
@@ -131,7 +136,28 @@ export const contentMap = {
         { label: "GitHub", href: "https://github.com/bmnova" },
         { label: "Twitter / X", href: "https://x.com/alimertcank?s=21" },
         { label: "LinkedIn", href: "https://linkedin.com/company/bmnova" },
+        { label: "Instagram", href: "https://www.instagram.com/bmnovainnovations/" },
       ],
+    },
+    partnerships: {
+      eyebrow: "Partners",
+      heading: "Strategic Partnerships",
+      items: partners,
+    },
+    aboutUs: {
+      back: "← bmnova.com",
+      eyebrow: "Who We Are",
+      heading: "About BM Nova",
+      vision: {
+        label: "Vision",
+        text: "To become a driving force in digital transformation through AI-powered software solutions. Our vision is to be a globally recognized, innovation-led technology company shaping the future of intelligent digital systems.",
+      },
+      mission: {
+        label: "Mission",
+        text: "To deliver lean and effective software solutions powered by cutting-edge technologies through a compact and highly skilled team. We aim to build scalable, investment-worthy digital products that drive business value and long-term growth for our clients.",
+      },
+      teamLabel: "The Team",
+      partnershipsLabel: "Strategic Partnerships",
     },
     footer: {
       careers: "Careers",
@@ -251,7 +277,7 @@ export const contentMap = {
     nav: [
       { label: "Projeler", href: "#projects" },
       { label: "Hizmetler", href: "#services" },
-      { label: "Hakkımızda", href: "#about" },
+      { label: "Hakkımızda", href: "/about-us" },
       { label: "Blog", href: "/blog" },
       { label: "Kariyer", href: "/careers" },
       { label: "İletişim", href: "#contact" },
@@ -336,7 +362,28 @@ export const contentMap = {
         { label: "GitHub", href: "https://github.com/bmnova" },
         { label: "Twitter / X", href: "https://x.com/alimertcank?s=21" },
         { label: "LinkedIn", href: "https://linkedin.com/company/bmnova" },
+        { label: "Instagram", href: "https://www.instagram.com/bmnovainnovations/" },
       ],
+    },
+    partnerships: {
+      eyebrow: "Ortaklar",
+      heading: "Stratejik Ortaklıklar",
+      items: partners,
+    },
+    aboutUs: {
+      back: "← bmnova.com",
+      eyebrow: "Biz Kimiz",
+      heading: "BM Nova Hakkında",
+      vision: {
+        label: "Vizyon",
+        text: "Yapay zeka destekli yazılım çözümleriyle dijital dönüşümde itici güç olmak. Vizyonumuz; akıllı dijital sistemlerin geleceğini şekillendiren, küresel ölçekte tanınan, inovasyon odaklı bir teknoloji şirketi olmaktır.",
+      },
+      mission: {
+        label: "Misyon",
+        text: "Küçük ve son derece nitelikli bir ekiple en güncel teknolojileri kullanarak yalın ve etkili yazılım çözümleri sunmak. Müşterilerimiz için iş değeri ve uzun vadeli büyüme sağlayan, ölçeklenebilir ve yatırıma değer dijital ürünler inşa etmeyi hedefliyoruz.",
+      },
+      teamLabel: "Ekibimiz",
+      partnershipsLabel: "Stratejik Ortaklıklar",
     },
     footer: {
       careers: "Kariyer",
