@@ -23,7 +23,7 @@ const trProjectDescriptions: Record<string, string> = {
   Collagevibe:
     "Fotoğrafları kolaj olarak kolayca oluşturun ve özelleştirin. Resimlerinizi tam istediğiniz gibi düzenleyin ve kişiselleştirin. Collagevibe'ın mobil platformu için geliştirildi.",
   FitVibe:
-    "Flutter ile geliştirilmiş kişiselleştirilmiş fitness takip uygulaması. Antrenmanları takip edin, ilerlemeyi izleyin ve aktivite düzeyinize göre özelleştirilmiş akıllı içgörülerle motive kalın.",
+    "Yapay zeka destekli dolap uygulaması. Kıyafetleri otomatik arka plan kaldırma ile ekleyin, AI ile kombin oluşturun, kişiselleştirilmiş stil önerileri alın, dolabınızdaki eksikleri keşfedin ve kıyafetleri üzerinizde görün.",
   "intyx.ai":
     "CSV, JSON yükleyin veya bir API bağlayın. Saniyeler içinde yapay zeka tarafından oluşturulan grafikler, yönetici özetleri ve akıllı öneriler alın.",
   "dynamic.intyx.ai":

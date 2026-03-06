@@ -28,8 +28,8 @@
   },
   {
     "title": "FitVibe",
-    "description": "A personalized fitness tracking app built with Flutter. Track workouts, monitor progress, and stay motivated with smart insights tailored to your activity level.",
-    "tags": ["Partner", "Flutter", "Fitness"],
+    "description": "AI-powered wardrobe app. Add clothes with automatic background removal, build outfits with AI, get personalized style recommendations, discover what's missing from your wardrobe, and virtually try on looks.",
+    "tags": ["Partner", "Flutter", "AI", "Fashion"],
     "color": "#F97316"
   },
   {
