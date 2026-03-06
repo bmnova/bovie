@@ -78,15 +78,26 @@ function ProjectCard({
       whileHover={{ y: -4 }}
     >
       {project.image ? (
-        <div
-          className={`flex w-full items-center justify-center overflow-hidden ${featured ? "h-56" : "h-44"}`}
-          style={{ backgroundColor: project.color ? `${project.color}18` : "rgba(0,0,0,0.04)" }}
-        >
+        <div className={`relative w-full overflow-hidden ${featured ? "h-56" : "h-44"}`}>
+          {/* Blurred background fills the empty sides */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={project.image}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full scale-110 object-cover blur-2xl"
+          />
+          {/* Subtle color tint over blur */}
+          <div
+            className="absolute inset-0"
+            style={{ backgroundColor: project.color ? `${project.color}30` : "rgba(0,0,0,0.1)" }}
+          />
+          {/* Sharp portrait image centered on top */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={project.image}
             alt={project.title}
-            className="h-full w-auto object-contain"
+            className="relative z-10 mx-auto h-full w-auto object-contain drop-shadow-2xl"
           />
         </div>
       ) : (
