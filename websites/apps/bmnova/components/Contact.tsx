@@ -60,6 +60,29 @@ export function Contact() {
           </motion.div>
         </motion.div>
       </div>
+
+      <motion.div
+        variants={fadeInUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-80px" }}
+        className="mx-auto mt-16 max-w-4xl overflow-hidden rounded-2xl border border-border"
+      >
+        <iframe
+          src="https://maps.google.com/maps?q=OSTİM+OSB+MAH.+CEVAT+DÜNDAR+CAD.+NO:1,+Yenimahalle,+Ankara,+Turkey&output=embed&hl=tr"
+          width="100%"
+          height="320"
+          style={{ border: 0, display: "block" }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          title="BM Nova Location"
+        />
+        <div className="px-6 py-4 text-center text-sm text-muted">
+          OSTİM OSB MAH. CEVAT DÜNDAR CAD. NO: 1/1 İÇ KAPI NO: 10 — YENİMAHALLE / ANKARA{" "}
+          <span className="font-medium text-primary">Turuncu Bina</span>
+        </div>
+      </motion.div>
     </section>
   );
 }
