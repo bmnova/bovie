@@ -78,17 +78,22 @@ function ProjectCard({
       whileHover={{ y: -4 }}
     >
       {project.image ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={project.image}
-          alt={project.title}
-          className={`w-full object-cover ${featured ? "h-52" : "h-36"}`}
-        />
+        <div
+          className={`flex w-full items-center justify-center overflow-hidden ${featured ? "h-56" : "h-44"}`}
+          style={{ backgroundColor: project.color ? `${project.color}18` : "rgba(0,0,0,0.04)" }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={project.image}
+            alt={project.title}
+            className="h-full w-auto object-contain"
+          />
+        </div>
       ) : (
         <Thumbnail
           color={project.color}
           label={project.title}
-          className={`w-full ${featured ? "h-52" : "h-36"}`}
+          className={`w-full ${featured ? "h-56" : "h-44"}`}
         />
       )}
 
