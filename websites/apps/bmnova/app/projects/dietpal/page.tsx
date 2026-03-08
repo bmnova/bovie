@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { InnerPageLayout } from "@/components/InnerPageLayout";
 import { DietPalContent } from "./DietPalContent";
 
 export const metadata: Metadata = {
@@ -8,5 +9,9 @@ export const metadata: Metadata = {
 };
 
 export default function DietPalPage() {
-  return <DietPalContent />;
+  return (
+    <InnerPageLayout>
+      <DietPalContent />
+    </InnerPageLayout>
+  );
 }

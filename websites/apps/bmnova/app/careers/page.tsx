@@ -1,3 +1,4 @@
+import { InnerPageLayout } from "@/components/InnerPageLayout";
 import { CareersContent } from "./CareersContent";
 
 export const metadata = {
@@ -6,5 +7,9 @@ export const metadata = {
 };
 
 export default function CareersPage() {
-  return <CareersContent />;
+  return (
+    <InnerPageLayout>
+      <CareersContent />
+    </InnerPageLayout>
+  );
 }

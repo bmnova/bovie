@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@websites/shared/animations";
 import { refundPolicyContent } from "@/content/refund-policy";
@@ -53,15 +52,6 @@ export function RefundPolicyContent() {
 
   return (
     <main className="min-h-screen bg-surface">
-      <div className="px-6 py-5 md:px-12">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-sm font-medium text-muted transition-colors hover:text-accent"
-        >
-          {refundPolicy.back}
-        </Link>
-      </div>
-
       <section className="px-6 pb-20 pt-4 md:px-12">
         <div className="mx-auto max-w-3xl">
           <motion.div
