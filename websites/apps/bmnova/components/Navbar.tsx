@@ -1,14 +1,28 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { contentMap } from "@/content";
 import { useLocale, type Locale } from "@/app/locale-context";
 
-export function Navbar() {
+type NavbarProps = {
+  /** When false, hides the "Hire us" CTA (e.g. on inner pages). Default true. */
+  showHireUs?: boolean;
+};
+
+export function Navbar({ showHireUs = true }: NavbarProps) {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
   const { locale, setLocale } = useLocale();
   const { nav, navbar } = contentMap[locale];
+  const isHome = pathname === "/";
+
+  /** On inner pages, hash links must go to home first (e.g. /#contact). */
+  function navHref(href: string) {
+    if (isHome) return href;
+    return href.startsWith("#") ? `/${href}` : href;
+  }
 
   function toggleLocale() {
     setLocale(locale === "en" ? "tr" : "en");
@@ -32,7 +46,7 @@ export function Navbar() {
           {nav.map((link) => (
             <a
               key={link.href}
-              href={link.href}
+              href={navHref(link.href)}
               className="text-sm font-medium text-muted transition-colors hover:text-accent"
             >
               {link.label}
@@ -50,12 +64,14 @@ export function Navbar() {
             {locale === "en" ? "TR" : "EN"}
           </button>
 
-          <a
-            href="#contact"
-            className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-80"
-          >
-            {navbar.hireUs}
-          </a>
+          {showHireUs && (
+            <a
+              href={navHref("#contact")}
+              className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-80"
+            >
+              {navbar.hireUs}
+            </a>
+          )}
 
           {/* Mobile hamburger */}
           <button
@@ -96,7 +112,7 @@ export function Navbar() {
               {nav.map((link) => (
                 <a
                   key={link.href}
-                  href={link.href}
+                  href={navHref(link.href)}
                   onClick={() => setOpen(false)}
                   className="rounded-xl px-3 py-3 text-sm font-medium text-muted transition-colors hover:bg-accent/5 hover:text-accent"
                 >

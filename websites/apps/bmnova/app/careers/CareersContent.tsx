@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { contentMap } from "@/content";
 import { useLocale } from "@/app/locale-context";
 
@@ -10,15 +9,8 @@ export function CareersContent() {
   const { opening } = careers;
 
   return (
-    <main className="min-h-screen bg-surface px-6 py-28 md:px-12">
+    <main className="min-h-screen bg-surface px-6 py-12 md:px-12">
       <div className="mx-auto max-w-2xl">
-        <Link
-          href="/"
-          className="mb-12 inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent"
-        >
-          {careers.back}
-        </Link>
-
         <h1 className="mb-2 text-4xl font-bold tracking-tight text-primary">
           {careers.title}
         </h1>

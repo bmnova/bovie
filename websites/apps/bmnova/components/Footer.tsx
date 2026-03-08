@@ -18,6 +18,18 @@ export function Footer() {
           <Link href="/careers" className="text-xs text-muted transition-colors hover:text-accent">
             {footer.careers}
           </Link>
+          <Link href="/privacy-policy" className="text-xs text-muted transition-colors hover:text-accent">
+            {footer.privacyPolicy}
+          </Link>
+          <Link href="/terms-of-use" className="text-xs text-muted transition-colors hover:text-accent">
+            {footer.termsOfUse}
+          </Link>
+          <Link href="/refund-policy" className="text-xs text-muted transition-colors hover:text-accent">
+            {footer.refundPolicy}
+          </Link>
+          <Link href="/account-data-deletion" className="text-xs text-muted transition-colors hover:text-accent">
+            {footer.accountDataDeletion}
+          </Link>
           <p className="text-xs text-muted">
             © {new Date().getFullYear()} {footer.copyright}
           </p>

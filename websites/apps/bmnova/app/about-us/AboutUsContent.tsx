@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@websites/shared/animations";
 import { contentMap } from "@/content";
@@ -12,16 +11,6 @@ export function AboutUsContent() {
 
   return (
     <main className="min-h-screen bg-surface">
-      {/* Back link */}
-      <div className="px-6 py-5 md:px-12">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-sm font-medium text-muted transition-colors hover:text-accent"
-        >
-          {aboutUs.back}
-        </Link>
-      </div>
-
       {/* Hero */}
       <section className="px-6 pb-16 pt-8 md:px-12">
         <div className="mx-auto max-w-4xl">

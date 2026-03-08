@@ -76,7 +76,7 @@ export function Contact() {
           allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-          title="BM Nova Location"
+          title="BMNova Location"
         />
         <div className="px-6 py-4 text-center text-sm text-muted">
           OSTİM OSB MAH. CEVAT DÜNDAR CAD. NO: 1/1 İÇ KAPI NO: 10 — YENİMAHALLE / ANKARA{" "}

@@ -10,15 +10,6 @@ export function OfferContent() {
 
   return (
     <main className="min-h-screen bg-surface">
-      <div className="px-6 py-5 md:px-12">
-        <Link
-          href="/#projects"
-          className="inline-flex items-center gap-2 text-sm font-medium text-muted transition-colors hover:text-accent"
-        >
-          {offer.back}
-        </Link>
-      </div>
-
       {/* Hero */}
       <section
         className="relative overflow-hidden px-6 py-20 md:px-12"
