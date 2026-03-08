@@ -1,0 +1,12 @@
+import type { Metadata } from "next";
+import { PrivacyPolicyContent } from "./PrivacyPolicyContent";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy — BM Nova",
+  description:
+    "BM Nova Privacy Policy. How we collect, use, store, share, and protect personal data. Gizlilik Politikası.",
+};
+
+export default function PrivacyPolicyPage() {
+  return <PrivacyPolicyContent />;
+}
