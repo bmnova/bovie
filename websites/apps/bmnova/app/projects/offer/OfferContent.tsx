@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { contentMap } from "@/content";
 import { useLocale } from "@/app/locale-context";
 
