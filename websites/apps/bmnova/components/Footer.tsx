@@ -21,6 +21,9 @@ export function Footer() {
           <Link href="/privacy-policy" className="text-xs text-muted transition-colors hover:text-accent">
             {footer.privacyPolicy}
           </Link>
+          <Link href="/terms-of-use" className="text-xs text-muted transition-colors hover:text-accent">
+            {footer.termsOfUse}
+          </Link>
           <p className="text-xs text-muted">
             © {new Date().getFullYear()} {footer.copyright}
           </p>

@@ -163,9 +163,14 @@ export const contentMap = {
     footer: {
       careers: "Careers",
       privacyPolicy: "Privacy Policy",
+      termsOfUse: "Terms of Use",
       copyright: "BMNova. All rights reserved.",
     },
     privacyPolicy: {
+      back: "← bmnova.com",
+      lastUpdatedLabel: "Last updated:",
+    },
+    termsOfUse: {
       back: "← bmnova.com",
       lastUpdatedLabel: "Last updated:",
     },
@@ -395,9 +400,14 @@ export const contentMap = {
     footer: {
       careers: "Kariyer",
       privacyPolicy: "Gizlilik Politikası",
+      termsOfUse: "Kullanım Koşulları",
       copyright: "BMNova. Tüm hakları saklıdır.",
     },
     privacyPolicy: {
+      back: "← bmnova.com",
+      lastUpdatedLabel: "Son güncelleme:",
+    },
+    termsOfUse: {
       back: "← bmnova.com",
       lastUpdatedLabel: "Son güncelleme:",
     },
