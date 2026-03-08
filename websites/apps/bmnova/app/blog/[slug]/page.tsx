@@ -13,7 +13,7 @@ export async function generateMetadata({
 }) {
   const post = await getPost(params.slug);
   if (!post) return {};
-  return { title: `${post.title} — BM Nova`, description: post.summary };
+  return { title: `${post.title} — BMNova`, description: post.summary };
 }
 
 export default async function PostPage({

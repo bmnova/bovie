@@ -5,11 +5,11 @@ import { LocaleProvider } from "@/app/locale-context";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "BM Nova — AI, Mobile & SaaS Development",
+  title: "BMNova — AI, Mobile & SaaS Development",
   description:
-    "BM Nova builds user-friendly AI apps, mobile products, and SaaS tools. Clean code, thoughtful design.",
+    "BMNova builds user-friendly AI apps, mobile products, and SaaS tools. Clean code, thoughtful design.",
   openGraph: {
-    title: "BM Nova",
+    title: "BMNova",
     description: "Building user-friendly AI apps, mobile & SaaS products.",
     type: "website",
   },

@@ -6,7 +6,7 @@ export function Footer() {
           int<span className="text-accent">yx</span>
         </span>
         <p className="text-xs text-muted">
-          © {new Date().getFullYear()} intyx. A BM Nova product.
+          © {new Date().getFullYear()} intyx. A BMNova product.
         </p>
         <a
           href="https://bmnova.com"

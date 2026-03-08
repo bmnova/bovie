@@ -16,7 +16,7 @@ export const privacyPolicyContent: Record<"en" | "tr", PrivacyPolicyContent> = {
     lastUpdated: "March 8, 2026",
     title: "Privacy Policy",
     intro: [
-      'BM Nova, operated by Ali Mertcan Karaman ("BM Nova", "we", "us", or "our"), builds mobile apps, web products, SaaS platforms, and AI-powered software. This Privacy Policy explains how we collect, use, store, share, and protect personal data when you visit our website, contact us, use our products or services, or interact with us in a business context.',
+      'BMNova, operated by Ali Mertcan Karaman ("BMNova", "we", "us", or "our"), builds mobile apps, web products, SaaS platforms, and AI-powered software. This Privacy Policy explains how we collect, use, store, share, and protect personal data when you visit our website, contact us, use our products or services, or interact with us in a business context.',
       "We build and ship real products. We also take privacy seriously.",
     ],
     sections: [
@@ -24,7 +24,7 @@ export const privacyPolicyContent: Record<"en" | "tr", PrivacyPolicyContent> = {
         number: 1,
         title: "Who We Are",
         paragraphs: [
-          "BM Nova",
+          "BMNova",
           "Operated by Ali Mertcan Karaman",
           "OSTİM OSB Mah. Cevat Dündar Cad. No: 1/1 İç Kapı No: 10",
           "Yenimahalle / Ankara, Türkiye",
@@ -52,10 +52,10 @@ export const privacyPolicyContent: Record<"en" | "tr", PrivacyPolicyContent> = {
         number: 3,
         title: "Roles: Controller and Processor",
         paragraphs: [
-          "Depending on the context, BM Nova may act as either a data controller or a data processor.",
+          "Depending on the context, BMNova may act as either a data controller or a data processor.",
           "We generally act as a controller when we process personal data for: our website and brand presence; our own products and services; sales, support, and communications; recruitment; marketing and operations.",
           "We generally act as a processor when we build, maintain, support, or host software for a client and process personal data only on that client's instructions.",
-          "If you use a product or service that BM Nova built for another company, that company may be the primary controller of your data.",
+          "If you use a product or service that BMNova built for another company, that company may be the primary controller of your data.",
         ],
       },
       {
@@ -105,10 +105,10 @@ export const privacyPolicyContent: Record<"en" | "tr", PrivacyPolicyContent> = {
         number: 7,
         title: "AI and Data Use",
         paragraphs: [
-          "Because BM Nova develops AI-powered products and features, some services may process prompts, files, images, text, and other user inputs in order to generate outputs or provide AI-enabled functionality.",
-          "At this time, BM Nova does not use prompts, uploads, outputs, or client content to train or improve general AI models.",
+          "Because BMNova develops AI-powered products and features, some services may process prompts, files, images, text, and other user inputs in order to generate outputs or provide AI-enabled functionality.",
+          "At this time, BMNova does not use prompts, uploads, outputs, or client content to train or improve general AI models.",
           "We process such content only to: provide the requested feature or service; maintain security and prevent abuse; troubleshoot, support, and fix technical issues; comply with legal obligations.",
-          "If BM Nova uses third-party AI or cloud providers to power a feature, those providers may process data on our behalf subject to their role, contractual protections, and applicable law.",
+          "If BMNova uses third-party AI or cloud providers to power a feature, those providers may process data on our behalf subject to their role, contractual protections, and applicable law.",
           "AI-generated content may be inaccurate or incomplete and should be reviewed before being relied upon in important decisions.",
         ],
       },
@@ -195,7 +195,7 @@ export const privacyPolicyContent: Record<"en" | "tr", PrivacyPolicyContent> = {
         number: 18,
         title: "Client Projects",
         paragraphs: [
-          "When BM Nova develops or operates a product for a client, BM Nova may process personal data on that client's behalf. In such cases, the client's own privacy notice may apply to end users, and privacy requests may need to be directed to that client first.",
+          "When BMNova develops or operates a product for a client, BMNova may process personal data on that client's behalf. In such cases, the client's own privacy notice may apply to end users, and privacy requests may need to be directed to that client first.",
         ],
       },
       {
@@ -210,7 +210,7 @@ export const privacyPolicyContent: Record<"en" | "tr", PrivacyPolicyContent> = {
         title: "Contact",
         paragraphs: [
           "For questions, requests, or complaints about this Privacy Policy or our privacy practices, contact:",
-          "BM Nova",
+          "BMNova",
           "Operated by Ali Mertcan Karaman",
           "OSTİM OSB Mah. Cevat Dündar Cad. No: 1/1 İç Kapı No: 10",
           "Yenimahalle / Ankara, Türkiye",
@@ -223,7 +223,7 @@ export const privacyPolicyContent: Record<"en" | "tr", PrivacyPolicyContent> = {
     lastUpdated: "8 Mart 2026",
     title: "Gizlilik Politikası",
     intro: [
-      'Ali Mertcan Karaman tarafından işletilen BM Nova ("BM Nova", "biz", "bize" veya "bizim"), mobil uygulamalar, web ürünleri, SaaS platformları ve yapay zekâ destekli yazılımlar geliştirir. Bu Gizlilik Politikası, web sitemizi ziyaret ettiğinizde, bizimle iletişime geçtiğinizde, ürün veya hizmetlerimizi kullandığınızda ya da bizimle ticari ilişki kurduğunuzda kişisel verilerinizi nasıl topladığımızı, kullandığımızı, sakladığımızı, paylaştığımızı ve koruduğumuzu açıklar.',
+      'Ali Mertcan Karaman tarafından işletilen BMNova ("BMNova", "biz", "bize" veya "bizim"), mobil uygulamalar, web ürünleri, SaaS platformları ve yapay zekâ destekli yazılımlar geliştirir. Bu Gizlilik Politikası, web sitemizi ziyaret ettiğinizde, bizimle iletişime geçtiğinizde, ürün veya hizmetlerimizi kullandığınızda ya da bizimle ticari ilişki kurduğunuzda kişisel verilerinizi nasıl topladığımızı, kullandığımızı, sakladığımızı, paylaştığımızı ve koruduğumuzu açıklar.',
       "Biz sadece prototip üretmeyiz; çalışan ürünler geliştiririz. Gizliliği de aynı ciddiyetle ele alırız.",
     ],
     sections: [
@@ -231,7 +231,7 @@ export const privacyPolicyContent: Record<"en" | "tr", PrivacyPolicyContent> = {
         number: 1,
         title: "Biz Kimiz",
         paragraphs: [
-          "BM Nova",
+          "BMNova",
           "İşleten: Ali Mertcan Karaman",
           "OSTİM OSB Mah. Cevat Dündar Cad. No: 1/1 İç Kapı No: 10",
           "Yenimahalle / Ankara, Türkiye",
@@ -259,10 +259,10 @@ export const privacyPolicyContent: Record<"en" | "tr", PrivacyPolicyContent> = {
         number: 3,
         title: "Veri Sorumlusu ve Veri İşleyen Rolümüz",
         paragraphs: [
-          "Bağlama göre BM Nova, veri sorumlusu veya veri işleyen olarak hareket edebilir.",
+          "Bağlama göre BMNova, veri sorumlusu veya veri işleyen olarak hareket edebilir.",
           "Aşağıdaki durumlarda genellikle veri sorumlusu olarak hareket ederiz: web sitemiz ve marka iletişimimiz; kendi ürün ve hizmetlerimiz; satış, destek ve iletişim süreçlerimiz; işe alım faaliyetlerimiz; pazarlama ve operasyon süreçlerimiz.",
           "Aşağıdaki durumlarda ise genellikle veri işleyen olarak hareket ederiz: bir müşteri için yazılım geliştirirken; bakım, destek, barındırma veya işletim hizmeti sunarken; kişisel verileri yalnızca müşterinin talimatları doğrultusunda işlerken.",
-          "BM Nova'nın başka bir şirket için geliştirdiği bir ürünü veya hizmeti kullanıyorsanız, verileriniz açısından asıl veri sorumlusu o şirket olabilir.",
+          "BMNova'nın başka bir şirket için geliştirdiği bir ürünü veya hizmeti kullanıyorsanız, verileriniz açısından asıl veri sorumlusu o şirket olabilir.",
         ],
       },
       {
@@ -312,8 +312,8 @@ export const privacyPolicyContent: Record<"en" | "tr", PrivacyPolicyContent> = {
         number: 7,
         title: "Yapay Zekâ ve Veri Kullanımı",
         paragraphs: [
-          "BM Nova yapay zekâ destekli ürünler ve özellikler geliştirdiği için bazı hizmetler; komutları, dosyaları, görselleri, metinleri ve diğer kullanıcı girdilerini işleyerek çıktı üretebilir veya yapay zekâ destekli işlevler sunabilir.",
-          "Şu anda BM Nova; komutları, yüklemeleri, çıktıları veya müşteri içeriklerini genel amaçlı yapay zekâ modellerini eğitmek ya da geliştirmek için kullanmamaktadır.",
+          "BMNova yapay zekâ destekli ürünler ve özellikler geliştirdiği için bazı hizmetler; komutları, dosyaları, görselleri, metinleri ve diğer kullanıcı girdilerini işleyerek çıktı üretebilir veya yapay zekâ destekli işlevler sunabilir.",
+          "Şu anda BMNova; komutları, yüklemeleri, çıktıları veya müşteri içeriklerini genel amaçlı yapay zekâ modellerini eğitmek ya da geliştirmek için kullanmamaktadır.",
           "Bu tür içerikleri yalnızca şu amaçlarla işleriz: talep edilen özelliği veya hizmeti sunmak; güvenliği sağlamak ve kötüye kullanımı önlemek; hata ayıklamak, destek sunmak ve teknik sorunları gidermek; hukuki yükümlülükleri yerine getirmek.",
           "Bir özelliği sunarken üçüncü taraf yapay zekâ veya bulut sağlayıcıları kullanırsak, ilgili veriler bu sağlayıcılar tarafından bizim adımıza ve uygulanabilir sözleşmesel korumalar ile hukuka uygun şekilde işlenebilir.",
           "Yapay zekâ tarafından üretilen içerikler hatalı, eksik veya bağlama uygun olmayabilir. Önemli kararlar öncesinde ayrıca gözden geçirilmelidir.",
@@ -402,7 +402,7 @@ export const privacyPolicyContent: Record<"en" | "tr", PrivacyPolicyContent> = {
         number: 18,
         title: "Müşteri Projeleri",
         paragraphs: [
-          "BM Nova, bir müşteri için ürün geliştiriyor veya işletiyorsa, ilgili kişisel verileri o müşteri adına işleyebilir. Bu durumlarda son kullanıcılar açısından müşterinin kendi gizlilik bildirimi geçerli olabilir ve bazı gizlilik taleplerinin öncelikle ilgili müşteriye yöneltilmesi gerekebilir.",
+          "BMNova, bir müşteri için ürün geliştiriyor veya işletiyorsa, ilgili kişisel verileri o müşteri adına işleyebilir. Bu durumlarda son kullanıcılar açısından müşterinin kendi gizlilik bildirimi geçerli olabilir ve bazı gizlilik taleplerinin öncelikle ilgili müşteriye yöneltilmesi gerekebilir.",
         ],
       },
       {
@@ -417,7 +417,7 @@ export const privacyPolicyContent: Record<"en" | "tr", PrivacyPolicyContent> = {
         title: "İletişim",
         paragraphs: [
           "Bu Gizlilik Politikası veya gizlilik uygulamalarımız hakkında soru, talep ya da şikâyetleriniz için:",
-          "BM Nova",
+          "BMNova",
           "İşleten: Ali Mertcan Karaman",
           "OSTİM OSB Mah. Cevat Dündar Cad. No: 1/1 İç Kapı No: 10",
           "Yenimahalle / Ankara, Türkiye",

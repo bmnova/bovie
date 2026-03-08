@@ -148,7 +148,7 @@ export const contentMap = {
     aboutUs: {
       back: "← bmnova.com",
       eyebrow: "Who We Are",
-      heading: "About BM Nova",
+      heading: "About BMNova",
       vision: {
         label: "Vision",
         text: "To become a driving force in digital transformation through AI-powered software solutions. Our vision is to be a globally recognized, innovation-led technology company shaping the future of intelligent digital systems.",
@@ -163,7 +163,7 @@ export const contentMap = {
     footer: {
       careers: "Careers",
       privacyPolicy: "Privacy Policy",
-      copyright: "BM Nova. All rights reserved.",
+      copyright: "BMNova. All rights reserved.",
     },
     privacyPolicy: {
       back: "← bmnova.com",
@@ -380,7 +380,7 @@ export const contentMap = {
     aboutUs: {
       back: "← bmnova.com",
       eyebrow: "Biz Kimiz",
-      heading: "BM Nova Hakkında",
+      heading: "BMNova Hakkında",
       vision: {
         label: "Vizyon",
         text: "Yapay zeka destekli yazılım çözümleriyle dijital dönüşümde itici güç olmak. Vizyonumuz; akıllı dijital sistemlerin geleceğini şekillendiren, küresel ölçekte tanınan, inovasyon odaklı bir teknoloji şirketi olmaktır.",
@@ -395,7 +395,7 @@ export const contentMap = {
     footer: {
       careers: "Kariyer",
       privacyPolicy: "Gizlilik Politikası",
-      copyright: "BM Nova. Tüm hakları saklıdır.",
+      copyright: "BMNova. Tüm hakları saklıdır.",
     },
     privacyPolicy: {
       back: "← bmnova.com",

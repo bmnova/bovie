@@ -3,7 +3,7 @@ import { getAllPosts } from "@/lib/posts";
 import { BlogHeader } from "./BlogHeader";
 
 export const metadata = {
-  title: "Blog — BM Nova",
+  title: "Blog — BMNova",
   description: "Thoughts on AI, Flutter, and building software.",
 };
 
