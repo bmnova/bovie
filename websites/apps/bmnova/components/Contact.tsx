@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@websites/shared/animations";
 import { contentMap } from "@/content";
 import { useLocale } from "@/app/locale-context";
+import { ContactMailLink } from "./ContactMailLink";
+import { ContactForm } from "./ContactForm";
 
 export function Contact() {
   const { locale } = useLocale();
@@ -34,13 +36,24 @@ export function Contact() {
             {contact.sub}
           </motion.p>
 
-          <motion.a
-            variants={fadeInUp}
-            href={`mailto:${contact.email}`}
-            className="mb-12 inline-block text-2xl font-bold text-accent underline decoration-accent/30 underline-offset-4 transition-all hover:decoration-accent md:text-3xl"
-          >
-            {contact.email}
-          </motion.a>
+          <motion.div variants={fadeInUp} className="mb-10">
+            <ContactForm toEmail={contact.email} form={contact.form} />
+          </motion.div>
+
+          <motion.p variants={fadeInUp} className="mb-4 text-sm text-muted">
+            {contact.orEmailDirectly}
+          </motion.p>
+          <motion.div variants={fadeInUp} className="mb-12">
+            <ContactMailLink
+              email={contact.email}
+              subject={contact.mailSubject}
+              body={contact.mailBody}
+              asButton={false}
+              className="inline-block text-2xl font-bold text-accent underline decoration-accent/30 underline-offset-4 transition-all hover:decoration-accent md:text-3xl"
+            >
+              {contact.email}
+            </ContactMailLink>
+          </motion.div>
 
           <motion.div
             variants={fadeInUp}
