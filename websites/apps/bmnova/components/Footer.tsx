@@ -24,6 +24,9 @@ export function Footer() {
           <Link href="/terms-of-use" className="text-xs text-muted transition-colors hover:text-accent">
             {footer.termsOfUse}
           </Link>
+          <Link href="/refund-policy" className="text-xs text-muted transition-colors hover:text-accent">
+            {footer.refundPolicy}
+          </Link>
           <p className="text-xs text-muted">
             © {new Date().getFullYear()} {footer.copyright}
           </p>

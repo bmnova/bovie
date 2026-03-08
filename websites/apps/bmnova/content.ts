@@ -164,6 +164,7 @@ export const contentMap = {
       careers: "Careers",
       privacyPolicy: "Privacy Policy",
       termsOfUse: "Terms of Use",
+      refundPolicy: "Refund Policy",
       copyright: "BMNova. All rights reserved.",
     },
     privacyPolicy: {
@@ -171,6 +172,10 @@ export const contentMap = {
       lastUpdatedLabel: "Last updated:",
     },
     termsOfUse: {
+      back: "← bmnova.com",
+      lastUpdatedLabel: "Last updated:",
+    },
+    refundPolicy: {
       back: "← bmnova.com",
       lastUpdatedLabel: "Last updated:",
     },
@@ -401,6 +406,7 @@ export const contentMap = {
       careers: "Kariyer",
       privacyPolicy: "Gizlilik Politikası",
       termsOfUse: "Kullanım Koşulları",
+      refundPolicy: "İade Politikası",
       copyright: "BMNova. Tüm hakları saklıdır.",
     },
     privacyPolicy: {
@@ -408,6 +414,10 @@ export const contentMap = {
       lastUpdatedLabel: "Son güncelleme:",
     },
     termsOfUse: {
+      back: "← bmnova.com",
+      lastUpdatedLabel: "Son güncelleme:",
+    },
+    refundPolicy: {
       back: "← bmnova.com",
       lastUpdatedLabel: "Son güncelleme:",
     },
