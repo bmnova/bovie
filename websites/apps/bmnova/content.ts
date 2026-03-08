@@ -165,6 +165,7 @@ export const contentMap = {
       privacyPolicy: "Privacy Policy",
       termsOfUse: "Terms of Use",
       refundPolicy: "Refund Policy",
+      accountDataDeletion: "Account & Data Deletion",
       copyright: "BMNova. All rights reserved.",
     },
     privacyPolicy: {
@@ -176,6 +177,10 @@ export const contentMap = {
       lastUpdatedLabel: "Last updated:",
     },
     refundPolicy: {
+      back: "← bmnova.com",
+      lastUpdatedLabel: "Last updated:",
+    },
+    accountDataDeletion: {
       back: "← bmnova.com",
       lastUpdatedLabel: "Last updated:",
     },
@@ -407,6 +412,7 @@ export const contentMap = {
       privacyPolicy: "Gizlilik Politikası",
       termsOfUse: "Kullanım Koşulları",
       refundPolicy: "İade Politikası",
+      accountDataDeletion: "Hesap ve Veri Silme",
       copyright: "BMNova. Tüm hakları saklıdır.",
     },
     privacyPolicy: {
@@ -418,6 +424,10 @@ export const contentMap = {
       lastUpdatedLabel: "Son güncelleme:",
     },
     refundPolicy: {
+      back: "← bmnova.com",
+      lastUpdatedLabel: "Son güncelleme:",
+    },
+    accountDataDeletion: {
       back: "← bmnova.com",
       lastUpdatedLabel: "Son güncelleme:",
     },
