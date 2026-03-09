@@ -16,6 +16,14 @@
     "status": "in_review"
   },
   {
+    "title": "Bloomish",
+    "description": "Generate stunning AI bouquets and send them as gifts. Share moments of joy with anyone, anywhere — beautifully wrapped and personally meaningful.",
+    "tags": ["Mobile", "Flutter", "AI", "Social"],
+    "href": "/projects/bloomish",
+    "color": "#F43F5E",
+    "status": "in_development"
+  },
+  {
     "title": "DietPal",
     "description": "AI-powered diet app that personalizes your plan based on your needs and lifestyle. Track food, exercise, and well-being — then get actionable insights to hit your goals.",
     "tags": ["Mobile", "Flutter", "AI"],
