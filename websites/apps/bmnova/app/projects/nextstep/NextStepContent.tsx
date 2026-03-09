@@ -39,8 +39,21 @@ export function NextStepContent() {
         />
       </section>
 
+      {/* Hero banner */}
+      <section className="px-6 pt-4 md:px-12">
+        <div className="mx-auto max-w-5xl overflow-hidden rounded-2xl">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/projects/nextstep-hero.jpg"
+            alt="NextStep — from confusion to clarity"
+            className="w-full object-cover"
+            loading="lazy"
+          />
+        </div>
+      </section>
+
       {/* Core loop visualization */}
-      <section className="px-6 pb-4 pt-4 md:px-12">
+      <section className="px-6 pb-4 pt-6 md:px-12">
         <div className="mx-auto max-w-2xl">
           <div className="flex items-center justify-center gap-3 rounded-2xl border border-border bg-white px-8 py-6">
             {(["Reflection", "One Question", "Next Step"] as const).map(
