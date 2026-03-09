@@ -91,6 +91,61 @@ export function NextStepContent() {
         </div>
       </section>
 
+      {/* Tech Stack */}
+      <section className="px-6 pb-20 md:px-12">
+        <div className="mx-auto max-w-5xl">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-[#6366F1]">
+            {nextstep.techEyebrow}
+          </p>
+          <h2 className="mb-10 text-3xl font-bold tracking-tight text-primary md:text-4xl">
+            {nextstep.techHeading}
+          </h2>
+
+          {/* Architecture flow */}
+          <div className="mb-10 rounded-2xl border border-border bg-white px-8 py-6">
+            <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-muted">
+              {nextstep.architectureLabel}
+            </p>
+            <div className="flex flex-wrap items-center gap-2">
+              {nextstep.architectureSteps.map((step, i) => (
+                <div key={step} className="flex items-center gap-2">
+                  <span className="rounded-lg bg-[#6366F1]/8 px-3 py-1.5 text-sm font-medium text-[#6366F1]">
+                    {step}
+                  </span>
+                  {i < nextstep.architectureSteps.length - 1 && (
+                    <span className="text-muted opacity-40">→</span>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Tech groups */}
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {nextstep.techGroups.map((group) => (
+              <div
+                key={group.group}
+                className="rounded-2xl border border-border bg-white p-6"
+              >
+                <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-muted">
+                  {group.group}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {group.items.map((item) => (
+                    <span
+                      key={item}
+                      className="rounded-full border border-border px-3 py-1 text-xs font-medium text-primary"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="px-6 pb-28 pt-4 text-center md:px-12">
         <div className="mx-auto max-w-xl">
