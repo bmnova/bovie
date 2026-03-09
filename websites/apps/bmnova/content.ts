@@ -411,6 +411,43 @@ I'm reaching out via your website.`,
         "DietPal is currently in development. Get in touch if you'd like early access or have questions.",
       ctaButton: "Get in touch →",
     },
+    bloomish: {
+      back: "← bmnova.com",
+      eyebrow: "What Bloomish does",
+      heading: "Turn a feeling into a bouquet. Send it to someone who matters.",
+      description:
+        "Generate stunning AI bouquets and send them as gifts. Share moments of joy with anyone, anywhere — beautifully wrapped and personally meaningful.",
+      features: [
+        {
+          icon: "💐",
+          title: "AI-generated bouquets",
+          description:
+            "Describe a feeling, a person, or an occasion — Bloomish generates a unique bouquet tailored to your words. Every arrangement is one of a kind.",
+        },
+        {
+          icon: "🎁",
+          title: "Send as a gift",
+          description:
+            "Share your bouquet with anyone via a link or in-app message. Recipients get a beautiful, personalized gift experience — no delivery required.",
+        },
+        {
+          icon: "📸",
+          title: "Save & share moments",
+          description:
+            "Keep your favorite arrangements in your collection. Share bouquets on social media or with your close circle to brighten their day.",
+        },
+        {
+          icon: "✨",
+          title: "Endlessly customizable",
+          description:
+            "Choose flowers, colors, wrapping, and style — or let the AI surprise you. Every bouquet reflects a real sentiment, not a generic template.",
+        },
+      ],
+      ctaHeading: "Want to try Bloomish?",
+      ctaSub:
+        "Bloomish is currently in development. Get in touch if you'd like early access or have questions.",
+      ctaButton: "Get in touch →",
+    },
   },
   tr: {
     nav: [
@@ -771,6 +808,43 @@ Siteniz üzerinden size ulaşıyorum.`,
       ctaHeading: "DietPal'ı denemek ister misiniz?",
       ctaSub:
         "DietPal şu anda geliştirme aşamasında. Erken erişim veya sorularınız için bize ulaşın.",
+      ctaButton: "İletişime geç →",
+    },
+    bloomish: {
+      back: "← bmnova.com",
+      eyebrow: "Bloomish ne yapar",
+      heading: "Bir duyguyu bukete dönüştür. Önemli birine gönder.",
+      description:
+        "Yapay zeka ile muhteşem buketler oluştur ve hediye olarak gönder. Sevincini herkesle, her yerde paylaş — güzelce sarılmış ve kişisel anlam taşıyan.",
+      features: [
+        {
+          icon: "💐",
+          title: "Yapay zeka ile buket oluşturma",
+          description:
+            "Bir duyguyu, bir kişiyi ya da bir anı tarif et — Bloomish sözlerine özel benzersiz bir buket oluşturur. Her düzenleme tek ve özgündür.",
+        },
+        {
+          icon: "🎁",
+          title: "Hediye olarak gönder",
+          description:
+            "Buketini bir bağlantı veya uygulama içi mesajla herkese gönder. Alıcılar güzel ve kişiselleştirilmiş bir hediye deneyimi yaşar — teslimat gerekmez.",
+        },
+        {
+          icon: "📸",
+          title: "Anları kaydet ve paylaş",
+          description:
+            "En sevdiğin düzenlemeleri koleksiyonunda sakla. Buketleri sosyal medyada veya yakın çevrende paylaşarak günlerini aydınlat.",
+        },
+        {
+          icon: "✨",
+          title: "Sonsuz kişiselleştirme",
+          description:
+            "Çiçek, renk, ambalaj ve stil seç — ya da yapay zekanın sürpriz yapmasına izin ver. Her buket gerçek bir duyguyu yansıtır, jenerik bir şablon değil.",
+        },
+      ],
+      ctaHeading: "Bloomish'i denemek ister misiniz?",
+      ctaSub:
+        "Bloomish şu anda geliştirme aşamasında. Erken erişim veya sorularınız için bize ulaşın.",
       ctaButton: "İletişime geç →",
     },
   },
