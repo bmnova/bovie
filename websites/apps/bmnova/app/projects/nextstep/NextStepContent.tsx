@@ -40,7 +40,7 @@ export function NextStepContent() {
       </section>
 
       {/* Core loop visualization */}
-      <section className="px-6 pt-4 pb-4 md:px-12">
+      <section className="px-6 pb-4 pt-4 md:px-12">
         <div className="mx-auto max-w-2xl">
           <div className="flex items-center justify-center gap-3 rounded-2xl border border-border bg-white px-8 py-6">
             {(["Reflection", "One Question", "Next Step"] as const).map(
@@ -50,7 +50,9 @@ export function NextStepContent() {
                     <div className="mb-1 text-xs font-semibold uppercase tracking-widest text-[#6366F1]">
                       {String(i + 1).padStart(2, "0")}
                     </div>
-                    <div className="text-sm font-medium text-primary">{step}</div>
+                    <div className="text-sm font-medium text-primary">
+                      {step}
+                    </div>
                   </div>
                   {i < 2 && (
                     <span className="text-lg text-muted opacity-40">→</span>
@@ -91,57 +93,87 @@ export function NextStepContent() {
         </div>
       </section>
 
-      {/* Tech Stack */}
+      {/* Coaches */}
       <section className="px-6 pb-20 md:px-12">
         <div className="mx-auto max-w-5xl">
           <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-[#6366F1]">
-            {nextstep.techEyebrow}
+            {nextstep.coachesEyebrow}
           </p>
-          <h2 className="mb-10 text-3xl font-bold tracking-tight text-primary md:text-4xl">
-            {nextstep.techHeading}
+          <h2 className="mb-14 text-3xl font-bold tracking-tight text-primary md:text-4xl">
+            {nextstep.coachesHeading}
           </h2>
 
-          {/* Architecture flow */}
-          <div className="mb-10 rounded-2xl border border-border bg-white px-8 py-6">
-            <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-muted">
-              {nextstep.architectureLabel}
-            </p>
-            <div className="flex flex-wrap items-center gap-2">
-              {nextstep.architectureSteps.map((step, i) => (
-                <div key={step} className="flex items-center gap-2">
-                  <span className="rounded-lg bg-[#6366F1]/8 px-3 py-1.5 text-sm font-medium text-[#6366F1]">
-                    {step}
-                  </span>
-                  {i < nextstep.architectureSteps.length - 1 && (
-                    <span className="text-muted opacity-40">→</span>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Tech groups */}
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {nextstep.techGroups.map((group) => (
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {nextstep.coaches.map((coach) => (
               <div
-                key={group.group}
-                className="rounded-2xl border border-border bg-white p-6"
+                key={coach.name}
+                className="flex flex-col justify-between rounded-2xl border border-border bg-white p-6"
               >
-                <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-muted">
-                  {group.group}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {group.items.map((item) => (
-                    <span
-                      key={item}
-                      className="rounded-full border border-border px-3 py-1 text-xs font-medium text-primary"
-                    >
-                      {item}
-                    </span>
-                  ))}
+                <div>
+                  <div className="mb-3 flex items-center justify-between">
+                    <h3 className="font-bold text-primary">{coach.name}</h3>
+                    {coach.pro && (
+                      <span className="rounded-full bg-[#6366F1]/10 px-2.5 py-0.5 text-xs font-semibold text-[#6366F1]">
+                        {nextstep.proLabel}
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-sm leading-relaxed text-muted">
+                    {coach.description}
+                  </p>
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Free vs Pro */}
+      <section className="px-6 pb-20 md:px-12">
+        <div className="mx-auto max-w-5xl">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-[#6366F1]">
+            {nextstep.tiersEyebrow}
+          </p>
+          <h2 className="mb-14 text-3xl font-bold tracking-tight text-primary md:text-4xl">
+            {nextstep.tiersHeading}
+          </h2>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            {/* Free */}
+            <div className="rounded-2xl border border-border bg-white p-8">
+              <p className="mb-6 text-lg font-bold text-primary">
+                {nextstep.freeTier.name}
+              </p>
+              <ul className="space-y-3">
+                {nextstep.freeTier.items.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-sm text-muted">
+                    <span className="mt-0.5 text-[#6366F1]">✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Pro */}
+            <div
+              className="rounded-2xl border border-[#6366F1]/20 p-8"
+              style={{
+                background:
+                  "radial-gradient(ellipse 120% 80% at 50% -20%, #6366F110, transparent)",
+              }}
+            >
+              <p className="mb-6 text-lg font-bold text-primary">
+                {nextstep.proTier.name}
+              </p>
+              <ul className="space-y-3">
+                {nextstep.proTier.items.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-sm text-muted">
+                    <span className="mt-0.5 text-[#6366F1]">✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
