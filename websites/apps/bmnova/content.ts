@@ -292,13 +292,13 @@ I'm reaching out via your website.`,
           icon: "🎯",
           title: "Purpose-built AI coaches",
           description:
-            "Not a generic chatbot. NextStep offers focused coaches for planning, decisions, habits, review, and focus — each designed for a specific type of thinking.",
+            "Not a generic chatbot. NextStep offers focused coaches for planning, decisions, habits, weekly review, and focus — each with its own rules, tone, and structure.",
         },
         {
           icon: "✅",
           title: "Action-first output",
           description:
-            "Every response ends with a concrete, small action you can take immediately — often in under five minutes.",
+            "Every response ends with exactly one concrete action — small enough to do immediately, often in under five minutes.",
         },
         {
           icon: "🧘",
@@ -307,12 +307,67 @@ I'm reaching out via your website.`,
             "No dashboards, graphs, or setup complexity. Every screen answers exactly one question. Close the app when you know what to do.",
         },
         {
-          icon: "🔁",
-          title: "Reflection → Question → Next Step",
+          icon: "🔒",
+          title: "Safe and private by design",
           description:
-            "Each session follows a simple, repeatable structure designed to reduce noise and increase clarity — not to keep you engaged longer.",
+            "AI requests never leave through the client. All calls are proxied server-side so API keys stay hidden and every response is validated before you see it.",
         },
       ],
+      coachesEyebrow: "Meet the coaches",
+      coachesHeading: "A coach for every kind of stuck.",
+      coaches: [
+        {
+          name: "Planner",
+          description: "Break ambiguous goals into a clear next action.",
+          pro: false,
+        },
+        {
+          name: "Decision Maker",
+          description: "Cut through options and commit to one path.",
+          pro: false,
+        },
+        {
+          name: "Habit Builder",
+          description: "Design one small habit worth starting today.",
+          pro: false,
+        },
+        {
+          name: "Focus Mode",
+          description: "Identify the single most important thing right now.",
+          pro: false,
+        },
+        {
+          name: "Weekly Review",
+          description: "Reflect on the week and set one intention for the next.",
+          pro: true,
+        },
+        {
+          name: "Creator Consistency",
+          description: "Stay consistent on your creative work without burning out.",
+          pro: true,
+        },
+      ],
+      proLabel: "Pro",
+      tiersEyebrow: "Pricing",
+      tiersHeading: "Start free. Unlock more when you need it.",
+      freeTier: {
+        name: "Free",
+        items: [
+          "Limited coaching conversations",
+          "Core coaches",
+          "Basic personalization",
+        ],
+      },
+      proTier: {
+        name: "Pro",
+        items: [
+          "Unlimited coaching conversations",
+          "All coaches, including advanced",
+          "Saved summaries and reusable systems",
+          "Custom coaches",
+          "Deeper personalization",
+        ],
+      },
       ctaHeading: "Want to try NextStep?",
       ctaSub:
         "NextStep is currently in development. Get in touch if you'd like early access or have questions.",
@@ -599,13 +654,13 @@ Siteniz üzerinden size ulaşıyorum.`,
           icon: "🎯",
           title: "Amaca özel yapay zeka koçları",
           description:
-            "Genel amaçlı bir sohbet botu değil. NextStep; planlama, karar verme, alışkanlıklar, gözden geçirme ve odaklanma için özel koçlar sunar.",
+            "Genel amaçlı bir sohbet botu değil. NextStep; planlama, karar verme, alışkanlıklar, haftalık gözden geçirme ve odaklanma için özel koçlar sunar — her birinin kendi kuralları, tonu ve yapısı vardır.",
         },
         {
           icon: "✅",
           title: "Eyleme yönelik çıktı",
           description:
-            "Her yanıt, genellikle beş dakika içinde yapabileceğiniz somut ve küçük bir eylemle biter.",
+            "Her yanıt tam olarak bir somut eylemle biter — hemen yapılabilecek kadar küçük, genellikle beş dakika içinde gerçekleştirilebilir.",
         },
         {
           icon: "🧘",
@@ -614,12 +669,67 @@ Siteniz üzerinden size ulaşıyorum.`,
             "Dashboard, grafik veya karmaşık kurulum yok. Her ekran tam olarak bir soruyu yanıtlar. Ne yapacağınızı bildiğinizde uygulamayı kapatın.",
         },
         {
-          icon: "🔁",
-          title: "Yansıma → Soru → Sonraki Adım",
+          icon: "🔒",
+          title: "Tasarımdan gelen güvenlik ve gizlilik",
           description:
-            "Her oturum, gürültüyü azaltmak ve netliği artırmak için tasarlanmış basit ve tekrarlanabilir bir yapıyı izler — sizi daha uzun süre ekranda tutmak için değil.",
+            "Yapay zeka istekleri istemci üzerinden asla dışarı çıkmaz. Tüm çağrılar sunucu tarafında yönetilir; API anahtarları gizli kalır ve her yanıt size ulaşmadan önce doğrulanır.",
         },
       ],
+      coachesEyebrow: "Koçlarla tanışın",
+      coachesHeading: "Her türlü tıkanma için bir koç.",
+      coaches: [
+        {
+          name: "Planlayıcı",
+          description: "Belirsiz hedefleri net bir sonraki eyleme dönüştürün.",
+          pro: false,
+        },
+        {
+          name: "Karar Verici",
+          description: "Seçenekleri eleyin ve tek bir yola bağlanın.",
+          pro: false,
+        },
+        {
+          name: "Alışkanlık Oluşturucu",
+          description: "Bugün başlamaya değer küçük bir alışkanlık tasarlayın.",
+          pro: false,
+        },
+        {
+          name: "Odak Modu",
+          description: "Şu an en önemli tek şeyi belirleyin.",
+          pro: false,
+        },
+        {
+          name: "Haftalık Değerlendirme",
+          description: "Haftayı gözden geçirin ve bir sonraki için tek bir niyet belirleyin.",
+          pro: true,
+        },
+        {
+          name: "Yaratıcı Tutarlılık",
+          description: "Tükenmeden yaratıcı çalışmanızda tutarlı kalın.",
+          pro: true,
+        },
+      ],
+      proLabel: "Pro",
+      tiersEyebrow: "Fiyatlandırma",
+      tiersHeading: "Ücretsiz başlayın. İhtiyaç duyanlar için daha fazlası.",
+      freeTier: {
+        name: "Ücretsiz",
+        items: [
+          "Sınırlı koçluk konuşması",
+          "Temel koçlar",
+          "Temel kişiselleştirme",
+        ],
+      },
+      proTier: {
+        name: "Pro",
+        items: [
+          "Sınırsız koçluk konuşması",
+          "Gelişmiş koçlar dahil tüm koçlar",
+          "Kaydedilmiş özetler ve yeniden kullanılabilir sistemler",
+          "Özel koçlar",
+          "Derin kişiselleştirme",
+        ],
+      },
       ctaHeading: "NextStep'i denemek ister misiniz?",
       ctaSub:
         "NextStep şu anda geliştirme aşamasında. Erken erişim veya sorularınız için bize ulaşın.",
