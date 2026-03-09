@@ -8,6 +8,14 @@
     "status": "in_review"
   },
   {
+    "title": "NextStep",
+    "description": "A minimalist AI coaching app that turns overthinking into action. One reflection, one question, one clear next step.",
+    "tags": ["Mobile", "Flutter", "AI"],
+    "href": "/projects/nextstep",
+    "color": "#6366F1",
+    "status": "in_review"
+  },
+  {
     "title": "DietPal",
     "description": "AI-powered diet app that personalizes your plan based on your needs and lifestyle. Track food, exercise, and well-being — then get actionable insights to hit your goals.",
     "tags": ["Mobile", "Flutter", "AI"],

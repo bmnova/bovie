@@ -12,6 +12,7 @@ const partners = [
 // Project image URLs served from public/projects/
 const projectImages: Record<string, string> = {
   Offer: "/projects/offer.avif",
+  NextStep: "/projects/nextstep.png",
   DietPal: "/projects/dietpal.png",
   Pixvibe: "/projects/pixvibe.avif",
   Collagevibe: "/projects/collagevibe.png",
@@ -21,6 +22,8 @@ const projectImages: Record<string, string> = {
 const trProjectDescriptions: Record<string, string> = {
   Offer:
     "Yerel işletmelerde çevrenizdekilere içecek, atıştırmalık veya başka şeyler ısmarlayarak onlarla bağlantı kurun. Buzu kırın, yeni yerler keşfedin ve gerçek bağlar kurun.",
+  NextStep:
+    "Aşırı düşünmeyi eyleme dönüştüren minimalist bir yapay zeka koçluk uygulaması. Bir yansıma, bir soru, bir net sonraki adım.",
   DietPal:
     "İhtiyaçlarınıza ve yaşam tarzınıza göre planınızı kişiselleştiren yapay zeka destekli diyet uygulaması. Yiyecekleri, egzersizi ve refahı takip edin — ardından hedeflerinize ulaşmak için içgörüler alın.",
   Pixvibe:
@@ -276,6 +279,43 @@ I'm reaching out via your website.`,
       ctaHeading: "Interested in Offer?",
       ctaSub:
         "We're actively developing Offer. Reach out if you'd like to know more or get early access.",
+      ctaButton: "Get in touch →",
+    },
+    nextstep: {
+      back: "← bmnova.com",
+      eyebrow: "What NextStep does",
+      heading: "Stop thinking in circles. Start moving.",
+      description:
+        "A minimalist AI coaching app that turns overthinking into action. One reflection, one question, one clear next step.",
+      features: [
+        {
+          icon: "🎯",
+          title: "Purpose-built AI coaches",
+          description:
+            "Not a generic chatbot. NextStep offers focused coaches for planning, decisions, habits, review, and focus — each designed for a specific type of thinking.",
+        },
+        {
+          icon: "✅",
+          title: "Action-first output",
+          description:
+            "Every response ends with a concrete, small action you can take immediately — often in under five minutes.",
+        },
+        {
+          icon: "🧘",
+          title: "Calm, minimalist UX",
+          description:
+            "No dashboards, graphs, or setup complexity. Every screen answers exactly one question. Close the app when you know what to do.",
+        },
+        {
+          icon: "🔁",
+          title: "Reflection → Question → Next Step",
+          description:
+            "Each session follows a simple, repeatable structure designed to reduce noise and increase clarity — not to keep you engaged longer.",
+        },
+      ],
+      ctaHeading: "Want to try NextStep?",
+      ctaSub:
+        "NextStep is currently in development. Get in touch if you'd like early access or have questions.",
       ctaButton: "Get in touch →",
     },
     dietpal: {
@@ -546,6 +586,43 @@ Siteniz üzerinden size ulaşıyorum.`,
       ctaHeading: "Offer'a ilginiz mi var?",
       ctaSub:
         "Offer'ı aktif olarak geliştiriyoruz. Daha fazla bilgi almak veya erken erişim için bize ulaşın.",
+      ctaButton: "İletişime geç →",
+    },
+    nextstep: {
+      back: "← bmnova.com",
+      eyebrow: "NextStep ne yapar",
+      heading: "Düşünce döngüsünü kır. Harekete geç.",
+      description:
+        "Aşırı düşünmeyi eyleme dönüştüren minimalist bir yapay zeka koçluk uygulaması. Bir yansıma, bir soru, bir net sonraki adım.",
+      features: [
+        {
+          icon: "🎯",
+          title: "Amaca özel yapay zeka koçları",
+          description:
+            "Genel amaçlı bir sohbet botu değil. NextStep; planlama, karar verme, alışkanlıklar, gözden geçirme ve odaklanma için özel koçlar sunar.",
+        },
+        {
+          icon: "✅",
+          title: "Eyleme yönelik çıktı",
+          description:
+            "Her yanıt, genellikle beş dakika içinde yapabileceğiniz somut ve küçük bir eylemle biter.",
+        },
+        {
+          icon: "🧘",
+          title: "Sakin, minimalist arayüz",
+          description:
+            "Dashboard, grafik veya karmaşık kurulum yok. Her ekran tam olarak bir soruyu yanıtlar. Ne yapacağınızı bildiğinizde uygulamayı kapatın.",
+        },
+        {
+          icon: "🔁",
+          title: "Yansıma → Soru → Sonraki Adım",
+          description:
+            "Her oturum, gürültüyü azaltmak ve netliği artırmak için tasarlanmış basit ve tekrarlanabilir bir yapıyı izler — sizi daha uzun süre ekranda tutmak için değil.",
+        },
+      ],
+      ctaHeading: "NextStep'i denemek ister misiniz?",
+      ctaSub:
+        "NextStep şu anda geliştirme aşamasında. Erken erişim veya sorularınız için bize ulaşın.",
       ctaButton: "İletişime geç →",
     },
     dietpal: {
