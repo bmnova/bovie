@@ -173,3 +173,9 @@ Before publishing any post, verify:
 - [ ] Content is accurate and current
 - [ ] Schema markup added (FAQ and/or HowTo where applicable)
 - [ ] Mobile-friendly and fast to load
+
+---
+
+## Backlog
+
+- [ ] **Blog i18n — Türkçe lokalizasyon**: Blog altyapısına dil desteği ekle. Frontmatter'a `lang` field eklenecek, `posts.ts` locale bazlı filtrelenecek, `/blog` sayfası locale'e göre doğru postları gösterecek. URL'ler Türkçe slug ile olacak (örn. `/blog/saglikli-kilo-yonetimi`). Mevcut tüm postların Türkçe versiyonları yazılacak. Öncelik yüksek — Türkçe GEO/AEO rekabeti düşük, etki büyük.
