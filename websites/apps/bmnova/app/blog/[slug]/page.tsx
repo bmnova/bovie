@@ -14,7 +14,23 @@ export async function generateMetadata({
 }) {
   const post = await getPost(params.slug);
   if (!post) return {};
-  return { title: `${post.title} — BMNova`, description: post.summary };
+  return {
+    title: `${post.title} — BMNova`,
+    description: post.summary,
+    openGraph: {
+      title: post.title,
+      description: post.summary,
+      type: "article",
+      publishedTime: post.date,
+      authors: ["BMNova"],
+      tags: post.tags,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.summary,
+    },
+  };
 }
 
 export default async function PostPage({
@@ -36,13 +52,17 @@ export default async function PostPage({
             ← All posts
           </Link>
 
-          <span className="mb-3 block text-xs font-semibold uppercase tracking-widest text-accent">
-            {new Date(post.date).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </span>
+          <div className="mb-3 flex items-center gap-3">
+            <span className="text-xs font-semibold uppercase tracking-widest text-accent">
+              {new Date(post.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </span>
+            <span className="text-xs text-muted/60">·</span>
+            <span className="text-xs text-muted">{post.readingTime} min read</span>
+          </div>
 
           <h1 className="mb-4 text-4xl font-bold tracking-tight text-primary md:text-5xl">
             {post.title}

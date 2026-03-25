@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -13,8 +13,6 @@ import { Thumbnail } from "@websites/shared/assets";
 import { contentMap } from "@/content";
 import { useLocale } from "@/app/locale-context";
 
-const LONG_PRESS_MS = 500;
-
 export function Projects() {
   const { locale } = useLocale();
   const { projects } = contentMap[locale];
@@ -22,11 +20,9 @@ export function Projects() {
     src: string;
     alt: string;
   } | null>(null);
-  const preventNextClickRef = useRef(false);
 
   const openFullscreen = useCallback((src: string, alt: string) => {
     setFullscreenImage({ src, alt });
-    preventNextClickRef.current = true;
   }, []);
 
   const closeFullscreen = useCallback(() => {
@@ -67,9 +63,7 @@ export function Projects() {
               >
                 <ProjectCard
                   project={project}
-                  longPressToViewFull={projects.longPressToViewFull}
                   onOpenFullscreen={openFullscreen}
-                  preventNextClickRef={preventNextClickRef}
                 />
               </motion.div>
             ))}
@@ -144,29 +138,9 @@ function FullscreenImageOverlay({
   );
 }
 
-function useLongPress(onLongPress: () => void) {
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const clearTimer = useCallback(() => {
-    if (timerRef.current) {
-      clearTimeout(timerRef.current);
-      timerRef.current = null;
-    }
-  }, []);
-
-  const start = useCallback(() => {
-    clearTimer();
-    timerRef.current = setTimeout(onLongPress, LONG_PRESS_MS);
-  }, [onLongPress, clearTimer]);
-
-  return { onTouchStart: start, onTouchEnd: clearTimer, onTouchCancel: clearTimer, onMouseDown: start, onMouseUp: clearTimer, onMouseLeave: clearTimer };
-}
-
 function ProjectCard({
   project,
-  longPressToViewFull,
   onOpenFullscreen,
-  preventNextClickRef,
 }: {
   project: {
     title: string;
@@ -177,28 +151,10 @@ function ProjectCard({
     image?: string;
     status?: string;
   };
-  longPressToViewFull: string;
   onOpenFullscreen: (src: string, alt: string) => void;
-  preventNextClickRef: React.MutableRefObject<boolean>;
 }) {
   const { locale } = useLocale();
   const inReviewLabel = locale === "tr" ? "İncelemede" : "In Review";
-  const longPress = useLongPress(
-    useCallback(() => {
-      if (project.image) onOpenFullscreen(project.image, project.title);
-    }, [project.image, project.title, onOpenFullscreen])
-  );
-
-  const handleImageClick = useCallback(
-    (e: React.MouseEvent) => {
-      if (preventNextClickRef.current) {
-        e.preventDefault();
-        e.stopPropagation();
-        preventNextClickRef.current = false;
-      }
-    },
-    [preventNextClickRef]
-  );
 
   const inner = (
     <motion.div
@@ -207,47 +163,30 @@ function ProjectCard({
     >
       <div className="relative">
         {project.image ? (
-          <div
-            className="relative aspect-video w-full overflow-hidden"
-            {...longPress}
-            onClick={handleImageClick}
-            onContextMenu={(e) => e.preventDefault()}
-            role="button"
-            tabIndex={0}
-            aria-label={`${longPressToViewFull} — ${project.title}`}
-          >
+          <div className="relative aspect-video w-full overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={project.image}
               alt={project.title}
               className="h-full w-full object-cover object-top"
             />
-            <motion.div
-              className="pointer-events-none absolute inset-x-0 bottom-0 flex items-center justify-center gap-2 bg-gradient-to-t from-black/75 to-transparent py-2.5 text-xs font-medium text-white/95"
-              initial={false}
-              animate={{ opacity: [0.6, 1, 0.6] }}
-              transition={{
-                duration: 2.5,
-                repeat: Infinity,
-                ease: "easeInOut",
+            <button
+              type="button"
+              className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-200 group-hover:bg-black/40"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                onOpenFullscreen(project.image!, project.title);
               }}
+              aria-label={`View full image — ${project.title}`}
             >
-              <svg
-                className="h-3.5 w-3.5 shrink-0"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
-                />
-              </svg>
-              <span>{longPressToViewFull}</span>
-            </motion.div>
+              <span className="flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1.5 text-xs font-semibold text-primary opacity-0 shadow transition-opacity duration-200 group-hover:opacity-100">
+                <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                </svg>
+                View
+              </span>
+            </button>
           </div>
         ) : (
           <Thumbnail
