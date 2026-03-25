@@ -10,11 +10,11 @@ export function Footer() {
 
   return (
     <footer className="border-t border-border px-6 py-8 md:px-12">
-      <div className="mx-auto flex max-w-6xl items-center justify-between">
+      <div className="mx-auto flex max-w-6xl flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
         <span className="font-mono text-sm font-bold text-primary">
           bm<span className="text-accent">nova</span>
         </span>
-        <div className="flex items-center gap-6">
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
           <Link href="/careers" className="text-xs text-muted transition-colors hover:text-accent">
             {footer.careers}
           </Link>

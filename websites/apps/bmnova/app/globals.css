@@ -15,6 +15,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
@@ -22,6 +23,7 @@ body {
   color: #0f172a;
   font-family: var(--font-geist-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
 }
 
 ::selection {
