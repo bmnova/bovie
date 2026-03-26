@@ -5,7 +5,7 @@ import { BlogHeader } from "./BlogHeader";
 
 export const metadata = {
   title: "Blog — BMNova",
-  description: "Thoughts on AI, Flutter, and building software.",
+  description: "Evidence-based writing on health, productivity, psychology, and building software products.",
 };
 
 export default function BlogPage() {
@@ -20,24 +20,28 @@ export default function BlogPage() {
           {posts.length === 0 ? (
             <p className="text-muted">No posts yet. Check back soon.</p>
           ) : (
-            <ul className="space-y-10">
+            <ul className="divide-y divide-border">
               {posts.map((post) => (
                 <li key={post.slug}>
-                  <Link href={`/blog/${post.slug}`} className="group block">
-                    <span className="mb-1 block text-xs font-semibold uppercase tracking-widest text-accent">
-                      {new Date(post.date).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}
-                    </span>
+                  <Link href={`/blog/${post.slug}`} className="group block py-10">
+                    <div className="mb-2 flex items-center gap-3">
+                      <span className="text-xs font-semibold uppercase tracking-widest text-accent">
+                        {new Date(post.date).toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })}
+                      </span>
+                      <span className="text-xs text-muted/60">·</span>
+                      <span className="text-xs text-muted">{post.readingTime} min read</span>
+                    </div>
                     <h2 className="mb-2 text-xl font-bold text-primary transition-colors group-hover:text-accent">
                       {post.title}
                     </h2>
-                    <p className="mb-3 text-sm leading-relaxed text-muted">
+                    <p className="mb-4 text-sm leading-relaxed text-muted">
                       {post.summary}
                     </p>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap items-center gap-2">
                       {post.tags.map((tag) => (
                         <span
                           key={tag}
@@ -46,6 +50,9 @@ export default function BlogPage() {
                           {tag}
                         </span>
                       ))}
+                      <span className="ml-auto text-xs font-semibold text-accent transition-opacity group-hover:opacity-70">
+                        Read →
+                      </span>
                     </div>
                   </Link>
                 </li>

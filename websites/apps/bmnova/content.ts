@@ -76,7 +76,6 @@ export const contentMap = {
     projects: {
       eyebrow: "Our Work",
       heading: "Products & Projects",
-      longPressToViewFull: "Long press to view full",
       items: buildProjects("en"),
     },
     services: {
@@ -487,7 +486,6 @@ I'm reaching out via your website.`,
     projects: {
       eyebrow: "Çalışmalarımız",
       heading: "Ürünler & Projeler",
-      longPressToViewFull: "Tam görmek için basılı tutun",
       items: buildProjects("tr"),
     },
     services: {
