@@ -422,6 +422,56 @@ I'm reaching out via your website.`,
         "DietPal is currently in development. Get in touch if you'd like early access or have questions.",
       ctaButton: "Get in touch →",
     },
+    fitvibe: {
+      back: "← bmnova.com",
+      eyebrow: "What FitVibe does",
+      heading: "Your AI-powered digital wardrobe. Style smarter, not harder.",
+      description:
+        "FitVibe is a digital wardrobe app built around agentic AI. Add your clothes, get outfit combinations generated automatically, discover what's missing from your wardrobe, and virtually try on any look.",
+      demoAlt: "FitVibe app demo",
+      features: [
+        {
+          icon: "👗",
+          title: "Digital wardrobe",
+          description:
+            "Add clothes with automatic background removal. Build a clean, organized catalogue of everything you own — always at your fingertips.",
+        },
+        {
+          icon: "🤖",
+          title: "Agentic AI stylist",
+          description:
+            "FitVibe's AI chatbot doesn't just suggest — it acts. Ask it to build an outfit, analyze your wardrobe, or find what you're missing, and it gets it done.",
+        },
+        {
+          icon: "✨",
+          title: "AI outfit combinations",
+          description:
+            "Describe an occasion or mood and FitVibe generates outfit combinations from your actual clothes. No more staring at a full wardrobe and feeling like you have nothing to wear.",
+        },
+        {
+          icon: "🪞",
+          title: "Virtual try-on",
+          description:
+            "See how an outfit looks on you before you commit. FitVibe generates a try-on preview so you can decide with confidence.",
+        },
+        {
+          icon: "🔍",
+          title: "Wardrobe analysis",
+          description:
+            "Get a clear picture of your wardrobe: gaps, redundancies, and styling opportunities. FitVibe tells you exactly what would complete your collection.",
+        },
+        {
+          icon: "🎨",
+          title: "Style canvas",
+          description:
+            "Compose and share outfit boards with FitVibe's built-in canvas. Pick items, arrange them, and export a polished look ready to share.",
+        },
+      ],
+      ctaHeading: "Want to try FitVibe?",
+      ctaSub:
+        "FitVibe is currently in development. Get in touch if you'd like early access or have questions.",
+      ctaButton: "Get in touch →",
+    },
     bloomish: {
       back: "← bmnova.com",
       eyebrow: "What Bloomish does",
@@ -830,6 +880,56 @@ Siteniz üzerinden size ulaşıyorum.`,
       ctaHeading: "DietPal'ı denemek ister misiniz?",
       ctaSub:
         "DietPal şu anda geliştirme aşamasında. Erken erişim veya sorularınız için bize ulaşın.",
+      ctaButton: "İletişime geç →",
+    },
+    fitvibe: {
+      back: "← bmnova.com",
+      eyebrow: "FitVibe ne yapar",
+      heading: "Yapay zeka destekli dijital dolabın. Daha akıllı stil, daha az çaba.",
+      description:
+        "FitVibe, agentic yapay zeka etrafında tasarlanmış bir dijital dolap uygulaması. Kıyafetlerini ekle, otomatik kombin önerileri al, dolabındaki eksikleri keşfet ve istediğin görünüşü üzerinde dene.",
+      demoAlt: "FitVibe uygulama demosu",
+      features: [
+        {
+          icon: "👗",
+          title: "Dijital dolap",
+          description:
+            "Kıyafetleri otomatik arka plan kaldırmayla ekle. Sahip olduğun her şeyin temiz ve düzenli bir kataloğunu oluştur — her zaman elinizin altında.",
+        },
+        {
+          icon: "🤖",
+          title: "Agentic AI stilisti",
+          description:
+            "FitVibe'ın yapay zeka sohbet botu yalnızca önermekle kalmaz — harekete geçer. Kombin oluşturmasını, dolabını analiz etmesini veya eksiklerini bulmasını söyle, o halleder.",
+        },
+        {
+          icon: "✨",
+          title: "Yapay zeka kombin önerileri",
+          description:
+            "Bir ortam ya da ruh hali tarif et, FitVibe gerçek kıyafetlerinden kombin oluşturur. Dolu bir dolaba bakıp 'giyecek bir şeyim yok' hissi artık geride kalıyor.",
+        },
+        {
+          icon: "🪞",
+          title: "Sanal deneme",
+          description:
+            "Bir kombini taahhüt etmeden önce üzerinde nasıl göründüğünü gör. FitVibe, güvenle karar verebilmen için sanal bir deneme önizlemesi oluşturur.",
+        },
+        {
+          icon: "🔍",
+          title: "Dolap analizi",
+          description:
+            "Dolabının net bir resmini al: eksikler, tekrarlar ve stil fırsatları. FitVibe, koleksiyonunu tamamlayacak şeyleri tam olarak söyler.",
+        },
+        {
+          icon: "🎨",
+          title: "Stil kanvası",
+          description:
+            "FitVibe'ın yerleşik kanvası ile kombin panoları oluştur ve paylaş. Parçaları seç, düzenle ve paylaşmaya hazır cilalı bir görünüm dışa aktar.",
+        },
+      ],
+      ctaHeading: "FitVibe'ı denemek ister misiniz?",
+      ctaSub:
+        "FitVibe şu anda geliştirme aşamasında. Erken erişim veya sorularınız için bize ulaşın.",
       ctaButton: "İletişime geç →",
     },
     bloomish: {

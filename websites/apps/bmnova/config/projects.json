@@ -49,6 +49,7 @@
     "title": "FitVibe",
     "description": "AI-powered wardrobe app. Add clothes with automatic background removal, build outfits with AI, get personalized style recommendations, discover what's missing from your wardrobe, and virtually try on looks.",
     "tags": ["Partner", "Flutter", "AI", "Fashion"],
+    "href": "/projects/fitvibe",
     "color": "#F97316",
     "status": "in_review"
   },
