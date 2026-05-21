@@ -1,35 +1,17 @@
 [
   {
-    "title": "Offer",
-    "description": "Connect with people around you by offering them drinks, snacks, or other items at local businesses. Break the ice, discover new places, and make real connections.",
-    "tags": ["Mobile", "Flutter", "Social"],
-    "href": "https://offer-app.com",
-    "color": "#F59E0B",
-    "status": "in_review"
-  },
-  {
-    "title": "NextStep",
-    "description": "A minimalist AI coaching app that turns overthinking into action. One reflection, one question, one clear next step.",
-    "tags": ["Mobile", "Flutter", "AI"],
-    "href": "/projects/nextstep",
-    "color": "#6366F1",
-    "status": "in_review"
-  },
-  {
-    "title": "Bloomish",
-    "description": "Generate stunning AI bouquets and send them as gifts. Share moments of joy with anyone, anywhere — beautifully wrapped and personally meaningful.",
-    "tags": ["Mobile", "Flutter", "AI", "Social"],
-    "href": "/projects/bloomish",
-    "color": "#F43F5E",
-    "status": "in_development"
-  },
-  {
     "title": "DietPal",
     "description": "AI-powered diet app that personalizes your plan based on your needs and lifestyle. Track food, exercise, and well-being — then get actionable insights to hit your goals.",
     "tags": ["Mobile", "Flutter", "AI"],
     "href": "/projects/dietpal",
-    "color": "#10B981",
-    "status": "in_review"
+    "color": "#10B981"
+  },
+  {
+    "title": "FitVibe",
+    "description": "AI-powered wardrobe app. Add clothes with automatic background removal, build outfits with AI, get personalized style recommendations, discover what's missing from your wardrobe, and virtually try on looks.",
+    "tags": ["Mobile", "Flutter", "AI", "Fashion"],
+    "href": "/projects/fitvibe",
+    "color": "#F97316"
   },
   {
     "title": "Pixvibe",
@@ -46,12 +28,28 @@
     "color": "#EC4899"
   },
   {
-    "title": "FitVibe",
-    "description": "AI-powered wardrobe app. Add clothes with automatic background removal, build outfits with AI, get personalized style recommendations, discover what's missing from your wardrobe, and virtually try on looks.",
-    "tags": ["Partner", "Flutter", "AI", "Fashion"],
-    "href": "/projects/fitvibe",
-    "color": "#F97316",
+    "title": "Offer",
+    "description": "Connect with people around you by offering them drinks, snacks, or other items at local businesses. Break the ice, discover new places, and make real connections.",
+    "tags": ["Mobile", "Flutter", "Social"],
+    "href": "/projects/offer",
+    "color": "#F59E0B"
+  },
+  {
+    "title": "NextStep",
+    "description": "A minimalist AI coaching app that turns overthinking into action. One reflection, one question, one clear next step.",
+    "tags": ["Mobile", "Flutter", "AI"],
+    "href": "/projects/nextstep",
+    "color": "#6366F1",
+    "initials": "NS",
     "status": "in_review"
+  },
+  {
+    "title": "Bloomish",
+    "description": "Generate stunning AI bouquets and send them as gifts. Share moments of joy with anyone, anywhere — beautifully wrapped and personally meaningful.",
+    "tags": ["Mobile", "Flutter", "AI", "Social"],
+    "href": "/projects/bloomish",
+    "color": "#F43F5E",
+    "status": "in_development"
   },
   {
     "title": "intyx.ai",
