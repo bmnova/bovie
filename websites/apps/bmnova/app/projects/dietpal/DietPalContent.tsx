@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { contentMap } from "@/content";
 import { useLocale } from "@/app/locale-context";
+import { StoreBadges } from "@/components/StoreBadges";
+import { storeLinks } from "@/config/store-links";
 
 export function DietPalContent() {
   const { locale } = useLocale();
@@ -28,9 +30,13 @@ export function DietPalContent() {
           <p className="mx-auto max-w-2xl text-xl leading-relaxed text-muted">
             {dietpal.description}
           </p>
+          <StoreBadges
+            className="mt-10"
+            googlePlayUrl={storeLinks.dietpal.googlePlay}
+            appStoreUrl={storeLinks.dietpal.appStore}
+          />
         </div>
 
-        {/* Decorative circle */}
         <div
           className="pointer-events-none absolute -left-32 -top-32 h-[500px] w-[500px] rounded-full"
           style={{
@@ -69,8 +75,12 @@ export function DietPalContent() {
                 className="rounded-2xl border border-border bg-white p-7"
               >
                 <span className="mb-4 block text-3xl">{feature.icon}</span>
-                <h3 className="mb-2 text-lg font-bold text-primary">{feature.title}</h3>
-                <p className="text-sm leading-relaxed text-muted">{feature.description}</p>
+                <h3 className="mb-2 text-lg font-bold text-primary">
+                  {feature.title}
+                </h3>
+                <p className="text-sm leading-relaxed text-muted">
+                  {feature.description}
+                </p>
               </div>
             ))}
           </div>
@@ -80,8 +90,15 @@ export function DietPalContent() {
       {/* CTA */}
       <section className="px-6 pb-28 pt-4 text-center md:px-12">
         <div className="mx-auto max-w-xl">
-          <h2 className="mb-4 text-2xl font-bold text-primary">{dietpal.ctaHeading}</h2>
+          <h2 className="mb-4 text-2xl font-bold text-primary">
+            {dietpal.ctaHeading}
+          </h2>
           <p className="mb-8 text-muted">{dietpal.ctaSub}</p>
+          <StoreBadges
+            className="mb-8"
+            googlePlayUrl={storeLinks.dietpal.googlePlay}
+            appStoreUrl={storeLinks.dietpal.appStore}
+          />
           <Link
             href="/#contact"
             className="inline-flex rounded-full bg-[#10B981] px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-[#10B981]/25 transition-all hover:opacity-90"

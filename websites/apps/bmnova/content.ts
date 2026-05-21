@@ -12,7 +12,6 @@ const partners = [
 // Project image URLs served from public/projects/
 const projectImages: Record<string, string> = {
   Offer: "/projects/offer.avif",
-  NextStep: "/projects/nextstep.png",
   DietPal: "/projects/dietpal.png",
   Pixvibe: "/projects/pixvibe.avif",
   Collagevibe: "/projects/collagevibe.png",
@@ -126,19 +125,17 @@ export const contentMap = {
             { place: "TUSAŞ", years: "2020–2025" },
           ],
         },
-        { name: "Büşra Mercan",
+        {
+          name: "Büşra Mercan",
           role: "Co-Founder",
           initials: "BM",
-          background: [
-            { place: "TOBB ETU", years: "2020–2024" },
-          ], 
+          background: [{ place: "TOBB ETU", years: "2020–2024" }],
         },
-        { name: "Özgür Emrem",
+        {
+          name: "Özgür Emrem",
           role: "Software Developer",
           initials: "ÖE",
-          background: [
-            { place: "Marmara Üniversitesi", years: "2016–2020" },
-          ],
+          background: [{ place: "Marmara Üniversitesi", years: "2016–2020" }],
         },
       ] satisfies TeamMember[],
     },
@@ -287,9 +284,9 @@ I'm reaching out via your website.`,
             "Whether you're new to a city or just looking to expand your circle, Offer turns everyday places into spaces for genuine connection.",
         },
       ],
-      ctaHeading: "Interested in Offer?",
+      ctaHeading: "Want to try Offer?",
       ctaSub:
-        "We're actively developing Offer. Reach out if you'd like to know more or get early access.",
+        "Download on the App Store and Google Play — or get in touch if you have questions.",
       ctaButton: "Get in touch →",
     },
     nextstep: {
@@ -419,7 +416,7 @@ I'm reaching out via your website.`,
       ],
       ctaHeading: "Want to try DietPal?",
       ctaSub:
-        "DietPal is currently in development. Get in touch if you'd like early access or have questions.",
+        "Download on the App Store and Google Play — or get in touch if you have questions.",
       ctaButton: "Get in touch →",
     },
     fitvibe: {
@@ -469,7 +466,7 @@ I'm reaching out via your website.`,
       ],
       ctaHeading: "Want to try FitVibe?",
       ctaSub:
-        "FitVibe is currently in development. Get in touch if you'd like early access or have questions.",
+        "Download on the App Store and Google Play — or get in touch if you have questions or partnership inquiries.",
       ctaButton: "Get in touch →",
     },
     bloomish: {
@@ -586,19 +583,17 @@ I'm reaching out via your website.`,
             { place: "TUSAŞ", years: "2020–2025" },
           ],
         },
-        { name: "Büşra Mercan", 
-          role: "Kurucu Ortak", 
+        {
+          name: "Büşra Mercan",
+          role: "Kurucu Ortak",
           initials: "BM",
-          background: [
-            { place: "TOBB ETU", years: "2020–2024" },
-          ],
+          background: [{ place: "TOBB ETU", years: "2020–2024" }],
         },
-        { name: "Özgür Emrem",
+        {
+          name: "Özgür Emrem",
           role: "Yazılım Geliştirici",
           initials: "ÖE",
-          background: [
-            { place: "Marmara Üniversitesi", years: "2016–2020" },
-          ],
+          background: [{ place: "Marmara Üniversitesi", years: "2016–2020" }],
         },
       ] satisfies TeamMember[],
     },
@@ -747,9 +742,9 @@ Siteniz üzerinden size ulaşıyorum.`,
             "İster yeni taşınmış olun ister çevrenizi genişletmek isteyin, Offer gündelik mekanları gerçek bağlantı alanlarına dönüştürür.",
         },
       ],
-      ctaHeading: "Offer'a ilginiz mi var?",
+      ctaHeading: "Offer'ı denemek ister misiniz?",
       ctaSub:
-        "Offer'ı aktif olarak geliştiriyoruz. Daha fazla bilgi almak veya erken erişim için bize ulaşın.",
+        "App Store ve Google Play'den indirin — veya sorularınız için bize ulaşın.",
       ctaButton: "İletişime geç →",
     },
     nextstep: {
@@ -879,7 +874,7 @@ Siteniz üzerinden size ulaşıyorum.`,
       ],
       ctaHeading: "DietPal'ı denemek ister misiniz?",
       ctaSub:
-        "DietPal şu anda geliştirme aşamasında. Erken erişim veya sorularınız için bize ulaşın.",
+        "App Store ve Google Play'den indirin — veya sorularınız için bize ulaşın.",
       ctaButton: "İletişime geç →",
     },
     fitvibe: {
@@ -929,7 +924,7 @@ Siteniz üzerinden size ulaşıyorum.`,
       ],
       ctaHeading: "FitVibe'ı denemek ister misiniz?",
       ctaSub:
-        "FitVibe şu anda geliştirme aşamasında. Erken erişim veya sorularınız için bize ulaşın.",
+        "App Store ve Google Play'den indirin — veya soru ve iş birliği talepleriniz için bize ulaşın.",
       ctaButton: "İletişime geç →",
     },
     bloomish: {

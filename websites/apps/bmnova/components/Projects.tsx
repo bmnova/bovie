@@ -149,6 +149,7 @@ function ProjectCard({
     href?: string;
     color?: string;
     image?: string;
+    initials?: string;
     status?: string;
   };
   onOpenFullscreen: (src: string, alt: string) => void;
@@ -192,6 +193,7 @@ function ProjectCard({
           <Thumbnail
             color={project.color}
             label={project.title}
+            initials={project.initials}
             className="w-full h-44"
           />
         )}
