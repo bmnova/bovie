@@ -16,6 +16,7 @@ const projectImages: Record<string, string> = {
   Pixvibe: "/projects/pixvibe.avif",
   Collagevibe: "/projects/collagevibe.png",
   FitVibe: "/projects/fitvibe.png",
+  RoomPace: "/projects/roompace.png",
 };
 
 const trProjectDescriptions: Record<string, string> = {
@@ -31,6 +32,8 @@ const trProjectDescriptions: Record<string, string> = {
     "Fotoğrafları kolaj olarak kolayca oluşturun ve özelleştirin. Resimlerinizi tam istediğiniz gibi düzenleyin ve kişiselleştirin. Collagevibe'ın mobil platformu için geliştirildi.",
   FitVibe:
     "Yapay zeka destekli dolap uygulaması. Kıyafetleri otomatik arka plan kaldırma ile ekleyin, AI ile kombin oluşturun, kişiselleştirilmiş stil önerileri alın, dolabınızdaki eksikleri keşfedin ve kıyafetleri üzerinizde görün.",
+  RoomPace:
+    "Bütçenize uygun oda yenilemeleri planlayan yapay zeka iç tasarım uygulaması. Fotoğraf yükleyin, harcama limitinizi belirleyin ve gerçek mobilyalardan oluşan istek listesiyle AI düzenleri alın.",
   "intyx.ai":
     "Verinizi anında dashboard'a dönüştürün. CSV yükleyin, yapay zeka saniyeler içinde güzel ve interaktif grafikler oluştursun — kod gerekmez. Erken erişim açık.",
   "dynamic.intyx.ai":
@@ -67,8 +70,10 @@ export const contentMap = {
       cta: { label: "See our work", href: "#projects" },
       ctaSecondary: { label: "Get in touch", href: "#contact" },
       stats: {
-        products: "products shipped",
-        founders: "founders",
+        total: { count: 6, label: "products shipped" },
+        client: { count: 3, label: "client delivered" },
+        own: { count: 3, label: "in-house" },
+        founders: { count: 2, label: "founders" },
         techStack: "Flutter · Next.js · AI",
       },
     },
@@ -148,6 +153,7 @@ I'm reaching out via your website.`,
           { value: "", label: "None" },
           { value: "dietpal", label: "DietPal" },
           { value: "fitvibe", label: "FitVibe" },
+          { value: "roompace", label: "RoomPace" },
           { value: "nextstep", label: "NextStep" },
           { value: "bloomish", label: "Bloomish" },
           { value: "intyx.ai", label: "Intyx AI" },
@@ -463,6 +469,56 @@ I'm reaching out via your website.`,
         "Download on the App Store and Google Play — or get in touch if you have questions or partnership inquiries.",
       ctaButton: "Get in touch →",
     },
+    roompace: {
+      back: "← bmnova.com",
+      eyebrow: "What RoomPace does",
+      heading: "Beautiful rooms, designed to your budget.",
+      description:
+        "RoomPace is the AI interior design app for people who want a beautiful home without overspending. Set your budget, upload a photo, and get AI layouts with real product wishlists.",
+      demoAlt: "RoomPace app demo",
+      features: [
+        {
+          icon: "💰",
+          title: "Budget-aware design",
+          description:
+            "Set how much you want to spend and get room designs that respect your numbers — from a light refresh to a full makeover.",
+        },
+        {
+          icon: "📸",
+          title: "Photo to AI layout",
+          description:
+            "Upload a photo of your space, pick your room type and aesthetic vibe, and generate a curated AI render in seconds.",
+        },
+        {
+          icon: "🎨",
+          title: "Explore interior styles",
+          description:
+            "Browse styles on the Inspire home screen, discover your aesthetic with AI, and compare looks before you commit.",
+        },
+        {
+          icon: "✨",
+          title: "Refine every detail",
+          description:
+            "Iterate on your render with simple prompts or auto-rearrange — tweak layouts until they feel right.",
+        },
+        {
+          icon: "🏠",
+          title: "My Rooms gallery",
+          description:
+            "Save every AI room concept in one organized gallery. Browse, manage, and revisit your designs anytime.",
+        },
+        {
+          icon: "🛒",
+          title: "Shoppable wishlist",
+          description:
+            "Every design comes with a per-room wishlist of real furniture and decor — with prices and purchase links.",
+        },
+      ],
+      ctaHeading: "Want to try RoomPace?",
+      ctaSub:
+        "Get in touch for early access, questions, or partnership inquiries.",
+      ctaButton: "Get in touch →",
+    },
     bloomish: {
       back: "← bmnova.com",
       eyebrow: "What Bloomish does",
@@ -519,8 +575,10 @@ I'm reaching out via your website.`,
       cta: { label: "Çalışmalarımıza bak", href: "#projects" },
       ctaSecondary: { label: "İletişime geç", href: "#contact" },
       stats: {
-        products: "ürün",
-        founders: "kurucu",
+        total: { count: 6, label: "ürün yayında" },
+        client: { count: 3, label: "müşteri teslimi" },
+        own: { count: 3, label: "kendi ürünümüz" },
+        founders: { count: 2, label: "kurucu" },
         techStack: "Flutter · Next.js · AI",
       },
     },
@@ -600,6 +658,7 @@ Siteniz üzerinden size ulaşıyorum.`,
           { value: "", label: "Yok" },
           { value: "dietpal", label: "DietPal" },
           { value: "fitvibe", label: "FitVibe" },
+          { value: "roompace", label: "RoomPace" },
           { value: "nextstep", label: "NextStep" },
           { value: "bloomish", label: "Bloomish" },
           { value: "intyx.ai", label: "Intyx AI" },
@@ -913,6 +972,56 @@ Siteniz üzerinden size ulaşıyorum.`,
       ctaHeading: "FitVibe'ı denemek ister misiniz?",
       ctaSub:
         "App Store ve Google Play'den indirin — veya soru ve iş birliği talepleriniz için bize ulaşın.",
+      ctaButton: "İletişime geç →",
+    },
+    roompace: {
+      back: "← bmnova.com",
+      eyebrow: "RoomPace ne yapar",
+      heading: "Güzel odalar, bütçenize göre tasarlanır.",
+      description:
+        "RoomPace, bütçesini aşmadan güzel bir ev isteyenler için yapay zeka iç tasarım uygulaması. Bütçenizi belirleyin, fotoğraf yükleyin ve gerçek ürün istek listeleriyle AI düzenleri alın.",
+      demoAlt: "RoomPace uygulama demosu",
+      features: [
+        {
+          icon: "💰",
+          title: "Bütçe odaklı tasarım",
+          description:
+            "Ne kadar harcamak istediğinizi belirleyin ve rakamlarınıza uygun oda tasarımları alın — hafif bir yenilemeden tam bir dönüşüme kadar.",
+        },
+        {
+          icon: "📸",
+          title: "Fotoğraftan AI düzen",
+          description:
+            "Alanınızın fotoğrafını yükleyin, oda tipinizi ve estetik tarzınızı seçin ve saniyeler içinde özenle hazırlanmış bir AI render alın.",
+        },
+        {
+          icon: "🎨",
+          title: "İç mekan stillerini keşfedin",
+          description:
+            "Inspire ana ekranında stilleri inceleyin, yapay zeka ile estetiğinizi keşfedin ve karar vermeden önce görünümleri karşılaştırın.",
+        },
+        {
+          icon: "✨",
+          title: "Her detayı iyileştirin",
+          description:
+            "Basit istemlerle render'ınızı geliştirin veya otomatik yeniden düzenleyin — düzenler tam istediğiniz gibi hissedene kadar ince ayar yapın.",
+        },
+        {
+          icon: "🏠",
+          title: "Odalarım galerisi",
+          description:
+            "Her AI oda konseptini tek bir düzenli galeride kaydedin. Tasarımlarınızı istediğiniz zaman inceleyin, yönetin ve yeniden ziyaret edin.",
+        },
+        {
+          icon: "🛒",
+          title: "Alışveriş yapılabilir istek listesi",
+          description:
+            "Her tasarım, gerçek mobilya ve dekor ürünlerinden oluşan oda bazlı bir istek listesiyle gelir — fiyatlar ve satın alma bağlantılarıyla.",
+        },
+      ],
+      ctaHeading: "RoomPace'ı denemek ister misiniz?",
+      ctaSub:
+        "Erken erişim, sorular veya iş birliği talepleri için bize ulaşın.",
       ctaButton: "İletişime geç →",
     },
     bloomish: {

@@ -135,17 +135,29 @@ export function Hero() {
             {/* Stats strip */}
             <motion.div
               variants={fadeInUp}
-              className="mt-12 flex items-center justify-center divide-x divide-muted/20 text-xs lg:justify-start"
+              className="mt-12 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs lg:justify-start"
             >
-              <span className="flex items-center gap-1.5 px-5 first:pl-0">
-                <CountUp to={4} delay={900} className="font-bold text-primary" />
-                <span className="text-muted">{hero.stats.products}</span>
+              <span className="flex items-center gap-1.5">
+                <CountUp to={hero.stats.total.count} delay={900} className="font-bold text-primary" />
+                <span className="text-muted">{hero.stats.total.label}</span>
               </span>
-              <span className="px-5 font-medium text-muted">{hero.stats.techStack}</span>
-              <span className="flex items-center gap-1.5 px-5">
-                <CountUp to={2} delay={1100} className="font-bold text-primary" />
-                <span className="text-muted">{hero.stats.founders}</span>
+              <span className="hidden text-muted/30 sm:inline">·</span>
+              <span className="flex items-center gap-1.5">
+                <CountUp to={hero.stats.client.count} delay={1000} className="font-bold text-primary" />
+                <span className="text-muted">{hero.stats.client.label}</span>
               </span>
+              <span className="hidden text-muted/30 sm:inline">·</span>
+              <span className="flex items-center gap-1.5">
+                <CountUp to={hero.stats.own.count} delay={1050} className="font-bold text-primary" />
+                <span className="text-muted">{hero.stats.own.label}</span>
+              </span>
+              <span className="hidden text-muted/30 sm:inline">·</span>
+              <span className="flex items-center gap-1.5">
+                <CountUp to={hero.stats.founders.count} delay={1100} className="font-bold text-primary" />
+                <span className="text-muted">{hero.stats.founders.label}</span>
+              </span>
+              <span className="hidden text-muted/30 sm:inline">·</span>
+              <span className="font-medium text-muted">{hero.stats.techStack}</span>
             </motion.div>
           </div>
 

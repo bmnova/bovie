@@ -14,6 +14,13 @@
     "color": "#F97316"
   },
   {
+    "title": "RoomPace",
+    "description": "AI interior design app that plans room makeovers to your budget. Upload a photo, set your spend limit, and get AI layouts with style suggestions and a shoppable wishlist of real furniture.",
+    "tags": ["Mobile", "Flutter", "AI", "Interior Design"],
+    "href": "/projects/roompace",
+    "color": "#153328"
+  },
+  {
     "title": "Pixvibe",
     "description": "Outstanding AI-powered photo editing: erase objects, cut subjects, swap backgrounds, and generate AI images. Built for Pixvibe's mobile and web platforms.",
     "tags": ["Partner", "Flutter", "AI", "Web"],
