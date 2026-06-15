@@ -17,6 +17,7 @@ const projectImages: Record<string, string> = {
   Collagevibe: "/projects/collagevibe.png",
   FitVibe: "/projects/fitvibe.png",
   RoomPace: "/projects/roompace.png",
+  "Kami AI": "/projects/kami.png",
 };
 
 const trProjectDescriptions: Record<string, string> = {
@@ -34,6 +35,8 @@ const trProjectDescriptions: Record<string, string> = {
     "Yapay zeka destekli dolap uygulaması. Kıyafetleri otomatik arka plan kaldırma ile ekleyin, AI ile kombin oluşturun, kişiselleştirilmiş stil önerileri alın, dolabınızdaki eksikleri keşfedin ve kıyafetleri üzerinizde görün.",
   RoomPace:
     "Bütçenize uygun oda yenilemeleri planlayan yapay zeka iç tasarım uygulaması. Fotoğraf yükleyin, harcama limitinizi belirleyin ve gerçek mobilyalardan oluşan istek listesiyle AI düzenleri alın.",
+  "Kami AI":
+    "Yapay zeka destekli manga çizgi roman oluşturucu. Hikayenizi yazın, kahramanınızı tanımlayın, görsel stilinizi seçin ve tam çizgi roman panelleri oluşturun — ardından kaydedin, indirin ve hikayeye devam edin.",
   "intyx.ai":
     "Verinizi anında dashboard'a dönüştürün. CSV yükleyin, yapay zeka saniyeler içinde güzel ve interaktif grafikler oluştursun — kod gerekmez. Erken erişim açık.",
   "dynamic.intyx.ai":
@@ -154,6 +157,7 @@ I'm reaching out via your website.`,
           { value: "dietpal", label: "DietPal" },
           { value: "fitvibe", label: "FitVibe" },
           { value: "roompace", label: "RoomPace" },
+          { value: "kami", label: "Kami AI" },
           { value: "nextstep", label: "NextStep" },
           { value: "bloomish", label: "Bloomish" },
           { value: "intyx.ai", label: "Intyx AI" },
@@ -519,6 +523,56 @@ I'm reaching out via your website.`,
         "Get in touch for early access, questions, or partnership inquiries.",
       ctaButton: "Get in touch →",
     },
+    kami: {
+      back: "← bmnova.com",
+      eyebrow: "What Kami AI does",
+      heading: "Your story. Your hero. AI manga panels in minutes.",
+      description:
+        "Kami AI is the manga comics generator for creators who want full panels without starting from a blank page. Script your vision, define your protagonist, pick a visual style, and generate comic pages you can save, download, and continue.",
+      demoAlt: "Kami AI app demo",
+      features: [
+        {
+          icon: "✍️",
+          title: "Script your vision",
+          description:
+            "Describe the scene you want to bring to life. Kami turns your story prompt into a draft ready for character setup and panel generation.",
+        },
+        {
+          icon: "🦸",
+          title: "Character setup",
+          description:
+            "Define your protagonist with a photo, name, role, and look. Kami keeps your hero consistent across every generated panel.",
+        },
+        {
+          icon: "🎨",
+          title: "Visual DNA & genres",
+          description:
+            "Choose manga styles like Shonen, Seinen, Shojo, or Cyberpunk, then pick genres from Action and Fantasy to Romance and Isekai.",
+        },
+        {
+          icon: "📖",
+          title: "Generate comic panels",
+          description:
+            "Turn your script and character into full AI manga panels in seconds — complete with dialogue, layout, and cinematic pacing.",
+        },
+        {
+          icon: "📚",
+          title: "Comic library",
+          description:
+            "Save every generated comic in your personal library. Browse collections, revisit past stories, and pick up where you left off.",
+        },
+        {
+          icon: "➡️",
+          title: "Continue the story",
+          description:
+            "Finished a chapter? Continue the narrative with new prompts and generate the next page of your manga without losing continuity.",
+        },
+      ],
+      ctaHeading: "Want to try Kami AI?",
+      ctaSub:
+        "Get in touch for early access, questions, or partnership inquiries.",
+      ctaButton: "Get in touch →",
+    },
     bloomish: {
       back: "← bmnova.com",
       eyebrow: "What Bloomish does",
@@ -659,6 +713,7 @@ Siteniz üzerinden size ulaşıyorum.`,
           { value: "dietpal", label: "DietPal" },
           { value: "fitvibe", label: "FitVibe" },
           { value: "roompace", label: "RoomPace" },
+          { value: "kami", label: "Kami AI" },
           { value: "nextstep", label: "NextStep" },
           { value: "bloomish", label: "Bloomish" },
           { value: "intyx.ai", label: "Intyx AI" },
@@ -1020,6 +1075,56 @@ Siteniz üzerinden size ulaşıyorum.`,
         },
       ],
       ctaHeading: "RoomPace'ı denemek ister misiniz?",
+      ctaSub:
+        "Erken erişim, sorular veya iş birliği talepleri için bize ulaşın.",
+      ctaButton: "İletişime geç →",
+    },
+    kami: {
+      back: "← bmnova.com",
+      eyebrow: "Kami AI ne yapar",
+      heading: "Senin hikayen. Senin kahramanın. Dakikalar içinde AI manga panelleri.",
+      description:
+        "Kami AI, boş sayfadan başlamadan tam paneller isteyen yaratıcılar için manga çizgi roman oluşturucusudur. Vizyonunuzu yazın, kahramanınızı tanımlayın, görsel stilinizi seçin ve kaydedip indirebileceğiniz, devam edebileceğiniz çizgi roman sayfaları oluşturun.",
+      demoAlt: "Kami AI uygulama demosu",
+      features: [
+        {
+          icon: "✍️",
+          title: "Vizyonunuzu yazın",
+          description:
+            "Hayata geçirmek istediğiniz sahneyi tarif edin. Kami, hikaye isteminizi karakter kurulumu ve panel oluşturmaya hazır bir taslağa dönüştürür.",
+        },
+        {
+          icon: "🦸",
+          title: "Karakter kurulumu",
+          description:
+            "Fotoğraf, isim, rol ve görünümle kahramanınızı tanımlayın. Kami, kahramanınızı oluşturulan her panelde tutarlı tutar.",
+        },
+        {
+          icon: "🎨",
+          title: "Görsel DNA ve türler",
+          description:
+            "Shonen, Seinen, Shojo veya Cyberpunk gibi manga stillerini seçin, ardından Action ve Fantasy'den Romance ve Isekai'ye kadar türler belirleyin.",
+        },
+        {
+          icon: "📖",
+          title: "Çizgi roman panelleri oluşturun",
+          description:
+            "Senaryonuzu ve karakterinizi saniyeler içinde tam AI manga panellerine dönüştürün — diyalog, düzen ve sinematik tempo ile birlikte.",
+        },
+        {
+          icon: "📚",
+          title: "Çizgi roman kütüphanesi",
+          description:
+            "Oluşturduğunuz her çizgi romanı kişisel kütüphanenize kaydedin. Koleksiyonlara göz atın, geçmiş hikayeleri yeniden ziyaret edin ve kaldığınız yerden devam edin.",
+        },
+        {
+          icon: "➡️",
+          title: "Hikayeye devam edin",
+          description:
+            "Bir bölümü bitirdiniz mi? Yeni istemlerle anlatıya devam edin ve sürekliliği kaybetmeden manganızın bir sonraki sayfasını oluşturun.",
+        },
+      ],
+      ctaHeading: "Kami AI'ı denemek ister misiniz?",
       ctaSub:
         "Erken erişim, sorular veya iş birliği talepleri için bize ulaşın.",
       ctaButton: "İletişime geç →",
