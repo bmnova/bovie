@@ -21,6 +21,13 @@
     "color": "#153328"
   },
   {
+    "title": "Kami AI",
+    "description": "AI manga comics generator. Script your story, define your protagonist, pick a visual style, and generate full comic panels — then save, download, and continue the narrative.",
+    "tags": ["Mobile", "Flutter", "AI", "Manga"],
+    "href": "/projects/kami",
+    "color": "#B60076"
+  },
+  {
     "title": "Pixvibe",
     "description": "Outstanding AI-powered photo editing: erase objects, cut subjects, swap backgrounds, and generate AI images. Built for Pixvibe's mobile and web platforms.",
     "tags": ["Partner", "Flutter", "AI", "Web"],
