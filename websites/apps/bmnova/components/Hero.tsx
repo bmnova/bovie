@@ -143,13 +143,13 @@ export function Hero() {
               </span>
               <span className="hidden text-muted/30 sm:inline">·</span>
               <span className="flex items-center gap-1.5">
-                <CountUp to={hero.stats.client.count} delay={1000} className="font-bold text-primary" />
-                <span className="text-muted">{hero.stats.client.label}</span>
+                <CountUp to={hero.stats.own.count} delay={1000} className="font-bold text-primary" />
+                <span className="text-muted">{hero.stats.own.label}</span>
               </span>
               <span className="hidden text-muted/30 sm:inline">·</span>
               <span className="flex items-center gap-1.5">
-                <CountUp to={hero.stats.own.count} delay={1050} className="font-bold text-primary" />
-                <span className="text-muted">{hero.stats.own.label}</span>
+                <CountUp to={hero.stats.client.count} delay={1050} className="font-bold text-primary" />
+                <span className="text-muted">{hero.stats.client.label}</span>
               </span>
               <span className="hidden text-muted/30 sm:inline">·</span>
               <span className="flex items-center gap-1.5">

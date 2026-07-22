@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { contentMap } from "@/content";
 import { useLocale } from "@/app/locale-context";
+import { StoreBadges } from "@/components/StoreBadges";
+import { storeLinks } from "@/config/store-links";
 
 export function RoomPaceContent() {
   const { locale } = useLocale();
@@ -28,6 +30,11 @@ export function RoomPaceContent() {
           <p className="mx-auto max-w-2xl text-xl leading-relaxed text-muted">
             {roompace.description}
           </p>
+          <StoreBadges
+            className="mt-10"
+            googlePlayUrl={storeLinks.roompace.googlePlay}
+            appStoreUrl={storeLinks.roompace.appStore}
+          />
         </div>
 
         <div
@@ -87,6 +94,11 @@ export function RoomPaceContent() {
             {roompace.ctaHeading}
           </h2>
           <p className="mb-8 text-muted">{roompace.ctaSub}</p>
+          <StoreBadges
+            className="mb-8"
+            googlePlayUrl={storeLinks.roompace.googlePlay}
+            appStoreUrl={storeLinks.roompace.appStore}
+          />
           <Link
             href="/#contact"
             className="inline-flex rounded-full bg-[#153328] px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-[#153328]/25 transition-all hover:opacity-90"
