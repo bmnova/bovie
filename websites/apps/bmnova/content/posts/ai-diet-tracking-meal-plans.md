@@ -1,8 +1,9 @@
 ---
 title: "How AI Diet Tracking Actually Works — Logging, Meal Plans, and Progress"
-date: "2026-07-22"
+date: "2026-07-16"
 summary: "Photo logging, AI meal plans, and chat coaches can make diet tracking stick — if you use them as feedback systems, not perfection tools. Here's what the research says."
 tags: ["Health", "Nutrition", "AI"]
+product: dietpal
 ---
 
 ## Quick Answer

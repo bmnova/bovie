@@ -1,8 +1,9 @@
 ---
 title: "How AI Digital Wardrobes Actually Work — Closet Logging, Outfit Plans, and Try-On"
-date: "2026-07-22"
+date: "2026-07-17"
 summary: "Background removal, cloth segmentation, AI outfit combines, and virtual try-on can make style stick — if you use them as a feedback system for clothes you already own, not another shopping feed."
 tags: ["Style", "Fashion", "AI"]
+product: fitvibe
 ---
 
 ## Quick Answer

@@ -68,14 +68,14 @@
   {
     "title": "intyx.ai",
     "description": "Transform your data into instant dashboards. Upload a CSV and AI creates beautiful, interactive charts in seconds — no coding required. Early access is open.",
-    "tags": ["Partner", "AI", "Web", "Early Access"],
+    "tags": ["AI", "Web", "SaaS", "Early Access"],
     "href": "https://intyx.ai",
     "color": "#A78BFA"
   },
   {
     "title": "dynamic.intyx.ai",
     "description": "Update your app's content in real time without shipping a new build. Drop one Flutter component; the AI decision layer picks the right content for each user.",
-    "tags": ["Partner", "Flutter", "Web", "Experimental"],
+    "tags": ["Flutter", "Web", "AI", "Experimental"],
     "href": "https://dynamic.intyx.ai",
     "color": "#7C3AED"
   }

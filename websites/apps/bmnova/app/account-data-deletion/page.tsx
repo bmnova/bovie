@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Account & Data Deletion — BMNova",
   description:
     "BMNova Account and Data Deletion. How to delete your account and personal data. Hesap ve Veri Silme.",
+  alternates: {
+    canonical: "/account-data-deletion",
+  },
 };
 
 export default function AccountDataDeletionPage() {
