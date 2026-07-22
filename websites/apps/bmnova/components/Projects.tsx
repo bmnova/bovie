@@ -12,6 +12,7 @@ import {
 import { Thumbnail } from "@websites/shared/assets";
 import { contentMap } from "@/content";
 import { useLocale } from "@/app/locale-context";
+import { MouseGlow, TiltCard } from "@/components/motion";
 
 export function Projects() {
   const { locale } = useLocale();
@@ -30,8 +31,12 @@ export function Projects() {
   }, []);
 
   return (
-    <section id="projects" className="px-6 py-28 md:px-12">
-      <div className="mx-auto max-w-6xl">
+    <section
+      id="projects"
+      className="relative overflow-hidden px-6 py-28 md:px-12"
+    >
+      <MouseGlow color="#6366F1" size={560} opacity={0.1} />
+      <div className="relative z-10 mx-auto max-w-6xl">
         <motion.div
           variants={staggerContainer}
           initial="hidden"
@@ -159,21 +164,30 @@ function ProjectCard({
 
   const inner = (
     <motion.div
-      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:border-accent/20 hover:shadow-xl"
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:border-accent/20 hover:shadow-xl"
       whileHover={{ y: -4 }}
     >
-      <div className="relative">
+      {project.color && (
+        <div
+          className="pointer-events-none absolute inset-0 z-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+          style={{
+            background: `radial-gradient(ellipse 90% 60% at 50% 0%, ${project.color}18, transparent 70%)`,
+          }}
+          aria-hidden
+        />
+      )}
+      <div className="relative z-[1]">
         {project.image ? (
-          <div className="relative aspect-video w-full overflow-hidden">
+          <TiltCard maxTilt={7} className="aspect-video w-full overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={project.image}
               alt={project.title}
-              className="h-full w-full object-cover object-top"
+              className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
             />
             <button
               type="button"
-              className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-200 group-hover:bg-black/40"
+              className="absolute inset-0 z-20 flex items-center justify-center bg-black/0 transition-colors duration-200 group-hover:bg-black/40"
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -188,23 +202,25 @@ function ProjectCard({
                 View
               </span>
             </button>
-          </div>
+          </TiltCard>
         ) : (
-          <Thumbnail
-            color={project.color}
-            label={project.title}
-            initials={project.initials}
-            className="w-full h-44"
-          />
+          <TiltCard maxTilt={7} className="overflow-hidden">
+            <Thumbnail
+              color={project.color}
+              label={project.title}
+              initials={project.initials}
+              className="h-44 w-full"
+            />
+          </TiltCard>
         )}
         {project.status === "in_review" && (
-          <span className="absolute right-3 top-3 rounded-full bg-black/60 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white backdrop-blur-sm">
+          <span className="absolute right-3 top-3 z-30 rounded-full bg-black/60 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white backdrop-blur-sm">
             {inReviewLabel}
           </span>
         )}
       </div>
 
-      <div className="flex flex-1 flex-col p-6">
+      <div className="relative z-[1] flex flex-1 flex-col p-6">
         <div className="mb-3 flex flex-wrap gap-1.5">
           {project.tags.map((tag) => (
             <span

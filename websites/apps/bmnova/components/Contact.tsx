@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@websites/shared/animations";
 import { contentMap } from "@/content";
 import { useLocale } from "@/app/locale-context";
+import { MouseGlow } from "@/components/motion";
 import { ContactMailLink } from "./ContactMailLink";
 import { ContactForm } from "./ContactForm";
 
@@ -12,8 +13,12 @@ export function Contact() {
   const { contact } = contentMap[locale];
 
   return (
-    <section id="contact" className="px-6 py-28 md:px-12">
-      <div className="mx-auto max-w-3xl text-center">
+    <section
+      id="contact"
+      className="relative overflow-hidden px-6 py-28 md:px-12"
+    >
+      <MouseGlow color="#6366F1" size={560} opacity={0.1} />
+      <div className="relative z-10 mx-auto max-w-3xl text-center">
         <motion.div
           variants={staggerContainer}
           initial="hidden"
@@ -79,7 +84,7 @@ export function Contact() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-80px" }}
-        className="mx-auto mt-16 max-w-4xl overflow-hidden rounded-2xl border border-border"
+        className="relative z-10 mx-auto mt-16 max-w-4xl overflow-hidden rounded-2xl border border-border"
       >
         <iframe
           src="https://maps.google.com/maps?q=Ostim+Teknopark+Turuncu+Bina+Ankara&output=embed&hl=tr"

@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Privacy Policy — BMNova",
   description:
     "BMNova Privacy Policy. How we collect, use, store, share, and protect personal data. Gizlilik Politikası.",
+  alternates: {
+    canonical: "/privacy-policy",
+  },
 };
 
 export default function PrivacyPolicyPage() {

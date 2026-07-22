@@ -15,4 +15,9 @@ export const storeLinks = {
     appStore:
       "https://play.google.com/store/apps/details?id=com.offerizm.offer",
   },
+  roompace: {
+    googlePlay:
+      "https://play.google.com/store/apps/details?id=com.intyx.roompace",
+    appStore: "https://apps.apple.com/app/6762028069",
+  },
 } as const;

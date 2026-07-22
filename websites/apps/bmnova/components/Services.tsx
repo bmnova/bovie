@@ -4,14 +4,19 @@ import { motion } from "framer-motion";
 import { blurIn, fadeInUp, staggerContainer, staggerContainerFast } from "@websites/shared/animations";
 import { contentMap } from "@/content";
 import { useLocale } from "@/app/locale-context";
+import { MouseGlow } from "@/components/motion";
 
 export function Services() {
   const { locale } = useLocale();
   const { services } = contentMap[locale];
 
   return (
-    <section id="services" className="px-6 py-28 md:px-12">
-      <div className="mx-auto max-w-6xl">
+    <section
+      id="services"
+      className="relative overflow-hidden px-6 py-28 md:px-12"
+    >
+      <MouseGlow color="#6366F1" size={560} opacity={0.1} />
+      <div className="relative z-10 mx-auto max-w-6xl">
         <motion.div
           key={locale}
           variants={staggerContainer}

@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "About Us — BMNova",
   description:
     "Learn about BMNova — our vision, mission, team, and strategic partnerships. A lean technology company shaping the future of AI-powered digital systems.",
+  alternates: {
+    canonical: "/about-us",
+  },
 };
 
 export default function AboutUsPage() {

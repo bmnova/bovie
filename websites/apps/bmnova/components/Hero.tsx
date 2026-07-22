@@ -1,34 +1,94 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { blurIn, fadeInUp, staggerContainer } from "@websites/shared/animations";
+import { useEffect, useState, useRef } from "react";
+import {
+  motion,
+  AnimatePresence,
+  useSpring,
+} from "framer-motion";
+import { fadeInUp, staggerContainer } from "@websites/shared/animations";
 import { Squiggle } from "@websites/shared/assets";
 import { contentMap } from "@/content";
 import { useLocale } from "@/app/locale-context";
+import {
+  MagneticCTA,
+  MouseGlow,
+  SplitWords,
+  TiltCard,
+  useCanHover,
+  usePrefersReducedMotion,
+} from "@/components/motion";
 
 export function Hero() {
   const { locale } = useLocale();
   const { hero } = contentMap[locale];
+  const reduced = usePrefersReducedMotion();
+  const canHover = useCanHover();
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const blob1X = useSpring(0, { stiffness: 50, damping: 20 });
+  const blob1Y = useSpring(0, { stiffness: 50, damping: 20 });
+  const blob2X = useSpring(0, { stiffness: 40, damping: 22 });
+  const blob2Y = useSpring(0, { stiffness: 40, damping: 22 });
+
+  useEffect(() => {
+    if (reduced || !canHover) return;
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const onMove = (e: PointerEvent) => {
+      const rect = el.getBoundingClientRect();
+      const nx = (e.clientX - rect.left) / rect.width - 0.5;
+      const ny = (e.clientY - rect.top) / rect.height - 0.5;
+      blob1X.set(nx * 36);
+      blob1Y.set(ny * 28);
+      blob2X.set(nx * -28);
+      blob2Y.set(ny * -22);
+    };
+    const onLeave = () => {
+      blob1X.set(0);
+      blob1Y.set(0);
+      blob2X.set(0);
+      blob2Y.set(0);
+    };
+
+    el.addEventListener("pointermove", onMove);
+    el.addEventListener("pointerleave", onLeave);
+    return () => {
+      el.removeEventListener("pointermove", onMove);
+      el.removeEventListener("pointerleave", onLeave);
+    };
+  }, [reduced, canHover, blob1X, blob1Y, blob2X, blob2Y]);
 
   return (
-    <section className="relative flex min-h-[85dvh] items-center justify-center overflow-hidden bg-hero-gradient px-6 md:min-h-screen">
+    <section
+      ref={sectionRef}
+      className="relative flex min-h-[85dvh] items-center justify-center overflow-hidden bg-hero-gradient px-6 md:min-h-screen"
+    >
+      <MouseGlow color="#6366F1" size={560} opacity={0.12} />
+
       {/* Organic animated blob 1 */}
       <motion.div
         className="pointer-events-none absolute -left-40 top-1/4 h-[520px] w-[520px]"
         style={{
+          x: blob1X,
+          y: blob1Y,
           background: "radial-gradient(ellipse at center, #6366F118, transparent 70%)",
           borderRadius: "60% 40% 70% 30% / 50% 60% 40% 50%",
           filter: "blur(70px)",
         }}
-        animate={{
-          borderRadius: [
-            "60% 40% 70% 30% / 50% 60% 40% 50%",
-            "40% 60% 30% 70% / 60% 40% 60% 40%",
-            "55% 45% 65% 35% / 45% 55% 45% 55%",
-            "60% 40% 70% 30% / 50% 60% 40% 50%",
-          ],
-        }}
+        animate={
+          reduced
+            ? undefined
+            : {
+                borderRadius: [
+                  "60% 40% 70% 30% / 50% 60% 40% 50%",
+                  "40% 60% 30% 70% / 60% 40% 60% 40%",
+                  "55% 45% 65% 35% / 45% 55% 45% 55%",
+                  "60% 40% 70% 30% / 50% 60% 40% 50%",
+                ],
+              }
+        }
         transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
       />
 
@@ -36,18 +96,24 @@ export function Hero() {
       <motion.div
         className="pointer-events-none absolute -right-32 bottom-1/4 h-[400px] w-[400px]"
         style={{
+          x: blob2X,
+          y: blob2Y,
           background: "radial-gradient(ellipse at center, #818CF812, transparent 70%)",
           borderRadius: "40% 60% 30% 70% / 60% 40% 60% 40%",
           filter: "blur(55px)",
         }}
-        animate={{
-          borderRadius: [
-            "40% 60% 30% 70% / 60% 40% 60% 40%",
-            "60% 40% 70% 30% / 50% 60% 40% 50%",
-            "35% 65% 55% 45% / 50% 35% 65% 50%",
-            "40% 60% 30% 70% / 60% 40% 60% 40%",
-          ],
-        }}
+        animate={
+          reduced
+            ? undefined
+            : {
+                borderRadius: [
+                  "40% 60% 30% 70% / 60% 40% 60% 40%",
+                  "60% 40% 70% 30% / 50% 60% 40% 50%",
+                  "35% 65% 55% 45% / 50% 35% 65% 50%",
+                  "40% 60% 30% 70% / 60% 40% 60% 40%",
+                ],
+              }
+        }
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 3 }}
       />
 
@@ -69,7 +135,6 @@ export function Hero() {
         <div className="flex flex-col items-center gap-16 lg:flex-row lg:items-center lg:gap-20">
           {/* Text */}
           <div className="flex-1 text-center lg:text-left">
-            {/* Logo + BMNova Innovations — above title, not in navbar */}
             <motion.div
               variants={fadeInUp}
               className="mb-10 flex items-center justify-center gap-3 lg:justify-start"
@@ -92,13 +157,10 @@ export function Hero() {
               Ankara, Turkey &mdash; Ostim Teknokent
             </motion.p>
 
-            <motion.h1
-              variants={blurIn}
+            <SplitWords
+              text={hero.tagline}
               className="mb-4 text-5xl font-bold leading-[1.1] tracking-tight text-primary md:text-7xl"
-              style={{ whiteSpace: "pre-line" }}
-            >
-              {hero.tagline}
-            </motion.h1>
+            />
 
             <motion.div
               variants={fadeInUp}
@@ -118,18 +180,22 @@ export function Hero() {
               variants={fadeInUp}
               className="flex flex-wrap items-center justify-center gap-4 lg:justify-start"
             >
-              <a
-                href={hero.cta.href}
-                className="rounded-full bg-accent px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-accent/25 transition-all hover:opacity-90 hover:shadow-xl hover:shadow-accent/30"
-              >
-                {hero.cta.label}
-              </a>
-              <a
-                href={hero.ctaSecondary.href}
-                className="rounded-full border border-primary/20 px-8 py-3.5 text-sm font-semibold text-primary transition-all hover:border-accent hover:text-accent"
-              >
-                {hero.ctaSecondary.label}
-              </a>
+              <MagneticCTA>
+                <a
+                  href={hero.cta.href}
+                  className="rounded-full bg-accent px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-accent/25 transition-all hover:opacity-90 hover:shadow-xl hover:shadow-accent/30"
+                >
+                  {hero.cta.label}
+                </a>
+              </MagneticCTA>
+              <MagneticCTA strength={0.25}>
+                <a
+                  href={hero.ctaSecondary.href}
+                  className="rounded-full border border-primary/20 px-8 py-3.5 text-sm font-semibold text-primary transition-all hover:border-accent hover:text-accent"
+                >
+                  {hero.ctaSecondary.label}
+                </a>
+              </MagneticCTA>
             </motion.div>
 
             {/* Stats strip */}
@@ -143,13 +209,13 @@ export function Hero() {
               </span>
               <span className="hidden text-muted/30 sm:inline">·</span>
               <span className="flex items-center gap-1.5">
-                <CountUp to={hero.stats.client.count} delay={1000} className="font-bold text-primary" />
-                <span className="text-muted">{hero.stats.client.label}</span>
+                <CountUp to={hero.stats.own.count} delay={1000} className="font-bold text-primary" />
+                <span className="text-muted">{hero.stats.own.label}</span>
               </span>
               <span className="hidden text-muted/30 sm:inline">·</span>
               <span className="flex items-center gap-1.5">
-                <CountUp to={hero.stats.own.count} delay={1050} className="font-bold text-primary" />
-                <span className="text-muted">{hero.stats.own.label}</span>
+                <CountUp to={hero.stats.client.count} delay={1050} className="font-bold text-primary" />
+                <span className="text-muted">{hero.stats.client.label}</span>
               </span>
               <span className="hidden text-muted/30 sm:inline">·</span>
               <span className="flex items-center gap-1.5">
@@ -166,16 +232,16 @@ export function Hero() {
             variants={fadeInUp}
             className="flex shrink-0 justify-center max-sm:scale-90"
           >
-            <AppMockup />
+            <TiltCard maxTilt={10} className="rounded-[2.8rem]">
+              <AppMockup />
+            </TiltCard>
           </motion.div>
         </div>
       </motion.div>
-
     </section>
   );
 }
 
-// Count-up number animation (triggers on mount with optional delay)
 function CountUp({
   to,
   delay = 0,
@@ -186,8 +252,13 @@ function CountUp({
   className?: string;
 }) {
   const [count, setCount] = useState(0);
+  const reduced = usePrefersReducedMotion();
 
   useEffect(() => {
+    if (reduced) {
+      setCount(to);
+      return;
+    }
     const startTimer = setTimeout(() => {
       const duration = 1200;
       const startTime = Date.now();
@@ -200,16 +271,20 @@ function CountUp({
       return () => clearInterval(timer);
     }, delay);
     return () => clearTimeout(startTimer);
-  }, [to, delay]);
+  }, [to, delay, reduced]);
 
   return <span className={className}>{count}</span>;
 }
 
-// Animated AI mobile mockup
 function AppMockup() {
   const [step, setStep] = useState(0);
+  const reduced = usePrefersReducedMotion();
 
   useEffect(() => {
+    if (reduced) {
+      setStep(3);
+      return;
+    }
     let timeoutIds: ReturnType<typeof setTimeout>[] = [];
     const clearAll = () => {
       timeoutIds.forEach(clearTimeout);
@@ -221,12 +296,11 @@ function AppMockup() {
       timeoutIds.push(setTimeout(() => setStep(1), 1000));
       timeoutIds.push(setTimeout(() => setStep(2), 2200));
       timeoutIds.push(setTimeout(() => setStep(3), 3200));
-      // After sequence + pause on result, restart from step 0
       timeoutIds.push(setTimeout(runCycle, 7000));
     };
     runCycle();
     return clearAll;
-  }, []);
+  }, [reduced]);
 
   const bars = [
     { width: 72, label: "Mobile" },
@@ -236,7 +310,6 @@ function AppMockup() {
   ];
 
   return (
-    // Outer phone frame
     <div
       className="relative w-[230px] overflow-hidden rounded-[2.8rem] shadow-2xl"
       style={{
@@ -244,23 +317,21 @@ function AppMockup() {
         padding: "3px",
       }}
     >
-      {/* Animated border glow */}
-      <motion.div
-        className="pointer-events-none absolute inset-0 rounded-[2.8rem]"
-        style={{
-          background:
-            "conic-gradient(from 0deg, #6366F140, #818CF820, #6366F140, transparent 60%)",
-        }}
-        animate={{ rotate: 360 }}
-        transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-      />
+      {!reduced && (
+        <motion.div
+          className="pointer-events-none absolute inset-0 rounded-[2.8rem]"
+          style={{
+            background:
+              "conic-gradient(from 0deg, #6366F140, #818CF820, #6366F140, transparent 60%)",
+          }}
+          animate={{ rotate: 360 }}
+          transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+        />
+      )}
 
-      {/* Screen */}
       <div className="relative overflow-hidden rounded-[2.5rem] bg-[#080d1a]">
-        {/* Status bar */}
-        <div className="flex items-center justify-between px-6 pt-4 pb-1">
+        <div className="flex items-center justify-between px-6 pb-1 pt-4">
           <span className="text-[10px] font-medium text-white/30">9:41</span>
-          {/* Dynamic island */}
           <div className="h-[18px] w-[80px] rounded-full bg-black" />
           <div className="flex items-center gap-1">
             <div className="h-1 w-3 rounded-full bg-white/30" />
@@ -269,7 +340,6 @@ function AppMockup() {
           </div>
         </div>
 
-        {/* App header */}
         <div className="px-5 pb-3 pt-2">
           <div className="flex items-center justify-between">
             <span className="text-sm font-bold text-white">
@@ -278,14 +348,13 @@ function AppMockup() {
             <div className="flex h-6 w-6 items-center justify-center rounded-full bg-accent/20">
               <motion.div
                 className="h-1.5 w-1.5 rounded-full bg-accent"
-                animate={{ opacity: [1, 0.3, 1] }}
+                animate={reduced ? undefined : { opacity: [1, 0.3, 1] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
               />
             </div>
           </div>
         </div>
 
-        {/* Chat area */}
         <div className="min-h-[300px] px-4 pb-2">
           <AnimatePresence>
             {step >= 1 && (
@@ -357,13 +426,12 @@ function AppMockup() {
           </AnimatePresence>
         </div>
 
-        {/* Input bar */}
         <div className="px-4 pb-6 pt-2">
           <div className="flex items-center gap-2 rounded-full bg-white/5 px-4 py-2.5">
             <span className="flex-1 text-[10px] text-white/20">Ask anything...</span>
             <motion.div
               className="flex h-5 w-5 items-center justify-center rounded-full bg-accent"
-              animate={{ scale: [1, 1.1, 1] }}
+              animate={reduced ? undefined : { scale: [1, 1.1, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
               <svg

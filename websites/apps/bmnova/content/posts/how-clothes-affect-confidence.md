@@ -3,6 +3,7 @@ title: "How What You Wear Affects Your Confidence and Performance"
 date: "2026-03-25"
 summary: "There's a name for it in psychology: enclothed cognition. Research shows that clothes don't just change how others see you — they change how you think, feel, and behave."
 tags: ["Psychology", "Style", "Confidence"]
+product: fitvibe
 ---
 
 ## Quick Answer
