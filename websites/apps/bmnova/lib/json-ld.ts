@@ -1,6 +1,12 @@
 import { storeLinks } from "@/config/store-links";
 import type { FirstPartyProject } from "@/lib/site";
-import { absoluteUrl, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
+import {
+  absoluteUrl,
+  FIRST_PARTY_EXTERNAL,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_URL,
+} from "@/lib/site";
 
 export type FaqItem = { question: string; answer: string };
 
@@ -83,6 +89,7 @@ export function organizationJsonLd() {
       storeLinks.fitvibe.appStore,
       storeLinks.roompace.googlePlay,
       storeLinks.roompace.appStore,
+      ...FIRST_PARTY_EXTERNAL.map((p) => p.url),
     ],
   };
 }
