@@ -13,7 +13,7 @@ export function BloomishContent() {
   return (
     <ProjectPageShell
       accent="#F43F5E"
-      badge="Mobile · Flutter · AI · Social"
+      badge="Gifts, Flowers, AI Bouquet Gifts"
       title="Bloomish"
       description={bloomish.description}
       afterDemo={

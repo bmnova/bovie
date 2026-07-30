@@ -2,56 +2,56 @@
   {
     "title": "DietPal",
     "description": "AI-powered diet app that personalizes your plan based on your needs and lifestyle. Track food, exercise, and well-being — then get actionable insights to hit your goals.",
-    "tags": ["Mobile", "Flutter", "AI"],
+    "tags": ["Health", "Diet", "AI Diet Coach"],
     "href": "/projects/dietpal",
     "color": "#10B981"
   },
   {
     "title": "FitVibe",
     "description": "AI-powered wardrobe app. Add clothes with automatic background removal, build outfits with AI, get personalized style recommendations, discover what's missing from your wardrobe, and virtually try on looks.",
-    "tags": ["Mobile", "Flutter", "AI", "Fashion"],
+    "tags": ["Fashion", "Closet Management", "AI Wardrobe"],
     "href": "/projects/fitvibe",
     "color": "#F97316"
   },
   {
     "title": "RoomPace",
     "description": "AI interior design app that plans room makeovers to your budget. Upload a photo, set your spend limit, and get AI layouts with style suggestions and a shoppable wishlist of real furniture.",
-    "tags": ["Mobile", "Flutter", "AI", "Interior Design"],
+    "tags": ["Interior", "AI Interior Design"],
     "href": "/projects/roompace",
     "color": "#153328"
   },
   {
     "title": "Haki",
     "description": "AI manga comics generator. Script your story, define your protagonist, pick a visual style, and generate full comic panels — then save, download, and continue the narrative.",
-    "tags": ["Mobile", "Flutter", "AI", "Manga"],
+    "tags": ["Manga", "Comics", "AI Manga Creator"],
     "href": "/projects/haki",
     "color": "#B60076"
   },
   {
     "title": "Pixvibe",
     "description": "Outstanding AI-powered photo editing: erase objects, cut subjects, swap backgrounds, and generate AI images. Built for Pixvibe's mobile and web platforms.",
-    "tags": ["Partner", "Flutter", "AI", "Web"],
+    "tags": ["Photo", "Photo Editing", "AI Photo Editor"],
     "href": "https://www.everpixel.org/apps/pixvibe",
     "color": "#8B5CF6"
   },
   {
     "title": "Collagevibe",
     "description": "Generate and customize photos as collages with ease. Edit, arrange, and personalize your pictures exactly how you want. Developed for Collagevibe's mobile platform.",
-    "tags": ["Partner", "Flutter", "Photo"],
+    "tags": ["Collage", "Photo Collages", "Photo Collage Generator"],
     "href": "https://www.everpixel.org/apps/collagevibe",
     "color": "#EC4899"
   },
   {
     "title": "Offer",
     "description": "Connect with people around you by offering them drinks, snacks, or other items at local businesses. Break the ice, discover new places, and make real connections.",
-    "tags": ["Mobile", "Flutter", "Social"],
+    "tags": ["Social", "Social Icebreaker", "Social Networking"],
     "href": "/projects/offer",
     "color": "#F59E0B"
   },
   {
     "title": "NextStep",
     "description": "A minimalist AI coaching app that turns overthinking into action. One reflection, one question, one clear next step.",
-    "tags": ["Mobile", "Flutter", "AI"],
+    "tags": ["Coaching", "Career", "AI Clarity Coach"],
     "href": "/projects/nextstep",
     "color": "#6366F1",
     "initials": "NS",
@@ -60,7 +60,7 @@
   {
     "title": "Bloomish",
     "description": "Generate stunning AI bouquets and send them as gifts. Share moments of joy with anyone, anywhere — beautifully wrapped and personally meaningful.",
-    "tags": ["Mobile", "Flutter", "AI", "Social"],
+    "tags": ["Gifts", "Flowers", "AI Bouquet Gifts"],
     "href": "/projects/bloomish",
     "color": "#F43F5E",
     "status": "in_development"
@@ -68,14 +68,14 @@
   {
     "title": "intyx.ai",
     "description": "Transform your data into instant dashboards. Upload a CSV and AI creates beautiful, interactive charts in seconds — no coding required. Early access is open.",
-    "tags": ["AI", "Web", "SaaS", "Early Access"],
+    "tags": ["Analytics", "Data Visualization", "Instant Dashboards"],
     "href": "https://intyx.ai",
     "color": "#A78BFA"
   },
   {
     "title": "dynamic.intyx.ai",
     "description": "Update your app's content in real time without shipping a new build. Drop one Flutter component; the AI decision layer picks the right content for each user.",
-    "tags": ["Flutter", "Web", "AI", "Experimental"],
+    "tags": ["Dynamic Content", "A/B Testing", "Feature Flagging"],
     "href": "https://dynamic.intyx.ai",
     "color": "#7C3AED"
   }

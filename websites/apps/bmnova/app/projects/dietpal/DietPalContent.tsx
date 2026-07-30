@@ -19,7 +19,7 @@ export function DietPalContent() {
   return (
     <ProjectPageShell
       accent="#10B981"
-      badge="Mobile · Flutter · AI"
+      badge="Health, Diet, AI Diet Coach"
       title="DietPal"
       description={dietpal.description}
       heroExtras={badges}

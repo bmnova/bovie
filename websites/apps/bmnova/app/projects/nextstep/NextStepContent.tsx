@@ -20,7 +20,7 @@ export function NextStepContent() {
   return (
     <ProjectPageShell
       accent={accent}
-      badge="Mobile · Flutter · AI"
+      badge="Coaching, Career, AI Clarity Coach"
       title="NextStep"
       description={nextstep.description}
       demo={{

@@ -19,7 +19,7 @@ export function RoomPaceContent() {
   return (
     <ProjectPageShell
       accent="#153328"
-      badge="Mobile · Flutter · AI · Interior Design"
+      badge="Interior, AI Interior Design"
       title="RoomPace"
       description={roompace.description}
       heroExtras={badges}
