@@ -8,6 +8,7 @@ import {
   staggerContainer,
   staggerContainerFast,
 } from "@websites/shared/animations";
+import { useLocale } from "@/app/locale-context";
 import {
   MagneticCTA,
   MouseGlow,
@@ -62,6 +63,7 @@ export function ProjectPageShell({
   ctaButton,
   ctaExtras,
 }: ProjectPageShellProps) {
+  const { locale } = useLocale();
   const reduced = usePrefersReducedMotion();
 
   return (
@@ -152,6 +154,7 @@ export function ProjectPageShell({
       <section className="px-6 py-20 md:px-12">
         <div className="mx-auto max-w-5xl">
           <motion.div
+            key={locale}
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
@@ -175,9 +178,9 @@ export function ProjectPageShell({
               variants={staggerContainerFast}
               className="grid gap-8 md:grid-cols-2"
             >
-              {features.map((feature) => (
+              {features.map((feature, index) => (
                 <motion.div
-                  key={feature.title}
+                  key={`${feature.icon}-${index}`}
                   variants={fadeInUp}
                   whileHover={
                     reduced
@@ -209,6 +212,7 @@ export function ProjectPageShell({
       {/* CTA */}
       <section className="px-6 pb-28 pt-4 text-center md:px-12">
         <motion.div
+          key={locale}
           className="mx-auto max-w-xl"
           variants={staggerContainer}
           initial="hidden"

@@ -11,7 +11,7 @@ Blog: https://bmnova.com/blog
 - [DietPal](https://bmnova.com/projects/dietpal): AI diet tracking, meal plans, and coaching. Photo/text food logging, personalized plans, progress charts.
 - [FitVibe](https://bmnova.com/projects/fitvibe): AI digital wardrobe and stylist. Closet logging with background removal, outfit combines, wardrobe gaps, virtual try-on.
 - [RoomPace](https://bmnova.com/projects/roompace): Budget-aware AI interior design. Upload a room photo, set a spend limit, get layouts and a shoppable furniture wishlist.
-- [Kami AI](https://bmnova.com/projects/kami): AI manga comics generator. Script stories, define characters, generate comic panels.
+- [Haki](https://bmnova.com/projects/haki): AI manga comics generator. Script stories, define characters, generate comic panels.
 - [Offer](https://bmnova.com/projects/offer): Social icebreaker app. Offer drinks or snacks at local businesses to connect with people nearby.
 - [NextStep](https://bmnova.com/projects/nextstep): Minimalist AI coaching for overthinking. One reflection, one question, one clear next step.
 - [Bloomish](https://bmnova.com/projects/bloomish): AI bouquet generator for sending digital flower gifts.

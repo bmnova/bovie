@@ -8,7 +8,7 @@ export const FIRST_PARTY_PROJECTS = [
   "dietpal",
   "fitvibe",
   "roompace",
-  "kami",
+  "haki",
   "offer",
   "nextstep",
   "bloomish",

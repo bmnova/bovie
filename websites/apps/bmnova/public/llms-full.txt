@@ -24,8 +24,8 @@ URL: https://bmnova.com/projects/roompace
 Budget-aware AI interior design. Upload a room photo, set a spend limit, get layouts and a shoppable furniture wishlist.
 Stores: Google Play + App Store (see product page).
 
-### Kami AI
-URL: https://bmnova.com/projects/kami
+### Haki
+URL: https://bmnova.com/projects/haki
 AI manga comics generator. Script stories, define characters, generate comic panels.
 
 ### Offer

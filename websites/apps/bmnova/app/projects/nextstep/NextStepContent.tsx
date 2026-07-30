@@ -71,6 +71,7 @@ export function NextStepContent() {
           <section className="px-6 pb-20 md:px-12">
             <div className="mx-auto max-w-5xl">
               <motion.div
+                key={locale}
                 variants={staggerContainer}
                 initial="hidden"
                 whileInView="visible"
@@ -131,6 +132,7 @@ export function NextStepContent() {
           <section className="px-6 pb-20 md:px-12">
             <div className="mx-auto max-w-5xl">
               <motion.div
+                key={`${locale}-tiers`}
                 variants={staggerContainer}
                 initial="hidden"
                 whileInView="visible"
