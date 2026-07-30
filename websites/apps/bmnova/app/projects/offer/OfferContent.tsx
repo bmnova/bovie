@@ -19,7 +19,7 @@ export function OfferContent() {
   return (
     <ProjectPageShell
       accent="#F59E0B"
-      badge="Mobile · Flutter · Social"
+      badge="Social, Social Icebreaker, Social Networking"
       title="Offer"
       description={offer.description}
       heroExtras={badges}

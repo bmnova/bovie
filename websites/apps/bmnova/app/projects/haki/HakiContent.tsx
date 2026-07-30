@@ -11,7 +11,7 @@ export function HakiContent() {
   return (
     <ProjectPageShell
       accent="#B60076"
-      badge="Mobile · Flutter · AI · Manga"
+      badge="Manga, Comics, AI Manga Creator"
       title="Haki"
       description={haki.description}
       demo={{

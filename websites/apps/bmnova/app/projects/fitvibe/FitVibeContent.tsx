@@ -19,7 +19,7 @@ export function FitVibeContent() {
   return (
     <ProjectPageShell
       accent="#F97316"
-      badge="Mobile · Flutter · AI · Fashion"
+      badge="Fashion, Closet Management, AI Wardrobe"
       title="FitVibe"
       description={fitvibe.description}
       heroExtras={badges}
