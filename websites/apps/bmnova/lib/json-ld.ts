@@ -43,11 +43,11 @@ export const SOFTWARE_APPS: Record<FirstPartyProject, SoftwareAppConfig> = {
     category: "LifestyleApplication",
     storeKey: "roompace",
   },
-  kami: {
-    name: "Kami AI",
+  haki: {
+    name: "Haki",
     description:
       "AI manga comics generator. Script your story, define your protagonist, pick a visual style, and generate full comic panels.",
-    path: "/projects/kami",
+    path: "/projects/haki",
     category: "EntertainmentApplication",
   },
   offer: {

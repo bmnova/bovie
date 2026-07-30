@@ -17,7 +17,7 @@ const projectImages: Record<string, string> = {
   Collagevibe: "/projects/collagevibe.png",
   FitVibe: "/projects/fitvibe.png",
   RoomPace: "/projects/roompace.png",
-  "Kami AI": "/projects/kami.png",
+  Haki: "/projects/haki.png",
 };
 
 const trProjectDescriptions: Record<string, string> = {
@@ -35,7 +35,7 @@ const trProjectDescriptions: Record<string, string> = {
     "Yapay zeka destekli dolap uygulaması. Kıyafetleri otomatik arka plan kaldırma ile ekleyin, AI ile kombin oluşturun, kişiselleştirilmiş stil önerileri alın, dolabınızdaki eksikleri keşfedin ve kıyafetleri üzerinizde görün.",
   RoomPace:
     "Bütçenize uygun oda yenilemeleri planlayan yapay zeka iç tasarım uygulaması. Fotoğraf yükleyin, harcama limitinizi belirleyin ve gerçek mobilyalardan oluşan istek listesiyle AI düzenleri alın.",
-  "Kami AI":
+  Haki:
     "Yapay zeka destekli manga çizgi roman oluşturucu. Hikayenizi yazın, kahramanınızı tanımlayın, görsel stilinizi seçin ve tam çizgi roman panelleri oluşturun — ardından kaydedin, indirin ve hikayeye devam edin.",
   "intyx.ai":
     "Verinizi anında dashboard'a dönüştürün. CSV yükleyin, yapay zeka saniyeler içinde güzel ve interaktif grafikler oluştursun — kod gerekmez. Erken erişim açık.",
@@ -157,7 +157,7 @@ I'm reaching out via your website.`,
           { value: "dietpal", label: "DietPal" },
           { value: "fitvibe", label: "FitVibe" },
           { value: "roompace", label: "RoomPace" },
-          { value: "kami", label: "Kami AI" },
+          { value: "haki", label: "Haki" },
           { value: "nextstep", label: "NextStep" },
           { value: "bloomish", label: "Bloomish" },
           { value: "intyx.ai", label: "Intyx AI" },
@@ -523,25 +523,25 @@ I'm reaching out via your website.`,
         "Download on the App Store and Google Play — or get in touch if you have questions or partnership inquiries.",
       ctaButton: "Get in touch →",
     },
-    kami: {
+    haki: {
       back: "← bmnova.com",
-      eyebrow: "What Kami AI does",
+      eyebrow: "What Haki does",
       heading: "Your story. Your hero. AI manga panels in minutes.",
       description:
-        "Kami AI is the manga comics generator for creators who want full panels without starting from a blank page. Script your vision, define your protagonist, pick a visual style, and generate comic pages you can save, download, and continue.",
-      demoAlt: "Kami AI app demo",
+        "Haki is the manga comics generator for creators who want full panels without starting from a blank page. Script your vision, define your protagonist, pick a visual style, and generate comic pages you can save, download, and continue.",
+      demoAlt: "Haki app demo",
       features: [
         {
           icon: "✍️",
           title: "Script your vision",
           description:
-            "Describe the scene you want to bring to life. Kami turns your story prompt into a draft ready for character setup and panel generation.",
+            "Describe the scene you want to bring to life. Haki turns your story prompt into a draft ready for character setup and panel generation.",
         },
         {
           icon: "🦸",
           title: "Character setup",
           description:
-            "Define your protagonist with a photo, name, role, and look. Kami keeps your hero consistent across every generated panel.",
+            "Define your protagonist with a photo, name, role, and look. Haki keeps your hero consistent across every generated panel.",
         },
         {
           icon: "🎨",
@@ -568,7 +568,7 @@ I'm reaching out via your website.`,
             "Finished a chapter? Continue the narrative with new prompts and generate the next page of your manga without losing continuity.",
         },
       ],
-      ctaHeading: "Want to try Kami AI?",
+      ctaHeading: "Want to try Haki?",
       ctaSub:
         "Get in touch for early access, questions, or partnership inquiries.",
       ctaButton: "Get in touch →",
@@ -713,7 +713,7 @@ Siteniz üzerinden size ulaşıyorum.`,
           { value: "dietpal", label: "DietPal" },
           { value: "fitvibe", label: "FitVibe" },
           { value: "roompace", label: "RoomPace" },
-          { value: "kami", label: "Kami AI" },
+          { value: "haki", label: "Haki" },
           { value: "nextstep", label: "NextStep" },
           { value: "bloomish", label: "Bloomish" },
           { value: "intyx.ai", label: "Intyx AI" },
@@ -1079,25 +1079,25 @@ Siteniz üzerinden size ulaşıyorum.`,
         "App Store ve Google Play'den indirin — sorularınız veya iş birliği talepleriniz için bize de ulaşabilirsiniz.",
       ctaButton: "İletişime geç →",
     },
-    kami: {
+    haki: {
       back: "← bmnova.com",
-      eyebrow: "Kami AI ne yapar",
+      eyebrow: "Haki ne yapar",
       heading: "Senin hikayen. Senin kahramanın. Dakikalar içinde AI manga panelleri.",
       description:
-        "Kami AI, boş sayfadan başlamadan tam paneller isteyen yaratıcılar için manga çizgi roman oluşturucusudur. Vizyonunuzu yazın, kahramanınızı tanımlayın, görsel stilinizi seçin ve kaydedip indirebileceğiniz, devam edebileceğiniz çizgi roman sayfaları oluşturun.",
-      demoAlt: "Kami AI uygulama demosu",
+        "Haki, boş sayfadan başlamadan tam paneller isteyen yaratıcılar için manga çizgi roman oluşturucusudur. Vizyonunuzu yazın, kahramanınızı tanımlayın, görsel stilinizi seçin ve kaydedip indirebileceğiniz, devam edebileceğiniz çizgi roman sayfaları oluşturun.",
+      demoAlt: "Haki uygulama demosu",
       features: [
         {
           icon: "✍️",
           title: "Vizyonunuzu yazın",
           description:
-            "Hayata geçirmek istediğiniz sahneyi tarif edin. Kami, hikaye isteminizi karakter kurulumu ve panel oluşturmaya hazır bir taslağa dönüştürür.",
+            "Hayata geçirmek istediğiniz sahneyi tarif edin. Haki, hikaye isteminizi karakter kurulumu ve panel oluşturmaya hazır bir taslağa dönüştürür.",
         },
         {
           icon: "🦸",
           title: "Karakter kurulumu",
           description:
-            "Fotoğraf, isim, rol ve görünümle kahramanınızı tanımlayın. Kami, kahramanınızı oluşturulan her panelde tutarlı tutar.",
+            "Fotoğraf, isim, rol ve görünümle kahramanınızı tanımlayın. Haki, kahramanınızı oluşturulan her panelde tutarlı tutar.",
         },
         {
           icon: "🎨",
@@ -1124,7 +1124,7 @@ Siteniz üzerinden size ulaşıyorum.`,
             "Bir bölümü bitirdiniz mi? Yeni istemlerle anlatıya devam edin ve sürekliliği kaybetmeden manganızın bir sonraki sayfasını oluşturun.",
         },
       ],
-      ctaHeading: "Kami AI'ı denemek ister misiniz?",
+      ctaHeading: "Haki'yi denemek ister misiniz?",
       ctaSub:
         "Erken erişim, sorular veya iş birliği talepleri için bize ulaşın.",
       ctaButton: "İletişime geç →",

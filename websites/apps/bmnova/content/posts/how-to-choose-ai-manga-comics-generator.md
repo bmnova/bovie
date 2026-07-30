@@ -3,7 +3,7 @@ title: "How to Choose an AI Manga Comics Generator"
 date: "2026-07-22"
 summary: "Pick an AI comics app for story continuity, not one-shot pretty panels. Prioritize script-to-page flow, a protagonist that stays consistent, style control, and the ability to save, download, and continue the narrative."
 tags: ["Manga", "Comics", "AI"]
-product: kami
+product: haki
 ---
 
 ## Quick Answer
@@ -59,9 +59,9 @@ Healthy use: finish a short chapter, iterate dialogue after panels exist, share 
 
 ---
 
-## How Kami AI Fits This Checklist
+## How Haki Fits This Checklist
 
-Apps like [Kami AI](https://bmnova.com/projects/kami) — built by bmnova — are designed around the comics loop: script your story, define your protagonist (photo, name, role, look), pick a visual style, and generate full comic panels you can save, download, and continue.
+Apps like [Haki](https://bmnova.com/projects/haki) — built by bmnova — are designed around the comics loop: script your story, define your protagonist (photo, name, role, look), pick a visual style, and generate full comic panels you can save, download, and continue.
 
 The product bet is simple: creators need continuity and pages — not another isolated “cool manga girl” image.
 
@@ -91,7 +91,7 @@ Two or three passes per page beat twenty near-duplicates. Lock the script beat, 
 
 ## References
 
-1. [Kami AI — BMNova](https://bmnova.com/projects/kami)
+1. [Haki — BMNova](https://bmnova.com/projects/haki)
 2. Narrative continuity in sequential art depends on recurring character identity and panel-to-panel clarity — AI tools help most when they preserve both, not when they optimize a single frame.
 
 ---
