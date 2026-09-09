@@ -7,42 +7,38 @@ import { useLocale } from "@/app/locale-context";
 import { contentMap } from "@/content";
 
 function linkifyEmail(text: string) {
-  if (text.includes("contact@bmnova.com")) {
-    return (
-      <>
-        {text.split("contact@bmnova.com").map((part, i, arr) => (
-          <span key={i}>
-            {part}
-            {i < arr.length - 1 ? (
-              <a
-                href="mailto:contact@bmnova.com"
-                className="text-accent underline transition-colors hover:text-accent/80"
-              >
-                contact@bmnova.com
-              </a>
-            ) : null}
-          </span>
-        ))}
-      </>
-    );
-  }
-  if (text.startsWith("https://")) {
-    const url = text.split(/\s/)[0];
-    return (
-      <>
-        <a
-          href={url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-accent underline transition-colors hover:text-accent/80"
-        >
-          {url}
-        </a>
-        {text.slice(url.length) ? ` ${text.slice(url.length)}` : null}
-      </>
-    );
-  }
-  return text;
+  const linkClass = "text-accent underline transition-colors hover:text-accent/80";
+  const parts = text.split(/(https:\/\/[^\s]+|contact@bmnova\.com)/g);
+
+  if (parts.length === 1) return text;
+
+  return (
+    <>
+      {parts.map((part, i) => {
+        if (part === "contact@bmnova.com") {
+          return (
+            <a key={i} href="mailto:contact@bmnova.com" className={linkClass}>
+              {part}
+            </a>
+          );
+        }
+        if (part.startsWith("https://")) {
+          return (
+            <a
+              key={i}
+              href={part}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={linkClass}
+            >
+              {part}
+            </a>
+          );
+        }
+        return <span key={i}>{part}</span>;
+      })}
+    </>
+  );
 }
 
 export function PrivacyPolicyContent() {
