@@ -14,7 +14,8 @@ export function PostStoreCta({ product }: PostStoreCtaProps) {
     product === "dietpal" ||
     product === "fitvibe" ||
     product === "offer" ||
-    product === "roompace"
+    product === "roompace" ||
+    product === "haki"
       ? storeLinks[product]
       : null;
 

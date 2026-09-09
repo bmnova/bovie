@@ -49,6 +49,7 @@ export const SOFTWARE_APPS: Record<FirstPartyProject, SoftwareAppConfig> = {
       "AI manga comics generator. Script your story, define your protagonist, pick a visual style, and generate full comic panels.",
     path: "/projects/haki",
     category: "EntertainmentApplication",
+    storeKey: "haki",
   },
   offer: {
     name: "Offer",
@@ -89,6 +90,8 @@ export function organizationJsonLd() {
       storeLinks.fitvibe.appStore,
       storeLinks.roompace.googlePlay,
       storeLinks.roompace.appStore,
+      storeLinks.haki.googlePlay,
+      storeLinks.haki.appStore,
       ...FIRST_PARTY_EXTERNAL.map((p) => p.url),
     ],
   };

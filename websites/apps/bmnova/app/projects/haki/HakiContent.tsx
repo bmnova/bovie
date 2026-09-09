@@ -2,11 +2,19 @@
 
 import { contentMap } from "@/content";
 import { useLocale } from "@/app/locale-context";
+import { StoreBadges } from "@/components/StoreBadges";
+import { storeLinks } from "@/config/store-links";
 import { ProjectPageShell } from "@/components/ProjectPageShell";
 
 export function HakiContent() {
   const { locale } = useLocale();
   const { haki } = contentMap[locale];
+  const badges = (
+    <StoreBadges
+      googlePlayUrl={storeLinks.haki.googlePlay}
+      appStoreUrl={storeLinks.haki.appStore}
+    />
+  );
 
   return (
     <ProjectPageShell
@@ -14,6 +22,7 @@ export function HakiContent() {
       badge="Manga, Comics, AI Manga Creator"
       title="Haki"
       description={haki.description}
+      heroExtras={badges}
       demo={{
         src: "/projects/haki.png",
         alt: haki.demoAlt,
@@ -24,6 +33,7 @@ export function HakiContent() {
       ctaHeading={haki.ctaHeading}
       ctaSub={haki.ctaSub}
       ctaButton={haki.ctaButton}
+      ctaExtras={badges}
     />
   );
 }
