@@ -565,17 +565,6 @@ export type Review = {
 /** Store reviews verbatim in their original language, with translations for the other locale. */
 export const REVIEWS: Review[] = [
   {
-    app: "pali",
-    author: "Kerem Can K.",
-    source: "appStore",
-    original: "tr",
-    title: { tr: "Karmaşadan uzak, çok pratik", en: "No clutter, very practical" },
-    text: {
-      tr: "Daha önce benzer birçok diyet uygulamasını denedim ama hemen hepsinde arayüz o kadar karmaşıktı ki bir noktadan sonra kullanmayı bırakıyordum. Dietpal’ı keşfettiğim için çok mutluyum. Özellikle içindeki yapay zeka asistanı beklediğimden çok daha iyi çalışıyor.",
-      en: "I tried many similar diet apps before, but almost all of them had interfaces so complicated that I eventually stopped using them. I'm so happy I found DietPal. The AI assistant inside works much better than I expected.",
-    },
-  },
-  {
     app: "fitvibe",
     author: "fatmanur ş",
     source: "appStore",

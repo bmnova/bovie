@@ -3,7 +3,6 @@ title: "How to Choose an AI Diet Tracking App in 2026"
 date: "2026-07-18"
 summary: "Pick an AI diet app for friction, not flash. Prioritize fast logging, meal plans you will actually follow, progress feedback, and coaching that reduces busywork — then ignore feature lists that don't change week-two adherence."
 tags: ["Health", "Nutrition", "AI"]
-product: pali
 ---
 
 ## Quick Answer
@@ -66,14 +65,6 @@ Most people need **two** of these on day one — usually fast logging plus one m
 4. Ask: if motivation drops, can the app reduce work — or does it demand more?
 
 If step 1 fails, stop evaluating. Everything else is secondary.
-
----
-
-## How DietPal Fits This Checklist
-
-Apps like [DietPal](https://bmnova.com/projects/pali) — built by bmnova — are built around the adherence loop: AI photo and text logging, daily and weekly meal generation, progress charts, and an agentic coach you can chat with to log meals or update preferences without digging through menus.
-
-It is not a clinical dietitian replacement. It is a feedback system designed to stay usable after the novelty fades. For the research behind why logging and planning work, see [How AI Diet Tracking Actually Works](/blog/ai-diet-tracking-meal-plans) and [healthy weight management basics](/blog/healthy-weight-management).
 
 ---
 

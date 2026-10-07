@@ -3,7 +3,6 @@ title: "How to Lose, Gain, or Maintain Weight in a Healthy Way"
 date: "2026-03-25"
 summary: "Whether you want to drop body fat, build mass, or stay consistent — the same core principles apply. Here's what the research actually says."
 tags: ["Health", "Nutrition", "Fitness"]
-product: pali
 ---
 
 ## Quick Answer
@@ -152,7 +151,7 @@ A number on a scale is a data point, not a verdict.
 
 The principles above only work if you can see your intake and adjust. Paper diaries and rigid calorie apps often fail when logging takes longer than the meal.
 
-Apps like [DietPal](https://bmnova.com/projects/pali) — built by bmnova — are designed around lower-friction feedback: AI photo and text logging, meal plans you can regenerate when life changes, progress charts, and a coach chat that can log meals or update preferences without digging through menus. Use any tracker as a weekly trend tool, not a perfection scoreboard.
+Use any tracker as a weekly trend tool, not a perfection scoreboard.
 
 ---
 
