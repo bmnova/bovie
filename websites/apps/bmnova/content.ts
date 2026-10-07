@@ -92,7 +92,7 @@ export const contentMap = {
         "AI that does one job well beats AI that does everything.",
       ],
       cofounder: "Co-founder",
-      yourCard: "Your card goes here.",
+      yourCard: "Your card could be here.",
       seeRoles: "See open roles →",
     },
     careersCta: {
