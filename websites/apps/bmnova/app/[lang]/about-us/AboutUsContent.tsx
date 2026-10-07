@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@websites/shared/animations";
 import { contentMap } from "@/content";
@@ -67,9 +68,21 @@ export function AboutUsContent() {
               <div className="flex flex-wrap gap-8">
                 {team.map((member) => (
                   <div key={member.name} className="flex items-start gap-4">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent/10 text-sm font-bold text-accent">
-                      {member.initials}
-                    </div>
+                    {member.photo ? (
+                      <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full">
+                        <Image
+                          src={member.photo}
+                          alt=""
+                          fill
+                          sizes="48px"
+                          className="object-cover object-[center_18%]"
+                        />
+                      </div>
+                    ) : (
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent/10 text-sm font-bold text-accent">
+                        {member.initials}
+                      </div>
+                    )}
                     <div>
                       <p className="text-sm font-semibold text-primary">
                         {member.name}

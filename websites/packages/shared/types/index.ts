@@ -11,6 +11,8 @@ export interface TeamMember {
   name: string;
   role: string;
   initials: string;
+  /** Public path, e.g. /team/ali-mertcan-karaman.jpg */
+  photo?: string;
   twitter?: string;
   linkedin?: string;
   background?: Array<{ place: string; years: string }>;

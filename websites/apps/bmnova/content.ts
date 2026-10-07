@@ -218,6 +218,7 @@ export const contentMap = {
         name: "Ali Mertcan Karaman",
         role: "Co-Founder",
         initials: "AK",
+        photo: "/team/ali-mertcan-karaman.jpg",
         twitter: "https://x.com/alimertcank?s=21",
         linkedin: "https://www.linkedin.com/in/ali-mertcan-karaman-088582133/",
         background: [
@@ -447,6 +448,7 @@ export const contentMap = {
         name: "Ali Mertcan Karaman",
         role: "Kurucu Ortak",
         initials: "AK",
+        photo: "/team/ali-mertcan-karaman.jpg",
         twitter: "https://x.com/alimertcank?s=21",
         linkedin: "https://www.linkedin.com/in/ali-mertcan-karaman-088582133/",
         background: [
