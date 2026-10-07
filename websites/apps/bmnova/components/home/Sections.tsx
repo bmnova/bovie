@@ -81,9 +81,9 @@ function NumberTile({ value, suffix = "", label, sub }: { value: number | string
   return (
     <div
       ref={ref}
-      className="group flex min-w-0 flex-[1_1_150px] flex-col gap-1.5 rounded-[20px] border border-border bg-card px-5 py-6 sm:px-6 sm:py-7 transition-[transform,border-color] duration-300 hover:-translate-y-1 hover:border-white/30"
+      className="group flex min-w-0 flex-col gap-1.5 rounded-[20px] border border-border bg-card px-5 py-6 sm:px-6 sm:py-7 transition-[transform,border-color] duration-300 hover:-translate-y-1 hover:border-white/30"
     >
-      <div className="font-display text-[clamp(40px,10vw,64px)] font-extrabold tabular-nums text-primary transition-colors group-hover:text-accent">
+      <div className="font-display text-[clamp(32px,4vw,52px)] font-extrabold tabular-nums text-primary transition-colors group-hover:text-accent">
         {numeric ? counted : value}
         {suffix}
       </div>
@@ -102,7 +102,7 @@ export function Numbers() {
         <h2 className="font-display text-[clamp(28px,3vw,40px)] font-extrabold">{numbers.heading}</h2>
         <span className="text-[13px] text-dim">{numbers.note}</span>
       </div>
-      <div className="stagger flex flex-wrap gap-3">
+      <div className="stagger grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
         <NumberTile value={APP_ORDER.length} label={numbers.apps.label} sub={numbers.apps.sub} />
         <NumberTile value={2000} suffix="+" label={numbers.downloads.label} sub={numbers.downloads.sub} />
         <NumberTile value={50} suffix="+" label={numbers.ratings.label} sub={fill(numbers.ratings.sub, { n: 20 })} />
