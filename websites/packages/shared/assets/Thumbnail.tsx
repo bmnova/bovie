@@ -3,20 +3,23 @@
 interface ThumbnailProps {
   color?: string;
   label: string;
+  initials?: string;
   className?: string;
 }
 
 export function Thumbnail({
   color = "#6366F1",
   label,
+  initials: initialsOverride,
   className = "",
 }: ThumbnailProps) {
   const initials =
-    label
+    initialsOverride ??
+    (label
       .split(/[\s._/-]/)
       .slice(0, 2)
       .map((w) => w[0]?.toUpperCase() ?? "")
-      .join("") || label.slice(0, 2).toUpperCase();
+      .join("") || label.slice(0, 2).toUpperCase());
 
   // Stable pattern id derived from label (no spaces/special chars)
   const patternId = `stripes-${label.replace(/[^a-zA-Z0-9]/g, "")}`;

@@ -6,6 +6,20 @@ import { BlogHeader } from "./BlogHeader";
 export const metadata = {
   title: "Blog — BMNova",
   description: "Evidence-based writing on health, productivity, psychology, and building software products.",
+  alternates: {
+    canonical: "/blog",
+  },
+  openGraph: {
+    title: "Blog — BMNova",
+    description: "Evidence-based writing on health, productivity, psychology, and building software products.",
+    url: "/blog",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog — BMNova",
+    description: "Evidence-based writing on health, productivity, psychology, and building software products.",
+  },
 };
 
 export default function BlogPage() {

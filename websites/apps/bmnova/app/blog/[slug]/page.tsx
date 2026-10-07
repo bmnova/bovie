@@ -1,7 +1,15 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { InnerPageLayout } from "@/components/InnerPageLayout";
-import { getPost, getAllPosts } from "@/lib/posts";
+import { JsonLd } from "@/components/JsonLd";
+import { RelatedPosts } from "@/components/RelatedPosts";
+import { PostStoreCta } from "@/components/PostStoreCta";
+import { getPost, getAllPosts, getRelatedPosts } from "@/lib/posts";
+import {
+  blogPostingJsonLd,
+  faqPageJsonLd,
+} from "@/lib/json-ld";
 
 export async function generateStaticParams() {
   return getAllPosts().map((post) => ({ slug: post.slug }));
@@ -11,12 +19,15 @@ export async function generateMetadata({
   params,
 }: {
   params: { slug: string };
-}) {
+}): Promise<Metadata> {
   const post = await getPost(params.slug);
   if (!post) return {};
   return {
     title: `${post.title} — BMNova`,
     description: post.summary,
+    alternates: {
+      canonical: `/blog/${post.slug}`,
+    },
     openGraph: {
       title: post.title,
       description: post.summary,
@@ -24,6 +35,7 @@ export async function generateMetadata({
       publishedTime: post.date,
       authors: ["BMNova"],
       tags: post.tags,
+      url: `/blog/${post.slug}`,
     },
     twitter: {
       card: "summary_large_image",
@@ -41,8 +53,15 @@ export default async function PostPage({
   const post = await getPost(params.slug);
   if (!post) notFound();
 
+  const related = getRelatedPosts(post.slug);
+  const schemas = [
+    blogPostingJsonLd(post),
+    faqPageJsonLd(post.faqs),
+  ].filter(Boolean) as Record<string, unknown>[];
+
   return (
     <InnerPageLayout>
+      <JsonLd data={schemas} />
       <main className="min-h-screen bg-surface px-6 py-12 md:px-12">
         <div className="mx-auto max-w-2xl">
           <Link
@@ -85,6 +104,10 @@ export default async function PostPage({
             className="post-content"
             dangerouslySetInnerHTML={{ __html: post.contentHtml }}
           />
+
+          {post.product ? <PostStoreCta product={post.product} /> : null}
+
+          <RelatedPosts posts={related} />
         </div>
       </main>
     </InnerPageLayout>

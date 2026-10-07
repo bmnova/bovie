@@ -116,6 +116,61 @@ body {
   color: #64748b;
   font-style: italic;
 }
+.post-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.75rem 0 2.25rem;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: #334155;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+.post-content th,
+.post-content td {
+  padding: 0.95rem 1.2rem;
+  text-align: left;
+  vertical-align: top;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+.post-content th {
+  font-weight: 600;
+  color: #0f172a;
+  background-color: #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
+}
+.post-content td {
+  border-bottom: 1px solid #e2e8f0;
+}
+.post-content tr:last-child td {
+  border-bottom: none;
+}
+.post-content tbody tr:nth-child(even) td {
+  background-color: #f8fafc;
+}
+
+/* Scroll wide tables on small screens without crushing cell padding */
+@media (max-width: 640px) {
+  .post-content table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 0.75rem;
+  }
+  .post-content thead,
+  .post-content tbody {
+    display: table;
+    width: 100%;
+    min-width: 28rem;
+  }
+  .post-content th,
+  .post-content td {
+    padding: 0.85rem 1rem;
+  }
+}
 
 /* Film grain texture */
 body::before {

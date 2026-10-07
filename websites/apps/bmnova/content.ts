@@ -12,11 +12,12 @@ const partners = [
 // Project image URLs served from public/projects/
 const projectImages: Record<string, string> = {
   Offer: "/projects/offer.avif",
-  NextStep: "/projects/nextstep.png",
   DietPal: "/projects/dietpal.png",
   Pixvibe: "/projects/pixvibe.avif",
   Collagevibe: "/projects/collagevibe.png",
   FitVibe: "/projects/fitvibe.png",
+  RoomPace: "/projects/roompace.png",
+  Haki: "/projects/haki.png",
 };
 
 const trProjectDescriptions: Record<string, string> = {
@@ -32,6 +33,10 @@ const trProjectDescriptions: Record<string, string> = {
     "Fotoğrafları kolaj olarak kolayca oluşturun ve özelleştirin. Resimlerinizi tam istediğiniz gibi düzenleyin ve kişiselleştirin. Collagevibe'ın mobil platformu için geliştirildi.",
   FitVibe:
     "Yapay zeka destekli dolap uygulaması. Kıyafetleri otomatik arka plan kaldırma ile ekleyin, AI ile kombin oluşturun, kişiselleştirilmiş stil önerileri alın, dolabınızdaki eksikleri keşfedin ve kıyafetleri üzerinizde görün.",
+  RoomPace:
+    "Bütçenize uygun oda yenilemeleri planlayan yapay zeka iç tasarım uygulaması. Fotoğraf yükleyin, harcama limitinizi belirleyin ve gerçek mobilyalardan oluşan istek listesiyle AI düzenleri alın.",
+  Haki:
+    "Yapay zeka destekli manga çizgi roman oluşturucu. Hikayenizi yazın, kahramanınızı tanımlayın, görsel stilinizi seçin ve tam çizgi roman panelleri oluşturun — ardından kaydedin, indirin ve hikayeye devam edin.",
   "intyx.ai":
     "Verinizi anında dashboard'a dönüştürün. CSV yükleyin, yapay zeka saniyeler içinde güzel ve interaktif grafikler oluştursun — kod gerekmez. Erken erişim açık.",
   "dynamic.intyx.ai":
@@ -68,8 +73,10 @@ export const contentMap = {
       cta: { label: "See our work", href: "#projects" },
       ctaSecondary: { label: "Get in touch", href: "#contact" },
       stats: {
-        products: "products shipped",
-        founders: "founders",
+        total: { count: 7, label: "products shipped" },
+        client: { count: 3, label: "client delivered" },
+        own: { count: 4, label: "in-house" },
+        founders: { count: 2, label: "founders" },
         techStack: "Flutter · Next.js · AI",
       },
     },
@@ -126,19 +133,11 @@ export const contentMap = {
             { place: "TUSAŞ", years: "2020–2025" },
           ],
         },
-        { name: "Büşra Mercan",
+        {
+          name: "Büşra Mercan",
           role: "Co-Founder",
           initials: "BM",
-          background: [
-            { place: "TOBB ETU", years: "2020–2024" },
-          ], 
-        },
-        { name: "Özgür Emrem",
-          role: "Software Developer",
-          initials: "ÖE",
-          background: [
-            { place: "Marmara Üniversitesi", years: "2016–2020" },
-          ],
+          background: [{ place: "TOBB ETU", years: "2020–2024" }],
         },
       ] satisfies TeamMember[],
     },
@@ -157,6 +156,8 @@ I'm reaching out via your website.`,
           { value: "", label: "None" },
           { value: "dietpal", label: "DietPal" },
           { value: "fitvibe", label: "FitVibe" },
+          { value: "roompace", label: "RoomPace" },
+          { value: "haki", label: "Haki" },
           { value: "nextstep", label: "NextStep" },
           { value: "bloomish", label: "Bloomish" },
           { value: "intyx.ai", label: "Intyx AI" },
@@ -287,9 +288,9 @@ I'm reaching out via your website.`,
             "Whether you're new to a city or just looking to expand your circle, Offer turns everyday places into spaces for genuine connection.",
         },
       ],
-      ctaHeading: "Interested in Offer?",
+      ctaHeading: "Want to try Offer?",
       ctaSub:
-        "We're actively developing Offer. Reach out if you'd like to know more or get early access.",
+        "Download on the App Store and Google Play — or get in touch if you have questions.",
       ctaButton: "Get in touch →",
     },
     nextstep: {
@@ -419,7 +420,7 @@ I'm reaching out via your website.`,
       ],
       ctaHeading: "Want to try DietPal?",
       ctaSub:
-        "DietPal is currently in development. Get in touch if you'd like early access or have questions.",
+        "Download on the App Store and Google Play — or get in touch if you have questions.",
       ctaButton: "Get in touch →",
     },
     fitvibe: {
@@ -469,7 +470,107 @@ I'm reaching out via your website.`,
       ],
       ctaHeading: "Want to try FitVibe?",
       ctaSub:
-        "FitVibe is currently in development. Get in touch if you'd like early access or have questions.",
+        "Download on the App Store and Google Play — or get in touch if you have questions or partnership inquiries.",
+      ctaButton: "Get in touch →",
+    },
+    roompace: {
+      back: "← bmnova.com",
+      eyebrow: "What RoomPace does",
+      heading: "Beautiful rooms, designed to your budget.",
+      description:
+        "RoomPace is the AI interior design app for people who want a beautiful home without overspending. Set your budget, upload a photo, and get AI layouts with real product wishlists.",
+      demoAlt: "RoomPace app demo",
+      features: [
+        {
+          icon: "💰",
+          title: "Budget-aware design",
+          description:
+            "Set how much you want to spend and get room designs that respect your numbers — from a light refresh to a full makeover.",
+        },
+        {
+          icon: "📸",
+          title: "Photo to AI layout",
+          description:
+            "Upload a photo of your space, pick your room type and aesthetic vibe, and generate a curated AI render in seconds.",
+        },
+        {
+          icon: "🎨",
+          title: "Explore interior styles",
+          description:
+            "Browse styles on the Inspire home screen, discover your aesthetic with AI, and compare looks before you commit.",
+        },
+        {
+          icon: "✨",
+          title: "Refine every detail",
+          description:
+            "Iterate on your render with simple prompts or auto-rearrange — tweak layouts until they feel right.",
+        },
+        {
+          icon: "🏠",
+          title: "My Rooms gallery",
+          description:
+            "Save every AI room concept in one organized gallery. Browse, manage, and revisit your designs anytime.",
+        },
+        {
+          icon: "🛒",
+          title: "Shoppable wishlist",
+          description:
+            "Every design comes with a per-room wishlist of real furniture and decor — with prices and purchase links.",
+        },
+      ],
+      ctaHeading: "Want to try RoomPace?",
+      ctaSub:
+        "Download on the App Store and Google Play — or get in touch if you have questions or partnership inquiries.",
+      ctaButton: "Get in touch →",
+    },
+    haki: {
+      back: "← bmnova.com",
+      eyebrow: "What Haki does",
+      heading: "Your story. Your hero. AI manga panels in minutes.",
+      description:
+        "Haki is the manga comics generator for creators who want full panels without starting from a blank page. Script your vision, define your protagonist, pick a visual style, and generate comic pages you can save, download, and continue.",
+      demoAlt: "Haki app demo",
+      features: [
+        {
+          icon: "✍️",
+          title: "Script your vision",
+          description:
+            "Describe the scene you want to bring to life. Haki turns your story prompt into a draft ready for character setup and panel generation.",
+        },
+        {
+          icon: "🦸",
+          title: "Character setup",
+          description:
+            "Define your protagonist with a photo, name, role, and look. Haki keeps your hero consistent across every generated panel.",
+        },
+        {
+          icon: "🎨",
+          title: "Visual DNA & genres",
+          description:
+            "Choose manga styles like Shonen, Seinen, Shojo, or Cyberpunk, then pick genres from Action and Fantasy to Romance and Isekai.",
+        },
+        {
+          icon: "📖",
+          title: "Generate comic panels",
+          description:
+            "Turn your script and character into full AI manga panels in seconds — complete with dialogue, layout, and cinematic pacing.",
+        },
+        {
+          icon: "📚",
+          title: "Comic library",
+          description:
+            "Save every generated comic in your personal library. Browse collections, revisit past stories, and pick up where you left off.",
+        },
+        {
+          icon: "➡️",
+          title: "Continue the story",
+          description:
+            "Finished a chapter? Continue the narrative with new prompts and generate the next page of your manga without losing continuity.",
+        },
+      ],
+      ctaHeading: "Want to try Haki?",
+      ctaSub:
+        "Get in touch for early access, questions, or partnership inquiries.",
       ctaButton: "Get in touch →",
     },
     bloomish: {
@@ -528,8 +629,10 @@ I'm reaching out via your website.`,
       cta: { label: "Çalışmalarımıza bak", href: "#projects" },
       ctaSecondary: { label: "İletişime geç", href: "#contact" },
       stats: {
-        products: "ürün",
-        founders: "kurucu",
+        total: { count: 7, label: "ürün yayında" },
+        client: { count: 3, label: "müşteri teslimi" },
+        own: { count: 4, label: "kendi ürünümüz" },
+        founders: { count: 2, label: "kurucu" },
         techStack: "Flutter · Next.js · AI",
       },
     },
@@ -586,19 +689,11 @@ I'm reaching out via your website.`,
             { place: "TUSAŞ", years: "2020–2025" },
           ],
         },
-        { name: "Büşra Mercan", 
-          role: "Kurucu Ortak", 
+        {
+          name: "Büşra Mercan",
+          role: "Kurucu Ortak",
           initials: "BM",
-          background: [
-            { place: "TOBB ETU", years: "2020–2024" },
-          ],
-        },
-        { name: "Özgür Emrem",
-          role: "Yazılım Geliştirici",
-          initials: "ÖE",
-          background: [
-            { place: "Marmara Üniversitesi", years: "2016–2020" },
-          ],
+          background: [{ place: "TOBB ETU", years: "2020–2024" }],
         },
       ] satisfies TeamMember[],
     },
@@ -617,6 +712,8 @@ Siteniz üzerinden size ulaşıyorum.`,
           { value: "", label: "Yok" },
           { value: "dietpal", label: "DietPal" },
           { value: "fitvibe", label: "FitVibe" },
+          { value: "roompace", label: "RoomPace" },
+          { value: "haki", label: "Haki" },
           { value: "nextstep", label: "NextStep" },
           { value: "bloomish", label: "Bloomish" },
           { value: "intyx.ai", label: "Intyx AI" },
@@ -747,9 +844,9 @@ Siteniz üzerinden size ulaşıyorum.`,
             "İster yeni taşınmış olun ister çevrenizi genişletmek isteyin, Offer gündelik mekanları gerçek bağlantı alanlarına dönüştürür.",
         },
       ],
-      ctaHeading: "Offer'a ilginiz mi var?",
+      ctaHeading: "Offer'ı denemek ister misiniz?",
       ctaSub:
-        "Offer'ı aktif olarak geliştiriyoruz. Daha fazla bilgi almak veya erken erişim için bize ulaşın.",
+        "App Store ve Google Play'den indirin — veya sorularınız için bize ulaşın.",
       ctaButton: "İletişime geç →",
     },
     nextstep: {
@@ -879,7 +976,7 @@ Siteniz üzerinden size ulaşıyorum.`,
       ],
       ctaHeading: "DietPal'ı denemek ister misiniz?",
       ctaSub:
-        "DietPal şu anda geliştirme aşamasında. Erken erişim veya sorularınız için bize ulaşın.",
+        "App Store ve Google Play'den indirin — veya sorularınız için bize ulaşın.",
       ctaButton: "İletişime geç →",
     },
     fitvibe: {
@@ -929,7 +1026,107 @@ Siteniz üzerinden size ulaşıyorum.`,
       ],
       ctaHeading: "FitVibe'ı denemek ister misiniz?",
       ctaSub:
-        "FitVibe şu anda geliştirme aşamasında. Erken erişim veya sorularınız için bize ulaşın.",
+        "App Store ve Google Play'den indirin — veya soru ve iş birliği talepleriniz için bize ulaşın.",
+      ctaButton: "İletişime geç →",
+    },
+    roompace: {
+      back: "← bmnova.com",
+      eyebrow: "RoomPace ne yapar",
+      heading: "Güzel odalar, bütçenize göre tasarlanır.",
+      description:
+        "RoomPace, bütçesini aşmadan güzel bir ev isteyenler için yapay zeka iç tasarım uygulaması. Bütçenizi belirleyin, fotoğraf yükleyin ve gerçek ürün istek listeleriyle AI düzenleri alın.",
+      demoAlt: "RoomPace uygulama demosu",
+      features: [
+        {
+          icon: "💰",
+          title: "Bütçe odaklı tasarım",
+          description:
+            "Ne kadar harcamak istediğinizi belirleyin ve rakamlarınıza uygun oda tasarımları alın — hafif bir yenilemeden tam bir dönüşüme kadar.",
+        },
+        {
+          icon: "📸",
+          title: "Fotoğraftan AI düzen",
+          description:
+            "Alanınızın fotoğrafını yükleyin, oda tipinizi ve estetik tarzınızı seçin ve saniyeler içinde özenle hazırlanmış bir AI render alın.",
+        },
+        {
+          icon: "🎨",
+          title: "İç mekan stillerini keşfedin",
+          description:
+            "Inspire ana ekranında stilleri inceleyin, yapay zeka ile estetiğinizi keşfedin ve karar vermeden önce görünümleri karşılaştırın.",
+        },
+        {
+          icon: "✨",
+          title: "Her detayı iyileştirin",
+          description:
+            "Basit istemlerle render'ınızı geliştirin veya otomatik yeniden düzenleyin — düzenler tam istediğiniz gibi hissedene kadar ince ayar yapın.",
+        },
+        {
+          icon: "🏠",
+          title: "Odalarım galerisi",
+          description:
+            "Her AI oda konseptini tek bir düzenli galeride kaydedin. Tasarımlarınızı istediğiniz zaman inceleyin, yönetin ve yeniden ziyaret edin.",
+        },
+        {
+          icon: "🛒",
+          title: "Alışveriş yapılabilir istek listesi",
+          description:
+            "Her tasarım, gerçek mobilya ve dekor ürünlerinden oluşan oda bazlı bir istek listesiyle gelir — fiyatlar ve satın alma bağlantılarıyla.",
+        },
+      ],
+      ctaHeading: "RoomPace'ı denemek ister misiniz?",
+      ctaSub:
+        "App Store ve Google Play'den indirin — sorularınız veya iş birliği talepleriniz için bize de ulaşabilirsiniz.",
+      ctaButton: "İletişime geç →",
+    },
+    haki: {
+      back: "← bmnova.com",
+      eyebrow: "Haki ne yapar",
+      heading: "Senin hikayen. Senin kahramanın. Dakikalar içinde AI manga panelleri.",
+      description:
+        "Haki, boş sayfadan başlamadan tam paneller isteyen yaratıcılar için manga çizgi roman oluşturucusudur. Vizyonunuzu yazın, kahramanınızı tanımlayın, görsel stilinizi seçin ve kaydedip indirebileceğiniz, devam edebileceğiniz çizgi roman sayfaları oluşturun.",
+      demoAlt: "Haki uygulama demosu",
+      features: [
+        {
+          icon: "✍️",
+          title: "Vizyonunuzu yazın",
+          description:
+            "Hayata geçirmek istediğiniz sahneyi tarif edin. Haki, hikaye isteminizi karakter kurulumu ve panel oluşturmaya hazır bir taslağa dönüştürür.",
+        },
+        {
+          icon: "🦸",
+          title: "Karakter kurulumu",
+          description:
+            "Fotoğraf, isim, rol ve görünümle kahramanınızı tanımlayın. Haki, kahramanınızı oluşturulan her panelde tutarlı tutar.",
+        },
+        {
+          icon: "🎨",
+          title: "Görsel DNA ve türler",
+          description:
+            "Shonen, Seinen, Shojo veya Cyberpunk gibi manga stillerini seçin, ardından Action ve Fantasy'den Romance ve Isekai'ye kadar türler belirleyin.",
+        },
+        {
+          icon: "📖",
+          title: "Çizgi roman panelleri oluşturun",
+          description:
+            "Senaryonuzu ve karakterinizi saniyeler içinde tam AI manga panellerine dönüştürün — diyalog, düzen ve sinematik tempo ile birlikte.",
+        },
+        {
+          icon: "📚",
+          title: "Çizgi roman kütüphanesi",
+          description:
+            "Oluşturduğunuz her çizgi romanı kişisel kütüphanenize kaydedin. Koleksiyonlara göz atın, geçmiş hikayeleri yeniden ziyaret edin ve kaldığınız yerden devam edin.",
+        },
+        {
+          icon: "➡️",
+          title: "Hikayeye devam edin",
+          description:
+            "Bir bölümü bitirdiniz mi? Yeni istemlerle anlatıya devam edin ve sürekliliği kaybetmeden manganızın bir sonraki sayfasını oluşturun.",
+        },
+      ],
+      ctaHeading: "Haki'yi denemek ister misiniz?",
+      ctaSub:
+        "Erken erişim, sorular veya iş birliği talepleri için bize ulaşın.",
       ctaButton: "İletişime geç →",
     },
     bloomish: {

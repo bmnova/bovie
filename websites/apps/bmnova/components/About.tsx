@@ -4,14 +4,19 @@ import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@websites/shared/animations";
 import { contentMap } from "@/content";
 import { useLocale } from "@/app/locale-context";
+import { MouseGlow } from "@/components/motion";
 
 export function About() {
   const { locale } = useLocale();
   const { about } = contentMap[locale];
 
   return (
-    <section id="about" className="bg-primary px-6 py-28 md:px-12">
-      <div className="mx-auto max-w-6xl">
+    <section
+      id="about"
+      className="relative overflow-hidden bg-primary px-6 py-28 md:px-12"
+    >
+      <MouseGlow color="#818CF8" size={560} opacity={0.18} />
+      <div className="relative z-10 mx-auto max-w-6xl">
         <motion.div
           variants={staggerContainer}
           initial="hidden"

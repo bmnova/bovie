@@ -3,6 +3,7 @@ title: "How to Lose, Gain, or Maintain Weight in a Healthy Way"
 date: "2026-03-25"
 summary: "Whether you want to drop body fat, build mass, or stay consistent — the same core principles apply. Here's what the research actually says."
 tags: ["Health", "Nutrition", "Fitness"]
+product: dietpal
 ---
 
 ## Quick Answer
@@ -144,6 +145,14 @@ Healthy weight management isn't about being thin or looking a certain way. It's 
 - Sustaining the approach without it dominating your life
 
 A number on a scale is a data point, not a verdict.
+
+---
+
+## Tracking Without Turning Food Into a Second Job
+
+The principles above only work if you can see your intake and adjust. Paper diaries and rigid calorie apps often fail when logging takes longer than the meal.
+
+Apps like [DietPal](https://bmnova.com/projects/dietpal) — built by bmnova — are designed around lower-friction feedback: AI photo and text logging, meal plans you can regenerate when life changes, progress charts, and a coach chat that can log meals or update preferences without digging through menus. Use any tracker as a weekly trend tool, not a perfection scoreboard.
 
 ---
 

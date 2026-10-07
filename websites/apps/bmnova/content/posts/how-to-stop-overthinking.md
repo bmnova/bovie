@@ -3,6 +3,7 @@ title: "How to Stop Overthinking and Actually Take Action"
 date: "2026-03-25"
 summary: "Overthinking isn't a personality flaw — it's a well-studied cognitive pattern with known causes and evidence-based solutions. Here's what the research says about breaking out of it."
 tags: ["Productivity", "Mental Health", "Psychology"]
+product: nextstep
 ---
 
 ## Quick Answer

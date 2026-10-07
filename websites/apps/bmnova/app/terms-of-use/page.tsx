@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Terms of Use — BMNova",
   description:
     "BMNova Terms of Use. Access and use of our websites, apps, AI features, and services. Kullanım Koşulları.",
+  alternates: {
+    canonical: "/terms-of-use",
+  },
 };
 
 export default function TermsOfUsePage() {

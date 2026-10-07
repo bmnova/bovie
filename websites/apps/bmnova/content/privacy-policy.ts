@@ -13,7 +13,7 @@ export type PrivacyPolicyContent = {
 
 export const privacyPolicyContent: Record<"en" | "tr", PrivacyPolicyContent> = {
   en: {
-    lastUpdated: "March 8, 2026",
+    lastUpdated: "September 9, 2026",
     title: "Privacy Policy",
     intro: [
       'BMNova, operated by Ali Mertcan Karaman ("BMNova", "we", "us", or "our"), builds mobile apps, web products, SaaS platforms, and AI-powered software. This Privacy Policy explains how we collect, use, store, share, and protect personal data when you visit our website, contact us, use our products or services, or interact with us in a business context.',
@@ -210,34 +210,44 @@ export const privacyPolicyContent: Record<"en" | "tr", PrivacyPolicyContent> = {
       },
       {
         number: 16,
+        title: "Face Data",
+        paragraphs: [
+          "Certain BMNova apps, including HAKI, may process photographs that include a face when you voluntarily take or upload them to create a comic character (“face photos”). We do not collect Face ID data, depth maps, facial geometry templates, faceprints, or other biometric identifiers derived from your face, and we do not use face photos for facial recognition or identity matching.",
+          "Face photos are used only to generate the stylized comic/manga character images and panel consistency you request. Original face photos remain on your device as part of your app projects/heroes. To fulfill a request, a copy may be transmitted securely to our servers (Firebase) and our AI processor (Google Gemini). We do not permanently store original face photos on our servers as a separate dataset; we store generated outputs (such as stylized avatars and panels) needed to provide the service. We do not sell face data or use it for advertising or identity verification.",
+          "You may delete face photos by deleting the related hero or project in the app, uninstalling the app, or requesting deletion at https://www.bmnova.com/account-data-deletion or contact@bmnova.com.",
+          'For general practices on user content, AI processing, sharing, retention, and your rights, see the sections “Data We Collect” (User content), “AI and Data Use,” “Sharing of Personal Data,” “Data Retention,” and “Your Rights” above.',
+        ],
+      },
+      {
+        number: 17,
         title: "Children",
         paragraphs: [
           "Our services are generally not directed to children unless explicitly stated otherwise. We do not knowingly collect personal data from children in violation of applicable law.",
         ],
       },
       {
-        number: 17,
+        number: 18,
         title: "Third-Party Services",
         paragraphs: [
           "Our website and products may include links to or integrations with third-party services. Those third parties operate under their own privacy policies, and we are not responsible for their practices.",
         ],
       },
       {
-        number: 18,
+        number: 19,
         title: "Client Projects",
         paragraphs: [
           "When BMNova develops or operates a product for a client, BMNova may process personal data on that client's behalf. In such cases, the client's own privacy notice may apply to end users, and privacy requests may need to be directed to that client first.",
         ],
       },
       {
-        number: 19,
+        number: 20,
         title: "Changes to This Policy",
         paragraphs: [
           "We may update this Privacy Policy from time to time. When we do, we will revise the \"Last updated\" date above. Material changes may also be communicated through the website or relevant service.",
         ],
       },
       {
-        number: 20,
+        number: 21,
         title: "Contact",
         paragraphs: [
           "For questions, requests, or complaints about this Privacy Policy or our privacy practices, contact:",
@@ -251,7 +261,7 @@ export const privacyPolicyContent: Record<"en" | "tr", PrivacyPolicyContent> = {
     ],
   },
   tr: {
-    lastUpdated: "8 Mart 2026",
+    lastUpdated: "9 Eylül 2026",
     title: "Gizlilik Politikası",
     intro: [
       'Ali Mertcan Karaman tarafından işletilen BMNova ("BMNova", "biz", "bize" veya "bizim"), mobil uygulamalar, web ürünleri, SaaS platformları ve yapay zekâ destekli yazılımlar geliştirir. Bu Gizlilik Politikası, web sitemizi ziyaret ettiğinizde, bizimle iletişime geçtiğinizde, ürün veya hizmetlerimizi kullandığınızda ya da bizimle ticari ilişki kurduğunuzda kişisel verilerinizi nasıl topladığımızı, kullandığımızı, sakladığımızı, paylaştığımızı ve koruduğumuzu açıklar.',
@@ -451,34 +461,44 @@ export const privacyPolicyContent: Record<"en" | "tr", PrivacyPolicyContent> = {
       },
       {
         number: 16,
+        title: "Yüz Verisi",
+        paragraphs: [
+          'Belirli BMNova uygulamaları, bunlar arasında HAKI de olmak üzere, gönüllü olarak çektiğiniz veya yüklediğiniz ve bir çizgi roman karakteri oluşturmak için kullandığınız yüz içeren fotoğrafları (“yüz fotoğrafları”) işleyebilir. Face ID verisi, derinlik haritaları, yüz geometrisi şablonları, yüz izleri (faceprint) veya yüzünüzden türetilen diğer biyometrik tanımlayıcıları toplamayız; yüz fotoğraflarını yüz tanıma veya kimlik eşleştirme için kullanmayız.',
+          "Yüz fotoğrafları yalnızca talep ettiğiniz stilize çizgi roman/manga karakter görsellerini ve panel tutarlılığını üretmek için kullanılır. Orijinal yüz fotoğrafları, uygulama içi proje/kahramanlarınızın bir parçası olarak cihazınızda kalır. Bir talebi yerine getirmek için bir kopya sunucularımıza (Firebase) ve yapay zekâ işlemcimize (Google Gemini) güvenli şekilde iletilebilir. Orijinal yüz fotoğraflarını sunucularımızda ayrı bir veri seti olarak kalıcı şekilde saklamayız; hizmeti sunmak için gerekli üretilmiş çıktıları (örneğin stilize avatarlar ve paneller) saklarız. Yüz verisini satmayız; reklam veya kimlik doğrulama için kullanmayız.",
+          "Yüz fotoğraflarını uygulamadaki ilgili kahramanı veya projeyi silerek, uygulamayı kaldırarak ya da https://www.bmnova.com/account-data-deletion adresinden veya contact@bmnova.com üzerinden silme talebinde bulunarak silebilirsiniz.",
+          'Kullanıcı içeriği, yapay zekâ işleme, paylaşım, saklama ve haklarınıza ilişkin genel uygulamalar için yukarıdaki “Topladığımız Veriler” (Kullanıcı içeriği), “Yapay Zekâ ve Veri Kullanımı”, “Kişisel Verilerin Paylaşılması”, “Saklama Süresi” ve “Haklarınız” bölümlerine bakın.',
+        ],
+      },
+      {
+        number: 17,
         title: "Çocuklara İlişkin Gizlilik",
         paragraphs: [
           "Hizmetlerimiz, açıkça belirtilmedikçe çocuklara yönelik değildir. Uygulanabilir hukuka aykırı şekilde çocuklardan bilerek kişisel veri toplamıyoruz.",
         ],
       },
       {
-        number: 17,
+        number: 18,
         title: "Üçüncü Taraf Hizmetler",
         paragraphs: [
           "Web sitemiz ve ürünlerimiz üçüncü taraf hizmetlere bağlantılar veya entegrasyonlar içerebilir. Bu taraflar kendi gizlilik politikalarına tabidir ve onların uygulamalarından sorumlu değiliz.",
         ],
       },
       {
-        number: 18,
+        number: 19,
         title: "Müşteri Projeleri",
         paragraphs: [
           "BMNova, bir müşteri için ürün geliştiriyor veya işletiyorsa, ilgili kişisel verileri o müşteri adına işleyebilir. Bu durumlarda son kullanıcılar açısından müşterinin kendi gizlilik bildirimi geçerli olabilir ve bazı gizlilik taleplerinin öncelikle ilgili müşteriye yöneltilmesi gerekebilir.",
         ],
       },
       {
-        number: 19,
+        number: 20,
         title: "Bu Politikadaki Değişiklikler",
         paragraphs: [
           "Bu Gizlilik Politikası'nı zaman zaman güncelleyebiliriz. Güncelleme yaptığımızda yukarıdaki \"Son güncelleme\" tarihini yenileriz. Esaslı değişiklikler ayrıca web sitesi veya ilgili hizmet üzerinden duyurulabilir.",
         ],
       },
       {
-        number: 20,
+        number: 21,
         title: "İletişim",
         paragraphs: [
           "Bu Gizlilik Politikası veya gizlilik uygulamalarımız hakkında soru, talep ya da şikâyetleriniz için:",
