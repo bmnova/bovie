@@ -8,8 +8,6 @@ A Flutter-based movie discovery application built with Clean Architecture, MobX 
 
 [![Demo 1: App Flow & Features](https://img.youtube.com/vi/rXYybQ9kKuM/0.jpg)](https://www.youtube.com/shorts/rXYybQ9kKuM)
 
-📥 [Download Demo 1 (126MB)](demo1.mov) - Direct download (Git LFS)
-
 ### Demo 2: Paywall Animations
 
 [![Demo 2: Paywall Animations](https://img.youtube.com/vi/NOMd3PIkUoI/0.jpg)](https://www.youtube.com/shorts/NOMd3PIkUoI)
