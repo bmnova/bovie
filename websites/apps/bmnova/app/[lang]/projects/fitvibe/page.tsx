@@ -16,7 +16,7 @@ export function generateMetadata({ params }: Props) {
 export default function FitVibePage({ params }: Props) {
   return (
     <>
-      <JsonLd data={softwareApplicationJsonLd("fitvibe")} />
+      <JsonLd data={softwareApplicationJsonLd("fitvibe", params.lang)} />
       <JsonLd data={faqPageJsonLd(APPS.fitvibe.copy[params.lang].faqs ?? [])} />
       <AppPage
         slug="fitvibe"

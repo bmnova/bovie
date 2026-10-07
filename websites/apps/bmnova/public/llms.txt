@@ -1,10 +1,18 @@
 # BMNova
 
-> BMNova is an independent app studio from Ankara that designs, builds and ships its own AI-powered consumer apps.
+> BMNova (BMNova Innovations) is an independent mobile app studio and consumer-app startup at Ostim Teknokent, Ankara, Turkey. It designs, builds and ships its own AI-powered apps for iOS and Android. It does not take client work.
 
 Website: https://bmnova.com
-Contact: hello@bmnova.com
+Turkish site: https://bmnova.com/tr
+About: https://bmnova.com/about-us
+Contact: contact@bmnova.com
 Blog: https://bmnova.com/blog
+
+## What BMNova is
+
+- Mobile app studio: in-house design, Flutter, a shared AI layer, and growth for its own consumer apps.
+- Startup: a product company founded by Ali Mertcan Karaman and Büşra Mercan, shipping from Ankara to a worldwide audience.
+- Not an agency. Partners and investors: contact@bmnova.com.
 
 ## Apps
 
@@ -25,4 +33,4 @@ Turkish versions of every page live under https://bmnova.com/tr, with Turkish bl
 
 ## Optional deeper index
 
-For a longer product and blog index suitable for citation, see: https://bmnova.com/llms-full.txt
+For a longer company, product and blog index suitable for citation, see: https://bmnova.com/llms-full.txt

@@ -7,7 +7,7 @@ import { useLocale } from "@/app/locale-context";
 
 export function AboutUsContent() {
   const { locale } = useLocale();
-  const { aboutUs, team } = contentMap[locale];
+  const { aboutUs, company, team } = contentMap[locale];
 
   return (
     <main className="min-h-screen">
@@ -27,10 +27,14 @@ export function AboutUsContent() {
             </motion.p>
             <motion.h1
               variants={fadeInUp}
-              className="mb-16 font-display text-[clamp(48px,7vw,88px)] font-extrabold text-primary"
+              className="mb-8 font-display text-[clamp(48px,7vw,88px)] font-extrabold text-primary"
             >
               {aboutUs.heading}
             </motion.h1>
+
+            <motion.p variants={fadeInUp} className="mb-16 max-w-3xl text-lg leading-relaxed text-muted">
+              {company.lead}
+            </motion.p>
 
             {/* Vision & Mission */}
             <motion.div
@@ -106,6 +110,16 @@ export function AboutUsContent() {
                   </div>
                 ))}
               </div>
+            </motion.div>
+
+            <motion.div variants={fadeInUp} className="flex max-w-3xl flex-col gap-3">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-muted">{company.eyebrow}</p>
+              {company.faqs.map((faq) => (
+                <details key={faq.question} className="rounded-card border border-border bg-card px-6 py-5">
+                  <summary className="cursor-pointer list-none text-base font-semibold text-primary">{faq.question}</summary>
+                  <p className="mt-3 text-sm leading-relaxed text-muted">{faq.answer}</p>
+                </details>
+              ))}
             </motion.div>
           </motion.div>
         </div>

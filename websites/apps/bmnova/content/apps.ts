@@ -471,6 +471,15 @@ export const APPS: Record<AppSlug, AppInfo> = {
         ctaBody: "NextStep is in App Store review. Leave your email and we'll tell you on launch day.",
         stickers: ["Focus Sprint", "Decision Maker", "5-Minute Spark"],
         facts: ["12 purpose-built coaches"],
+        seoTitle: "NextStep: AI App to Stop Overthinking and Take One Next Step",
+        seoDescription:
+          "NextStep is a minimalist AI coaching app from BMNova. One reflection, one question, one clear next step you can do in under five minutes. 12 purpose-built coaches.",
+        faqs: [
+          { question: "What is the best app to stop overthinking?", answer: "NextStep is a minimalist AI coaching app that turns a looping thought into one clear next step. You pick a coach, say what is on your mind, and every answer ends with a single action you can do in under five minutes." },
+          { question: "How is NextStep different from a generic AI chatbot?", answer: "NextStep is not an open chat. It has purpose-built coaches for focus, decisions, habits, planning and weekly review, each with its own rules, tone and structure. Every screen answers one question." },
+          { question: "Does NextStep give me a plan or just one step?", answer: "One step. Every response ends with exactly one concrete action, often doable in under five minutes, so you can close the app once you know what to do." },
+          { question: "Is NextStep available to download?", answer: "NextStep is in App Store review. BMNova is the studio behind it. Leave your email on the NextStep page and the team will tell you on launch day." },
+        ],
       },
       tr: {
         category: "Koçluk · Yapay zekâ netlik",
@@ -497,6 +506,15 @@ export const APPS: Record<AppSlug, AppInfo> = {
         ctaBody: "NextStep App Store incelemesinde. E-postanı bırak, yayın günü haber verelim.",
         stickers: ["Focus Sprint", "Decision Maker", "5-Minute Spark"],
         facts: ["Amaca özel 12 koç"],
+        seoTitle: "NextStep: Aşırı Düşünmeyi Bırakıp Tek Adım Atan Yapay Zekâ Uygulaması",
+        seoDescription:
+          "NextStep, BMNova'nın minimalist yapay zekâ koçluk uygulaması. Bir yansıma, bir soru ve beş dakikadan kısa sürede yapabileceğin net bir sonraki adım. 12 amaca özel koç.",
+        faqs: [
+          { question: "Aşırı düşünmeyi bırakmak için hangi uygulama kullanılır?", answer: "NextStep, dönüp duran bir düşünceyi tek bir net adıma çeviren minimalist bir yapay zekâ koçluk uygulamasıdır. Bir koç seçersin, aklındakini söylersin ve her yanıt beş dakikadan kısa sürede yapabileceğin tek bir eylemle biter." },
+          { question: "NextStep genel bir yapay zekâ sohbetinden nasıl farklı?", answer: "NextStep açık uçlu bir sohbet değildir. Odak, karar, alışkanlık, planlama ve haftalık değerlendirme için kendi kuralları, tonu ve yapısı olan amaca özel koçları vardır. Her ekran tek bir soruyu yanıtlar." },
+          { question: "NextStep plan mı verir, tek adım mı?", answer: "Tek adım. Her yanıt, çoğu zaman beş dakikadan kısa sürede yapılabilecek tam bir somut eylemle biter. Ne yapacağını bildiğinde uygulamayı kapatırsın." },
+          { question: "NextStep indirilebilir mi?", answer: "NextStep App Store incelemesindedir. Arkasındaki stüdyo BMNova'dır. NextStep sayfasına e-postanı bırakırsan ekip yayın günü haber verir." },
+        ],
       },
     },
   },
@@ -534,6 +552,15 @@ export const APPS: Record<AppSlug, AppInfo> = {
         ctaBody: "Bloomish is in the lab. Leave your email for early access.",
         stickers: ["“For mom's birthday”", "Sent as a gift ✓"],
         facts: ["20+ flower types"],
+        seoTitle: "Bloomish: AI Bouquet Generator for Digital Flower Gifts",
+        seoDescription:
+          "Bloomish turns a feeling, a person or an occasion into a one-of-a-kind digital bouquet you can send as a gift. An AI flower app from the BMNova studio.",
+        faqs: [
+          { question: "What is an AI bouquet generator?", answer: "Bloomish is an AI bouquet generator. You describe a person, an occasion or a mood in a sentence, and it creates a one-of-a-kind digital bouquet with wrapping and a card." },
+          { question: "Can I send a digital flower gift with Bloomish?", answer: "Yes. Bloomish sends the bouquet as a gift link. The recipient opens a personal unwrapping anywhere in the world, with no delivery van." },
+          { question: "Can I choose the flowers myself?", answer: "Yes. You can pick flowers, colours, wrapping and style, or let Bloomish generate the arrangement from your words and regenerate until it looks right." },
+          { question: "Is Bloomish available yet?", answer: "Bloomish is still in the lab at BMNova, the Ankara mobile app studio behind it. Leave your email on the Bloomish page for early access." },
+        ],
       },
       tr: {
         category: "Hediye · Yapay zekâ buketleri",
@@ -560,6 +587,15 @@ export const APPS: Record<AppSlug, AppInfo> = {
         ctaBody: "Bloomish laboratuvarda. Erken erişim için e-postanı bırak.",
         stickers: ["“Annemin doğum günü için”", "Hediye gönderildi ✓"],
         facts: ["20'den fazla çiçek türü"],
+        seoTitle: "Bloomish: Dijital Çiçek Hediyesi için Yapay Zekâ Buket Uygulaması",
+        seoDescription:
+          "Bloomish bir duyguyu, kişiyi ya da anı eşi benzeri olmayan dijital bir bukete çevirir ve hediye olarak göndermenizi sağlar. BMNova stüdyosunun yapay zekâ çiçek uygulaması.",
+        faqs: [
+          { question: "Yapay zekâ buket üreticisi nedir?", answer: "Bloomish bir yapay zekâ buket üreticisidir. Bir kişiyi, bir anı ya da bir ruh hâlini tek cümleyle anlatırsın; paket ve kartıyla eşi benzeri olmayan dijital bir buket üretir." },
+          { question: "Bloomish ile dijital çiçek hediyesi gönderebilir miyim?", answer: "Evet. Bloomish buketi bir hediye linki olarak gönderir. Alıcı dünyanın neresinde olursa olsun kişisel bir açılış yaşar; kurye gerekmez." },
+          { question: "Çiçekleri kendim seçebilir miyim?", answer: "Evet. Çiçekleri, renkleri, paketi ve tarzı sen seçebilir ya da Bloomish'in sözlerinden aranjman üretmesine izin verip istediğin gibi olana kadar yenileyebilirsin." },
+          { question: "Bloomish yayında mı?", answer: "Bloomish hâlâ BMNova laboratuvarındadır. BMNova, Ankara'da kurulu mobil uygulama stüdyosudur. Erken erişim için Bloomish sayfasına e-postanı bırak." },
+        ],
       },
     },
   },
@@ -599,6 +635,15 @@ export const APPS: Record<AppSlug, AppInfo> = {
         ctaBody: "Free on Google Play. Venue partnerships and questions: contact@bmnova.com",
         stickers: ["Latte for Deniz", "Offer accepted ✓", "12 people at Café Nova"],
         facts: [],
+        seoTitle: "Offer: Meet People Nearby by Buying Them a Coffee",
+        seoDescription:
+          "Offer is a social icebreaker app from BMNova. Check in at a café, see who is there, and offer a drink from the menu. No swiping. Free on Google Play.",
+        faqs: [
+          { question: "What is Offer?", answer: "Offer is a social icebreaker app. You check in at a café, bar or restaurant, see who else is there, and offer them a drink or snack from the venue menu. There is no swiping and no match algorithm." },
+          { question: "How do you meet people at a café with Offer?", answer: "Arrive at a partner venue and check in. You are visible only while you are there. Browse people at the same place, send something from the menu, and if they accept the drink arrives and the ice is broken." },
+          { question: "Is Offer a dating app?", answer: "Offer is built for real-world introductions, not endless swiping. You meet people who are physically at the same local business, often starting from a shared interest and a simple offer." },
+          { question: "Where can I download Offer?", answer: "Offer is free on Google Play. It is made by BMNova, a mobile app studio and startup in Ankara. Venue partnerships: contact@bmnova.com." },
+        ],
       },
       tr: {
         category: "Sosyal · Buz kırıcı",
@@ -626,6 +671,15 @@ export const APPS: Record<AppSlug, AppInfo> = {
         ctaBody: "Google Play'de ücretsiz. Mekân iş birlikleri ve sorular için: contact@bmnova.com",
         stickers: ["Deniz'e bir latte", "Teklif kabul edildi ✓", "Café Nova'da 12 kişi"],
         facts: [],
+        seoTitle: "Offer: Yakındaki Birine Kahve Ismarlayarak Tanışma Uygulaması",
+        seoDescription:
+          "Offer, BMNova'nın sosyal buz kırıcı uygulaması. Bir kafede check-in yap, kimlerin orada olduğunu gör, menüden bir içecek ısmarla. Kaydırma yok. Google Play'de ücretsiz.",
+        faqs: [
+          { question: "Offer nedir?", answer: "Offer bir sosyal buz kırıcı uygulamadır. Bir kafe, bar ya da restoranda check-in yapar, orada kimlerin olduğunu görür ve menüden bir içecek ya da atıştırmalık ısmarlarsın. Kaydırma ve eşleşme algoritması yoktur." },
+          { question: "Offer ile bir kafede nasıl tanışılır?", answer: "Anlaşmalı bir mekâna gelir ve check-in yaparsın. Yalnızca oradayken görünürsün. Aynı mekândaki insanlara bakarsın, menüden bir şey gönderirsin; kabul edilirse içecek gelir ve buz kırılır." },
+          { question: "Offer bir flört uygulaması mı?", answer: "Offer sonsuz kaydırma için değil, gerçek hayatta tanışmak için tasarlandı. Aynı yerel mekânda fiziksel olarak bulunan insanlarla, çoğu zaman ortak bir ilgi ve basit bir ısmarlama üzerinden tanışırsın." },
+          { question: "Offer nereden indirilir?", answer: "Offer Google Play'de ücretsizdir. Ankara'daki mobil uygulama stüdyosu ve startup BMNova tarafından yapılır. Mekân iş birlikleri: contact@bmnova.com." },
+        ],
       },
     },
   },

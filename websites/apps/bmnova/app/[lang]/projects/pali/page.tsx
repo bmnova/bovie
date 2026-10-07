@@ -16,7 +16,7 @@ export function generateMetadata({ params }: Props) {
 export default function PaliPage({ params }: Props) {
   return (
     <>
-      <JsonLd data={softwareApplicationJsonLd("pali")} />
+      <JsonLd data={softwareApplicationJsonLd("pali", params.lang)} />
       <JsonLd data={faqPageJsonLd(APPS.pali.copy[params.lang].faqs ?? [])} />
       <AppPage
         slug="pali"

@@ -60,7 +60,7 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: "history.scrollRestoration='manual'" }} />
-        <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
+        <JsonLd data={[organizationJsonLd(params.lang), websiteJsonLd(params.lang)]} />
       </head>
       <body>
         <LocaleProvider locale={params.lang}>{children}</LocaleProvider>

@@ -50,6 +50,7 @@ export function pageMetadata({ locale, path, title, description }: PageMetaInput
       title,
       description,
       url,
+      siteName: "BMNova",
       type: "website",
       locale: locale === "tr" ? "tr_TR" : "en_US",
     },

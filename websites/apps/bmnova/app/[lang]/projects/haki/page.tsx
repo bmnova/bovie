@@ -16,7 +16,7 @@ export function generateMetadata({ params }: Props) {
 export default function HakiPage({ params }: Props) {
   return (
     <>
-      <JsonLd data={softwareApplicationJsonLd("haki")} />
+      <JsonLd data={softwareApplicationJsonLd("haki", params.lang)} />
       <JsonLd data={faqPageJsonLd(APPS.haki.copy[params.lang].faqs ?? [])} />
       <AppPage
         slug="haki"

@@ -1,10 +1,14 @@
 import { storeLinks } from "@/config/store-links";
 import { APPS, appStore } from "@/content/apps";
 import type { FirstPartyProject } from "@/lib/site";
+import type { Locale } from "@/lib/i18n";
 import {
   absoluteUrl,
   FIRST_PARTY_EXTERNAL,
+  FIRST_PARTY_PROJECTS,
+  ORG_ID,
   SITE_DESCRIPTION,
+  SITE_LEGAL_NAME,
   SITE_NAME,
   SITE_URL,
 } from "@/lib/site";
@@ -22,14 +26,91 @@ const APP_CATEGORY: Record<FirstPartyProject, string> = {
   offer: "SocialNetworkingApplication",
 };
 
-export function organizationJsonLd() {
+const ORG_DESCRIPTION: Record<Locale, string> = {
+  en: SITE_DESCRIPTION,
+  tr: "BMNova (BMNova Innovations), Ankara Ostim Teknokent'te kurulu bir mobil uygulama stüdyosu ve tüketici uygulaması startup'ıdır. Kendi yapay zekâ uygulamalarını tasarlar, geliştirir ve yayınlar: Pali, FitVibe, Haki, RoomPace, NextStep, Bloomish ve Offer.",
+};
+
+export function organizationJsonLd(locale: Locale = "en") {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": ORG_ID,
     name: SITE_NAME,
+    legalName: SITE_LEGAL_NAME,
+    alternateName: ["BM Nova", SITE_LEGAL_NAME, "BMNova app studio"],
     url: SITE_URL,
-    email: "hello@bmnova.com",
-    description: SITE_DESCRIPTION,
+    email: "contact@bmnova.com",
+    description: ORG_DESCRIPTION[locale],
+    slogan: locale === "tr" ? "Küçük stüdyo. Büyük uygulamalar." : "Tiny studio. Big apps.",
+    foundingLocation: {
+      "@type": "Place",
+      name: "Ostim Teknokent",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Ostim Teknokent",
+        addressLocality: "Ankara",
+        addressCountry: "TR",
+      },
+    },
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Ostim Teknokent",
+      addressLocality: "Ankara",
+      addressCountry: "TR",
+    },
+    areaServed: "Worldwide",
+    knowsAbout: [
+      "mobile app studio",
+      "consumer mobile apps",
+      "mobile app startup",
+      "iOS apps",
+      "Android apps",
+      "Flutter",
+      "artificial intelligence",
+    ],
+    founder: [
+      {
+        "@type": "Person",
+        name: "Ali Mertcan Karaman",
+        jobTitle: "Co-founder",
+        sameAs: [
+          "https://www.linkedin.com/in/ali-mertcan-karaman-088582133/",
+          "https://x.com/alimertcank",
+        ],
+      },
+      {
+        "@type": "Person",
+        name: "Büşra Mercan",
+        jobTitle: "Co-founder",
+      },
+    ],
+    contactPoint: {
+      "@type": "ContactPoint",
+      email: "contact@bmnova.com",
+      contactType: "customer support",
+      availableLanguage: ["English", "Turkish"],
+    },
+    brand: FIRST_PARTY_PROJECTS.map((slug) => ({
+      "@type": "Brand",
+      name: APPS[slug].name,
+      url: absoluteUrl(`/projects/${slug}`),
+    })),
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: locale === "tr" ? "BMNova uygulamaları" : "BMNova apps",
+      itemListElement: FIRST_PARTY_PROJECTS.map((slug, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "SoftwareApplication",
+          name: APPS[slug].name,
+          url: absoluteUrl(`/projects/${slug}`),
+          applicationCategory: APP_CATEGORY[slug],
+          author: { "@id": ORG_ID },
+        },
+      })),
+    },
     sameAs: [
       ...Object.values(storeLinks).flatMap((links) => Object.values(links)),
       ...FIRST_PARTY_EXTERNAL.map((p) => p.url),
@@ -37,18 +118,16 @@ export function organizationJsonLd() {
   };
 }
 
-export function websiteJsonLd() {
+export function websiteJsonLd(locale: Locale = "en") {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": `${SITE_URL}/#website`,
     name: SITE_NAME,
     url: SITE_URL,
-    description: SITE_DESCRIPTION,
-    publisher: {
-      "@type": "Organization",
-      name: SITE_NAME,
-      url: SITE_URL,
-    },
+    description: ORG_DESCRIPTION[locale],
+    inLanguage: ["en", "tr"],
+    publisher: { "@id": ORG_ID },
   };
 }
 
@@ -66,16 +145,8 @@ export function blogPostingJsonLd(input: {
     description: input.summary,
     datePublished: input.date,
     dateModified: input.date,
-    author: {
-      "@type": "Organization",
-      name: SITE_NAME,
-      url: SITE_URL,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: SITE_NAME,
-      url: SITE_URL,
-    },
+    author: { "@id": ORG_ID },
+    publisher: { "@id": ORG_ID },
     mainEntityOfPage: absoluteUrl(`/blog/${input.slug}`),
     keywords: input.tags.join(", "),
     url: absoluteUrl(`/blog/${input.slug}`),
@@ -98,24 +169,23 @@ export function faqPageJsonLd(faqs: FaqItem[]) {
   };
 }
 
-export function softwareApplicationJsonLd(project: FirstPartyProject) {
+export function softwareApplicationJsonLd(project: FirstPartyProject, locale: Locale = "en") {
   const app = APPS[project];
+  const copy = app.copy[locale];
   const store = appStore(app);
 
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     name: app.name,
-    description: app.copy.en.heroBody,
+    description: copy.seoDescription ?? copy.heroBody,
     url: absoluteUrl(`/projects/${project}`),
+    inLanguage: locale,
     applicationCategory: APP_CATEGORY[project],
-    featureList: app.copy.en.features.map((feature) => feature.title),
+    featureList: copy.features.map((feature) => feature.title),
     operatingSystem: app.platforms === "both" ? "iOS, Android" : "Android",
-    author: {
-      "@type": "Organization",
-      name: SITE_NAME,
-      url: SITE_URL,
-    },
+    author: { "@id": ORG_ID },
+    publisher: { "@id": ORG_ID },
     ...(store
       ? {
           offers: {

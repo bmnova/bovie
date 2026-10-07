@@ -2,8 +2,8 @@ import { JsonLd } from "@/components/JsonLd";
 import { ProjectRelatedReading } from "@/components/ProjectRelatedReading";
 import { AppPage } from "@/components/apps/AppPage";
 import { NextStepCoaches, NextStepDemo, NextStepHeroVisual } from "@/components/apps/nextstep";
-import { appMetadata } from "@/content/apps";
-import { softwareApplicationJsonLd } from "@/lib/json-ld";
+import { APPS, appMetadata } from "@/content/apps";
+import { faqPageJsonLd, softwareApplicationJsonLd } from "@/lib/json-ld";
 import type { Locale } from "@/lib/i18n";
 import { getPostsByProduct } from "@/lib/posts";
 
@@ -16,7 +16,8 @@ export function generateMetadata({ params }: Props) {
 export default function NextStepPage({ params }: Props) {
   return (
     <>
-      <JsonLd data={softwareApplicationJsonLd("nextstep")} />
+      <JsonLd data={softwareApplicationJsonLd("nextstep", params.lang)} />
+      <JsonLd data={faqPageJsonLd(APPS.nextstep.copy[params.lang].faqs ?? [])} />
       <AppPage
         slug="nextstep"
         heroVisual={<NextStepHeroVisual />}

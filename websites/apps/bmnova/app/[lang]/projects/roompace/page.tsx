@@ -16,7 +16,7 @@ export function generateMetadata({ params }: Props) {
 export default function RoomPacePage({ params }: Props) {
   return (
     <>
-      <JsonLd data={softwareApplicationJsonLd("roompace")} />
+      <JsonLd data={softwareApplicationJsonLd("roompace", params.lang)} />
       <JsonLd data={faqPageJsonLd(APPS.roompace.copy[params.lang].faqs ?? [])} />
       <AppPage
         slug="roompace"
