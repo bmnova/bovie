@@ -3,7 +3,6 @@ title: "How AI Diet Tracking Actually Works — Logging, Meal Plans, and Progres
 date: "2026-07-16"
 summary: "Photo logging, AI meal plans, and chat coaches can make diet tracking stick — if you use them as feedback systems, not perfection tools. Here's what the research says."
 tags: ["Health", "Nutrition", "AI"]
-product: dietpal
 ---
 
 ## Quick Answer
@@ -157,8 +156,6 @@ Use this loop whether you prefer a dedicated app or a mix of tools:
 3. **During the day:** Track water if hydration is a goal.
 4. **Evening:** Glance at calories and macros; adjust tomorrow, not yesterday with guilt.
 5. **Weekly:** Review weight trend + adherence; regenerate meals that failed in real life.
-
-Apps like [DietPal](https://bmnova.com/projects/dietpal) — built by bmnova — are designed around this loop: AI photo and text logging, daily and weekly meal generation, progress charts, and an agentic coach you can chat with to log meals or update preferences without digging through menus.
 
 ---
 

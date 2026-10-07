@@ -1,39 +1,28 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext } from "react";
+import { DEFAULT_LOCALE, localePath, type Locale } from "@/lib/i18n";
 
-export type Locale = "en" | "tr";
+export type { Locale };
 
-interface LocaleContextValue {
+const LocaleContext = createContext<Locale>(DEFAULT_LOCALE);
+
+/** The locale comes from the URL (/ or /tr), so every page renders in one language on the server. */
+export function LocaleProvider({
+  locale,
+  children,
+}: {
   locale: Locale;
-  setLocale: (locale: Locale) => void;
-}
-
-const LocaleContext = createContext<LocaleContextValue>({
-  locale: "en",
-  setLocale: () => {},
-});
-
-export function LocaleProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>("en");
-
-  useEffect(() => {
-    const saved = localStorage.getItem("locale") as Locale;
-    if (saved === "en" || saved === "tr") setLocaleState(saved);
-  }, []);
-
-  function setLocale(l: Locale) {
-    setLocaleState(l);
-    localStorage.setItem("locale", l);
-  }
-
-  return (
-    <LocaleContext.Provider value={{ locale, setLocale }}>
-      {children}
-    </LocaleContext.Provider>
-  );
+  children: React.ReactNode;
+}) {
+  return <LocaleContext.Provider value={locale}>{children}</LocaleContext.Provider>;
 }
 
 export function useLocale() {
-  return useContext(LocaleContext);
+  const locale = useContext(LocaleContext);
+  return {
+    locale,
+    /** Prefixes an internal path with the current locale; hashes and external links pass through. */
+    href: (path: string) => localePath(locale, path),
+  };
 }

@@ -1,28 +1,36 @@
 # BMNova
 
-> BMNova builds user-friendly AI apps, mobile products, and SaaS tools.
+> BMNova (BMNova Innovations) is an independent mobile app studio and consumer-app startup at Ostim Teknokent, Ankara, Turkey. It designs, builds and ships its own AI-powered apps for iOS and Android. It does not take client work.
 
 Website: https://bmnova.com
-Contact: hello@bmnova.com
+Turkish site: https://bmnova.com/tr
+About: https://bmnova.com/about-us
+Contact: contact@bmnova.com
 Blog: https://bmnova.com/blog
 
-## Products
+## What BMNova is
 
-- [DietPal](https://bmnova.com/projects/dietpal): AI diet tracking, meal plans, and coaching. Photo/text food logging, personalized plans, progress charts.
-- [FitVibe](https://bmnova.com/projects/fitvibe): AI digital wardrobe and stylist. Closet logging with background removal, outfit combines, wardrobe gaps, virtual try-on.
-- [RoomPace](https://bmnova.com/projects/roompace): Budget-aware AI interior design. Upload a room photo, set a spend limit, get layouts and a shoppable furniture wishlist.
-- [Haki](https://bmnova.com/projects/haki): AI manga comics generator. Script stories, define characters, generate comic panels.
-- [Offer](https://bmnova.com/projects/offer): Social icebreaker app. Offer drinks or snacks at local businesses to connect with people nearby.
+- Mobile app studio: in-house design, Flutter, a shared AI layer, and growth for its own consumer apps.
+- Startup: a product company founded by Ali Mertcan Karaman and Büşra Mercan, shipping from Ankara to a worldwide audience.
+- Not an agency. Partners and investors: contact@bmnova.com.
+
+## Apps
+
+- [Pali](https://bmnova.com/projects/pali): GLP-1 companion (formerly DietPal). Shots and injection sites, side-effect check-ins, protein, water and weight, weekly review.
+- [FitVibe](https://bmnova.com/projects/fitvibe): AI digital wardrobe and stylist. Background removal, outfit combinations, wardrobe gaps, virtual try-on.
+- [Haki](https://bmnova.com/projects/haki): AI manga, manhwa and comics maker with consistent characters and editable multi-panel pages.
+- [RoomPace](https://bmnova.com/projects/roompace): Budget-aware AI interior design with a shoppable furniture wishlist.
 - [NextStep](https://bmnova.com/projects/nextstep): Minimalist AI coaching for overthinking. One reflection, one question, one clear next step.
 - [Bloomish](https://bmnova.com/projects/bloomish): AI bouquet generator for sending digital flower gifts.
+- [Offer](https://bmnova.com/projects/offer): Social icebreaker. Offer drinks or snacks at local businesses to meet people nearby.
+
+Turkish versions of every page live under https://bmnova.com/tr, with Turkish blog posts at https://bmnova.com/tr/blog.
+
+## Also by BMNova
+
 - [intyx.ai](https://intyx.ai): CSV to AI dashboards — upload data, get interactive charts in seconds.
 - [dynamic.intyx.ai](https://dynamic.intyx.ai): Real-time Flutter content updates without shipping a new app build.
 
-## Partner work
-
-- [Pixvibe](https://www.everpixel.org/apps/pixvibe): AI photo editing (built with EverPixel)
-- [Collagevibe](https://www.everpixel.org/apps/collagevibe): Photo collages (built with EverPixel)
-
 ## Optional deeper index
 
-For a longer product and blog index suitable for citation, see: https://bmnova.com/llms-full.txt
+For a longer company, product and blog index suitable for citation, see: https://bmnova.com/llms-full.txt

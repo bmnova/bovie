@@ -178,4 +178,4 @@ Before publishing any post, verify:
 
 ## Backlog
 
-- [ ] **Blog i18n — Türkçe lokalizasyon**: Blog altyapısına dil desteği ekle. Frontmatter'a `lang` field eklenecek, `posts.ts` locale bazlı filtrelenecek, `/blog` sayfası locale'e göre doğru postları gösterecek. URL'ler Türkçe slug ile olacak (örn. `/blog/saglikli-kilo-yonetimi`). Mevcut tüm postların Türkçe versiyonları yazılacak. Öncelik yüksek — Türkçe GEO/AEO rekabeti düşük, etki büyük.
+- Blog dil desteği: Türkçe yazılar Türkçe slug'lı dosya adıyla, frontmatter'da `lang: tr` ve İngilizce slug'ı gösteren `translationOf` ile eklenir. Türkçe yazılarda SSS başlığı `## Sıkça Sorulan Sorular`. Yeni bir İngilizce yazı yayınlandığında Türkçesi de yazılır.

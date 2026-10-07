@@ -4,6 +4,7 @@ import matter from "gray-matter";
 import { marked } from "marked";
 import type { FirstPartyProject } from "@/lib/site";
 import type { FaqItem } from "@/lib/json-ld";
+import { DEFAULT_LOCALE, type Locale } from "@/lib/i18n";
 
 const postsDir = path.join(process.cwd(), "content/posts");
 
@@ -15,6 +16,9 @@ export interface PostMeta {
   tags: string[];
   readingTime: number; // minutes
   product?: FirstPartyProject;
+  locale: Locale;
+  /** Slug of the English post this one translates */
+  translationOf?: string;
 }
 
 export interface Post extends PostMeta {
@@ -31,12 +35,12 @@ function stripMarkdown(text: string): string {
     .trim();
 }
 
-/** Parse FAQ section: **Question?** followed by answer paragraphs until next **Q** or ## */
+/** Parse FAQ section (## FAQ or ## Sıkça Sorulan Sorular): **Question?** followed by answer paragraphs until next **Q** or ## */
 export function parseFaqsFromMarkdown(markdown: string): FaqItem[] {
-  const faqHeading = markdown.search(/^## FAQ\s*$/m);
+  const faqHeading = markdown.search(/^## (FAQ|Sıkça Sorulan Sorular)\s*$/m);
   if (faqHeading === -1) return [];
 
-  const afterHeading = markdown.slice(faqHeading).replace(/^## FAQ\s*\n/, "");
+  const afterHeading = markdown.slice(faqHeading).replace(/^## (FAQ|Sıkça Sorulan Sorular)\s*\n/, "");
   const endMatch = afterHeading.search(/\n## |\n---\s*\n/);
   const body = (endMatch === -1 ? afterHeading : afterHeading.slice(0, endMatch)).trim();
 
@@ -63,6 +67,7 @@ function toMeta(
 ): PostMeta {
   const wordCount = content.trim().split(/\s+/).length;
   const product = data.product as FirstPartyProject | undefined;
+  const translationOf = data.translationOf as string | undefined;
 
   return {
     slug,
@@ -72,10 +77,13 @@ function toMeta(
     tags: (data.tags as string[]) ?? [],
     readingTime: Math.max(1, Math.ceil(wordCount / 200)),
     ...(product ? { product } : {}),
+    locale: (data.lang as Locale | undefined) ?? DEFAULT_LOCALE,
+    ...(translationOf ? { translationOf } : {}),
   };
 }
 
-export function getAllPosts(): PostMeta[] {
+/** Every post in every language, newest first; pass a locale to keep only that language. */
+export function getAllPosts(locale?: Locale): PostMeta[] {
   const files = fs.readdirSync(postsDir).filter((f) => f.endsWith(".md"));
 
   return files
@@ -85,10 +93,18 @@ export function getAllPosts(): PostMeta[] {
       const { data, content } = matter(raw);
       return toMeta(slug, data, content);
     })
+    .filter((post) => !locale || post.locale === locale)
     .sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
-export async function getPost(slug: string): Promise<Post | null> {
+/** The same post in the other language, if it has been written. */
+export function getTranslation(post: PostMeta): PostMeta | undefined {
+  return getAllPosts().find((other) =>
+    post.translationOf ? other.slug === post.translationOf : other.translationOf === post.slug
+  );
+}
+
+export async function getPost(slug: string, locale: Locale): Promise<Post | null> {
   const filePath = path.join(postsDir, `${slug}.md`);
   if (!fs.existsSync(filePath)) return null;
 
@@ -96,6 +112,7 @@ export async function getPost(slug: string): Promise<Post | null> {
   const { data, content } = matter(raw);
   const contentHtml = await marked(content);
   const meta = toMeta(slug, data, content);
+  if (meta.locale !== locale) return null;
 
   return {
     ...meta,
@@ -105,8 +122,8 @@ export async function getPost(slug: string): Promise<Post | null> {
   };
 }
 
-export function getRelatedPosts(slug: string, limit = 3): PostMeta[] {
-  const all = getAllPosts();
+export function getRelatedPosts(slug: string, locale: Locale, limit = 3): PostMeta[] {
+  const all = getAllPosts(locale);
   const current = all.find((p) => p.slug === slug);
   if (!current) return [];
 
@@ -127,6 +144,6 @@ export function getRelatedPosts(slug: string, limit = 3): PostMeta[] {
   return scored.slice(0, limit).map((x) => x.post);
 }
 
-export function getPostsByProduct(product: FirstPartyProject): PostMeta[] {
-  return getAllPosts().filter((p) => p.product === product);
+export function getPostsByProduct(product: FirstPartyProject, locale: Locale): PostMeta[] {
+  return getAllPosts(locale).filter((p) => p.product === product);
 }

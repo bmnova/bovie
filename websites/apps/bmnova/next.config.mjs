@@ -8,6 +8,16 @@ const nextConfig = {
         destination: "/projects/haki",
         permanent: true,
       },
+      {
+        source: "/projects/dietpal",
+        destination: "/projects/pali",
+        permanent: true,
+      },
+      {
+        source: "/tr/projects/dietpal",
+        destination: "/tr/projects/pali",
+        permanent: true,
+      },
     ];
   },
 };

@@ -1,17 +1,19 @@
 export const SITE_URL = "https://bmnova.com";
 export const SITE_NAME = "BMNova";
+export const SITE_LEGAL_NAME = "BMNova Innovations";
+export const ORG_ID = `${SITE_URL}/#organization`;
 export const SITE_DESCRIPTION =
-  "BMNova builds user-friendly AI apps, mobile products, and SaaS tools. Clean code, thoughtful design.";
+  "BMNova is an Ankara-based mobile app studio and consumer-app startup. We design, build and ship our own AI apps: Pali, FitVibe, Haki, RoomPace, NextStep, Bloomish and Offer.";
 
-/** First-party apps with landings on bmnova.com/projects/* */
+/** First-party apps with landings on bmnova.com/projects/*, in order of importance */
 export const FIRST_PARTY_PROJECTS = [
-  "dietpal",
+  "pali",
   "fitvibe",
-  "roompace",
   "haki",
-  "offer",
+  "roompace",
   "nextstep",
   "bloomish",
+  "offer",
 ] as const;
 
 export type FirstPartyProject = (typeof FIRST_PARTY_PROJECTS)[number];
