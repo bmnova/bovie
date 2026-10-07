@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@websites/shared/animations";
+import { FounderSocials } from "@/components/FounderSocials";
 import { contentMap } from "@/content";
 import { useLocale } from "@/app/locale-context";
 
@@ -97,28 +98,7 @@ export function AboutUsContent() {
                           ))}
                         </div>
                       )}
-                      <div className="flex gap-3">
-                        {member.twitter && (
-                          <a
-                            href={member.twitter}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-xs text-muted/60 transition-colors hover:text-accent"
-                          >
-                            X
-                          </a>
-                        )}
-                        {member.linkedin && (
-                          <a
-                            href={member.linkedin}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-xs text-muted/60 transition-colors hover:text-accent"
-                          >
-                            LinkedIn
-                          </a>
-                        )}
-                      </div>
+                      <FounderSocials twitter={member.twitter} linkedin={member.linkedin} />
                     </div>
                   </div>
                 ))}
