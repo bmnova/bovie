@@ -128,41 +128,7 @@ export const contentMap = {
       plus: "Plus",
     },
     company: {
-      eyebrow: "The company",
-      heading: "A mobile app studio. A startup.",
       lead: "BMNova (BMNova Innovations) is an independent mobile app studio and consumer-app startup at Ostim Teknokent in Ankara, Turkey. Co-founders Ali Mertcan Karaman and Büşra Mercan design, build and ship their own AI-powered apps for iOS and Android. BMNova does not take client work.",
-      faqs: [
-        {
-          question: "What is BMNova?",
-          answer:
-            "BMNova, legally BMNova Innovations, is an independent mobile app studio and consumer-app startup based at Ostim Teknokent in Ankara, Turkey. It designs, builds and ships its own AI-powered mobile apps, including Pali, FitVibe, Haki, RoomPace, NextStep, Bloomish and Offer, plus intyx.ai.",
-        },
-        {
-          question: "Is BMNova a mobile app studio?",
-          answer:
-            "Yes. BMNova is a mobile app studio. A small in-house team designs, builds and grows consumer apps for iOS and Android on one Flutter codebase, a shared AI layer and remote content updates. It is not a client agency.",
-        },
-        {
-          question: "Is BMNova a startup?",
-          answer:
-            "Yes. BMNova is an independent product startup founded by Ali Mertcan Karaman and Büşra Mercan. It ships its own consumer mobile apps from Ankara to a worldwide audience. Partners and investors can reach the studio at contact@bmnova.com.",
-        },
-        {
-          question: "Where is BMNova based?",
-          answer:
-            "BMNova is based at Ostim Teknokent in Ankara, Turkey. Its apps are published for a worldwide audience on the App Store and Google Play.",
-        },
-        {
-          question: "Which mobile apps has BMNova built?",
-          answer:
-            "BMNova's own apps are Pali (GLP-1 companion), FitVibe (AI wardrobe), Haki (AI manga and comics), RoomPace (budget AI interior design), NextStep (AI coaching for overthinking), Bloomish (AI bouquet gifts) and Offer (a social icebreaker). It also builds intyx.ai and dynamic.intyx.ai.",
-        },
-        {
-          question: "Does BMNova build mobile apps for other companies?",
-          answer:
-            "No. BMNova is a product studio and startup, not an agency. Every app on bmnova.com is BMNova's own product.",
-        },
-      ],
     },
     aboutUs: {
       eyebrow: "Who we are",
@@ -391,41 +357,7 @@ export const contentMap = {
       plus: "Plus",
     },
     company: {
-      eyebrow: "Şirket",
-      heading: "Bir mobil uygulama stüdyosu. Bir startup.",
       lead: "BMNova (BMNova Innovations), Türkiye'nin Ankara kentindeki Ostim Teknokent'te kurulu bağımsız bir mobil uygulama stüdyosu ve tüketici uygulaması startup'ıdır. Kurucu ortaklar Ali Mertcan Karaman ve Büşra Mercan, iOS ve Android için kendi yapay zekâ uygulamalarını tasarlar, geliştirir ve yayınlar. BMNova müşteri işi almaz.",
-      faqs: [
-        {
-          question: "BMNova nedir?",
-          answer:
-            "BMNova, tüzel adı BMNova Innovations, Ankara Ostim Teknokent'te kurulu bağımsız bir mobil uygulama stüdyosu ve tüketici uygulaması startup'ıdır. Pali, FitVibe, Haki, RoomPace, NextStep, Bloomish ve Offer dahil kendi yapay zekâ mobil uygulamalarını tasarlar, geliştirir ve yayınlar; intyx.ai de BMNova ürünüdür.",
-        },
-        {
-          question: "BMNova bir mobil uygulama stüdyosu mu?",
-          answer:
-            "Evet. BMNova bir mobil uygulama stüdyosudur. Küçük bir ekip, iOS ve Android tüketici uygulamalarını tek bir Flutter kod tabanı, ortak bir yapay zekâ katmanı ve uzaktan içerik güncellemesiyle kendi içinde tasarlar, geliştirir ve büyütür. Ajans değildir.",
-        },
-        {
-          question: "BMNova bir startup mı?",
-          answer:
-            "Evet. BMNova, Ali Mertcan Karaman ve Büşra Mercan'ın kurduğu bağımsız bir ürün startup'ıdır. Kendi tüketici mobil uygulamalarını Ankara'dan dünya çapında bir kitleye yayınlar. İş ortakları ve yatırımcılar stüdyoya contact@bmnova.com adresinden ulaşabilir.",
-        },
-        {
-          question: "BMNova nerede?",
-          answer:
-            "BMNova, Ankara'da Ostim Teknokent'te kuruludur. Uygulamaları App Store ve Google Play üzerinden dünya genelinde yayınlanır.",
-        },
-        {
-          question: "BMNova hangi mobil uygulamaları geliştirdi?",
-          answer:
-            "BMNova'nın kendi uygulamaları Pali (GLP-1 yol arkadaşı), FitVibe (yapay zekâ gardırop), Haki (yapay zekâ manga ve çizgi roman), RoomPace (bütçeli yapay zekâ iç mimari), NextStep (aşırı düşünme için yapay zekâ koçluğu), Bloomish (yapay zekâ buket hediyesi) ve Offer'dır (sosyal buz kırıcı). intyx.ai ve dynamic.intyx.ai de BMNova ürünleridir.",
-        },
-        {
-          question: "BMNova başka şirketler için mobil uygulama yapar mı?",
-          answer:
-            "Hayır. BMNova bir ajans değil, ürün stüdyosu ve startup'tır. bmnova.com'daki her uygulama BMNova'nın kendi ürünüdür.",
-        },
-      ],
     },
     aboutUs: {
       eyebrow: "Biz kimiz",
