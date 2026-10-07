@@ -1,210 +1,158 @@
-import type { TeamMember, NavLink } from "@websites/shared/types";
-import projectsData from "@/config/projects.json";
-import type { Locale } from "@/app/locale-context";
+import type { TeamMember } from "@websites/shared/types";
+import type { Locale } from "@/lib/i18n";
 
 export { type Locale };
 
-const partners = [
-  { name: "EverPixel", href: "https://www.everpixel.org" },
-  { name: "Nefes Mühendislik", href: null as string | null },
-];
-
-// Project image URLs served from public/projects/
-const projectImages: Record<string, string> = {
-  Offer: "/projects/offer.avif",
-  DietPal: "/projects/dietpal.png",
-  Pixvibe: "/projects/pixvibe.avif",
-  Collagevibe: "/projects/collagevibe.png",
-  FitVibe: "/projects/fitvibe.png",
-  RoomPace: "/projects/roompace.png",
-  Haki: "/projects/haki.png",
-};
-
-const trProjectDescriptions: Record<string, string> = {
-  Offer:
-    "Yerel işletmelerde çevrenizdekilere içecek, atıştırmalık veya başka şeyler ısmarlayarak onlarla bağlantı kurun. Buzu kırın, yeni yerler keşfedin ve gerçek bağlar kurun.",
-  NextStep:
-    "Aşırı düşünmeyi eyleme dönüştüren minimalist bir yapay zeka koçluk uygulaması. Bir yansıma, bir soru, bir net sonraki adım.",
-  DietPal:
-    "İhtiyaçlarınıza ve yaşam tarzınıza göre planınızı kişiselleştiren yapay zeka destekli diyet uygulaması. Yiyecekleri, egzersizi ve refahı takip edin — ardından hedeflerinize ulaşmak için içgörüler alın.",
-  Pixvibe:
-    "Olağanüstü yapay zeka destekli fotoğraf düzenleme: nesneleri silin, konuları kesin, arka planları değiştirin ve AI görselleri oluşturun. Pixvibe'ın mobil ve web platformları için geliştirildi.",
-  Collagevibe:
-    "Fotoğrafları kolaj olarak kolayca oluşturun ve özelleştirin. Resimlerinizi tam istediğiniz gibi düzenleyin ve kişiselleştirin. Collagevibe'ın mobil platformu için geliştirildi.",
-  FitVibe:
-    "Yapay zeka destekli dolap uygulaması. Kıyafetleri otomatik arka plan kaldırma ile ekleyin, AI ile kombin oluşturun, kişiselleştirilmiş stil önerileri alın, dolabınızdaki eksikleri keşfedin ve kıyafetleri üzerinizde görün.",
-  RoomPace:
-    "Bütçenize uygun oda yenilemeleri planlayan yapay zeka iç tasarım uygulaması. Fotoğraf yükleyin, harcama limitinizi belirleyin ve gerçek mobilyalardan oluşan istek listesiyle AI düzenleri alın.",
-  Haki:
-    "Yapay zeka destekli manga çizgi roman oluşturucu. Hikayenizi yazın, kahramanınızı tanımlayın, görsel stilinizi seçin ve tam çizgi roman panelleri oluşturun — ardından kaydedin, indirin ve hikayeye devam edin.",
-  "intyx.ai":
-    "Verinizi anında dashboard'a dönüştürün. CSV yükleyin, yapay zeka saniyeler içinde güzel ve interaktif grafikler oluştursun — kod gerekmez. Erken erişim açık.",
-  "dynamic.intyx.ai":
-    "Yeni build göndermeden uygulamanızın içeriğini gerçek zamanlı güncelleyin. Tek bir Flutter component ekleyin; AI karar katmanı her kullanıcı için doğru içeriği seçsin.",
-};
-
-function buildProjects(locale: Locale) {
-  return projectsData.map((p) => ({
-    ...p,
-    image: projectImages[p.title],
-    description:
-      locale === "tr"
-        ? (trProjectDescriptions[p.title] ?? p.description)
-        : p.description,
-  }));
-}
-
 export const contentMap = {
   en: {
-    nav: [
-      { label: "Projects", href: "#projects" },
-      { label: "Services", href: "#services" },
-      { label: "About", href: "/about-us" },
-      { label: "Blog", href: "/blog" },
-      { label: "Careers", href: "/careers" },
-      { label: "Contact", href: "#contact" },
-    ] satisfies NavLink[],
-    navbar: {
-      hireUs: "Hire us",
+    meta: {
+      homeTitle: "BMNova — Independent app studio",
+      description:
+        "BMNova is an independent app studio from Ankara. We design, build and ship our own AI-powered consumer apps.",
+      pages: {
+        about: { title: "About Us — BMNova", description: "BMNova is an independent app studio at Ostim Teknokent, Ankara: our vision, our mission and the team behind our apps." },
+        careers: { title: "Careers — BMNova", description: "Join BMNova. We're hiring a Mobile App Growth Expert." },
+        blog: { title: "Blog — BMNova", description: "Evidence-based writing on health, productivity, psychology, and building software products." },
+        privacy: { title: "Privacy Policy — BMNova", description: "BMNova Privacy Policy. How we collect, use, store, share, and protect personal data." },
+        terms: { title: "Terms of Use — BMNova", description: "BMNova Terms of Use. Access and use of our websites, apps, AI features, and services." },
+        refund: { title: "Refund Policy — BMNova", description: "BMNova Refund Policy. How refund requests are handled for web and mobile purchases." },
+        deletion: { title: "Account & Data Deletion — BMNova", description: "BMNova Account and Data Deletion. How to delete your account and personal data." },
+      },
+    },
+    nav: {
+      apps: "Apps",
+      studio: "Studio",
+      shipLog: "Ship log",
+      careers: "Careers",
+      getApps: "Get the apps",
+      menu: "Toggle menu",
+      switchTo: "Türkçe",
+      switchLabel: "TR",
     },
     hero: {
-      tagline: "We ship products.\nNot just prototypes.",
-      sub: "We are a software, technology, and innovation company based in Ankara. We develop mobile/web projects and AI-powered solutions.",
-      cta: { label: "See our work", href: "#projects" },
-      ctaSecondary: { label: "Get in touch", href: "#contact" },
-      stats: {
-        total: { count: 7, label: "products shipped" },
-        client: { count: 3, label: "client delivered" },
-        own: { count: 4, label: "in-house" },
-        founders: { count: 2, label: "founders" },
-        techStack: "Flutter · Next.js · AI",
-      },
+      badge: "Independent app studio · Ankara → worldwide",
+      titleLine1: "Tiny studio.",
+      titleBig: "Big",
+      titleAccent: "apps.",
+      sub: "BMNova designs, builds and ships its own AI-powered consumer apps. No clients, no briefs: just seven apps people open every day, and more in the lab.",
+      ctaApps: "Explore the apps",
+      ctaHiring: "We're hiring",
+      nowShowing: "Now showing",
+      pickApp: "Pick an app",
+      showApp: "Show {name}",
     },
-    projects: {
-      eyebrow: "Our Work",
-      heading: "Products & Projects",
-      items: buildProjects("en"),
+    numbers: {
+      heading: "Only real numbers here.",
+      note: "From App Store Connect and Play Console, all apps combined",
+      apps: { label: "apps shipped", sub: "5 live · 1 in review · 1 in the lab" },
+      downloads: { label: "downloads", sub: "across iOS and Android" },
+      ratings: { label: "store ratings", sub: "and {n}+ written reviews" },
+      inhouse: { label: "in-house", sub: "design, code, AI, growth" },
+      founded: { label: "founded", sub: "Ostim Teknokent, Ankara" },
     },
-    services: {
-      eyebrow: "What We Do",
-      heading: "Our Services",
-      items: [
-        {
-          icon: "🤖",
-          title: "AI Powered Projects",
-          description:
-            "We build AI-driven products using RAG pipelines, computer vision with YOLO, and LLM integrations — from intelligent search to real-time object detection.",
-        },
-        {
-          icon: "📱",
-          title: "Application Development",
-          description:
-            "We develop mobile, desktop, and web applications using Flutter, Next.js, and modern backend stacks.",
-        },
-        {
-          icon: "☁️",
-          title: "SaaS",
-          description:
-            "We design and build scalable SaaS products — from architecture to launch — helping ideas become investable digital businesses.",
-        },
+    apps: {
+      eyebrow: "The apps",
+      headingStart: "Seven apps. One obsession: making AI feel",
+      headingEm: "useful.",
+      sub: "Each one solves a small, daily problem. Each one is designed, built and grown by the same team.",
+      status: { live: "Live", review: "In review", lab: "In the lab" },
+      both: "iOS · Android",
+      android: "Android",
+      notify: "Notify me",
+      open: "Open page →",
+    },
+    reviews: {
+      eyebrow: "Loved by users",
+      heading: "Real reviews, straight from the stores.",
+      note: "From the App Store and Google Play · hover to pause",
+      translated: "translated from Turkish",
+      source: { appStore: "App Store", googlePlay: "Google Play" },
+      stars: "5 out of 5 stars",
+    },
+    core: {
+      eyebrow: "How we move fast",
+      heading: "One core. Seven apps.",
+      body: "Every app runs on the same engine: one Flutter codebase, one AI layer, shared onboarding and paywalls, and content we update remotely without shipping a new build.",
+      chips: ["Flutter", "AI layer", "dynamic.intyx", "Shared onboarding & paywalls"],
+      center: "core",
+    },
+    shipLog: {
+      eyebrow: "Ship log",
+      heading: "Recently shipped.",
+      note: "Straight from the app repositories",
+    },
+    studio: {
+      eyebrow: "The studio",
+      heading1: "Built in Ankara.",
+      heading2: "Shipped everywhere.",
+      body: "Two founders, one studio at Ostim Teknokent, and a habit of launching things. We use the apps we build, and we keep improving the ones people keep opening.",
+      values: [
+        "We ship small and often.",
+        "Every app is ours. No client work.",
+        "AI that does one job well beats AI that does everything.",
       ],
+      cofounder: "Co-founder",
+      yourCard: "Your card goes here.",
+      seeRoles: "See open roles →",
     },
-    about: {
-      eyebrow: "About Us",
-      heading: "A lean team. Serious products.",
-      body: "We are a software, technology, and innovation company. We develop mobile/web projects and AI-powered solutions. Founded in 2025 and based at Ostim Teknokent in Ankara, our vision is to become a driving force in digital transformation — a globally recognized, innovation-led company shaping the future of intelligent digital systems.",
-      stack: [
-        { label: "Mobile", items: "Flutter · Dart · Onyx" },
-        { label: "Web", items: "Next.js · TypeScript" },
-        { label: "Backend", items: "Supabase · Firebase" },
-        { label: "AI", items: "RAG · YOLO · LLM Integration" },
-        { label: "Design", items: "Figma · Framer" },
-      ],
-      teamLabel: "The Team",
-      team: [
-        {
-          name: "Ali Mertcan Karaman",
-          role: "Co-Founder",
-          initials: "AK",
-          twitter: "https://x.com/alimertcank?s=21",
-          linkedin: "https://www.linkedin.com/in/ali-mertcan-karaman-088582133/",
-          background: [
-            { place: "Marmara University", years: "2016–2020" },
-            { place: "TUSAŞ", years: "2020–2025" },
-          ],
-        },
-        {
-          name: "Büşra Mercan",
-          role: "Co-Founder",
-          initials: "BM",
-          background: [{ place: "TOBB ETU", years: "2020–2024" }],
-        },
-      ] satisfies TeamMember[],
+    careersCta: {
+      eyebrow: "Careers",
+      heading: "We're growing. Come grow with us.",
+      body: "Small team, big surface area. If you want your work in front of real users this month, not next year, talk to us.",
+      openRole: "Open role",
+      readRole: "Read the role",
     },
-    contact: {
-      eyebrow: "Contact",
-      heading: "Got a project in mind? Or need support?",
-      sub: "We have capacity for 1–2 new projects. For project inquiries or any support question, reach out — we'll get back within 24 hours.",
-      email: "contact@bmnova.com",
-      mailSubject: "",
-      mailBody: `Hello,
-
-I'm reaching out via your website.`,
-      form: {
-        appLabel: "Regarding app",
-        apps: [
-          { value: "", label: "None" },
-          { value: "dietpal", label: "DietPal" },
-          { value: "fitvibe", label: "FitVibe" },
-          { value: "roompace", label: "RoomPace" },
-          { value: "haki", label: "Haki" },
-          { value: "nextstep", label: "NextStep" },
-          { value: "bloomish", label: "Bloomish" },
-          { value: "intyx.ai", label: "Intyx AI" },
-          { value: "dynamic.intyx", label: "Dynamic Intyx" },
-        ],
-        name: "Name (optional)",
-        namePlaceholder: "Your name",
-        bodyGreetingWithName: "Hello, I'm {name},",
-        subject: "Subject",
-        message: "Message",
-        submit: "Open in email",
-      },
-      orEmailDirectly: "— or email directly —",
-      links: [
-        { label: "GitHub", href: "https://github.com/bmnova" },
-        { label: "Twitter / X", href: "https://x.com/alimertcank?s=21" },
-        { label: "LinkedIn", href: "https://linkedin.com/company/bmnova" },
-        { label: "Instagram", href: "https://www.instagram.com/bmnovainnovations/" },
-      ],
-    },
-    partnerships: {
-      eyebrow: "Partners",
-      heading: "Strategic Partnerships",
-      items: partners,
+    appPage: {
+      allApps: "All apps",
+      get: "Get {name}",
+      notify: "Notify me at launch",
+      earlyAccess: "Get early access",
+      liveBoth: "Live on iOS & Android",
+      liveAndroid: "Live on Android",
+      inReview: "In App Store review",
+      inLab: "In the lab · launching soon",
+      madeIn: "Made in Ankara",
+      worksWith: "Works with",
+      howItWorks: "How it works",
+      whatItDoes: "What {name} does",
+      tryIt: "Try it",
+      storeListing: "From the store listing",
+      storeNote: "Google Play screenshots · scroll sideways",
+      reviewsHeading: "What people say about {name}",
+      reviewsNote: "From the App Store and Google Play",
+      moreFrom: "More from BMNova",
+      allSeven: "All seven apps →",
+      downloadOn: "Download on the",
+      getItOn: "Get it on",
+      plus: "Plus",
     },
     aboutUs: {
-      back: "← bmnova.com",
-      eyebrow: "Who We Are",
+      eyebrow: "Who we are",
       heading: "About BMNova",
       vision: {
         label: "Vision",
-        text: "To become a driving force in digital transformation through AI-powered software solutions. Our vision is to be a globally recognized, innovation-led technology company shaping the future of intelligent digital systems.",
+        text: "To build a family of AI-powered consumer apps that people open every day, from a small studio in Ankara to users all over the world.",
       },
       mission: {
         label: "Mission",
-        text: "To deliver lean and effective software solutions powered by cutting-edge technologies through a compact and highly skilled team. We aim to build scalable, investment-worthy digital products that drive business value and long-term growth for our clients.",
+        text: "To design, build and grow our own products with a compact, highly skilled team: one shared core, honest numbers, and AI that does one job well.",
       },
       teamLabel: "The Team",
-      partnershipsLabel: "Strategic Partnerships",
     },
     footer: {
+      tagline: "An independent app studio. Ostim Teknokent, Ankara, Turkey.",
+      apps: "Apps",
+      studio: "Studio",
+      legal: "Legal",
+      about: "About",
+      blog: "Blog",
+      shipLog: "Ship log",
       careers: "Careers",
       privacyPolicy: "Privacy Policy",
       termsOfUse: "Terms of Use",
       refundPolicy: "Refund Policy",
       accountDataDeletion: "Account & Data Deletion",
-      copyright: "BMNova. All rights reserved.",
+      copyright: "BMNova Innovations",
     },
     privacyPolicy: {
       back: "← bmnova.com",
@@ -228,15 +176,21 @@ I'm reaching out via your website.`,
       noPosts: "No posts yet. Check back soon.",
       back: "← bmnova.com",
       allPosts: "← All posts",
+      minRead: "min read",
+      onlyEnglish: "Posts are written in English.",
+      relatedEyebrow: "From the blog",
+      relatedHeading: "Related reading",
+      fromStudio: "From BMNova",
+      learnMore: "Learn more about {name} →",
     },
     careers: {
       title: "Careers",
       subtitle:
         "We're a small team building serious products. If you're sharp, self-directed, and want to work on things that matter — we'd love to hear from you.",
-      back: "← bmnova.com",
       opening: {
         title: "Mobile App Growth Expert",
         type: "Part-time · Remote",
+        summary: "ASO, paid, retention",
         description:
           "We're looking for someone who lives and breathes mobile app growth. You'll own acquisition, retention, and monetization strategy across our mobile products — running experiments, analyzing data, and finding the levers that move the numbers.",
         responsibilitiesLabel: "What you'll do",
@@ -256,511 +210,175 @@ I'm reaching out via your website.`,
         apply: "Apply via email",
       },
     },
-    offer: {
-      back: "← bmnova.com",
-      eyebrow: "How it works",
-      heading: "Real people. Real places. Real moments.",
-      description:
-        "Connect with people around you by offering them drinks, snacks, or other items at local businesses. Break the ice, discover new places, and make real connections.",
-      features: [
-        {
-          icon: "☕",
-          title: "Offer something, start a conversation",
-          description:
-            "Send a virtual offer — a coffee, a snack, anything — to someone nearby at a local business. A simple gesture that breaks the ice instantly.",
-        },
-        {
-          icon: "📍",
-          title: "Discover local spots",
-          description:
-            "Browse businesses around you and see who else is there. Find new cafés, restaurants, and hangout spots through the people already in them.",
-        },
-        {
-          icon: "🤝",
-          title: "Meet people with shared interests",
-          description:
-            "Offer matches you with people who enjoy the same kinds of places. No swiping, no algorithms — just an honest offer and a real moment.",
-        },
-        {
-          icon: "🌍",
-          title: "Make your city feel smaller",
-          description:
-            "Whether you're new to a city or just looking to expand your circle, Offer turns everyday places into spaces for genuine connection.",
-        },
-      ],
-      ctaHeading: "Want to try Offer?",
-      ctaSub:
-        "Download on the App Store and Google Play — or get in touch if you have questions.",
-      ctaButton: "Get in touch →",
-    },
-    nextstep: {
-      back: "← bmnova.com",
-      eyebrow: "What NextStep does",
-      heading: "Stop thinking in circles. Start moving.",
-      description:
-        "A minimalist AI coaching app that turns overthinking into action. One reflection, one question, one clear next step.",
-      features: [
-        {
-          icon: "🎯",
-          title: "Purpose-built AI coaches",
-          description:
-            "Not a generic chatbot. NextStep offers focused coaches for planning, decisions, habits, weekly review, and focus — each with its own rules, tone, and structure.",
-        },
-        {
-          icon: "✅",
-          title: "Action-first output",
-          description:
-            "Every response ends with exactly one concrete action — small enough to do immediately, often in under five minutes.",
-        },
-        {
-          icon: "🧘",
-          title: "Calm, minimalist UX",
-          description:
-            "No dashboards, graphs, or setup complexity. Every screen answers exactly one question. Close the app when you know what to do.",
-        },
-        {
-          icon: "🔒",
-          title: "Safe and private by design",
-          description:
-            "AI requests never leave through the client. All calls are proxied server-side so API keys stay hidden and every response is validated before you see it.",
-        },
-      ],
-      coachesEyebrow: "Meet the coaches",
-      coachesHeading: "A coach for every kind of stuck.",
-      coaches: [
-        {
-          name: "Planner",
-          description: "Break ambiguous goals into a clear next action.",
-          pro: false,
-        },
-        {
-          name: "Decision Maker",
-          description: "Cut through options and commit to one path.",
-          pro: false,
-        },
-        {
-          name: "Habit Builder",
-          description: "Design one small habit worth starting today.",
-          pro: false,
-        },
-        {
-          name: "Focus Mode",
-          description: "Identify the single most important thing right now.",
-          pro: false,
-        },
-        {
-          name: "Weekly Review",
-          description: "Reflect on the week and set one intention for the next.",
-          pro: true,
-        },
-        {
-          name: "Creator Consistency",
-          description: "Stay consistent on your creative work without burning out.",
-          pro: true,
-        },
-      ],
-      proLabel: "Pro",
-      tiersEyebrow: "Pricing",
-      tiersHeading: "Start free. Unlock more when you need it.",
-      freeTier: {
-        name: "Free",
-        items: [
-          "Limited coaching conversations",
-          "Core coaches",
-          "Basic personalization",
+    team: [
+      {
+        name: "Ali Mertcan Karaman",
+        role: "Co-Founder",
+        initials: "AK",
+        twitter: "https://x.com/alimertcank?s=21",
+        linkedin: "https://www.linkedin.com/in/ali-mertcan-karaman-088582133/",
+        background: [
+          { place: "Marmara University", years: "2016–2020" },
+          { place: "TUSAŞ", years: "2020–2025" },
         ],
       },
-      proTier: {
-        name: "Pro",
-        items: [
-          "Unlimited coaching conversations",
-          "All coaches, including advanced",
-          "Saved summaries and reusable systems",
-          "Custom coaches",
-          "Deeper personalization",
-        ],
+      {
+        name: "Büşra Mercan",
+        role: "Co-Founder",
+        initials: "BM",
+        background: [{ place: "TOBB ETU", years: "2020–2024" }],
       },
-      ctaHeading: "Want to try NextStep?",
-      ctaSub:
-        "NextStep is currently in development. Get in touch if you'd like early access or have questions.",
-      ctaButton: "Get in touch →",
-    },
-    dietpal: {
-      back: "← bmnova.com",
-      eyebrow: "What DietPal does",
-      heading: "A holistic approach to reaching your health goals.",
-      description:
-        "AI-powered diet app that personalizes your plan based on your needs and lifestyle. Track food, exercise, and well-being — then get actionable insights to hit your goals.",
-      demoAlt: "DietPal app demo",
-      features: [
-        {
-          icon: "🧠",
-          title: "Personalized by AI",
-          description:
-            "DietPal learns your dietary needs, goals, and lifestyle to build a plan that actually fits you — not a generic template.",
-        },
-        {
-          icon: "🥗",
-          title: "Track food & exercise",
-          description:
-            "Log meals and workouts with ease. DietPal gives you a clear picture of your daily intake and activity without overwhelming you with numbers.",
-        },
-        {
-          icon: "📊",
-          title: "Insights that matter",
-          description:
-            "Get clear, actionable feedback based on your data. DietPal surfaces the patterns that matter so you can make better choices every day.",
-        },
-        {
-          icon: "💚",
-          title: "Holistic well-being",
-          description:
-            "Diet is just one piece. DietPal also tracks your sleep, stress, and energy — giving you a complete picture of your health journey.",
-        },
-      ],
-      ctaHeading: "Want to try DietPal?",
-      ctaSub:
-        "Download on the App Store and Google Play — or get in touch if you have questions.",
-      ctaButton: "Get in touch →",
-    },
-    fitvibe: {
-      back: "← bmnova.com",
-      eyebrow: "What FitVibe does",
-      heading: "Your AI-powered digital wardrobe. Style smarter, not harder.",
-      description:
-        "FitVibe is a digital wardrobe app built around agentic AI. Add your clothes, get outfit combinations generated automatically, discover what's missing from your wardrobe, and virtually try on any look.",
-      demoAlt: "FitVibe app demo",
-      features: [
-        {
-          icon: "👗",
-          title: "Digital wardrobe",
-          description:
-            "Add clothes with automatic background removal. Build a clean, organized catalogue of everything you own — always at your fingertips.",
-        },
-        {
-          icon: "🤖",
-          title: "Agentic AI stylist",
-          description:
-            "FitVibe's AI chatbot doesn't just suggest — it acts. Ask it to build an outfit, analyze your wardrobe, or find what you're missing, and it gets it done.",
-        },
-        {
-          icon: "✨",
-          title: "AI outfit combinations",
-          description:
-            "Describe an occasion or mood and FitVibe generates outfit combinations from your actual clothes. No more staring at a full wardrobe and feeling like you have nothing to wear.",
-        },
-        {
-          icon: "🪞",
-          title: "Virtual try-on",
-          description:
-            "See how an outfit looks on you before you commit. FitVibe generates a try-on preview so you can decide with confidence.",
-        },
-        {
-          icon: "🔍",
-          title: "Wardrobe analysis",
-          description:
-            "Get a clear picture of your wardrobe: gaps, redundancies, and styling opportunities. FitVibe tells you exactly what would complete your collection.",
-        },
-        {
-          icon: "🎨",
-          title: "Style canvas",
-          description:
-            "Compose and share outfit boards with FitVibe's built-in canvas. Pick items, arrange them, and export a polished look ready to share.",
-        },
-      ],
-      ctaHeading: "Want to try FitVibe?",
-      ctaSub:
-        "Download on the App Store and Google Play — or get in touch if you have questions or partnership inquiries.",
-      ctaButton: "Get in touch →",
-    },
-    roompace: {
-      back: "← bmnova.com",
-      eyebrow: "What RoomPace does",
-      heading: "Beautiful rooms, designed to your budget.",
-      description:
-        "RoomPace is the AI interior design app for people who want a beautiful home without overspending. Set your budget, upload a photo, and get AI layouts with real product wishlists.",
-      demoAlt: "RoomPace app demo",
-      features: [
-        {
-          icon: "💰",
-          title: "Budget-aware design",
-          description:
-            "Set how much you want to spend and get room designs that respect your numbers — from a light refresh to a full makeover.",
-        },
-        {
-          icon: "📸",
-          title: "Photo to AI layout",
-          description:
-            "Upload a photo of your space, pick your room type and aesthetic vibe, and generate a curated AI render in seconds.",
-        },
-        {
-          icon: "🎨",
-          title: "Explore interior styles",
-          description:
-            "Browse styles on the Inspire home screen, discover your aesthetic with AI, and compare looks before you commit.",
-        },
-        {
-          icon: "✨",
-          title: "Refine every detail",
-          description:
-            "Iterate on your render with simple prompts or auto-rearrange — tweak layouts until they feel right.",
-        },
-        {
-          icon: "🏠",
-          title: "My Rooms gallery",
-          description:
-            "Save every AI room concept in one organized gallery. Browse, manage, and revisit your designs anytime.",
-        },
-        {
-          icon: "🛒",
-          title: "Shoppable wishlist",
-          description:
-            "Every design comes with a per-room wishlist of real furniture and decor — with prices and purchase links.",
-        },
-      ],
-      ctaHeading: "Want to try RoomPace?",
-      ctaSub:
-        "Download on the App Store and Google Play — or get in touch if you have questions or partnership inquiries.",
-      ctaButton: "Get in touch →",
-    },
-    haki: {
-      back: "← bmnova.com",
-      eyebrow: "What Haki does",
-      heading: "Your story. Your hero. AI manga panels in minutes.",
-      description:
-        "Haki is the manga comics generator for creators who want full panels without starting from a blank page. Script your vision, define your protagonist, pick a visual style, and generate comic pages you can save, download, and continue.",
-      demoAlt: "Haki app demo",
-      features: [
-        {
-          icon: "✍️",
-          title: "Script your vision",
-          description:
-            "Describe the scene you want to bring to life. Haki turns your story prompt into a draft ready for character setup and panel generation.",
-        },
-        {
-          icon: "🦸",
-          title: "Character setup",
-          description:
-            "Define your protagonist with a photo, name, role, and look. Haki keeps your hero consistent across every generated panel.",
-        },
-        {
-          icon: "🎨",
-          title: "Visual DNA & genres",
-          description:
-            "Choose manga styles like Shonen, Seinen, Shojo, or Cyberpunk, then pick genres from Action and Fantasy to Romance and Isekai.",
-        },
-        {
-          icon: "📖",
-          title: "Generate comic panels",
-          description:
-            "Turn your script and character into full AI manga panels in seconds — complete with dialogue, layout, and cinematic pacing.",
-        },
-        {
-          icon: "📚",
-          title: "Comic library",
-          description:
-            "Save every generated comic in your personal library. Browse collections, revisit past stories, and pick up where you left off.",
-        },
-        {
-          icon: "➡️",
-          title: "Continue the story",
-          description:
-            "Finished a chapter? Continue the narrative with new prompts and generate the next page of your manga without losing continuity.",
-        },
-      ],
-      ctaHeading: "Want to try Haki?",
-      ctaSub:
-        "Get in touch for early access, questions, or partnership inquiries.",
-      ctaButton: "Get in touch →",
-    },
-    bloomish: {
-      back: "← bmnova.com",
-      eyebrow: "What Bloomish does",
-      heading: "Turn a feeling into a bouquet. Send it to someone who matters.",
-      description:
-        "Generate stunning AI bouquets and send them as gifts. Share moments of joy with anyone, anywhere — beautifully wrapped and personally meaningful.",
-      features: [
-        {
-          icon: "💐",
-          title: "AI-generated bouquets",
-          description:
-            "Describe a feeling, a person, or an occasion — Bloomish generates a unique bouquet tailored to your words. Every arrangement is one of a kind.",
-        },
-        {
-          icon: "🎁",
-          title: "Send as a gift",
-          description:
-            "Share your bouquet with anyone via a link or in-app message. Recipients get a beautiful, personalized gift experience — no delivery required.",
-        },
-        {
-          icon: "📸",
-          title: "Save & share moments",
-          description:
-            "Keep your favorite arrangements in your collection. Share bouquets on social media or with your close circle to brighten their day.",
-        },
-        {
-          icon: "✨",
-          title: "Endlessly customizable",
-          description:
-            "Choose flowers, colors, wrapping, and style — or let the AI surprise you. Every bouquet reflects a real sentiment, not a generic template.",
-        },
-      ],
-      ctaHeading: "Want to try Bloomish?",
-      ctaSub:
-        "Bloomish is currently in development. Get in touch if you'd like early access or have questions.",
-      ctaButton: "Get in touch →",
-    },
+    ] satisfies TeamMember[],
   },
   tr: {
-    nav: [
-      { label: "Projeler", href: "#projects" },
-      { label: "Hizmetler", href: "#services" },
-      { label: "Hakkımızda", href: "/about-us" },
-      { label: "Blog", href: "/blog" },
-      { label: "Kariyer", href: "/careers" },
-      { label: "İletişim", href: "#contact" },
-    ] satisfies NavLink[],
-    navbar: {
-      hireUs: "Bizi işe al",
+    meta: {
+      homeTitle: "BMNova — Bağımsız uygulama stüdyosu",
+      description:
+        "BMNova, Ankara'dan bağımsız bir uygulama stüdyosu. Kendi yapay zekâ destekli tüketici uygulamalarımızı tasarlıyor, geliştiriyor ve yayınlıyoruz.",
+      pages: {
+        about: { title: "Hakkımızda — BMNova", description: "BMNova, Ankara Ostim Teknokent'te bağımsız bir uygulama stüdyosu: vizyonumuz, misyonumuz ve uygulamalarımızın arkasındaki ekip." },
+        careers: { title: "Kariyer — BMNova", description: "BMNova'ya katıl. Mobil Uygulama Büyüme Uzmanı arıyoruz." },
+        blog: { title: "Blog — BMNova", description: "Sağlık, üretkenlik, psikoloji ve yazılım ürünleri geliştirme üzerine kanıta dayalı yazılar." },
+        privacy: { title: "Gizlilik Politikası — BMNova", description: "BMNova Gizlilik Politikası. Kişisel verileri nasıl topladığımız, kullandığımız, sakladığımız, paylaştığımız ve koruduğumuz." },
+        terms: { title: "Kullanım Koşulları — BMNova", description: "BMNova Kullanım Koşulları. Web sitelerimizin, uygulamalarımızın, yapay zekâ özelliklerimizin ve hizmetlerimizin kullanımı." },
+        refund: { title: "İade Politikası — BMNova", description: "BMNova İade Politikası. Web ve mobil satın alımlarda iade taleplerinin nasıl ele alındığı." },
+        deletion: { title: "Hesap ve Veri Silme — BMNova", description: "BMNova Hesap ve Veri Silme. Hesabınızı ve kişisel verilerinizi nasıl silebileceğiniz." },
+      },
+    },
+    nav: {
+      apps: "Uygulamalar",
+      studio: "Stüdyo",
+      shipLog: "Yayın günlüğü",
+      careers: "Kariyer",
+      getApps: "Uygulamaları indir",
+      menu: "Menüyü aç/kapat",
+      switchTo: "English",
+      switchLabel: "EN",
     },
     hero: {
-      tagline: "Ürün üretiriz.\nSadece prototip değil.",
-      sub: "Ankara merkezli bir yazılım, teknoloji ve inovasyon şirketiyiz. Mobil/web projeler ve yapay zeka destekli çözümler geliştiriyoruz.",
-      cta: { label: "Çalışmalarımıza bak", href: "#projects" },
-      ctaSecondary: { label: "İletişime geç", href: "#contact" },
-      stats: {
-        total: { count: 7, label: "ürün yayında" },
-        client: { count: 3, label: "müşteri teslimi" },
-        own: { count: 4, label: "kendi ürünümüz" },
-        founders: { count: 2, label: "kurucu" },
-        techStack: "Flutter · Next.js · AI",
-      },
+      badge: "Bağımsız uygulama stüdyosu · Ankara → dünya",
+      titleLine1: "Küçük stüdyo.",
+      titleBig: "Büyük",
+      titleAccent: "uygulamalar.",
+      sub: "BMNova kendi yapay zekâ destekli tüketici uygulamalarını tasarlar, geliştirir ve yayınlar. Müşteri yok, brief yok: insanların her gün açtığı yedi uygulama ve laboratuvarda daha fazlası.",
+      ctaApps: "Uygulamaları keşfet",
+      ctaHiring: "Ekibe katıl",
+      nowShowing: "Şu an",
+      pickApp: "Bir uygulama seç",
+      showApp: "{name} uygulamasını göster",
     },
-    projects: {
-      eyebrow: "Çalışmalarımız",
-      heading: "Ürünler & Projeler",
-      items: buildProjects("tr"),
+    numbers: {
+      heading: "Burada sadece gerçek rakamlar var.",
+      note: "App Store Connect ve Play Console'dan, tüm uygulamaların toplamı",
+      apps: { label: "uygulama", sub: "5 yayında · 1 incelemede · 1 laboratuvarda" },
+      downloads: { label: "indirme", sub: "iOS ve Android'de" },
+      ratings: { label: "mağaza puanı", sub: "ve {n}+ yazılı yorum" },
+      inhouse: { label: "kendi ekibimiz", sub: "tasarım, kod, yapay zekâ, büyüme" },
+      founded: { label: "kuruluş", sub: "Ostim Teknokent, Ankara" },
     },
-    services: {
-      eyebrow: "Ne Yapıyoruz",
-      heading: "Hizmetlerimiz",
-      items: [
-        {
-          icon: "🤖",
-          title: "Yapay Zeka Projeleri",
-          description:
-            "RAG pipeline'ları, YOLO ile bilgisayarlı görü ve LLM entegrasyonlarını kullanarak yapay zeka odaklı ürünler geliştiriyoruz — akıllı aramadan gerçek zamanlı nesne tespitine.",
-        },
-        {
-          icon: "📱",
-          title: "Uygulama Geliştirme",
-          description:
-            "Flutter, Next.js ve modern backend altyapıları kullanarak mobil, masaüstü ve web uygulamaları geliştiriyoruz.",
-        },
-        {
-          icon: "☁️",
-          title: "SaaS",
-          description:
-            "Mimari tasarımdan lansmana kadar ölçeklenebilir SaaS ürünleri tasarlayıp inşa ediyoruz — fikirleri yatırım alabilir dijital işlere dönüştürüyoruz.",
-        },
+    apps: {
+      eyebrow: "Uygulamalar",
+      headingStart: "Yedi uygulama. Tek bir tutku: yapay zekâyı",
+      headingEm: "işe yarar kılmak.",
+      sub: "Her biri küçük, gündelik bir sorunu çözer. Hepsi aynı ekip tarafından tasarlanır, geliştirilir ve büyütülür.",
+      status: { live: "Yayında", review: "İncelemede", lab: "Laboratuvarda" },
+      both: "iOS · Android",
+      android: "Android",
+      notify: "Haber ver",
+      open: "Sayfayı aç →",
+    },
+    reviews: {
+      eyebrow: "Kullanıcılar seviyor",
+      heading: "Gerçek yorumlar, doğrudan mağazalardan.",
+      note: "App Store ve Google Play'den · durdurmak için üzerine gel",
+      translated: "İngilizceden çevrildi",
+      source: { appStore: "App Store", googlePlay: "Google Play" },
+      stars: "5 üzerinden 5 yıldız",
+    },
+    core: {
+      eyebrow: "Nasıl hızlı ilerliyoruz",
+      heading: "Tek çekirdek. Yedi uygulama.",
+      body: "Tüm uygulamalar aynı motorla çalışır: tek bir Flutter kod tabanı, tek bir yapay zekâ katmanı, ortak onboarding ve ödeme ekranları ve yeni sürüm yayınlamadan uzaktan güncellediğimiz içerik.",
+      chips: ["Flutter", "Yapay zekâ katmanı", "dynamic.intyx", "Ortak onboarding ve paywall"],
+      center: "çekirdek",
+    },
+    shipLog: {
+      eyebrow: "Yayın günlüğü",
+      heading: "Son yayınlananlar.",
+      note: "Doğrudan uygulama repolarından",
+    },
+    studio: {
+      eyebrow: "Stüdyo",
+      heading1: "Ankara'da geliştirildi.",
+      heading2: "Her yerde yayında.",
+      body: "İki kurucu, Ostim Teknokent'te bir stüdyo ve bir şeyler yayınlama alışkanlığı. Geliştirdiğimiz uygulamaları kendimiz kullanıyor, insanların açmaya devam ettiklerini geliştirmeye devam ediyoruz.",
+      values: [
+        "Küçük ve sık yayınlarız.",
+        "Her uygulama bizim. Müşteri işi yok.",
+        "Tek bir işi iyi yapan yapay zekâ, her şeyi yapmaya çalışandan iyidir.",
       ],
+      cofounder: "Kurucu ortak",
+      yourCard: "Senin kartın burada olabilir.",
+      seeRoles: "Açık pozisyonlar →",
     },
-    about: {
-      eyebrow: "Hakkımızda",
-      heading: "Küçük ekip. Ciddi ürünler.",
-      body: "Bir yazılım, teknoloji ve inovasyon şirketiyiz. Mobil/web projeler ve yapay zeka destekli çözümler geliştiriyoruz. 2025 yılında kurulan ve Ankara Ostim Teknokent'te faaliyet gösteren şirketimizin vizyonu, dijital dönüşümde itici güç olmak — akıllı dijital sistemlerin geleceğini şekillendiren, küresel ölçekte tanınan, inovasyon odaklı bir şirket.",
-      stack: [
-        { label: "Mobil", items: "Flutter · Dart · Onyx" },
-        { label: "Web", items: "Next.js · TypeScript" },
-        { label: "Backend", items: "Supabase · Firebase" },
-        { label: "Yapay Zeka", items: "RAG · YOLO · LLM Entegrasyonu" },
-        { label: "Tasarım", items: "Figma · Framer" },
-      ],
-      teamLabel: "Ekibimiz",
-      team: [
-        {
-          name: "Ali Mertcan Karaman",
-          role: "Kurucu Ortak",
-          initials: "AK",
-          twitter: "https://x.com/alimertcank?s=21",
-          linkedin: "https://www.linkedin.com/in/ali-mertcan-karaman-088582133/",
-          background: [
-            { place: "Marmara Üniversitesi", years: "2016–2020" },
-            { place: "TUSAŞ", years: "2020–2025" },
-          ],
-        },
-        {
-          name: "Büşra Mercan",
-          role: "Kurucu Ortak",
-          initials: "BM",
-          background: [{ place: "TOBB ETU", years: "2020–2024" }],
-        },
-      ] satisfies TeamMember[],
+    careersCta: {
+      eyebrow: "Kariyer",
+      heading: "Büyüyoruz. Bizimle büyü.",
+      body: "Küçük ekip, geniş etki alanı. İşinin seneye değil bu ay gerçek kullanıcılarla buluşmasını istiyorsan bize yaz.",
+      openRole: "Açık pozisyon",
+      readRole: "İlanı oku",
     },
-    contact: {
-      eyebrow: "İletişim",
-      heading: "Aklınızda bir proje mi var? Destek mi gerekiyor?",
-      sub: "1–2 yeni proje kapasitemiz var. Proje talepleri veya destek sorularınız için bize ulaşın — 24 saat içinde dönüş yaparız.",
-      email: "contact@bmnova.com",
-      mailSubject: "",
-      mailBody: `Merhaba,
-
-Siteniz üzerinden size ulaşıyorum.`,
-      form: {
-        appLabel: "İlgili uygulama",
-        apps: [
-          { value: "", label: "Yok" },
-          { value: "dietpal", label: "DietPal" },
-          { value: "fitvibe", label: "FitVibe" },
-          { value: "roompace", label: "RoomPace" },
-          { value: "haki", label: "Haki" },
-          { value: "nextstep", label: "NextStep" },
-          { value: "bloomish", label: "Bloomish" },
-          { value: "intyx.ai", label: "Intyx AI" },
-          { value: "dynamic.intyx", label: "Dynamic Intyx" },
-        ],
-        name: "Ad (opsiyonel)",
-        namePlaceholder: "Adınız",
-        bodyGreetingWithName: "Merhaba, ben {name},",
-        subject: "Konu",
-        message: "Mesaj",
-        submit: "E-posta ile aç",
-      },
-      orEmailDirectly: "— veya doğrudan e-posta —",
-      links: [
-        { label: "GitHub", href: "https://github.com/bmnova" },
-        { label: "Twitter / X", href: "https://x.com/alimertcank?s=21" },
-        { label: "LinkedIn", href: "https://linkedin.com/company/bmnova" },
-        { label: "Instagram", href: "https://www.instagram.com/bmnovainnovations/" },
-      ],
-    },
-    partnerships: {
-      eyebrow: "Ortaklar",
-      heading: "Stratejik Ortaklıklar",
-      items: partners,
+    appPage: {
+      allApps: "Tüm uygulamalar",
+      get: "{name} indir",
+      notify: "Yayınlanınca haber ver",
+      earlyAccess: "Erken erişim al",
+      liveBoth: "iOS ve Android'de yayında",
+      liveAndroid: "Android'de yayında",
+      inReview: "App Store incelemesinde",
+      inLab: "Laboratuvarda · yakında",
+      madeIn: "Ankara'da geliştirildi",
+      worksWith: "Uyumlu",
+      howItWorks: "Nasıl çalışır",
+      whatItDoes: "{name} neler yapar",
+      tryIt: "Dene",
+      storeListing: "Mağaza sayfasından",
+      storeNote: "Google Play ekran görüntüleri · yana kaydır",
+      reviewsHeading: "{name} hakkında ne diyorlar",
+      reviewsNote: "App Store ve Google Play'den",
+      moreFrom: "BMNova'dan diğerleri",
+      allSeven: "Yedi uygulamanın hepsi →",
+      downloadOn: "İndir",
+      getItOn: "Şuradan edinin",
+      plus: "Plus",
     },
     aboutUs: {
-      back: "← bmnova.com",
-      eyebrow: "Biz Kimiz",
+      eyebrow: "Biz kimiz",
       heading: "BMNova Hakkında",
       vision: {
         label: "Vizyon",
-        text: "Yapay zeka destekli yazılım çözümleriyle dijital dönüşümde itici güç olmak. Vizyonumuz; akıllı dijital sistemlerin geleceğini şekillendiren, küresel ölçekte tanınan, inovasyon odaklı bir teknoloji şirketi olmaktır.",
+        text: "Ankara'daki küçük bir stüdyodan dünyanın dört bir yanındaki kullanıcılara, insanların her gün açtığı yapay zekâ destekli tüketici uygulamalarından oluşan bir aile kurmak.",
       },
       mission: {
         label: "Misyon",
-        text: "Küçük ve son derece nitelikli bir ekiple en güncel teknolojileri kullanarak yalın ve etkili yazılım çözümleri sunmak. Müşterilerimiz için iş değeri ve uzun vadeli büyüme sağlayan, ölçeklenebilir ve yatırıma değer dijital ürünler inşa etmeyi hedefliyoruz.",
+        text: "Küçük ve son derece yetkin bir ekiple kendi ürünlerimizi tasarlamak, geliştirmek ve büyütmek: tek bir ortak çekirdek, dürüst rakamlar ve tek bir işi iyi yapan yapay zekâ.",
       },
       teamLabel: "Ekibimiz",
-      partnershipsLabel: "Stratejik Ortaklıklar",
     },
     footer: {
+      tagline: "Bağımsız bir uygulama stüdyosu. Ostim Teknokent, Ankara, Türkiye.",
+      apps: "Uygulamalar",
+      studio: "Stüdyo",
+      legal: "Yasal",
+      about: "Hakkımızda",
+      blog: "Blog",
+      shipLog: "Yayın günlüğü",
       careers: "Kariyer",
       privacyPolicy: "Gizlilik Politikası",
       termsOfUse: "Kullanım Koşulları",
       refundPolicy: "İade Politikası",
       accountDataDeletion: "Hesap ve Veri Silme",
-      copyright: "BMNova. Tüm hakları saklıdır.",
+      copyright: "BMNova Innovations",
     },
     privacyPolicy: {
       back: "← bmnova.com",
@@ -784,15 +402,21 @@ Siteniz üzerinden size ulaşıyorum.`,
       noPosts: "Henüz yazı yok. Yakında tekrar kontrol edin.",
       back: "← bmnova.com",
       allPosts: "← Tüm yazılar",
+      minRead: "dk okuma",
+      onlyEnglish: "Yazılarımız İngilizce yayınlanıyor.",
+      relatedEyebrow: "Blogdan",
+      relatedHeading: "İlgili yazılar",
+      fromStudio: "BMNova'dan",
+      learnMore: "{name} hakkında daha fazlası →",
     },
     careers: {
       title: "Kariyer",
       subtitle:
         "Ciddi ürünler geliştiren küçük bir ekibiz. Keskin, bağımsız çalışabilen ve önemli şeyler üretmek isteyen biri arıyorsak — sizden haber almak isteriz.",
-      back: "← bmnova.com",
       opening: {
         title: "Mobil Uygulama Büyüme Uzmanı",
         type: "Yarı zamanlı · Uzaktan",
+        summary: "ASO, ücretli kampanyalar, elde tutma",
         description:
           "Mobil uygulama büyümesini içselleştirmiş birini arıyoruz. Mobil ürünlerimizde edinim, elde tutma ve monetizasyon stratejisini üstleneceksiniz — deneyler yapacak, verileri analiz edecek ve sayıları hareket ettiren kaldıraçları bulacaksınız.",
         responsibilitiesLabel: "Ne yapacaksınız",
@@ -812,359 +436,29 @@ Siteniz üzerinden size ulaşıyorum.`,
         apply: "E-posta ile başvur",
       },
     },
-    offer: {
-      back: "← bmnova.com",
-      eyebrow: "Nasıl çalışır",
-      heading: "Gerçek insanlar. Gerçek mekanlar. Gerçek anlar.",
-      description:
-        "Yerel işletmelerde çevrenizdekilere içecek, atıştırmalık veya başka şeyler ısmarlayarak onlarla bağlantı kurun. Buzu kırın, yeni yerler keşfedin ve gerçek bağlar kurun.",
-      features: [
-        {
-          icon: "☕",
-          title: "Bir şey ısmarla, konuşma başlat",
-          description:
-            "Yakınınızdaki birine yerel bir işletmede sanal bir ısmarlama gönderin — kahve, atıştırmalık, her neyse. Buzu anında kıran basit bir jest.",
-        },
-        {
-          icon: "📍",
-          title: "Yerel mekanları keşfet",
-          description:
-            "Çevrenizdeki işletmelere göz atın ve kimlerin orada olduğunu görün. Zaten orada olan insanlar aracılığıyla yeni kafeler, restoranlar ve buluşma noktaları bulun.",
-        },
-        {
-          icon: "🤝",
-          title: "Ortak ilgi alanlarına sahip insanlarla tanış",
-          description:
-            "Offer, aynı tür mekanları seven insanlarla eşleştirir. Kaydırma yok, algoritma yok — sadece samimi bir ısmarlama ve gerçek bir an.",
-        },
-        {
-          icon: "🌍",
-          title: "Şehrini küçült",
-          description:
-            "İster yeni taşınmış olun ister çevrenizi genişletmek isteyin, Offer gündelik mekanları gerçek bağlantı alanlarına dönüştürür.",
-        },
-      ],
-      ctaHeading: "Offer'ı denemek ister misiniz?",
-      ctaSub:
-        "App Store ve Google Play'den indirin — veya sorularınız için bize ulaşın.",
-      ctaButton: "İletişime geç →",
-    },
-    nextstep: {
-      back: "← bmnova.com",
-      eyebrow: "NextStep ne yapar",
-      heading: "Düşünce döngüsünü kır. Harekete geç.",
-      description:
-        "Aşırı düşünmeyi eyleme dönüştüren minimalist bir yapay zeka koçluk uygulaması. Bir yansıma, bir soru, bir net sonraki adım.",
-      features: [
-        {
-          icon: "🎯",
-          title: "Amaca özel yapay zeka koçları",
-          description:
-            "Genel amaçlı bir sohbet botu değil. NextStep; planlama, karar verme, alışkanlıklar, haftalık gözden geçirme ve odaklanma için özel koçlar sunar — her birinin kendi kuralları, tonu ve yapısı vardır.",
-        },
-        {
-          icon: "✅",
-          title: "Eyleme yönelik çıktı",
-          description:
-            "Her yanıt tam olarak bir somut eylemle biter — hemen yapılabilecek kadar küçük, genellikle beş dakika içinde gerçekleştirilebilir.",
-        },
-        {
-          icon: "🧘",
-          title: "Sakin, minimalist arayüz",
-          description:
-            "Dashboard, grafik veya karmaşık kurulum yok. Her ekran tam olarak bir soruyu yanıtlar. Ne yapacağınızı bildiğinizde uygulamayı kapatın.",
-        },
-        {
-          icon: "🔒",
-          title: "Tasarımdan gelen güvenlik ve gizlilik",
-          description:
-            "Yapay zeka istekleri istemci üzerinden asla dışarı çıkmaz. Tüm çağrılar sunucu tarafında yönetilir; API anahtarları gizli kalır ve her yanıt size ulaşmadan önce doğrulanır.",
-        },
-      ],
-      coachesEyebrow: "Koçlarla tanışın",
-      coachesHeading: "Her türlü tıkanma için bir koç.",
-      coaches: [
-        {
-          name: "Planlayıcı",
-          description: "Belirsiz hedefleri net bir sonraki eyleme dönüştürün.",
-          pro: false,
-        },
-        {
-          name: "Karar Verici",
-          description: "Seçenekleri eleyin ve tek bir yola bağlanın.",
-          pro: false,
-        },
-        {
-          name: "Alışkanlık Oluşturucu",
-          description: "Bugün başlamaya değer küçük bir alışkanlık tasarlayın.",
-          pro: false,
-        },
-        {
-          name: "Odak Modu",
-          description: "Şu an en önemli tek şeyi belirleyin.",
-          pro: false,
-        },
-        {
-          name: "Haftalık Değerlendirme",
-          description: "Haftayı gözden geçirin ve bir sonraki için tek bir niyet belirleyin.",
-          pro: true,
-        },
-        {
-          name: "Yaratıcı Tutarlılık",
-          description: "Tükenmeden yaratıcı çalışmanızda tutarlı kalın.",
-          pro: true,
-        },
-      ],
-      proLabel: "Pro",
-      tiersEyebrow: "Fiyatlandırma",
-      tiersHeading: "Ücretsiz başlayın. İhtiyaç duyanlar için daha fazlası.",
-      freeTier: {
-        name: "Ücretsiz",
-        items: [
-          "Sınırlı koçluk konuşması",
-          "Temel koçlar",
-          "Temel kişiselleştirme",
+    team: [
+      {
+        name: "Ali Mertcan Karaman",
+        role: "Kurucu Ortak",
+        initials: "AK",
+        twitter: "https://x.com/alimertcank?s=21",
+        linkedin: "https://www.linkedin.com/in/ali-mertcan-karaman-088582133/",
+        background: [
+          { place: "Marmara Üniversitesi", years: "2016–2020" },
+          { place: "TUSAŞ", years: "2020–2025" },
         ],
       },
-      proTier: {
-        name: "Pro",
-        items: [
-          "Sınırsız koçluk konuşması",
-          "Gelişmiş koçlar dahil tüm koçlar",
-          "Kaydedilmiş özetler ve yeniden kullanılabilir sistemler",
-          "Özel koçlar",
-          "Derin kişiselleştirme",
-        ],
+      {
+        name: "Büşra Mercan",
+        role: "Kurucu Ortak",
+        initials: "BM",
+        background: [{ place: "TOBB ETÜ", years: "2020–2024" }],
       },
-      ctaHeading: "NextStep'i denemek ister misiniz?",
-      ctaSub:
-        "NextStep şu anda geliştirme aşamasında. Erken erişim veya sorularınız için bize ulaşın.",
-      ctaButton: "İletişime geç →",
-    },
-    dietpal: {
-      back: "← bmnova.com",
-      eyebrow: "DietPal ne yapar",
-      heading: "Sağlık hedeflerinize ulaşmak için bütünsel bir yaklaşım.",
-      description:
-        "İhtiyaçlarınıza ve yaşam tarzınıza göre planınızı kişiselleştiren yapay zeka destekli diyet uygulaması. Yiyecekleri, egzersizi ve refahı takip edin — ardından hedeflerinize ulaşmak için içgörüler alın.",
-      demoAlt: "DietPal uygulama demosu",
-      features: [
-        {
-          icon: "🧠",
-          title: "Yapay zeka ile kişiselleştirme",
-          description:
-            "DietPal, genel bir şablondan değil, size gerçekten uyan bir plan oluşturmak için beslenme ihtiyaçlarınızı, hedeflerinizi ve yaşam tarzınızı öğrenir.",
-        },
-        {
-          icon: "🥗",
-          title: "Yiyecek ve egzersiz takibi",
-          description:
-            "Öğün ve antrenmanlarınızı kolayca kaydedin. DietPal, günlük alımınız ve aktiviteniz hakkında size rakamlarla bunaltmadan net bir tablo sunar.",
-        },
-        {
-          icon: "📊",
-          title: "Önemli içgörüler",
-          description:
-            "Verilerinize dayalı net ve eyleme geçirilebilir geri bildirimler alın. DietPal, her gün daha iyi seçimler yapabilmeniz için önemli kalıpları öne çıkarır.",
-        },
-        {
-          icon: "💚",
-          title: "Bütünsel sağlık",
-          description:
-            "Diyet yalnızca bir parça. DietPal aynı zamanda uyku, stres ve enerjinizi de takip ederek sağlık yolculuğunuzun eksiksiz bir resmini sunar.",
-        },
-      ],
-      ctaHeading: "DietPal'ı denemek ister misiniz?",
-      ctaSub:
-        "App Store ve Google Play'den indirin — veya sorularınız için bize ulaşın.",
-      ctaButton: "İletişime geç →",
-    },
-    fitvibe: {
-      back: "← bmnova.com",
-      eyebrow: "FitVibe ne yapar",
-      heading: "Yapay zeka destekli dijital dolabın. Daha akıllı stil, daha az çaba.",
-      description:
-        "FitVibe, agentic yapay zeka etrafında tasarlanmış bir dijital dolap uygulaması. Kıyafetlerini ekle, otomatik kombin önerileri al, dolabındaki eksikleri keşfet ve istediğin görünüşü üzerinde dene.",
-      demoAlt: "FitVibe uygulama demosu",
-      features: [
-        {
-          icon: "👗",
-          title: "Dijital dolap",
-          description:
-            "Kıyafetleri otomatik arka plan kaldırmayla ekle. Sahip olduğun her şeyin temiz ve düzenli bir kataloğunu oluştur — her zaman elinizin altında.",
-        },
-        {
-          icon: "🤖",
-          title: "Agentic AI stilisti",
-          description:
-            "FitVibe'ın yapay zeka sohbet botu yalnızca önermekle kalmaz — harekete geçer. Kombin oluşturmasını, dolabını analiz etmesini veya eksiklerini bulmasını söyle, o halleder.",
-        },
-        {
-          icon: "✨",
-          title: "Yapay zeka kombin önerileri",
-          description:
-            "Bir ortam ya da ruh hali tarif et, FitVibe gerçek kıyafetlerinden kombin oluşturur. Dolu bir dolaba bakıp 'giyecek bir şeyim yok' hissi artık geride kalıyor.",
-        },
-        {
-          icon: "🪞",
-          title: "Sanal deneme",
-          description:
-            "Bir kombini taahhüt etmeden önce üzerinde nasıl göründüğünü gör. FitVibe, güvenle karar verebilmen için sanal bir deneme önizlemesi oluşturur.",
-        },
-        {
-          icon: "🔍",
-          title: "Dolap analizi",
-          description:
-            "Dolabının net bir resmini al: eksikler, tekrarlar ve stil fırsatları. FitVibe, koleksiyonunu tamamlayacak şeyleri tam olarak söyler.",
-        },
-        {
-          icon: "🎨",
-          title: "Stil kanvası",
-          description:
-            "FitVibe'ın yerleşik kanvası ile kombin panoları oluştur ve paylaş. Parçaları seç, düzenle ve paylaşmaya hazır cilalı bir görünüm dışa aktar.",
-        },
-      ],
-      ctaHeading: "FitVibe'ı denemek ister misiniz?",
-      ctaSub:
-        "App Store ve Google Play'den indirin — veya soru ve iş birliği talepleriniz için bize ulaşın.",
-      ctaButton: "İletişime geç →",
-    },
-    roompace: {
-      back: "← bmnova.com",
-      eyebrow: "RoomPace ne yapar",
-      heading: "Güzel odalar, bütçenize göre tasarlanır.",
-      description:
-        "RoomPace, bütçesini aşmadan güzel bir ev isteyenler için yapay zeka iç tasarım uygulaması. Bütçenizi belirleyin, fotoğraf yükleyin ve gerçek ürün istek listeleriyle AI düzenleri alın.",
-      demoAlt: "RoomPace uygulama demosu",
-      features: [
-        {
-          icon: "💰",
-          title: "Bütçe odaklı tasarım",
-          description:
-            "Ne kadar harcamak istediğinizi belirleyin ve rakamlarınıza uygun oda tasarımları alın — hafif bir yenilemeden tam bir dönüşüme kadar.",
-        },
-        {
-          icon: "📸",
-          title: "Fotoğraftan AI düzen",
-          description:
-            "Alanınızın fotoğrafını yükleyin, oda tipinizi ve estetik tarzınızı seçin ve saniyeler içinde özenle hazırlanmış bir AI render alın.",
-        },
-        {
-          icon: "🎨",
-          title: "İç mekan stillerini keşfedin",
-          description:
-            "Inspire ana ekranında stilleri inceleyin, yapay zeka ile estetiğinizi keşfedin ve karar vermeden önce görünümleri karşılaştırın.",
-        },
-        {
-          icon: "✨",
-          title: "Her detayı iyileştirin",
-          description:
-            "Basit istemlerle render'ınızı geliştirin veya otomatik yeniden düzenleyin — düzenler tam istediğiniz gibi hissedene kadar ince ayar yapın.",
-        },
-        {
-          icon: "🏠",
-          title: "Odalarım galerisi",
-          description:
-            "Her AI oda konseptini tek bir düzenli galeride kaydedin. Tasarımlarınızı istediğiniz zaman inceleyin, yönetin ve yeniden ziyaret edin.",
-        },
-        {
-          icon: "🛒",
-          title: "Alışveriş yapılabilir istek listesi",
-          description:
-            "Her tasarım, gerçek mobilya ve dekor ürünlerinden oluşan oda bazlı bir istek listesiyle gelir — fiyatlar ve satın alma bağlantılarıyla.",
-        },
-      ],
-      ctaHeading: "RoomPace'ı denemek ister misiniz?",
-      ctaSub:
-        "App Store ve Google Play'den indirin — sorularınız veya iş birliği talepleriniz için bize de ulaşabilirsiniz.",
-      ctaButton: "İletişime geç →",
-    },
-    haki: {
-      back: "← bmnova.com",
-      eyebrow: "Haki ne yapar",
-      heading: "Senin hikayen. Senin kahramanın. Dakikalar içinde AI manga panelleri.",
-      description:
-        "Haki, boş sayfadan başlamadan tam paneller isteyen yaratıcılar için manga çizgi roman oluşturucusudur. Vizyonunuzu yazın, kahramanınızı tanımlayın, görsel stilinizi seçin ve kaydedip indirebileceğiniz, devam edebileceğiniz çizgi roman sayfaları oluşturun.",
-      demoAlt: "Haki uygulama demosu",
-      features: [
-        {
-          icon: "✍️",
-          title: "Vizyonunuzu yazın",
-          description:
-            "Hayata geçirmek istediğiniz sahneyi tarif edin. Haki, hikaye isteminizi karakter kurulumu ve panel oluşturmaya hazır bir taslağa dönüştürür.",
-        },
-        {
-          icon: "🦸",
-          title: "Karakter kurulumu",
-          description:
-            "Fotoğraf, isim, rol ve görünümle kahramanınızı tanımlayın. Haki, kahramanınızı oluşturulan her panelde tutarlı tutar.",
-        },
-        {
-          icon: "🎨",
-          title: "Görsel DNA ve türler",
-          description:
-            "Shonen, Seinen, Shojo veya Cyberpunk gibi manga stillerini seçin, ardından Action ve Fantasy'den Romance ve Isekai'ye kadar türler belirleyin.",
-        },
-        {
-          icon: "📖",
-          title: "Çizgi roman panelleri oluşturun",
-          description:
-            "Senaryonuzu ve karakterinizi saniyeler içinde tam AI manga panellerine dönüştürün — diyalog, düzen ve sinematik tempo ile birlikte.",
-        },
-        {
-          icon: "📚",
-          title: "Çizgi roman kütüphanesi",
-          description:
-            "Oluşturduğunuz her çizgi romanı kişisel kütüphanenize kaydedin. Koleksiyonlara göz atın, geçmiş hikayeleri yeniden ziyaret edin ve kaldığınız yerden devam edin.",
-        },
-        {
-          icon: "➡️",
-          title: "Hikayeye devam edin",
-          description:
-            "Bir bölümü bitirdiniz mi? Yeni istemlerle anlatıya devam edin ve sürekliliği kaybetmeden manganızın bir sonraki sayfasını oluşturun.",
-        },
-      ],
-      ctaHeading: "Haki'yi denemek ister misiniz?",
-      ctaSub:
-        "Erken erişim, sorular veya iş birliği talepleri için bize ulaşın.",
-      ctaButton: "İletişime geç →",
-    },
-    bloomish: {
-      back: "← bmnova.com",
-      eyebrow: "Bloomish ne yapar",
-      heading: "Bir duyguyu bukete dönüştür. Önemli birine gönder.",
-      description:
-        "Yapay zeka ile muhteşem buketler oluştur ve hediye olarak gönder. Sevincini herkesle, her yerde paylaş — güzelce sarılmış ve kişisel anlam taşıyan.",
-      features: [
-        {
-          icon: "💐",
-          title: "Yapay zeka ile buket oluşturma",
-          description:
-            "Bir duyguyu, bir kişiyi ya da bir anı tarif et — Bloomish sözlerine özel benzersiz bir buket oluşturur. Her düzenleme tek ve özgündür.",
-        },
-        {
-          icon: "🎁",
-          title: "Hediye olarak gönder",
-          description:
-            "Buketini bir bağlantı veya uygulama içi mesajla herkese gönder. Alıcılar güzel ve kişiselleştirilmiş bir hediye deneyimi yaşar — teslimat gerekmez.",
-        },
-        {
-          icon: "📸",
-          title: "Anları kaydet ve paylaş",
-          description:
-            "En sevdiğin düzenlemeleri koleksiyonunda sakla. Buketleri sosyal medyada veya yakın çevrende paylaşarak günlerini aydınlat.",
-        },
-        {
-          icon: "✨",
-          title: "Sonsuz kişiselleştirme",
-          description:
-            "Çiçek, renk, ambalaj ve stil seç — ya da yapay zekanın sürpriz yapmasına izin ver. Her buket gerçek bir duyguyu yansıtır, jenerik bir şablon değil.",
-        },
-      ],
-      ctaHeading: "Bloomish'i denemek ister misiniz?",
-      ctaSub:
-        "Bloomish şu anda geliştirme aşamasında. Erken erişim veya sorularınız için bize ulaşın.",
-      ctaButton: "İletişime geç →",
-    },
+    ] satisfies TeamMember[],
   },
 };
+
+/** Fills {placeholders} in a content string. */
+export function fill(template: string, values: Record<string, string | number>): string {
+  return template.replace(/\{(\w+)\}/g, (_, key: string) => String(values[key] ?? `{${key}}`));
+}

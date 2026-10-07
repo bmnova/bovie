@@ -1,5 +1,7 @@
+type StoreLink = { googlePlay: string; appStore?: string };
+
 export const storeLinks = {
-  dietpal: {
+  pali: {
     googlePlay:
       "https://play.google.com/store/apps/details?id=com.gaft.dietpal",
     appStore: "https://apps.apple.com/app/6756529135",
@@ -12,8 +14,6 @@ export const storeLinks = {
   offer: {
     googlePlay:
       "https://play.google.com/store/apps/details?id=com.offerizm.offer",
-    appStore:
-      "https://play.google.com/store/apps/details?id=com.offerizm.offer",
   },
   roompace: {
     googlePlay:
@@ -25,4 +25,6 @@ export const storeLinks = {
       "https://play.google.com/store/apps/details?id=com.intyx.haki",
     appStore: "https://apps.apple.com/app/6795980533",
   },
-} as const;
+} as const satisfies Record<string, StoreLink>;
+
+export type StoreKey = keyof typeof storeLinks;

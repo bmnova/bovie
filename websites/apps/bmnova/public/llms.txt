@@ -1,27 +1,27 @@
 # BMNova
 
-> BMNova builds user-friendly AI apps, mobile products, and SaaS tools.
+> BMNova is an independent app studio from Ankara that designs, builds and ships its own AI-powered consumer apps.
 
 Website: https://bmnova.com
 Contact: hello@bmnova.com
 Blog: https://bmnova.com/blog
 
-## Products
+## Apps
 
-- [DietPal](https://bmnova.com/projects/dietpal): AI diet tracking, meal plans, and coaching. Photo/text food logging, personalized plans, progress charts.
-- [FitVibe](https://bmnova.com/projects/fitvibe): AI digital wardrobe and stylist. Closet logging with background removal, outfit combines, wardrobe gaps, virtual try-on.
-- [RoomPace](https://bmnova.com/projects/roompace): Budget-aware AI interior design. Upload a room photo, set a spend limit, get layouts and a shoppable furniture wishlist.
-- [Haki](https://bmnova.com/projects/haki): AI manga comics generator. Script stories, define characters, generate comic panels.
-- [Offer](https://bmnova.com/projects/offer): Social icebreaker app. Offer drinks or snacks at local businesses to connect with people nearby.
+- [Pali](https://bmnova.com/projects/pali): GLP-1 companion (formerly DietPal). Shots and injection sites, side-effect check-ins, protein, water and weight, weekly review.
+- [FitVibe](https://bmnova.com/projects/fitvibe): AI digital wardrobe and stylist. Background removal, outfit combinations, wardrobe gaps, virtual try-on.
+- [Haki](https://bmnova.com/projects/haki): AI manga, manhwa and comics maker with consistent characters and editable multi-panel pages.
+- [RoomPace](https://bmnova.com/projects/roompace): Budget-aware AI interior design with a shoppable furniture wishlist.
 - [NextStep](https://bmnova.com/projects/nextstep): Minimalist AI coaching for overthinking. One reflection, one question, one clear next step.
 - [Bloomish](https://bmnova.com/projects/bloomish): AI bouquet generator for sending digital flower gifts.
+- [Offer](https://bmnova.com/projects/offer): Social icebreaker. Offer drinks or snacks at local businesses to meet people nearby.
+
+Turkish versions of every page live under https://bmnova.com/tr.
+
+## Also by BMNova
+
 - [intyx.ai](https://intyx.ai): CSV to AI dashboards — upload data, get interactive charts in seconds.
 - [dynamic.intyx.ai](https://dynamic.intyx.ai): Real-time Flutter content updates without shipping a new app build.
-
-## Partner work
-
-- [Pixvibe](https://www.everpixel.org/apps/pixvibe): AI photo editing (built with EverPixel)
-- [Collagevibe](https://www.everpixel.org/apps/collagevibe): Photo collages (built with EverPixel)
 
 ## Optional deeper index
 

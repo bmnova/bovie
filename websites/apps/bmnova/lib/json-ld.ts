@@ -1,4 +1,5 @@
 import { storeLinks } from "@/config/store-links";
+import { APPS, appStore } from "@/content/apps";
 import type { FirstPartyProject } from "@/lib/site";
 import {
   absoluteUrl,
@@ -10,69 +11,15 @@ import {
 
 export type FaqItem = { question: string; answer: string };
 
-type SoftwareAppConfig = {
-  name: string;
-  description: string;
-  path: string;
-  category: string;
-  storeKey?: keyof typeof storeLinks;
-};
-
-export const SOFTWARE_APPS: Record<FirstPartyProject, SoftwareAppConfig> = {
-  dietpal: {
-    name: "DietPal",
-    description:
-      "AI-powered diet app that personalizes your plan based on your needs and lifestyle. Track food, exercise, and well-being with ease.",
-    path: "/projects/dietpal",
-    category: "HealthApplication",
-    storeKey: "dietpal",
-  },
-  fitvibe: {
-    name: "FitVibe",
-    description:
-      "AI-powered digital wardrobe app. Add clothes, get outfit combinations, discover wardrobe gaps, and virtually try on looks.",
-    path: "/projects/fitvibe",
-    category: "LifestyleApplication",
-    storeKey: "fitvibe",
-  },
-  roompace: {
-    name: "RoomPace",
-    description:
-      "AI interior design app that plans room makeovers to your budget. Upload a photo, get AI layouts, and build a shoppable wishlist.",
-    path: "/projects/roompace",
-    category: "LifestyleApplication",
-    storeKey: "roompace",
-  },
-  haki: {
-    name: "Haki",
-    description:
-      "AI manga comics generator. Script your story, define your protagonist, pick a visual style, and generate full comic panels.",
-    path: "/projects/haki",
-    category: "EntertainmentApplication",
-    storeKey: "haki",
-  },
-  offer: {
-    name: "Offer",
-    description:
-      "Connect with people around you by offering drinks, snacks, or other items at local businesses. Break the ice and make real connections.",
-    path: "/projects/offer",
-    category: "SocialNetworkingApplication",
-    storeKey: "offer",
-  },
-  nextstep: {
-    name: "NextStep",
-    description:
-      "A minimalist AI coaching app that turns overthinking into action. One reflection, one question, one clear next step.",
-    path: "/projects/nextstep",
-    category: "LifestyleApplication",
-  },
-  bloomish: {
-    name: "Bloomish",
-    description:
-      "Generate stunning AI bouquets and send them as gifts. Share moments of joy with anyone, anywhere — beautifully wrapped and personally meaningful.",
-    path: "/projects/bloomish",
-    category: "LifestyleApplication",
-  },
+/** schema.org application category for each app */
+const APP_CATEGORY: Record<FirstPartyProject, string> = {
+  pali: "HealthApplication",
+  fitvibe: "LifestyleApplication",
+  haki: "EntertainmentApplication",
+  roompace: "LifestyleApplication",
+  nextstep: "LifestyleApplication",
+  bloomish: "LifestyleApplication",
+  offer: "SocialNetworkingApplication",
 };
 
 export function organizationJsonLd() {
@@ -84,14 +31,7 @@ export function organizationJsonLd() {
     email: "hello@bmnova.com",
     description: SITE_DESCRIPTION,
     sameAs: [
-      storeLinks.dietpal.googlePlay,
-      storeLinks.dietpal.appStore,
-      storeLinks.fitvibe.googlePlay,
-      storeLinks.fitvibe.appStore,
-      storeLinks.roompace.googlePlay,
-      storeLinks.roompace.appStore,
-      storeLinks.haki.googlePlay,
-      storeLinks.haki.appStore,
+      ...Object.values(storeLinks).flatMap((links) => Object.values(links)),
       ...FIRST_PARTY_EXTERNAL.map((p) => p.url),
     ],
   };
@@ -159,17 +99,17 @@ export function faqPageJsonLd(faqs: FaqItem[]) {
 }
 
 export function softwareApplicationJsonLd(project: FirstPartyProject) {
-  const app = SOFTWARE_APPS[project];
-  const store = app.storeKey ? storeLinks[app.storeKey] : undefined;
+  const app = APPS[project];
+  const store = appStore(app);
 
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     name: app.name,
-    description: app.description,
-    url: absoluteUrl(app.path),
-    applicationCategory: app.category,
-    operatingSystem: "iOS, Android",
+    description: app.copy.en.heroBody,
+    url: absoluteUrl(`/projects/${project}`),
+    applicationCategory: APP_CATEGORY[project],
+    operatingSystem: app.platforms === "both" ? "iOS, Android" : "Android",
     author: {
       "@type": "Organization",
       name: SITE_NAME,
@@ -182,7 +122,7 @@ export function softwareApplicationJsonLd(project: FirstPartyProject) {
             price: "0",
             priceCurrency: "USD",
           },
-          downloadUrl: [store.googlePlay, store.appStore],
+          downloadUrl: Object.values(store),
           installUrl: store.googlePlay,
         }
       : {}),

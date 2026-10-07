@@ -1,46 +1,37 @@
 import Link from "next/link";
+import { contentMap } from "@/content";
+import { localePath, type Locale } from "@/lib/i18n";
 import type { PostMeta } from "@/lib/posts";
 
 type ProjectRelatedReadingProps = {
   posts: PostMeta[];
-  accent?: string;
+  locale: Locale;
 };
 
-/** Server-friendly related blog links for product landings */
-export function ProjectRelatedReading({
-  posts,
-  accent = "var(--accent)",
-}: ProjectRelatedReadingProps) {
+/** Server-rendered related blog links for app landings */
+export function ProjectRelatedReading({ posts, locale }: ProjectRelatedReadingProps) {
   if (posts.length === 0) return null;
+  const { blog } = contentMap[locale];
 
   return (
-    <section className="border-t border-border bg-surface px-6 py-16 md:px-12">
-      <div className="mx-auto max-w-4xl">
-        <p
-          className="mb-2 text-xs font-semibold uppercase tracking-widest"
-          style={{ color: accent }}
-        >
-          From the blog
-        </p>
-        <h2 className="mb-8 text-2xl font-bold tracking-tight text-primary">
-          Related reading
-        </h2>
-        <ul className="space-y-6">
-          {posts.map((post) => (
-            <li key={post.slug}>
-              <Link
-                href={`/blog/${post.slug}`}
-                className="group block rounded-xl border border-border px-5 py-4 transition-colors hover:border-accent/40"
-              >
-                <h3 className="mb-1 font-semibold text-primary group-hover:text-accent">
-                  {post.title}
-                </h3>
-                <p className="text-sm leading-relaxed text-muted">{post.summary}</p>
-              </Link>
-            </li>
-          ))}
-        </ul>
+    <section className="reveal mx-auto max-w-[1440px] px-[clamp(20px,4vw,56px)] pb-[72px]">
+      <div className="mb-6 flex flex-col gap-3">
+        <span className="text-xs font-semibold uppercase tracking-[.14em] text-accent">{blog.relatedEyebrow}</span>
+        <h2 className="font-display text-[clamp(28px,3vw,40px)] font-extrabold">{blog.relatedHeading}</h2>
       </div>
+      <ul className="stagger flex flex-wrap gap-3.5">
+        {posts.map((post) => (
+          <li key={post.slug} className="flex-[1_1_300px]">
+            <Link
+              href={localePath(locale, `/blog/${post.slug}`)}
+              className="group flex h-full flex-col gap-2 rounded-[20px] border border-border bg-card px-6 py-5 transition-[transform,border-color] duration-300 hover:-translate-y-1 hover:border-white/30"
+            >
+              <h3 className="font-semibold text-primary group-hover:text-accent">{post.title}</h3>
+              <p className="text-sm leading-relaxed text-muted">{post.summary}</p>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }

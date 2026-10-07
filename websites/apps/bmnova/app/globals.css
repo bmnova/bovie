@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --font-geist-sans: "Geist", sans-serif;
-  --font-geist-mono: "Geist Mono", monospace;
-}
-
 * {
   box-sizing: border-box;
   padding: 0;
@@ -19,41 +14,149 @@ html {
 }
 
 body {
-  background-color: #f8fafc;
-  color: #0f172a;
+  background-color: #0b0b12;
+  color: #f3f2fa;
   font-family: var(--font-geist-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   overflow-x: clip;
 }
 
 ::selection {
-  background-color: #6366f1;
-  color: #fff;
+  background-color: #daff47;
+  color: #0b0b12;
+}
+
+/* Display type: Bricolage Grotesque at its largest optical size */
+.font-display {
+  font-variation-settings: "opsz" 96;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+}
+
+/* Sections rise in as they scroll into view, driven by scroll position where supported */
+@keyframes rise {
+  from { opacity: 0; translate: 0 28px; }
+  to { opacity: 1; translate: 0 0; }
+}
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+  }
+  .stagger > * {
+    animation: rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+  }
+  .stagger > *:nth-child(2) { animation-range: entry 8% entry 43%; }
+  .stagger > *:nth-child(3) { animation-range: entry 16% entry 51%; }
+  .stagger > *:nth-child(4) { animation-range: entry 24% entry 59%; }
+  .stagger > *:nth-child(5) { animation-range: entry 32% entry 67%; }
+  .stagger > *:nth-child(n + 6) { animation-range: entry 40% entry 75%; }
+}
+
+/* Hero copy rises in on load, one line after another */
+.hero-in {
+  animation: rise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: 0.05s;
+}
+.hero-in-2 { animation-delay: 0.15s; }
+.hero-in-3 { animation-delay: 0.25s; }
+.hero-in-4 { animation-delay: 0.35s; }
+.hero-in-5 { animation-delay: 0.5s; }
+
+/* A soft light sweep across a card on hover */
+.sheen {
+  position: relative;
+}
+.sheen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 35%, rgb(255 255 255 / 0.08) 50%, transparent 65%);
+  translate: -120% 0;
+  transition: translate 0.9s ease;
+  pointer-events: none;
+}
+.sheen:hover::after {
+  translate: 120% 0;
+}
+
+/* Marquees pause while hovered so the content stays readable */
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Hide scrollbars on horizontal strips but keep them scrollable */
+.strip {
+  scrollbar-width: none;
+}
+.strip::-webkit-scrollbar {
+  display: none;
+}
+
+/* Pali the mascot: bob, breathe and blink */
+@keyframes pali-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+@keyframes pali-shadow {
+  0%, 100% { transform: scaleX(1); opacity: 1; }
+  50% { transform: scaleX(0.78); opacity: 0.55; }
+}
+@keyframes pali-blink {
+  0%, 90%, 100% { transform: scaleY(1); }
+  93% { transform: scaleY(0.08); }
+}
+.pali-bob {
+  animation: pali-bob 2.6s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+.pali-shadow {
+  animation: pali-shadow 2.6s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+.pali-blink {
+  animation: pali-blink 4.2s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }
 
 /* Blog post content */
 .post-content h2 {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #0f172a;
+  color: #f3f2fa;
   margin-top: 2.5rem;
   margin-bottom: 0.75rem;
 }
 .post-content h3 {
   font-size: 1.125rem;
   font-weight: 700;
-  color: #0f172a;
+  color: #f3f2fa;
   margin-top: 2rem;
   margin-bottom: 0.5rem;
 }
 .post-content p {
   font-size: 1rem;
   line-height: 1.75;
-  color: #334155;
+  color: #cfcde0;
   margin-bottom: 1.25rem;
 }
 .post-content a {
-  color: #6366f1;
+  color: #daff47;
   text-decoration: underline;
   text-underline-offset: 2px;
 }
@@ -64,7 +167,7 @@ body {
 .post-content ol {
   padding-left: 1.5rem;
   margin-bottom: 1.25rem;
-  color: #334155;
+  color: #cfcde0;
   line-height: 1.75;
 }
 .post-content ul {
@@ -79,14 +182,15 @@ body {
 .post-content code {
   font-family: var(--font-geist-mono), monospace;
   font-size: 0.875em;
-  background-color: #f1f5f9;
-  border: 1px solid #e2e8f0;
+  background-color: #15151f;
+  border: 1px solid rgb(255 255 255 / 0.1);
   border-radius: 0.25rem;
   padding: 0.1em 0.35em;
 }
 .post-content pre {
-  background-color: #0f172a;
-  color: #e2e8f0;
+  background-color: #15151f;
+  border: 1px solid rgb(255 255 255 / 0.1);
+  color: #f3f2fa;
   border-radius: 0.75rem;
   padding: 1.25rem 1.5rem;
   overflow-x: auto;
@@ -102,18 +206,18 @@ body {
 }
 .post-content hr {
   border: none;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid rgb(255 255 255 / 0.1);
   margin: 2.5rem 0;
 }
 .post-content strong {
   font-weight: 600;
-  color: #0f172a;
+  color: #f3f2fa;
 }
 .post-content blockquote {
-  border-left: 3px solid #6366f1;
+  border-left: 3px solid #daff47;
   padding-left: 1rem;
   margin: 1.5rem 0;
-  color: #64748b;
+  color: #a4a2b8;
   font-style: italic;
 }
 .post-content table {
@@ -122,8 +226,8 @@ body {
   margin: 1.75rem 0 2.25rem;
   font-size: 0.9375rem;
   line-height: 1.65;
-  color: #334155;
-  border: 1px solid #e2e8f0;
+  color: #cfcde0;
+  border: 1px solid rgb(255 255 255 / 0.1);
   border-radius: 0.75rem;
   overflow: hidden;
 }
@@ -137,18 +241,18 @@ body {
 }
 .post-content th {
   font-weight: 600;
-  color: #0f172a;
-  background-color: #f1f5f9;
-  border-bottom: 1px solid #e2e8f0;
+  color: #f3f2fa;
+  background-color: #15151f;
+  border-bottom: 1px solid rgb(255 255 255 / 0.1);
 }
 .post-content td {
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid rgb(255 255 255 / 0.1);
 }
 .post-content tr:last-child td {
   border-bottom: none;
 }
 .post-content tbody tr:nth-child(even) td {
-  background-color: #f8fafc;
+  background-color: rgb(255 255 255 / 0.03);
 }
 
 /* Scroll wide tables on small screens without crushing cell padding */
@@ -172,18 +276,6 @@ body {
   }
 }
 
-/* Film grain texture */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.018;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-size: 200px;
-}
-
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
@@ -192,6 +284,6 @@ body::before {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #c7d2fe;
+  background: rgb(255 255 255 / 0.18);
   border-radius: 999px;
 }

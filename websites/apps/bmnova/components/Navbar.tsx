@@ -1,124 +1,114 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { contentMap } from "@/content";
-import { useLocale, type Locale } from "@/app/locale-context";
+import { useLocale } from "@/app/locale-context";
+import { switchLocalePath } from "@/lib/i18n";
+import { Wordmark } from "@/components/Wordmark";
+import { ArrowIcon } from "@/components/icons";
 
-type NavbarProps = {
-  /** When false, hides the "Hire us" CTA (e.g. on inner pages). Default true. */
-  showHireUs?: boolean;
-};
-
-export function Navbar({ showHireUs = true }: NavbarProps) {
+export function Navbar() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const { locale, setLocale } = useLocale();
-  const { nav, navbar } = contentMap[locale];
-  const isHome = pathname === "/";
+  const { locale, href } = useLocale();
+  const { nav } = contentMap[locale];
+  const other = locale === "en" ? "tr" : "en";
 
-  /** On inner pages, hash links must go to home first (e.g. /#contact). */
-  function navHref(href: string) {
-    if (isHome) return href;
-    return href.startsWith("#") ? `/${href}` : href;
-  }
-
-  function toggleLocale() {
-    setLocale(locale === "en" ? "tr" : "en");
-  }
+  const links = [
+    { label: nav.apps, href: href("/#apps") },
+    { label: nav.studio, href: href("/#studio") },
+    { label: nav.shipLog, href: href("/#shiplog") },
+    { label: nav.careers, href: href("/careers") },
+  ];
 
   return (
     <>
-      <motion.header
-        className="fixed inset-x-0 top-0 z-50 flex items-center justify-between border-b border-border/60 px-6 py-4 backdrop-blur-md md:px-12"
-        style={{ backgroundColor: "rgba(248,250,252,0.85)" }}
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <a href="/" className="font-mono text-lg font-bold tracking-tight text-primary">
-          bm<span className="text-accent">nova</span>
-        </a>
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-surface/80 backdrop-blur-md">
+        <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-[clamp(20px,4vw,56px)] py-4">
+          <Wordmark />
 
-        {/* Desktop nav */}
-        <nav className="hidden items-center gap-8 md:flex">
-          {nav.map((link) => (
-            <a
-              key={link.href}
-              href={navHref(link.href)}
-              className="text-sm font-medium text-muted transition-colors hover:text-accent"
+          <nav className="hidden items-center gap-8 text-[15px] font-medium text-muted md:flex">
+            {links.map((link) => (
+              <Link key={link.label} href={link.href} className="transition-colors hover:text-accent">
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-2.5">
+            <Link
+              href={switchLocalePath(pathname, other)}
+              hrefLang={other}
+              aria-label={nav.switchTo}
+              className="inline-flex h-10 items-center rounded-full border border-white/20 px-3.5 text-[13px] font-semibold text-muted transition-colors hover:border-white/50 hover:text-primary"
             >
-              {link.label}
-            </a>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-3">
-          {/* Locale toggle */}
-          <button
-            onClick={toggleLocale}
-            className="text-xs font-semibold text-muted transition-colors hover:text-accent"
-            aria-label="Switch language"
-          >
-            {locale === "en" ? "TR" : "EN"}
-          </button>
-
-          {showHireUs && (
-            <a
-              href={navHref("#contact")}
-              className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-80"
+              {nav.switchLabel}
+            </Link>
+            <Link
+              href={href("/#apps")}
+              className="hidden h-10 items-center gap-2 rounded-full bg-accent px-[18px] text-sm font-bold text-surface transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_40px_rgba(218,255,71,.32)] sm:inline-flex"
             >
-              {navbar.hireUs}
-            </a>
-          )}
-
-          {/* Mobile hamburger */}
-          <button
-            className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 md:hidden"
-            onClick={() => setOpen((v) => !v)}
-            aria-label="Toggle menu"
-          >
-            <motion.span
-              className="block h-0.5 w-5 rounded-full bg-primary"
-              animate={open ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.25 }}
-            />
-            <motion.span
-              className="block h-0.5 w-5 rounded-full bg-primary"
-              animate={open ? { opacity: 0 } : { opacity: 1 }}
-              transition={{ duration: 0.2 }}
-            />
-            <motion.span
-              className="block h-0.5 w-5 rounded-full bg-primary"
-              animate={open ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.25 }}
-            />
-          </button>
+              {nav.getApps}
+              <ArrowIcon className="h-3.5 w-3.5" />
+            </Link>
+            <button
+              type="button"
+              className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
+              onClick={() => setOpen((v) => !v)}
+              aria-label={nav.menu}
+              aria-expanded={open}
+            >
+              <motion.span
+                className="block h-0.5 w-5 rounded-full bg-primary"
+                animate={open ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.25 }}
+              />
+              <motion.span
+                className="block h-0.5 w-5 rounded-full bg-primary"
+                animate={open ? { opacity: 0 } : { opacity: 1 }}
+                transition={{ duration: 0.2 }}
+              />
+              <motion.span
+                className="block h-0.5 w-5 rounded-full bg-primary"
+                animate={open ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.25 }}
+              />
+            </button>
+          </div>
         </div>
-      </motion.header>
+      </header>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed inset-x-0 top-[65px] z-40 border-b border-border bg-surface px-6 py-4 md:hidden"
+            className="fixed inset-x-0 top-[73px] z-40 border-b border-border bg-surface px-5 py-4 md:hidden"
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
           >
             <nav className="flex flex-col gap-1">
-              {nav.map((link) => (
-                <a
-                  key={link.href}
-                  href={navHref(link.href)}
+              {links.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
                   onClick={() => setOpen(false)}
-                  className="rounded-xl px-3 py-3 text-sm font-medium text-muted transition-colors hover:bg-accent/5 hover:text-accent"
+                  className="rounded-xl px-3 py-3 text-base font-medium text-muted transition-colors hover:bg-white/5 hover:text-accent"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
+              <Link
+                href={href("/#apps")}
+                onClick={() => setOpen(false)}
+                className="mt-2 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-accent text-sm font-bold text-surface"
+              >
+                {nav.getApps}
+                <ArrowIcon className="h-3.5 w-3.5" />
+              </Link>
             </nav>
           </motion.div>
         )}
@@ -126,6 +116,3 @@ export function Navbar({ showHireUs = true }: NavbarProps) {
     </>
   );
 }
-
-// Re-export Locale type for convenience
-export type { Locale };
