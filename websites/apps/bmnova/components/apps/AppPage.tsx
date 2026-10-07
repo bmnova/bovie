@@ -303,6 +303,20 @@ export function AppPage({ slug, heroVisual, heroExtra, demo, extra, related }: A
           </section>
         )}
 
+        {copy.faqs && (
+          <section className={`${container} reveal pb-[72px]`}>
+            <h2 className="mb-6 font-display text-[clamp(28px,3vw,40px)] font-extrabold">{fill(appPage.faqHeading, { name: app.name })}</h2>
+            <div className="flex max-w-[860px] flex-col gap-3">
+              {copy.faqs.map((faq) => (
+                <details key={faq.question} className="group rounded-[20px] border border-border bg-card px-6 py-5">
+                  <summary className="cursor-pointer list-none text-[17px] font-semibold text-primary">{faq.question}</summary>
+                  <p className="mt-3 text-[15px] leading-relaxed text-muted">{faq.answer}</p>
+                </details>
+              ))}
+            </div>
+          </section>
+        )}
+
         {related}
 
         {/* More from BMNova */}

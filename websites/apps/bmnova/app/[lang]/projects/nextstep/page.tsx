@@ -22,7 +22,7 @@ export default function NextStepPage({ params }: Props) {
         heroVisual={<NextStepHeroVisual />}
         demo={<NextStepDemo />}
         extra={<NextStepCoaches />}
-        related={<ProjectRelatedReading posts={getPostsByProduct("nextstep")} locale={params.lang} />}
+        related={<ProjectRelatedReading posts={getPostsByProduct("nextstep", params.lang)} locale={params.lang} />}
       />
     </>
   );

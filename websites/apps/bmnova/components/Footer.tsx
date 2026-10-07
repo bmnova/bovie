@@ -5,13 +5,13 @@ import { usePathname } from "next/navigation";
 import { contentMap } from "@/content";
 import { APP_ORDER, APPS } from "@/content/apps";
 import { useLocale } from "@/app/locale-context";
-import { switchLocalePath } from "@/lib/i18n";
+import { switchLocalePath, type Locale } from "@/lib/i18n";
 import { Wordmark } from "@/components/Wordmark";
 
 const CONTACT_EMAIL = "contact@bmnova.com";
 
 /** Carries id="contact": the stores list bmnova.com/#contact as the support URL. */
-export function Footer() {
+export function Footer({ localeHrefs }: { localeHrefs?: Record<Locale, string> }) {
   const { locale, href } = useLocale();
   const pathname = usePathname();
   const { footer } = contentMap[locale];
@@ -68,14 +68,14 @@ export function Footer() {
         </span>
         <span className="flex gap-3">
           <Link
-            href={switchLocalePath(pathname, "en")}
+            href={localeHrefs?.en ?? switchLocalePath(pathname, "en")}
             hrefLang="en"
             className={locale === "en" ? "text-primary" : "transition-colors hover:text-accent"}
           >
             EN
           </Link>
           <Link
-            href={switchLocalePath(pathname, "tr")}
+            href={localeHrefs?.tr ?? switchLocalePath(pathname, "tr")}
             hrefLang="tr"
             className={locale === "tr" ? "text-primary" : "transition-colors hover:text-accent"}
           >

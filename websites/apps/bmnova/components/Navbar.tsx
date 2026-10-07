@@ -6,11 +6,11 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { contentMap } from "@/content";
 import { useLocale } from "@/app/locale-context";
-import { switchLocalePath } from "@/lib/i18n";
+import { switchLocalePath, type Locale } from "@/lib/i18n";
 import { Wordmark } from "@/components/Wordmark";
 import { ArrowIcon } from "@/components/icons";
 
-export function Navbar() {
+export function Navbar({ localeHrefs }: { localeHrefs?: Record<Locale, string> }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const { locale, href } = useLocale();
@@ -40,7 +40,7 @@ export function Navbar() {
 
           <div className="flex items-center gap-2.5">
             <Link
-              href={switchLocalePath(pathname, other)}
+              href={localeHrefs?.[other] ?? switchLocalePath(pathname, other)}
               hrefLang={other}
               aria-label={nav.switchTo}
               className="inline-flex h-10 items-center rounded-full border border-white/20 px-3.5 text-[13px] font-semibold text-muted transition-colors hover:border-white/50 hover:text-primary"

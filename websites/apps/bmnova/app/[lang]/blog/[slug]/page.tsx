@@ -5,29 +5,52 @@ import { InnerPageLayout } from "@/components/InnerPageLayout";
 import { JsonLd } from "@/components/JsonLd";
 import { RelatedPosts } from "@/components/RelatedPosts";
 import { PostStoreCta } from "@/components/PostStoreCta";
-import { getPost, getAllPosts, getRelatedPosts } from "@/lib/posts";
+import { getPost, getAllPosts, getRelatedPosts, getTranslation, type Post } from "@/lib/posts";
 import {
   blogPostingJsonLd,
   faqPageJsonLd,
 } from "@/lib/json-ld";
 import { contentMap } from "@/content";
-import { localePath, type Locale } from "@/lib/i18n";
+import { LOCALES, localePath, type Locale } from "@/lib/i18n";
 
 type Props = { params: { lang: Locale; slug: string } };
 
-export async function generateStaticParams() {
-  return getAllPosts().map((post) => ({ slug: post.slug }));
+export async function generateStaticParams({ params }: { params: { lang: Locale } }) {
+  return getAllPosts(params.lang).map((post) => ({ slug: post.slug }));
 }
 
-/** Posts are written in English, so every locale points search engines at the English URL. */
+/** Where the language switch goes: the translated post, or that language's blog index. */
+function localeHrefs(post: Post): Record<Locale, string> {
+  const translation = getTranslation(post);
+  return Object.fromEntries(
+    LOCALES.map((l) => [
+      l,
+      l === post.locale
+        ? localePath(l, `/blog/${post.slug}`)
+        : localePath(l, translation ? `/blog/${translation.slug}` : "/blog"),
+    ])
+  ) as Record<Locale, string>;
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = await getPost(params.slug);
+  const post = await getPost(params.slug, params.lang);
   if (!post) return {};
+  const url = localePath(post.locale, `/blog/${post.slug}`);
+  const translation = getTranslation(post);
   return {
     title: `${post.title} — BMNova`,
     description: post.summary,
     alternates: {
-      canonical: `/blog/${post.slug}`,
+      canonical: url,
+      ...(translation
+        ? {
+            languages: {
+              [post.locale]: url,
+              [translation.locale]: localePath(translation.locale, `/blog/${translation.slug}`),
+              "x-default": post.locale === "en" ? url : localePath("en", `/blog/${translation.slug}`),
+            },
+          }
+        : {}),
     },
     openGraph: {
       title: post.title,
@@ -36,7 +59,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       publishedTime: post.date,
       authors: ["BMNova"],
       tags: post.tags,
-      url: `/blog/${post.slug}`,
+      url,
+      locale: post.locale === "tr" ? "tr_TR" : "en_US",
     },
     twitter: {
       card: "summary_large_image",
@@ -47,19 +71,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function PostPage({ params }: Props) {
-  const post = await getPost(params.slug);
+  const post = await getPost(params.slug, params.lang);
   if (!post) notFound();
   const locale = params.lang;
   const { blog } = contentMap[locale];
 
-  const related = getRelatedPosts(post.slug);
+  const related = getRelatedPosts(post.slug, locale);
   const schemas = [
     blogPostingJsonLd(post),
     faqPageJsonLd(post.faqs),
   ].filter(Boolean) as Record<string, unknown>[];
 
   return (
-    <InnerPageLayout>
+    <InnerPageLayout localeHrefs={localeHrefs(post)}>
       <JsonLd data={schemas} />
       <main className="min-h-screen bg-surface px-6 py-12 md:px-12">
         <div className="mx-auto max-w-2xl">
@@ -103,7 +127,6 @@ export default async function PostPage({ params }: Props) {
           </div>
 
           <div
-            lang="en"
             className="post-content"
             dangerouslySetInnerHTML={{ __html: post.contentHtml }}
           />

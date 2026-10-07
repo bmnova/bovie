@@ -21,7 +21,7 @@ export default function BloomishPage({ params }: Props) {
         slug="bloomish"
         heroVisual={<BloomishHeroVisual />}
         demo={<BloomishDemo />}
-        related={<ProjectRelatedReading posts={getPostsByProduct("bloomish")} locale={params.lang} />}
+        related={<ProjectRelatedReading posts={getPostsByProduct("bloomish", params.lang)} locale={params.lang} />}
       />
     </>
   );

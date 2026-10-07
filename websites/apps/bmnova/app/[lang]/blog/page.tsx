@@ -13,7 +13,7 @@ export function generateMetadata({ params }: Props) {
 export default function BlogPage({ params }: Props) {
   const locale = params.lang;
   const { blog } = contentMap[locale];
-  const posts = getAllPosts();
+  const posts = getAllPosts(locale);
   const date = new Intl.DateTimeFormat(locale === "tr" ? "tr-TR" : "en-US", {
     year: "numeric",
     month: "long",
@@ -27,7 +27,6 @@ export default function BlogPage({ params }: Props) {
         <div className="mx-auto max-w-2xl">
           <h1 className="hero-in mb-3 font-display text-[clamp(48px,7vw,88px)] font-extrabold">{blog.title}</h1>
           <p className="hero-in hero-in-2 mb-3 text-lg text-muted">{blog.subtitle}</p>
-          {locale !== "en" && <p className="hero-in hero-in-3 text-sm text-dim">{blog.onlyEnglish}</p>}
 
           {posts.length === 0 ? (
             <p className="mt-12 text-muted">{blog.noPosts}</p>

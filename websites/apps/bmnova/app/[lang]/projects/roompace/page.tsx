@@ -2,8 +2,8 @@ import { JsonLd } from "@/components/JsonLd";
 import { ProjectRelatedReading } from "@/components/ProjectRelatedReading";
 import { AppPage } from "@/components/apps/AppPage";
 import { RoomPaceHeroVisual } from "@/components/apps/roompace";
-import { appMetadata } from "@/content/apps";
-import { softwareApplicationJsonLd } from "@/lib/json-ld";
+import { APPS, appMetadata } from "@/content/apps";
+import { faqPageJsonLd, softwareApplicationJsonLd } from "@/lib/json-ld";
 import type { Locale } from "@/lib/i18n";
 import { getPostsByProduct } from "@/lib/posts";
 
@@ -17,10 +17,11 @@ export default function RoomPacePage({ params }: Props) {
   return (
     <>
       <JsonLd data={softwareApplicationJsonLd("roompace")} />
+      <JsonLd data={faqPageJsonLd(APPS.roompace.copy[params.lang].faqs ?? [])} />
       <AppPage
         slug="roompace"
         heroVisual={<RoomPaceHeroVisual />}
-        related={<ProjectRelatedReading posts={getPostsByProduct("roompace")} locale={params.lang} />}
+        related={<ProjectRelatedReading posts={getPostsByProduct("roompace", params.lang)} locale={params.lang} />}
       />
     </>
   );

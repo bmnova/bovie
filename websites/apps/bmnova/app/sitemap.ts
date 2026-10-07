@@ -1,9 +1,9 @@
 import type { MetadataRoute } from "next";
-import { getAllPosts } from "@/lib/posts";
-import { LOCALES, localePath } from "@/lib/i18n";
+import { getAllPosts, getTranslation } from "@/lib/posts";
+import { LOCALES, localePath, type Locale } from "@/lib/i18n";
 import { FIRST_PARTY_PROJECTS, SITE_URL } from "@/lib/site";
 
-/** Every page exists in English at the root and in Turkish under /tr; posts are English only. */
+/** Every page exists in English at the root and in Turkish under /tr; posts exist in the languages they were written in. */
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
@@ -32,12 +32,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   );
 
-  const posts: MetadataRoute.Sitemap = getAllPosts().map((post) => ({
-    url: `${SITE_URL}/blog/${post.slug}`,
-    lastModified: new Date(post.date),
-    changeFrequency: "monthly",
-    priority: 0.7,
-  }));
+  const postUrl = (post: { locale: Locale; slug: string }) => absolute(localePath(post.locale, `/blog/${post.slug}`));
+  const posts: MetadataRoute.Sitemap = getAllPosts().map((post) => {
+    const translation = getTranslation(post);
+    return {
+      url: postUrl(post),
+      lastModified: new Date(post.date),
+      changeFrequency: "monthly",
+      priority: 0.7,
+      ...(translation
+        ? { alternates: { languages: { [post.locale]: postUrl(post), [translation.locale]: postUrl(translation) } } }
+        : {}),
+    };
+  });
 
   return [...localized, ...posts];
 }

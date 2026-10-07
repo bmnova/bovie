@@ -16,7 +16,7 @@ Blog: https://bmnova.com/blog
 - [Bloomish](https://bmnova.com/projects/bloomish): AI bouquet generator for sending digital flower gifts.
 - [Offer](https://bmnova.com/projects/offer): Social icebreaker. Offer drinks or snacks at local businesses to meet people nearby.
 
-Turkish versions of every page live under https://bmnova.com/tr.
+Turkish versions of every page live under https://bmnova.com/tr, with Turkish blog posts at https://bmnova.com/tr/blog.
 
 ## Also by BMNova
 

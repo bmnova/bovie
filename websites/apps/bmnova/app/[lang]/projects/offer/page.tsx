@@ -21,7 +21,7 @@ export default function OfferPage({ params }: Props) {
         slug="offer"
         heroVisual={<OfferHeroVisual />}
         demo={<OfferDemo />}
-        related={<ProjectRelatedReading posts={getPostsByProduct("offer")} locale={params.lang} />}
+        related={<ProjectRelatedReading posts={getPostsByProduct("offer", params.lang)} locale={params.lang} />}
       />
     </>
   );

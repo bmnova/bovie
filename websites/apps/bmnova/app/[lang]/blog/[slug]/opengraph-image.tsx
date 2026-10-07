@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { getPost } from "@/lib/posts";
+import type { Locale } from "@/lib/i18n";
 import { SITE_NAME } from "@/lib/site";
 
 export const alt = "BMNova Blog";
@@ -9,9 +10,9 @@ export const contentType = "image/png";
 export default async function Image({
   params,
 }: {
-  params: { slug: string };
+  params: { lang: Locale; slug: string };
 }) {
-  const post = await getPost(params.slug);
+  const post = await getPost(params.slug, params.lang);
   const title = post?.title ?? "BMNova Blog";
   const summary = post?.summary ?? "Evidence-based writing from BMNova.";
 

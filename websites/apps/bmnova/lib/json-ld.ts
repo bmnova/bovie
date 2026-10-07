@@ -109,6 +109,7 @@ export function softwareApplicationJsonLd(project: FirstPartyProject) {
     description: app.copy.en.heroBody,
     url: absoluteUrl(`/projects/${project}`),
     applicationCategory: APP_CATEGORY[project],
+    featureList: app.copy.en.features.map((feature) => feature.title),
     operatingSystem: app.platforms === "both" ? "iOS, Android" : "Android",
     author: {
       "@type": "Organization",

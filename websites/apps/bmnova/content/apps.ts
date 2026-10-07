@@ -1,5 +1,6 @@
 import { storeLinks, type StoreKey } from "@/config/store-links";
 import { pageMetadata, type Locale } from "@/lib/i18n";
+import type { FaqItem } from "@/lib/json-ld";
 import type { FirstPartyProject } from "@/lib/site";
 
 export type AppSlug = FirstPartyProject;
@@ -54,6 +55,11 @@ type AppCopy = {
   stickers: string[];
   /** Extra hero facts after the status, e.g. "12 purpose-built coaches" */
   facts: string[];
+  /** Search-facing page title and description; default to the tag and hero body */
+  seoTitle?: string;
+  seoDescription?: string;
+  /** Question-led answers shown on the app page and emitted as FAQPage schema */
+  faqs?: FaqItem[];
 };
 
 export type AppInfo = {
@@ -111,6 +117,16 @@ export const APPS: Record<AppSlug, AppInfo> = {
         ctaBody: "Free to download. Plus adds the doctor report, meal photos and Pali chat.",
         stickers: ["First shot ✓ · milestone", "Protein 62 / 90 g"],
         facts: [],
+        seoTitle: "Pali: GLP-1 Tracker for Ozempic, Wegovy & Mounjaro Shots",
+        seoDescription:
+          "Track GLP-1 shots and injection sites, side effects, protein, water and weight. Pali works with Ozempic, Wegovy, Mounjaro, Zepbound and Rybelsus. Free on iOS and Android.",
+        faqs: [
+          { question: "What is the best app to track Ozempic, Wegovy or Mounjaro shots?", answer: "Pali is a GLP-1 companion that logs each shot with its dose, injection site and a pain score, and reminds you when the next one is due. It works with Ozempic, Wegovy, Mounjaro, Zepbound and Rybelsus, and it is free on iOS and Android." },
+          { question: "How does Pali help with injection site rotation?", answer: "Pali shows a body map of your abdomen, thighs and upper arms and remembers which spots you used in the last two weeks. It suggests a rested spot for the next shot so you don't keep injecting in the same place." },
+          { question: "Can Pali track GLP-1 side effects like nausea and food noise?", answer: "Yes. A thirty-second daily check-in rates nausea, fatigue, heartburn, constipation, low appetite and food noise on a four-step scale. Pali then shows how they move across your shot cycle." },
+          { question: "How much protein should I eat on a GLP-1 medication?", answer: "Pali sets a daily protein target from your goal weight, because eating enough protein helps protect muscle while you lose weight. Your doctor or dietitian can adjust that number for you." },
+          { question: "Does Pali give medical advice or change my dose?", answer: "No. Pali tracks and spots patterns, it does not advise. Dose changes are always your doctor's call, and the Plus doctor report gives them your shots, side effects, weight and protein in one summary." },
+        ],
       },
       tr: {
         category: "Sağlık · GLP-1 yol arkadaşı",
@@ -140,6 +156,16 @@ export const APPS: Record<AppSlug, AppInfo> = {
         ctaBody: "Ücretsiz indir. Plus; doktor raporu, fotoğrafla öğün kaydı ve Pali sohbetini ekler.",
         stickers: ["İlk iğne ✓ · kilometre taşı", "Protein 62 / 90 g"],
         facts: [],
+        seoTitle: "Pali: Ozempic, Wegovy ve Mounjaro için GLP-1 Takip Uygulaması",
+        seoDescription:
+          "GLP-1 iğnelerini ve iğne yerlerini, yan etkileri, proteini, suyu ve kiloyu takip et. Pali Ozempic, Wegovy, Mounjaro, Zepbound ve Rybelsus ile çalışır. iOS ve Android'de ücretsiz.",
+        faqs: [
+          { question: "Ozempic, Wegovy ya da Mounjaro iğnelerini takip etmek için hangi uygulama kullanılır?", answer: "Pali her iğneyi dozu, iğne yeri ve ağrı puanıyla kaydeden, sıradaki iğnenin zamanını hatırlatan bir GLP-1 yol arkadaşıdır. Ozempic, Wegovy, Mounjaro, Zepbound ve Rybelsus ile çalışır; iOS ve Android'de ücretsizdir." },
+          { question: "Pali iğne yeri değiştirmeye nasıl yardım eder?", answer: "Pali karın, uyluk ve üst kolu gösteren bir vücut haritası tutar ve son iki haftada kullandığın noktaları hatırlar. Bir sonraki iğne için dinlenmiş bir nokta önerir, böylece hep aynı yere yapmazsın." },
+          { question: "Pali bulantı ve yemek sesi (food noise) gibi yan etkileri takip eder mi?", answer: "Evet. Otuz saniyelik günlük kontrolde bulantı, yorgunluk, mide yanması, kabızlık, iştahsızlık ve yemek sesi dört basamaklı bir ölçekte puanlanır. Pali bunların iğne döngüsü boyunca nasıl değiştiğini gösterir." },
+          { question: "GLP-1 ilacı kullanırken ne kadar protein almalıyım?", answer: "Pali hedef kilona göre günlük bir protein hedefi belirler, çünkü yeterli protein kilo verirken kası korumaya yardımcı olur. Bu rakamı doktorun ya da diyetisyenin sana göre ayarlayabilir." },
+          { question: "Pali tıbbi tavsiye verir mi, dozumu değiştirir mi?", answer: "Hayır. Pali takip eder ve örüntüleri yakalar, tavsiye vermez. Doz değişiklikleri her zaman doktorunun kararıdır; Plus doktor raporu iğnelerini, yan etkilerini, kilonu ve proteinini tek bir özette sunar." },
+        ],
       },
     },
   },
@@ -180,6 +206,16 @@ export const APPS: Record<AppSlug, AppInfo> = {
         ctaBody: "Free to download. Questions or partnerships: contact@bmnova.com",
         stickers: ["3 outfits for Friday ✓"],
         facts: [],
+        seoTitle: "FitVibe: AI Wardrobe, Outfit Planner & Virtual Try-On App",
+        seoDescription:
+          "Digitise your closet with automatic background removal, get AI outfit ideas from clothes you already own, find wardrobe gaps and try looks on before you buy. Free on iOS and Android.",
+        faqs: [
+          { question: "What is the best app to organise my closet and plan outfits?", answer: "FitVibe is an AI digital wardrobe: photograph each item, the background is removed automatically and the item is sorted into a category. The AI stylist then builds outfits only from clothes you own and lets you plan them on a calendar." },
+          { question: "How does FitVibe's virtual try-on work?", answer: "Upload one photo of yourself and pick an outfit. FitVibe renders the look on you so you can see whether it works before you wear it, buy it or pack it." },
+          { question: "Can an AI stylist tell me what to wear today?", answer: "Yes. Describe the occasion or the mood, for example dinner on Friday, a bit dressy, and FitVibe's stylist suggests complete outfits from your own wardrobe." },
+          { question: "How do I find out what my wardrobe is missing?", answer: "FitVibe's wardrobe analysis looks for gaps, duplicates and styling opportunities across everything you have added. It names the pieces that would unlock the most new outfits." },
+          { question: "Is FitVibe free?", answer: "FitVibe is free to download on iOS and Android." },
+        ],
       },
       tr: {
         category: "Moda · Yapay zekâ gardırop",
@@ -208,6 +244,16 @@ export const APPS: Record<AppSlug, AppInfo> = {
         ctaBody: "Ücretsiz indir. Soru ve iş birlikleri için: contact@bmnova.com",
         stickers: ["Cuma için 3 kombin ✓"],
         facts: [],
+        seoTitle: "FitVibe: Yapay Zekâ Gardırop, Kombin Uygulaması ve Sanal Deneme",
+        seoDescription:
+          "Dolabını otomatik arka plan kaldırmayla dijitale aktar, sahip olduğun kıyafetlerden yapay zekâ kombinleri al, eksiklerini bul ve almadan önce üzerinde dene. iOS ve Android'de ücretsiz.",
+        faqs: [
+          { question: "Dolabımı düzenleyip kombin planlamak için en iyi uygulama hangisi?", answer: "FitVibe bir yapay zekâ dijital gardıroptur: her parçanın fotoğrafını çekersin, arka plan otomatik kaldırılır ve parça kategorisine yerleşir. Ardından stilist yalnızca sahip olduğun kıyafetlerden kombin kurar ve takvime planlamanı sağlar." },
+          { question: "FitVibe'ın sanal deneme özelliği nasıl çalışır?", answer: "Kendi fotoğrafını yükle ve bir kombin seç. FitVibe görünümü üzerinde canlandırır; giymeden, satın almadan ya da bavula koymadan önce yakışıp yakışmadığını görürsün." },
+          { question: "Yapay zekâ stilist bugün ne giyeceğimi söyleyebilir mi?", answer: "Evet. Davet ya da ruh hâlini anlat, örneğin cuma akşam yemeği, biraz şık; FitVibe kendi gardırobundan tam kombinler önerir." },
+          { question: "Gardırobumda neyin eksik olduğunu nasıl anlarım?", answer: "FitVibe'ın gardırop analizi eklediğin her şeyde boşlukları, tekrarları ve stil fırsatlarını arar. En çok yeni kombin açacak parçaları adıyla söyler." },
+          { question: "FitVibe ücretsiz mi?", answer: "FitVibe iOS ve Android'de ücretsiz indirilebilir." },
+        ],
       },
     },
   },
@@ -249,6 +295,16 @@ export const APPS: Record<AppSlug, AppInfo> = {
         ctaBody: "Free to download. Questions, early access or partnerships: contact@bmnova.com",
         stickers: ["Shonen", "Isekai", "Shojo", "Noir"],
         facts: [],
+        seoTitle: "Haki: AI Manga, Manhwa & Comic Maker with Consistent Characters",
+        seoDescription:
+          "Make your own manga with AI. Write a scene, add a photo for your hero, pick a style and get editable multi-panel manga, manhwa and comic pages in minutes. Free on iOS and Android.",
+        faqs: [
+          { question: "How can I make my own manga with AI?", answer: "With Haki you describe the scene, define your protagonist with a photo, name, role and look, and pick comic, manga or manhwa plus a genre. Haki generates full multi-panel pages with dialogue that you can edit, save and continue." },
+          { question: "Can Haki keep the same character across panels and pages?", answer: "Yes. Your cast is defined once and Haki reuses the same faces in every panel. When you continue the story, new pages keep that continuity." },
+          { question: "Can I turn a photo of myself into a manga character?", answer: "Yes. Add a photo when you build your cast and Haki draws that person as the hero of your pages in the style you chose." },
+          { question: "Which manga styles and genres does Haki support?", answer: "Visual styles include Shonen, Seinen, Shojo and Cyberpunk, and genres include Action, Fantasy, Romance and Isekai. You can also choose comic or manhwa formats." },
+          { question: "Can I edit speech bubbles or regenerate one panel?", answer: "Yes. You can change the dialogue, regenerate a single panel and keep the rest of the page. Every chapter is saved in your library." },
+        ],
       },
       tr: {
         category: "Eğlence · Yapay zekâ manga",
@@ -278,6 +334,16 @@ export const APPS: Record<AppSlug, AppInfo> = {
         ctaBody: "Ücretsiz indir. Soru, erken erişim ya da iş birlikleri için: contact@bmnova.com",
         stickers: ["Shonen", "Isekai", "Shojo", "Noir"],
         facts: [],
+        seoTitle: "Haki: Tutarlı Karakterlerle Yapay Zekâ Manga ve Çizgi Roman Yapma",
+        seoDescription:
+          "Yapay zekâ ile kendi mangını yap. Sahneyi yaz, kahramanın için bir fotoğraf ekle, tarzı seç; dakikalar içinde düzenlenebilir çok panelli manga, manhwa ve çizgi roman sayfaları al. iOS ve Android'de ücretsiz.",
+        faqs: [
+          { question: "Yapay zekâ ile kendi mangamı nasıl yaparım?", answer: "Haki'de sahneyi anlatırsın, kahramanını fotoğraf, isim, rol ve görünümle tanımlarsın; çizgi roman, manga ya da manhwa ile bir tür seçersin. Haki diyaloglu, çok panelli tam sayfalar üretir; düzenleyebilir, kaydedebilir ve devam ettirebilirsin." },
+          { question: "Haki aynı karakteri panellerde ve sayfalarda koruyabilir mi?", answer: "Evet. Kadronu bir kez tanımlarsın, Haki her panelde aynı yüzleri kullanır. Hikâyeye devam ettiğinde yeni sayfalar da bu sürekliliği korur." },
+          { question: "Kendi fotoğrafımı manga karakterine dönüştürebilir miyim?", answer: "Evet. Kadroyu kurarken bir fotoğraf ekle; Haki o kişiyi seçtiğin tarzda sayfalarının kahramanı olarak çizer." },
+          { question: "Haki hangi manga tarzlarını ve türlerini destekliyor?", answer: "Görsel tarzlar arasında Shonen, Seinen, Shojo ve Cyberpunk, türler arasında Aksiyon, Fantastik, Romantik ve Isekai var. Çizgi roman ya da manhwa formatını da seçebilirsin." },
+          { question: "Konuşma balonlarını düzenleyebilir ya da tek bir paneli yeniden üretebilir miyim?", answer: "Evet. Diyaloğu değiştirebilir, tek bir paneli yeniden üretip sayfanın geri kalanını koruyabilirsin. Her bölüm kütüphanende saklanır." },
+        ],
       },
     },
   },
@@ -319,6 +385,16 @@ export const APPS: Record<AppSlug, AppInfo> = {
         ctaBody: "Free to download. Questions or partnerships: contact@bmnova.com",
         stickers: [],
         facts: [],
+        seoTitle: "RoomPace: AI Interior Design App That Redesigns Your Room on a Budget",
+        seoDescription:
+          "Upload a photo of your room, set a budget and get AI interior designs in modern, cozy, bohemian and more styles, each with a shoppable list of real furniture. Free on iOS and Android.",
+        faqs: [
+          { question: "How can I redesign my room with AI from a photo?", answer: "Open RoomPace, set your budget, upload a phone photo of the room and pick the room type and a style. You get an AI render of your own space in seconds and can refine it with a simple prompt." },
+          { question: "Can AI interior design stay within my budget?", answer: "Yes, that is what RoomPace is built around. You set the number first and every design and its furniture list respects it, from a light refresh to a full makeover." },
+          { question: "Can I buy the furniture shown in the design?", answer: "Every RoomPace design comes with a wishlist of real furniture and decor, with prices and purchase links." },
+          { question: "Which interior design styles can I try?", answer: "RoomPace includes modern, cozy, bohemian and more, and the Inspire screen helps you compare looks before you commit. Every concept is saved in your My Rooms gallery." },
+          { question: "Is RoomPace free?", answer: "RoomPace is free to download on iOS and Android." },
+        ],
       },
       tr: {
         category: "Ev · Bütçeye göre yapay zekâ tasarım",
@@ -348,6 +424,16 @@ export const APPS: Record<AppSlug, AppInfo> = {
         ctaBody: "Ücretsiz indir. Soru ve iş birlikleri için: contact@bmnova.com",
         stickers: [],
         facts: [],
+        seoTitle: "RoomPace: Bütçene Göre Yapay Zekâ Oda ve İç Mimari Tasarım Uygulaması",
+        seoDescription:
+          "Odanın fotoğrafını yükle, bütçeni belirle; modern, sıcak, bohem ve daha fazla tarzda yapay zekâ iç mimari tasarımları al, her biri satın alınabilir gerçek mobilya listesiyle. iOS ve Android'de ücretsiz.",
+        faqs: [
+          { question: "Bir fotoğraftan yapay zekâ ile odamı nasıl yeniden tasarlarım?", answer: "RoomPace'i aç, bütçeni belirle, odanın telefonla çekilmiş fotoğrafını yükle, oda tipini ve tarzı seç. Saniyeler içinde kendi odanın yapay zekâ tasarımını alırsın ve basit bir istemle iyileştirebilirsin." },
+          { question: "Yapay zekâ iç mimari tasarımı bütçeme sadık kalabilir mi?", answer: "Evet, RoomPace tam olarak bunun üzerine kurulu. Önce rakamı belirlersin; hafif bir tazelemeden tam yenilemeye her tasarım ve mobilya listesi ona uyar." },
+          { question: "Tasarımda görünen mobilyaları satın alabilir miyim?", answer: "Her RoomPace tasarımı fiyatları ve satın alma linkleriyle gerçek mobilya ve dekor ürünlerinden oluşan bir listeyle gelir." },
+          { question: "Hangi iç mekân tarzlarını deneyebilirim?", answer: "RoomPace'te modern, sıcak, bohem ve daha fazlası var; İlham ekranı karar vermeden önce görünümleri karşılaştırmanı sağlar. Her fikir Odalarım galerisinde saklanır." },
+          { question: "RoomPace ücretsiz mi?", answer: "RoomPace iOS ve Android'de ücretsiz indirilebilir." },
+        ],
       },
     },
   },
@@ -664,7 +750,7 @@ export function appMetadata(locale: Locale, slug: AppSlug) {
   return pageMetadata({
     locale,
     path: `/projects/${slug}`,
-    title: `${app.name}: ${copy.tag} — BMNova`,
-    description: copy.heroBody,
+    title: copy.seoTitle ?? `${app.name}: ${copy.tag} — BMNova`,
+    description: copy.seoDescription ?? copy.heroBody,
   });
 }
