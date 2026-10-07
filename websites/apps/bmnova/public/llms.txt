@@ -33,4 +33,4 @@ Turkish versions of every page live under https://bmnova.com/tr, with Turkish bl
 
 ## Optional deeper index
 
-For a longer company, product and blog index suitable for citation, see: https://bmnova.com/llms-full.txt
+Company questions (what BMNova is, studio, startup, location, apps, client work) live only in the longer index, not on the website UI: https://bmnova.com/llms-full.txt

@@ -111,16 +111,6 @@ export function AboutUsContent() {
                 ))}
               </div>
             </motion.div>
-
-            <motion.div variants={fadeInUp} className="flex max-w-3xl flex-col gap-3">
-              <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-muted">{company.eyebrow}</p>
-              {company.faqs.map((faq) => (
-                <details key={faq.question} className="rounded-card border border-border bg-card px-6 py-5">
-                  <summary className="cursor-pointer list-none text-base font-semibold text-primary">{faq.question}</summary>
-                  <p className="mt-3 text-sm leading-relaxed text-muted">{faq.answer}</p>
-                </details>
-              ))}
-            </motion.div>
           </motion.div>
         </div>
       </section>

@@ -452,29 +452,6 @@ export function Studio() {
   );
 }
 
-/** Citable company definition for search and answer engines. */
-export function CompanyFaq() {
-  const { locale } = useLocale();
-  const { company } = contentMap[locale];
-  return (
-    <section id="company" className={`${container} reveal scroll-mt-20 pb-[72px]`}>
-      <div className="mb-8 flex max-w-[760px] flex-col gap-4">
-        <Eyebrow>{company.eyebrow}</Eyebrow>
-        <h2 className="font-display text-[clamp(36px,4.4vw,64px)] font-extrabold">{company.heading}</h2>
-        <p className="text-base leading-relaxed text-muted">{company.lead}</p>
-      </div>
-      <div className="flex max-w-[860px] flex-col gap-3">
-        {company.faqs.map((faq) => (
-          <details key={faq.question} className="group rounded-[20px] border border-border bg-card px-6 py-5">
-            <summary className="cursor-pointer list-none text-[17px] font-semibold text-primary">{faq.question}</summary>
-            <p className="mt-3 text-[15px] leading-relaxed text-muted">{faq.answer}</p>
-          </details>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 export function CareersCta() {
   const { locale, href } = useLocale();
   const { careersCta, careers } = contentMap[locale];
