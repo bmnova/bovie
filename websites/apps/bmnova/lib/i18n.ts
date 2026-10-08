@@ -35,6 +35,7 @@ type PageMetaInput = {
 /** Canonical, hreflang alternates, Open Graph and Twitter for one localized page. */
 export function pageMetadata({ locale, path, title, description }: PageMetaInput): Metadata {
   const url = localePath(locale, path);
+  const image = `/${locale}/opengraph-image`;
   return {
     title,
     description,
@@ -53,11 +54,13 @@ export function pageMetadata({ locale, path, title, description }: PageMetaInput
       siteName: "BMNova",
       type: "website",
       locale: locale === "tr" ? "tr_TR" : "en_US",
+      images: image,
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      images: image,
     },
   };
 }
