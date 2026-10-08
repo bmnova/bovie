@@ -7,6 +7,7 @@ import { contentMap, fill } from "@/content";
 import { APP_ORDER, APPS, REVIEWS, SHIP_LOG, type AppInfo, type AppSlug } from "@/content/apps";
 import { useLocale } from "@/app/locale-context";
 import { ArrowIcon } from "@/components/icons";
+import { FounderSocials } from "@/components/FounderSocials";
 import { ReviewCard } from "@/components/ReviewCard";
 import { ScaledScreen } from "@/components/PhoneFrame";
 import { PaliToday } from "@/components/pali/screens";
@@ -422,12 +423,27 @@ export function Studio() {
               key={member.name}
               className="group flex flex-[1_1_200px] flex-col gap-4 rounded-card border border-border bg-card p-7 transition-[transform,border-color] duration-300 hover:-translate-y-1.5 hover:border-white/30"
             >
-              <span
-                className="inline-flex h-16 w-16 items-center justify-center rounded-[20px] font-display text-[22px] font-extrabold text-surface transition-[rotate,scale] duration-500 group-hover:[rotate:-6deg] group-hover:[scale:1.08]"
-                style={{ background: AVATAR_COLORS[i % AVATAR_COLORS.length] }}
-              >
-                {member.initials}
-              </span>
+              <div className="flex items-center gap-3">
+                {member.photo ? (
+                  <span className="relative inline-flex h-16 w-16 shrink-0 overflow-hidden rounded-[20px] transition-[rotate,scale] duration-500 group-hover:[rotate:-6deg] group-hover:[scale:1.08]">
+                    <Image
+                      src={member.photo}
+                      alt=""
+                      fill
+                      sizes="64px"
+                      className="object-cover object-[center_18%]"
+                    />
+                  </span>
+                ) : (
+                  <span
+                    className="inline-flex h-16 w-16 shrink-0 items-center justify-center rounded-[20px] font-display text-[22px] font-extrabold text-surface transition-[rotate,scale] duration-500 group-hover:[rotate:-6deg] group-hover:[scale:1.08]"
+                    style={{ background: AVATAR_COLORS[i % AVATAR_COLORS.length] }}
+                  >
+                    {member.initials}
+                  </span>
+                )}
+                <FounderSocials twitter={member.twitter} linkedin={member.linkedin} />
+              </div>
               <div className="flex flex-col gap-1">
                 <strong className="text-lg font-bold">{member.name}</strong>
                 <span className="text-[13px] text-muted">{studio.cofounder}</span>

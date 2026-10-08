@@ -74,6 +74,7 @@ export function organizationJsonLd(locale: Locale = "en") {
         "@type": "Person",
         name: "Ali Mertcan Karaman",
         jobTitle: "Co-founder",
+        image: absoluteUrl("/team/ali-mertcan-karaman.jpg"),
         sameAs: [
           "https://www.linkedin.com/in/ali-mertcan-karaman-088582133/",
           "https://x.com/alimertcank",

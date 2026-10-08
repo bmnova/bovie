@@ -34,7 +34,7 @@ export const contentMap = {
       titleLine1: "Tiny studio.",
       titleBig: "Big",
       titleAccent: "apps.",
-      sub: "BMNova designs, builds and ships its own AI-powered consumer apps. No clients, no briefs: just seven apps people open every day, and more in the lab.",
+      sub: "BMNova designs, builds and ships its own AI-powered consumer apps. Seven that people open every day and the next ones already in the lab.",
       ctaApps: "Explore the apps",
       ctaHiring: "We're hiring",
       nowShowing: "Now showing",
@@ -88,11 +88,11 @@ export const contentMap = {
       body: "BMNova is an independent mobile app studio and consumer-app startup: two founders at Ostim Teknokent, shipping our own AI apps worldwide. We use what we build, and we keep improving the ones people keep opening.",
       values: [
         "We ship small and often.",
-        "Every app is ours. No client work.",
+        "Every app is one we design, build and grow.",
         "AI that does one job well beats AI that does everything.",
       ],
       cofounder: "Co-founder",
-      yourCard: "Your card goes here.",
+      yourCard: "Your card could be here.",
       seeRoles: "See open roles →",
     },
     careersCta: {
@@ -128,7 +128,7 @@ export const contentMap = {
       plus: "Plus",
     },
     company: {
-      lead: "BMNova (BMNova Innovations) is an independent mobile app studio and consumer-app startup at Ostim Teknokent in Ankara, Turkey. Co-founders Ali Mertcan Karaman and Büşra Mercan design, build and ship their own AI-powered apps for iOS and Android. BMNova does not take client work.",
+      lead: "BMNova (BMNova Innovations) is an independent mobile app studio and consumer-app startup at Ostim Teknokent in Ankara, Turkey, building products for people everywhere. Co-founders Ali Mertcan Karaman and Büşra Mercan design, build and grow their own AI-powered apps for iOS and Android, taking each one from the first idea to the stores and staying with it after launch.",
     },
     aboutUs: {
       eyebrow: "Who we are",
@@ -139,7 +139,7 @@ export const contentMap = {
       },
       mission: {
         label: "Mission",
-        text: "To design, build and grow our own products with a compact, highly skilled team: one shared core, honest numbers, and AI that does one job well.",
+        text: "To design, build and grow our own products with a compact, highly skilled team: one shared core, honest numbers and AI that does one job well.",
       },
       teamLabel: "The Team",
     },
@@ -218,6 +218,7 @@ export const contentMap = {
         name: "Ali Mertcan Karaman",
         role: "Co-Founder",
         initials: "AK",
+        photo: "/team/ali-mertcan-karaman.jpg",
         twitter: "https://x.com/alimertcank?s=21",
         linkedin: "https://www.linkedin.com/in/ali-mertcan-karaman-088582133/",
         background: [
@@ -263,7 +264,7 @@ export const contentMap = {
       titleLine1: "Küçük stüdyo.",
       titleBig: "Büyük",
       titleAccent: "uygulamalar.",
-      sub: "BMNova kendi yapay zekâ destekli tüketici uygulamalarını tasarlar, geliştirir ve yayınlar. Müşteri yok, brief yok: insanların her gün açtığı yedi uygulama ve laboratuvarda daha fazlası.",
+      sub: "BMNova kendi yapay zekâ destekli tüketici uygulamalarını tasarlar, geliştirir ve yayınlar. Her gün açılan yedi uygulama var. Sıradakiler çoktan laboratuvarda.",
       ctaApps: "Uygulamaları keşfet",
       ctaHiring: "Ekibe katıl",
       nowShowing: "Şu an",
@@ -317,7 +318,7 @@ export const contentMap = {
       body: "BMNova, bağımsız bir mobil uygulama stüdyosu ve tüketici uygulaması startup'ıdır: Ostim Teknokent'te iki kurucu, kendi yapay zekâ uygulamalarını dünyaya yayınlıyor. Geliştirdiklerimizi kendimiz kullanıyor, insanların açmaya devam ettiklerini geliştirmeye devam ediyoruz.",
       values: [
         "Küçük ve sık yayınlarız.",
-        "Her uygulama bizim. Müşteri işi yok.",
+        "Her uygulamayı kendimiz tasarlar, geliştirir ve büyütürüz.",
         "Tek bir işi iyi yapan yapay zekâ, her şeyi yapmaya çalışandan iyidir.",
       ],
       cofounder: "Kurucu ortak",
@@ -357,7 +358,7 @@ export const contentMap = {
       plus: "Plus",
     },
     company: {
-      lead: "BMNova (BMNova Innovations), Türkiye'nin Ankara kentindeki Ostim Teknokent'te kurulu bağımsız bir mobil uygulama stüdyosu ve tüketici uygulaması startup'ıdır. Kurucu ortaklar Ali Mertcan Karaman ve Büşra Mercan, iOS ve Android için kendi yapay zekâ uygulamalarını tasarlar, geliştirir ve yayınlar. BMNova müşteri işi almaz.",
+      lead: "BMNova (BMNova Innovations), Türkiye'nin Ankara kentindeki Ostim Teknokent'te kurulu, ürünlerini dünyanın her yerine ulaştıran bağımsız bir mobil uygulama stüdyosu ve tüketici uygulaması startup'ıdır. Kurucu ortaklar Ali Mertcan Karaman ve Büşra Mercan, iOS ve Android için kendi yapay zekâ uygulamalarını ilk fikirden mağazalara kadar tasarlar, geliştirir ve büyütür; yayınlandıktan sonra da üzerinde çalışmaya devam eder.",
     },
     aboutUs: {
       eyebrow: "Biz kimiz",
@@ -447,6 +448,7 @@ export const contentMap = {
         name: "Ali Mertcan Karaman",
         role: "Kurucu Ortak",
         initials: "AK",
+        photo: "/team/ali-mertcan-karaman.jpg",
         twitter: "https://x.com/alimertcank?s=21",
         linkedin: "https://www.linkedin.com/in/ali-mertcan-karaman-088582133/",
         background: [
