@@ -1,4 +1,4 @@
-export const SITE_URL = "https://bmnova.com";
+export const SITE_URL = "https://www.bmnova.com";
 export const SITE_NAME = "BMNova";
 export const SITE_LEGAL_NAME = "BMNova Innovations";
 export const ORG_ID = `${SITE_URL}/#organization`;
