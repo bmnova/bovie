@@ -689,6 +689,9 @@ export const APPS: Record<AppSlug, AppInfo> = {
 /** Apps in order of importance; drives every list on the site. */
 export const APP_ORDER: AppSlug[] = ["pali", "fitvibe", "haki", "roompace", "nextstep", "bloomish", "offer"];
 
+/** Apps the hero and ticker show off; archived ones stay out of the spotlight. */
+export const SHOWCASE = APP_ORDER.filter((slug) => APPS[slug].status !== "archived");
+
 export function appStore(app: AppInfo) {
   return app.store ? storeLinks[app.store] : undefined;
 }

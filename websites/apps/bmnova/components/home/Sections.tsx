@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { contentMap, fill } from "@/content";
-import { APP_ORDER, APPS, REVIEWS, SHIP_LOG, type AppInfo, type AppSlug } from "@/content/apps";
+import { APP_ORDER, APPS, REVIEWS, SHIP_LOG, SHOWCASE, type AppInfo, type AppSlug } from "@/content/apps";
 import { useLocale } from "@/app/locale-context";
 import { ArrowIcon } from "@/components/icons";
 import { FounderSocials } from "@/components/FounderSocials";
@@ -23,7 +23,7 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 /** App names scrolling past; pauses on hover. */
 export function Ticker() {
   const { locale } = useLocale();
-  const items = APP_ORDER.map((slug) => `${APPS[slug].name} · ${APPS[slug].copy[locale].tag}`);
+  const items = SHOWCASE.map((slug) => `${APPS[slug].name} · ${APPS[slug].copy[locale].tag}`);
   return (
     <div className="marquee mt-14 overflow-hidden border-y border-border bg-white/[.02] py-[18px]" aria-hidden="true">
       <div className="marquee-track flex w-max animate-marquee gap-14 whitespace-nowrap font-display text-[22px] font-bold tracking-[-0.02em] text-accent">
