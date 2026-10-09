@@ -142,7 +142,7 @@ export const contentMap = {
         text: "To design, build and grow our own products with a compact, highly skilled team: one shared core, honest numbers and AI that does one job well.",
       },
       teamLabel: "The Team",
-      thanks: "With thanks to Büşra Mercan and Zeliha Karaman, for believing in this from day one.",
+      thanks: "With thanks to Zeliha Karaman and Büşra Mercan, for believing in this from day one.",
     },
     footer: {
       tagline: "Independent mobile app studio and startup. Ostim Teknokent, Ankara, Turkey.",
@@ -367,7 +367,7 @@ export const contentMap = {
         text: "Küçük ve son derece yetkin bir ekiple kendi ürünlerimizi tasarlamak, geliştirmek ve büyütmek: tek bir ortak çekirdek, dürüst rakamlar ve tek bir işi iyi yapan yapay zekâ.",
       },
       teamLabel: "Ekibimiz",
-      thanks: "İlk günden beri inandıkları için Büşra Mercan ve Zeliha Karaman'a teşekkürler.",
+      thanks: "İlk günden beri inandıkları için Zeliha Karaman ve Büşra Mercan'a teşekkürler.",
     },
     footer: {
       tagline: "Bağımsız mobil uygulama stüdyosu ve startup. Ostim Teknokent, Ankara, Türkiye.",
