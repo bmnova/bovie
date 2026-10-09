@@ -104,6 +104,10 @@ export function AboutUsContent() {
                 ))}
               </div>
             </motion.div>
+
+            <motion.p variants={fadeInUp} className="text-sm italic text-muted/60">
+              {aboutUs.thanks}
+            </motion.p>
           </motion.div>
         </div>
       </section>

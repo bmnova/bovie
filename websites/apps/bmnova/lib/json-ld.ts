@@ -73,17 +73,12 @@ export function organizationJsonLd(locale: Locale = "en") {
       {
         "@type": "Person",
         name: "Ali Mertcan Karaman",
-        jobTitle: "Co-founder",
+        jobTitle: "Founder",
         image: absoluteUrl("/team/ali-mertcan-karaman.jpg"),
         sameAs: [
           "https://www.linkedin.com/in/ali-mertcan-karaman-088582133/",
           "https://x.com/alimertcank",
         ],
-      },
-      {
-        "@type": "Person",
-        name: "Büşra Mercan",
-        jobTitle: "Co-founder",
       },
     ],
     contactPoint: {
