@@ -11,7 +11,7 @@ Blog: https://bmnova.com/blog
 ## What BMNova is
 
 - Mobile app studio: in-house design, Flutter, a shared AI layer, and growth for its own consumer apps.
-- Startup: a product company founded by Ali Mertcan Karaman and Büşra Mercan, shipping from Ankara to a worldwide audience.
+- Startup: a product company founded by Ali Mertcan Karaman, shipping from Ankara to a worldwide audience.
 - Not an agency. Partners and investors: contact@bmnova.com.
 
 ## Apps

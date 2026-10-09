@@ -10,7 +10,7 @@ export const contentMap = {
       description:
         "BMNova is a mobile app studio and consumer-app startup in Ankara. We design, build and ship our own AI apps for iOS and Android.",
       pages: {
-        about: { title: "About BMNova — Mobile app studio & startup", description: "BMNova is an independent mobile app studio and consumer-app startup at Ostim Teknokent, Ankara. Meet the founders behind Pali, FitVibe, Haki and the rest." },
+        about: { title: "About BMNova — Mobile app studio & startup", description: "BMNova is an independent mobile app studio and consumer-app startup at Ostim Teknokent, Ankara. Meet the studio behind Pali, FitVibe, Haki and the rest." },
         careers: { title: "Careers — BMNova", description: "Join BMNova. We're hiring a Mobile App Growth Expert." },
         blog: { title: "Blog — BMNova", description: "Evidence-based writing on health, productivity, psychology, and building software products." },
         privacy: { title: "Privacy Policy — BMNova", description: "BMNova Privacy Policy. How we collect, use, store, share, and protect personal data." },
@@ -85,13 +85,13 @@ export const contentMap = {
       eyebrow: "The studio",
       heading1: "Built in Ankara.",
       heading2: "Shipped everywhere.",
-      body: "BMNova is an independent mobile app studio and consumer-app startup: two founders at Ostim Teknokent, shipping our own AI apps worldwide. We use what we build, and we keep improving the ones people keep opening.",
+      body: "BMNova is an independent mobile app studio and consumer-app startup: a small team at Ostim Teknokent, shipping our own AI apps worldwide. We use what we build, and we keep improving the ones people keep opening.",
       values: [
         "We ship small and often.",
         "Every app is one we design, build and grow.",
         "AI that does one job well beats AI that does everything.",
       ],
-      cofounder: "Co-founder",
+      founder: "Founder",
       yourCard: "Your card could be here.",
       seeRoles: "See open roles →",
     },
@@ -128,7 +128,7 @@ export const contentMap = {
       plus: "Plus",
     },
     company: {
-      lead: "BMNova (BMNova Innovations) is an independent mobile app studio and consumer-app startup at Ostim Teknokent in Ankara, Turkey, building products for people everywhere. Co-founders Ali Mertcan Karaman and Büşra Mercan design, build and grow their own AI-powered apps for iOS and Android, taking each one from the first idea to the stores and staying with it after launch.",
+      lead: "BMNova (BMNova Innovations) is an independent mobile app studio and consumer-app startup at Ostim Teknokent in Ankara, Turkey, building products for people everywhere. Founded by Ali Mertcan Karaman, the studio designs, builds and grows its own AI-powered apps for iOS and Android, taking each one from the first idea to the stores and staying with it after launch.",
     },
     aboutUs: {
       eyebrow: "Who we are",
@@ -142,6 +142,7 @@ export const contentMap = {
         text: "To design, build and grow our own products with a compact, highly skilled team: one shared core, honest numbers and AI that does one job well.",
       },
       teamLabel: "The Team",
+      thanks: "With thanks to Büşra Mercan and Zeliha Karaman, for believing in this from day one.",
     },
     footer: {
       tagline: "Independent mobile app studio and startup. Ostim Teknokent, Ankara, Turkey.",
@@ -216,7 +217,7 @@ export const contentMap = {
     team: [
       {
         name: "Ali Mertcan Karaman",
-        role: "Co-Founder",
+        role: "Founder",
         initials: "AK",
         photo: "/team/ali-mertcan-karaman.jpg",
         twitter: "https://x.com/alimertcank?s=21",
@@ -226,12 +227,6 @@ export const contentMap = {
           { place: "TUSAŞ", years: "2020–2025" },
         ],
       },
-      {
-        name: "Büşra Mercan",
-        role: "Co-Founder",
-        initials: "BM",
-        background: [{ place: "TOBB ETU", years: "2020–2024" }],
-      },
     ] satisfies TeamMember[],
   },
   tr: {
@@ -240,7 +235,7 @@ export const contentMap = {
       description:
         "BMNova, Ankara merkezli bir mobil uygulama stüdyosu ve tüketici uygulaması startup'ıdır. Kendi yapay zekâ uygulamalarını iOS ve Android için geliştirir.",
       pages: {
-        about: { title: "BMNova Hakkında — Mobil uygulama stüdyosu ve startup", description: "BMNova, Ankara Ostim Teknokent'te bağımsız bir mobil uygulama stüdyosu ve tüketici uygulaması startup'ıdır. Pali, FitVibe, Haki ve diğer uygulamaların kurucuları." },
+        about: { title: "BMNova Hakkında — Mobil uygulama stüdyosu ve startup", description: "BMNova, Ankara Ostim Teknokent'te bağımsız bir mobil uygulama stüdyosu ve tüketici uygulaması startup'ıdır. Pali, FitVibe, Haki ve diğer uygulamaların arkasındaki stüdyo." },
         careers: { title: "Kariyer — BMNova", description: "BMNova'ya katıl. Mobil Uygulama Büyüme Uzmanı arıyoruz." },
         blog: { title: "Blog — BMNova", description: "Sağlık, üretkenlik, psikoloji ve yazılım ürünleri geliştirme üzerine kanıta dayalı yazılar." },
         privacy: { title: "Gizlilik Politikası — BMNova", description: "BMNova Gizlilik Politikası. Kişisel verileri nasıl topladığımız, kullandığımız, sakladığımız, paylaştığımız ve koruduğumuz." },
@@ -315,13 +310,13 @@ export const contentMap = {
       eyebrow: "Stüdyo",
       heading1: "Ankara'da geliştirildi.",
       heading2: "Her yerde yayında.",
-      body: "BMNova, bağımsız bir mobil uygulama stüdyosu ve tüketici uygulaması startup'ıdır: Ostim Teknokent'te iki kurucu, kendi yapay zekâ uygulamalarını dünyaya yayınlıyor. Geliştirdiklerimizi kendimiz kullanıyor, insanların açmaya devam ettiklerini geliştirmeye devam ediyoruz.",
+      body: "BMNova, bağımsız bir mobil uygulama stüdyosu ve tüketici uygulaması startup'ıdır: Ostim Teknokent'te küçük bir ekip, kendi yapay zekâ uygulamalarını dünyaya yayınlıyor. Geliştirdiklerimizi kendimiz kullanıyor, insanların açmaya devam ettiklerini geliştirmeye devam ediyoruz.",
       values: [
         "Küçük ve sık yayınlarız.",
         "Her uygulamayı kendimiz tasarlar, geliştirir ve büyütürüz.",
         "Tek bir işi iyi yapan yapay zekâ, her şeyi yapmaya çalışandan iyidir.",
       ],
-      cofounder: "Kurucu ortak",
+      founder: "Kurucu",
       yourCard: "Senin kartın burada olabilir.",
       seeRoles: "Açık pozisyonlar →",
     },
@@ -358,7 +353,7 @@ export const contentMap = {
       plus: "Plus",
     },
     company: {
-      lead: "BMNova (BMNova Innovations), Türkiye'nin Ankara kentindeki Ostim Teknokent'te kurulu, ürünlerini dünyanın her yerine ulaştıran bağımsız bir mobil uygulama stüdyosu ve tüketici uygulaması startup'ıdır. Kurucu ortaklar Ali Mertcan Karaman ve Büşra Mercan, iOS ve Android için kendi yapay zekâ uygulamalarını ilk fikirden mağazalara kadar tasarlar, geliştirir ve büyütür; yayınlandıktan sonra da üzerinde çalışmaya devam eder.",
+      lead: "BMNova (BMNova Innovations), Türkiye'nin Ankara kentindeki Ostim Teknokent'te kurulu, ürünlerini dünyanın her yerine ulaştıran bağımsız bir mobil uygulama stüdyosu ve tüketici uygulaması startup'ıdır. Ali Mertcan Karaman'ın kurduğu stüdyo, iOS ve Android için kendi yapay zekâ uygulamalarını ilk fikirden mağazalara kadar tasarlar, geliştirir ve büyütür; yayınlandıktan sonra da üzerinde çalışmaya devam eder.",
     },
     aboutUs: {
       eyebrow: "Biz kimiz",
@@ -372,6 +367,7 @@ export const contentMap = {
         text: "Küçük ve son derece yetkin bir ekiple kendi ürünlerimizi tasarlamak, geliştirmek ve büyütmek: tek bir ortak çekirdek, dürüst rakamlar ve tek bir işi iyi yapan yapay zekâ.",
       },
       teamLabel: "Ekibimiz",
+      thanks: "İlk günden beri inandıkları için Büşra Mercan ve Zeliha Karaman'a teşekkürler.",
     },
     footer: {
       tagline: "Bağımsız mobil uygulama stüdyosu ve startup. Ostim Teknokent, Ankara, Türkiye.",
@@ -446,7 +442,7 @@ export const contentMap = {
     team: [
       {
         name: "Ali Mertcan Karaman",
-        role: "Kurucu Ortak",
+        role: "Kurucu",
         initials: "AK",
         photo: "/team/ali-mertcan-karaman.jpg",
         twitter: "https://x.com/alimertcank?s=21",
@@ -455,12 +451,6 @@ export const contentMap = {
           { place: "Marmara Üniversitesi", years: "2016–2020" },
           { place: "TUSAŞ", years: "2020–2025" },
         ],
-      },
-      {
-        name: "Büşra Mercan",
-        role: "Kurucu Ortak",
-        initials: "BM",
-        background: [{ place: "TOBB ETÜ", years: "2020–2024" }],
       },
     ] satisfies TeamMember[],
   },

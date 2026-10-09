@@ -446,7 +446,7 @@ export function Studio() {
               </div>
               <div className="flex flex-col gap-1">
                 <strong className="text-lg font-bold">{member.name}</strong>
-                <span className="text-[13px] text-muted">{studio.cofounder}</span>
+                <span className="text-[13px] text-muted">{studio.founder}</span>
               </div>
               {member.background && (
                 <span className="text-[13px] text-dim">{member.background.map((b) => b.place).join(" · ")}</span>
