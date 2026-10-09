@@ -5,7 +5,7 @@ import type { FirstPartyProject } from "@/lib/site";
 import shipLog from "./ship-log.json";
 
 export type AppSlug = FirstPartyProject;
-export type AppStatus = "live" | "review" | "lab";
+export type AppStatus = "live" | "review" | "lab" | "archived";
 
 export type FeatureIcon =
   | "pen"
@@ -605,7 +605,7 @@ export const APPS: Record<AppSlug, AppInfo> = {
     name: "Offer",
     color: "#FFB224",
     icon: "/apps/offer/icon.webp",
-    status: "live",
+    status: "archived",
     platforms: "android",
     store: "offer",
     screenshots: [],

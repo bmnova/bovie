@@ -206,7 +206,7 @@ function AppCard({ slug }: { slug: AppSlug }) {
     <div className="mt-auto flex flex-wrap items-center gap-2">
       <StatusPill app={app} />
       <SecondaryPill>
-        {app.status === "live" ? (app.platforms === "both" ? apps.both : apps.android) : apps.notify}
+        {app.store ? (app.platforms === "both" ? apps.both : apps.android) : apps.notify}
       </SecondaryPill>
     </div>
   );
@@ -225,7 +225,7 @@ function AppCard({ slug }: { slug: AppSlug }) {
     <Link
       href={href(`/projects/${slug}`)}
       className={`sheen group relative flex min-h-[420px] overflow-hidden rounded-card border bg-card text-primary transition-[transform,border-color] duration-300 hover:-translate-y-2 hover:-rotate-[0.4deg] hover:border-white/30 ${
-        featured ? "flex-wrap sm:col-span-2 lg:col-span-3 xl:col-span-2" : "flex-col"
+        featured ? "flex-wrap sm:col-span-2 lg:col-span-3" : "flex-col"
       } ${app.status === "live" ? "border-border" : "border-dashed"}`}
       style={app.status === "live" ? undefined : { borderColor: `${app.color}80` }}
     >
@@ -249,9 +249,35 @@ function AppCard({ slug }: { slug: AppSlug }) {
   );
 }
 
+/** A retired app: one quiet row under the grid, still linking to its page. */
+function ArchivedApp({ slug }: { slug: AppSlug }) {
+  const { locale, href } = useLocale();
+  const { apps } = contentMap[locale];
+  const app = APPS[slug];
+  return (
+    <Link
+      href={href(`/projects/${slug}`)}
+      className="group mt-10 flex flex-wrap items-center gap-x-5 gap-y-3 rounded-[20px] border border-dashed border-white/15 px-6 py-5 text-primary transition-colors hover:border-white/30"
+    >
+      <Image src={app.icon} alt="" width={44} height={44} className="rounded-xl opacity-70 grayscale transition group-hover:opacity-100 group-hover:grayscale-0" />
+      <div className="flex min-w-0 flex-[1_1_240px] flex-col gap-1">
+        <span className="flex flex-wrap items-center gap-2.5">
+          <strong className="font-display text-xl font-extrabold">{app.name}</strong>
+          <SecondaryPill>{apps.status.archived}</SecondaryPill>
+        </span>
+        <span className="text-sm text-muted">{apps.archiveNote}</span>
+      </div>
+      <span className="text-sm font-semibold text-muted transition-colors group-hover:text-accent">{apps.open}</span>
+    </Link>
+  );
+}
+
 export function AppsGrid() {
   const { locale } = useLocale();
   const { apps } = contentMap[locale];
+  const live = APP_ORDER.filter((slug) => APPS[slug].status === "live");
+  const lab = APP_ORDER.filter((slug) => APPS[slug].status === "review" || APPS[slug].status === "lab");
+  const archived = APP_ORDER.filter((slug) => APPS[slug].status === "archived");
   return (
     <section id="apps" className={`${container} reveal scroll-mt-20 pb-10 pt-[72px]`}>
       <div className="mb-9 flex flex-wrap items-end justify-between gap-5">
@@ -263,12 +289,29 @@ export function AppsGrid() {
         </div>
         <p className="max-w-[360px] text-[15px] leading-normal text-muted">{apps.sub}</p>
       </div>
-      {/* Pali takes a full row at two and three columns and two cells at four, so every row is full */}
-      <div className="stagger grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {APP_ORDER.map((slug) => (
+      {/* Pali takes a full row and the last card fills the two-column row, so every row is full */}
+      <div className="stagger grid grid-cols-1 gap-3.5 sm:grid-cols-2 sm:[&>*:last-child]:col-span-2 lg:grid-cols-3 lg:[&>*:last-child]:col-span-1">
+        {live.map((slug) => (
           <AppCard key={slug} slug={slug} />
         ))}
       </div>
+
+      <div className="mb-7 mt-20 flex flex-wrap items-end justify-between gap-5">
+        <div className="flex flex-col gap-3">
+          <Eyebrow>{apps.labEyebrow}</Eyebrow>
+          <h3 className="font-display text-[clamp(32px,4vw,56px)] font-extrabold">{apps.labHeading}</h3>
+        </div>
+        <p className="max-w-[360px] text-[15px] leading-normal text-muted">{apps.labSub}</p>
+      </div>
+      <div className="stagger grid grid-cols-1 gap-3.5 sm:grid-cols-2">
+        {lab.map((slug) => (
+          <AppCard key={slug} slug={slug} />
+        ))}
+      </div>
+
+      {archived.map((slug) => (
+        <ArchivedApp key={slug} slug={slug} />
+      ))}
     </section>
   );
 }

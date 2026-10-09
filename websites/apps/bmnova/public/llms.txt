@@ -22,7 +22,7 @@ Blog: https://bmnova.com/blog
 - [RoomPace](https://bmnova.com/projects/roompace): Budget-aware AI interior design with a shoppable furniture wishlist.
 - [NextStep](https://bmnova.com/projects/nextstep): Minimalist AI coaching for overthinking. One reflection, one question, one clear next step.
 - [Bloomish](https://bmnova.com/projects/bloomish): AI bouquet generator for sending digital flower gifts.
-- [Offer](https://bmnova.com/projects/offer): Social icebreaker. Offer drinks or snacks at local businesses to meet people nearby.
+- [Offer](https://bmnova.com/projects/offer): Social icebreaker. Offer drinks or snacks at local businesses to meet people nearby. Archived: still on Google Play, no longer in active development.
 
 Turkish versions of every page live under https://bmnova.com/tr, with Turkish blog posts at https://bmnova.com/tr/blog.
 
