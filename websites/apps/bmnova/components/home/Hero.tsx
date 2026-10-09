@@ -12,15 +12,15 @@ import { PaliToday } from "@/components/pali/screens";
 import { BouquetArt } from "@/components/apps/BouquetArt";
 import { usePrefersReducedMotion } from "@/components/motion";
 
-/** Left to right; the most important app sits in the middle, on top. */
-const DECK: AppSlug[] = ["bloomish", "roompace", "fitvibe", "pali", "haki", "nextstep"];
+/** Left to right as a fan mirrored around the centre; Pali leads the middle pair, on top. */
+const DECK: AppSlug[] = ["bloomish", "roompace", "pali", "haki", "fitvibe", "nextstep"];
 const POSITIONS = [
-  { left: 5, top: 24, width: 22, z: 1 },
-  { left: 17.5, top: 13, width: 22, z: 2 },
-  { left: 30, top: 5, width: 22, z: 3 },
-  { left: 42, top: 0, width: 26, z: 5 },
-  { left: 60.5, top: 5, width: 22, z: 3 },
-  { left: 72.5, top: 13, width: 22, z: 2 },
+  { left: 5.5, top: 22, width: 23, z: 1 },
+  { left: 18.5, top: 10, width: 23, z: 2 },
+  { left: 30, top: 0, width: 26, z: 5 },
+  { left: 45.5, top: 2, width: 23, z: 4 },
+  { left: 58.5, top: 10, width: 23, z: 2 },
+  { left: 71.5, top: 22, width: 23, z: 1 },
 ];
 const CYCLE_MS = 3600;
 
@@ -205,8 +205,8 @@ export function Hero() {
                     top: `${pos.top}%`,
                     width: `${pos.width}%`,
                     zIndex: pos.z,
-                    borderRadius: pos.width > 22 ? "3.6cqw" : "3.2cqw",
-                    rotate: `${(i - 3) * 6}deg`,
+                    borderRadius: pos.width > 23 ? "3.6cqw" : "3.2cqw",
+                    rotate: `${(i - (DECK.length - 1) / 2) * 6}deg`,
                     animationDelay: `${-0.85 * i}s`,
                     boxShadow: on ? `0 0 0 3px ${deckApp.color}, 0 40px 80px rgba(0,0,0,.55)` : "0 40px 80px rgba(0,0,0,.55)",
                   }}
