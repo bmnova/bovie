@@ -5,7 +5,7 @@ import type { FirstPartyProject } from "@/lib/site";
 import shipLog from "./ship-log.json";
 
 export type AppSlug = FirstPartyProject;
-export type AppStatus = "live" | "review" | "lab";
+export type AppStatus = "live" | "review" | "lab" | "archived";
 
 export type FeatureIcon =
   | "pen"
@@ -605,7 +605,7 @@ export const APPS: Record<AppSlug, AppInfo> = {
     name: "Offer",
     color: "#FFB224",
     icon: "/apps/offer/icon.webp",
-    status: "live",
+    status: "archived",
     platforms: "android",
     store: "offer",
     screenshots: [],
@@ -688,6 +688,9 @@ export const APPS: Record<AppSlug, AppInfo> = {
 
 /** Apps in order of importance; drives every list on the site. */
 export const APP_ORDER: AppSlug[] = ["pali", "fitvibe", "haki", "roompace", "nextstep", "bloomish", "offer"];
+
+/** Apps the hero and ticker show off; archived ones stay out of the spotlight. */
+export const SHOWCASE = APP_ORDER.filter((slug) => APPS[slug].status !== "archived");
 
 export function appStore(app: AppInfo) {
   return app.store ? storeLinks[app.store] : undefined;

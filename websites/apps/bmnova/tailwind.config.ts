@@ -72,19 +72,49 @@ const config: Config = {
           "0%, 100%": { translate: "0 0" },
           "50%": { translate: "0 -4%" },
         },
+        /* Electrons travel their offset-path once per cycle, swelling in front (25%) and receding behind (75%) */
+        orbit: {
+          from: { offsetDistance: "0%" },
+          to: { offsetDistance: "100%" },
+        },
+        depth: {
+          "0%, 50%, 100%": { transform: "scale(1)", opacity: "1" },
+          "25%": { transform: "scale(1.3)", opacity: "1" },
+          "75%": { transform: "scale(0.65)", opacity: "0.4" },
+        },
+        breathe: {
+          "0%, 100%": {
+            scale: "1",
+            boxShadow: "0 0 50px color-mix(in srgb, var(--glow) 16%, transparent), inset 0 0 24px color-mix(in srgb, var(--glow) 6%, transparent)",
+          },
+          "50%": {
+            scale: "1.05",
+            boxShadow: "0 0 96px color-mix(in srgb, var(--glow) 34%, transparent), inset 0 0 38px color-mix(in srgb, var(--glow) 16%, transparent)",
+          },
+        },
+        ripple: {
+          from: { transform: "scale(0.9)", opacity: "0.55" },
+          to: { transform: "scale(2.7)", opacity: "0" },
+        },
+        atomSway: {
+          "0%, 100%": { rotate: "-4deg" },
+          "50%": { rotate: "4deg" },
+        },
       },
       animation: {
         floaty: "floaty 7s ease-in-out infinite",
         marquee: "marquee 32s linear infinite",
-        "marquee-slow": "marquee 48s linear infinite",
         glow: "pulseGlow 6s ease-in-out infinite",
         blink: "blink 1.6s ease-in-out infinite",
         drift: "drift 9s ease-in-out infinite",
         hop: "hop .5s cubic-bezier(.2,.8,.2,1)",
         sway: "sway 5s ease-in-out infinite",
-        "spin-18": "spin 18s linear infinite",
-        "spin-28": "spin 28s linear infinite reverse",
-        "spin-40": "spin 40s linear infinite",
+        "spin-7": "spin 7s linear infinite",
+        "spin-60": "spin 60s linear infinite",
+        orbit: "orbit var(--d) linear infinite, depth var(--d) ease-in-out infinite",
+        breathe: "breathe 5s ease-in-out infinite",
+        ripple: "ripple 4.5s cubic-bezier(.2,.6,.3,1) infinite",
+        "atom-sway": "atomSway 16s ease-in-out infinite",
       },
     },
   },

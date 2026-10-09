@@ -88,6 +88,11 @@ body {
   animation-play-state: paused;
 }
 
+/* The core atom pauses while an app is picked or after it was tapped, so electrons can be caught */
+.atom-paused * {
+  animation-play-state: paused;
+}
+
 /* Hide scrollbars on horizontal strips but keep them scrollable */
 .strip {
   scrollbar-width: none;

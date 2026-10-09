@@ -50,7 +50,7 @@ AI bouquet generator for digital flower gifts. Describe a person, occasion or mo
 
 ### Offer
 URL: https://bmnova.com/projects/offer (Turkish: https://bmnova.com/tr/projects/offer)
-Social icebreaker. Check in at a café, bar or restaurant, see who is there, and offer a drink or snack from the menu. No swiping. Free on Google Play.
+Social icebreaker. Check in at a café, bar or restaurant, see who is there, and offer a drink or snack from the menu. No swiping. Archived: still free on Google Play, no longer in active development.
 
 ## Also by BMNova
 

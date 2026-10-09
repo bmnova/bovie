@@ -113,9 +113,11 @@ export function AppPage({ slug, heroVisual, heroExtra, demo, extra, related }: A
       ? app.platforms === "both"
         ? appPage.liveBoth
         : appPage.liveAndroid
-      : app.status === "review"
-        ? appPage.inReview
-        : appPage.inLab;
+      : app.status === "archived"
+        ? appPage.archived
+        : app.status === "review"
+          ? appPage.inReview
+          : appPage.inLab;
 
   return (
     <>

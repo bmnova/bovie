@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { contentMap, fill } from "@/content";
-import { APP_ORDER, APPS, type AppSlug } from "@/content/apps";
+import { APPS, SHOWCASE, type AppSlug } from "@/content/apps";
 import { useLocale } from "@/app/locale-context";
 import { ArrowIcon } from "@/components/icons";
 import { ScaledScreen } from "@/components/PhoneFrame";
@@ -12,16 +12,15 @@ import { PaliToday } from "@/components/pali/screens";
 import { BouquetArt } from "@/components/apps/BouquetArt";
 import { usePrefersReducedMotion } from "@/components/motion";
 
-/** Left to right; the most important app sits in the middle, on top. */
-const DECK: AppSlug[] = ["bloomish", "roompace", "fitvibe", "pali", "haki", "nextstep", "offer"];
+/** Left to right as a fan mirrored around the centre; Pali leads the middle pair, on top. */
+const DECK: AppSlug[] = ["bloomish", "roompace", "pali", "haki", "fitvibe", "nextstep"];
 const POSITIONS = [
-  { left: 0, top: 24, width: 22, z: 1 },
-  { left: 12.5, top: 13, width: 22, z: 2 },
-  { left: 25, top: 5, width: 22, z: 3 },
-  { left: 37, top: 0, width: 26, z: 5 },
-  { left: 55.5, top: 5, width: 22, z: 3 },
-  { left: 67.5, top: 13, width: 22, z: 2 },
-  { left: 78, top: 24, width: 22, z: 1 },
+  { left: 5.5, top: 22, width: 23, z: 1 },
+  { left: 18.5, top: 10, width: 23, z: 2 },
+  { left: 30, top: 0, width: 26, z: 5 },
+  { left: 45.5, top: 2, width: 23, z: 4 },
+  { left: 58.5, top: 10, width: 23, z: 2 },
+  { left: 71.5, top: 22, width: 23, z: 1 },
 ];
 const CYCLE_MS = 3600;
 
@@ -63,8 +62,6 @@ function CardFace({ slug, locale }: { slug: AppSlug; locale: "en" | "tr" }) {
       return <Image src="/apps/fitvibe/home.webp" alt="" fill sizes="200px" className="object-cover object-top" />;
     case "roompace":
       return <Image src="/apps/roompace/store-1.webp" alt="" fill sizes="200px" className="object-cover object-[center_20%]" />;
-    case "offer":
-      return <Image src="/apps/offer/welcome.webp" alt="" fill sizes="200px" className="scale-[1.14] object-cover" />;
     case "haki":
       return (
         <div className="flex h-full flex-col bg-[#0E0A14] text-left text-primary">
@@ -115,7 +112,7 @@ function CardFace({ slug, locale }: { slug: AppSlug; locale: "en" | "tr" }) {
 
 export function Hero() {
   const { locale, href } = useLocale();
-  const { hero } = contentMap[locale];
+  const { hero, apps } = contentMap[locale];
   const reduced = usePrefersReducedMotion();
   const [active, setActive] = useState<AppSlug>("pali");
   const [manual, setManual] = useState(false);
@@ -124,7 +121,7 @@ export function Hero() {
   useEffect(() => {
     if (manual || reduced) return;
     const timer = setInterval(() => {
-      setActive((cur) => APP_ORDER[(APP_ORDER.indexOf(cur) + 1) % APP_ORDER.length]);
+      setActive((cur) => SHOWCASE[(SHOWCASE.indexOf(cur) + 1) % SHOWCASE.length]);
     }, CYCLE_MS);
     return () => clearInterval(timer);
   }, [manual, reduced]);
@@ -180,6 +177,12 @@ export function Hero() {
             </Link>
             <span className="text-dim">·</span>
             <span>{app.copy[locale].tag}</span>
+            {app.status !== "live" && (
+              <>
+                <span className="text-dim">·</span>
+                <span style={{ color: app.color }}>{apps.status[app.status]}</span>
+              </>
+            )}
           </p>
         </div>
 
@@ -202,8 +205,8 @@ export function Hero() {
                     top: `${pos.top}%`,
                     width: `${pos.width}%`,
                     zIndex: pos.z,
-                    borderRadius: pos.width > 22 ? "3.6cqw" : "3.2cqw",
-                    rotate: `${(i - 3) * 6}deg`,
+                    borderRadius: pos.width > 23 ? "3.6cqw" : "3.2cqw",
+                    rotate: `${(i - (DECK.length - 1) / 2) * 6}deg`,
                     animationDelay: `${-0.85 * i}s`,
                     boxShadow: on ? `0 0 0 3px ${deckApp.color}, 0 40px 80px rgba(0,0,0,.55)` : "0 40px 80px rgba(0,0,0,.55)",
                   }}
@@ -218,20 +221,22 @@ export function Hero() {
 
       <div className="relative z-[2] mt-12 flex flex-wrap items-center gap-2">
         <span className="mr-2 text-xs font-semibold uppercase tracking-[.14em] text-dim">{hero.pickApp}</span>
-        {APP_ORDER.map((slug) => {
+        {SHOWCASE.map((slug) => {
           const chip = APPS[slug];
           const on = slug === active;
+          const live = chip.status === "live";
           return (
             <button
               key={slug}
               type="button"
               onClick={() => pick(slug)}
               aria-pressed={on}
-              className="inline-flex h-[38px] items-center gap-2 rounded-full border border-white/15 pl-2.5 pr-3.5 text-[13px] font-semibold transition-[transform,background,color,border-color] duration-300 hover:-translate-y-0.5 hover:border-white/40"
+              className={`inline-flex h-[38px] items-center gap-2 rounded-full border pl-2.5 pr-3.5 ${live ? "border-white/15" : "border-dashed border-white/30"} text-[13px] font-semibold transition-[transform,background,color,border-color] duration-300 hover:-translate-y-0.5 hover:border-white/40`}
               style={on ? { background: chip.color, color: "#0B0B12" } : { background: "rgba(255,255,255,.06)", color: "#F3F2FA" }}
             >
               <span className="h-2 w-2 rounded-full" style={{ background: on ? "#0B0B12" : chip.color }} />
               {chip.name}
+              {!live && <span className={`text-[10px] font-bold uppercase tracking-[.12em] ${on ? "opacity-70" : "text-dim"}`}>{hero.soon}</span>}
             </button>
           );
         })}
