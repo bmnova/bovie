@@ -194,14 +194,15 @@ export const contentMap = {
       opening: {
         title: "Mobile App Growth Expert",
         type: "Part-time · Remote",
-        summary: "ASO, paid, retention",
+        summary: "ASO, paid, retention, content",
         description:
-          "We're looking for someone who lives and breathes mobile app growth. You'll own acquisition, retention, and monetization strategy across our mobile products — running experiments, analyzing data, and finding the levers that move the numbers.",
+          "We're looking for someone who lives and breathes mobile app growth. You'll own acquisition, retention, and monetization strategy across our mobile products — running experiments, analyzing data, and finding the levers that move the numbers. You'll also create the content that fuels that growth: short-form videos, social posts, and store creatives.",
         responsibilitiesLabel: "What you'll do",
         responsibilities: [
           "Drive user acquisition via ASO, paid campaigns, and organic channels",
           "Design and run A/B tests to improve onboarding and retention",
           "Analyze product metrics and translate insights into growth experiments",
+          "Create short-form video, social media posts, and App Store / Google Play creatives",
           "Collaborate closely with the engineering and design team",
           "Build and own our mobile marketing playbook from the ground up",
         ],
@@ -210,6 +211,7 @@ export const contentMap = {
           "Experience growing a mobile app past 10K+ MAU",
           "Familiarity with Flutter or mobile development workflows",
           "Background in SaaS or AI-powered products",
+          "A portfolio of content you made that performed (TikTok, Reels, UGC-style ads)",
         ],
         apply: "Apply via email",
       },
@@ -419,14 +421,15 @@ export const contentMap = {
       opening: {
         title: "Mobil Uygulama Büyüme Uzmanı",
         type: "Yarı zamanlı · Uzaktan",
-        summary: "ASO, ücretli kampanyalar, elde tutma",
+        summary: "ASO, ücretli kampanyalar, elde tutma, içerik",
         description:
-          "Mobil uygulama büyümesini içselleştirmiş birini arıyoruz. Mobil ürünlerimizde edinim, elde tutma ve monetizasyon stratejisini üstleneceksiniz — deneyler yapacak, verileri analiz edecek ve sayıları hareket ettiren kaldıraçları bulacaksınız.",
+          "Mobil uygulama büyümesini içselleştirmiş birini arıyoruz. Mobil ürünlerimizde edinim, elde tutma ve monetizasyon stratejisini üstleneceksiniz — deneyler yapacak, verileri analiz edecek ve sayıları hareket ettiren kaldıraçları bulacaksınız. Bu büyümeyi besleyen içerikleri de siz üreteceksiniz: kısa videolar, sosyal medya paylaşımları ve mağaza görselleri.",
         responsibilitiesLabel: "Ne yapacaksınız",
         responsibilities: [
           "ASO, ücretli kampanyalar ve organik kanallar aracılığıyla kullanıcı edinimini yönetin",
           "Onboarding ve elde tutmayı iyileştirmek için A/B testleri tasarlayın ve yürütün",
           "Ürün metriklerini analiz edin ve içgörüleri büyüme deneylerine dönüştürün",
+          "Kısa video, sosyal medya paylaşımları ve App Store / Google Play görselleri üretin",
           "Mühendislik ve tasarım ekibiyle yakın işbirliği yapın",
           "Mobil pazarlama playbook'umuzu sıfırdan oluşturun",
         ],
@@ -435,6 +438,7 @@ export const contentMap = {
           "10K+ MAU'ya ulaşmış bir mobil uygulamayı büyütme deneyimi",
           "Flutter veya mobil geliştirme süreçlerine aşinalık",
           "SaaS veya yapay zeka ürünleri geçmişi",
+          "Ürettiğiniz ve iyi performans göstermiş içeriklerden bir portfolyo (TikTok, Reels, UGC tarzı reklamlar)",
         ],
         apply: "E-posta ile başvur",
       },
