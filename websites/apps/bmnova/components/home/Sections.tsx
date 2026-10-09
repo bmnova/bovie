@@ -455,11 +455,11 @@ export function Core() {
           >
             <div className="absolute inset-0 animate-atom-sway">
               {[0, -2.25].map((delay) => (
-                <div key={delay} className="absolute inset-[36%] animate-ripple rounded-full border border-accent/50" style={{ animationDelay: `${delay}s` }} />
+                <div key={delay} className="pointer-events-none absolute inset-[36%] animate-ripple rounded-full border border-accent/50" style={{ animationDelay: `${delay}s` }} />
               ))}
               {ORBITS.map((orbit) => (
-                <div key={orbit.rotate} className="absolute inset-0" style={{ rotate: `${orbit.rotate}deg` }}>
-                  <div className="absolute inset-x-0 inset-y-[31%] animate-spin-60 rounded-full border border-dashed border-white/20" />
+                <div key={orbit.rotate} className="pointer-events-none absolute inset-0" style={{ rotate: `${orbit.rotate}deg` }}>
+                  <div className="pointer-events-none absolute inset-x-0 inset-y-[31%] animate-spin-60 rounded-full border border-dashed border-white/20" />
                   {orbit.electrons.map(({ app, phase }) => (
                     <button
                       key={app}
@@ -470,7 +470,7 @@ export function Core() {
                         e.stopPropagation();
                         setSelected(selected === app ? null : app);
                       }}
-                      className="absolute left-0 top-0 h-7 w-7 animate-orbit before:absolute before:right-1/2 before:top-1/2 before:h-[3px] before:w-[54px] before:-translate-y-1/2 before:rounded-full before:bg-[linear-gradient(to_left,var(--c),transparent)] before:opacity-70 before:content-[''] after:absolute after:inset-[7px] after:rounded-full after:bg-[color:var(--c)] after:shadow-[0_0_18px_var(--c)] after:content-['']"
+                      className="pointer-events-auto absolute left-0 top-0 h-7 w-7 animate-orbit before:absolute before:right-1/2 before:top-1/2 before:h-[3px] before:w-[54px] before:-translate-y-1/2 before:rounded-full before:bg-[linear-gradient(to_left,var(--c),transparent)] before:opacity-70 before:content-[''] after:absolute after:inset-[7px] after:rounded-full after:bg-[color:var(--c)] after:shadow-[0_0_18px_var(--c)] after:content-['']"
                       style={
                         {
                           "--c": APPS[app].color,
@@ -486,8 +486,8 @@ export function Core() {
                   ))}
                 </div>
               ))}
-              <div className="absolute inset-[26%] animate-glow rounded-full bg-[radial-gradient(circle,color-mix(in_srgb,var(--glow)_26%,transparent),transparent_70%)]" />
-              <div className="absolute inset-[36%] flex animate-breathe items-center justify-center rounded-full border border-white/20 bg-surface text-center">
+              <div className="pointer-events-none absolute inset-[26%] animate-glow rounded-full bg-[radial-gradient(circle,color-mix(in_srgb,var(--glow)_26%,transparent),transparent_70%)]" />
+              <div className="pointer-events-none absolute inset-[36%] flex animate-breathe items-center justify-center rounded-full border border-white/20 bg-surface text-center">
                 <div className="absolute inset-[7%] animate-spin-7 rounded-full border-2 border-dotted border-accent/55" />
                 <span className="font-display text-base font-extrabold leading-tight">
                   BMNova
