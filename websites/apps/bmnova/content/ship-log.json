@@ -1,0 +1,31 @@
+[
+  {
+    "date": "2026-10-07",
+    "app": "pali",
+    "text": {
+      "en": "Build 65 with every locale reworded for the GLP-1 release.",
+      "tr": "Build 65: tüm diller GLP-1 sürümü için yeniden yazıldı."
+    }
+  },
+  {
+    "date": "2026-10-06",
+    "app": "fitvibe",
+    "text": { "en": "Build 122.", "tr": "Build 122." }
+  },
+  {
+    "date": "2026-10-05",
+    "app": "pali",
+    "text": {
+      "en": "DietPal becomes Pali 3.0, a GLP-1 companion with shots, check-ins and a new mascot.",
+      "tr": "DietPal, Pali 3.0 oldu: iğneler, check-in'ler ve yeni bir maskotla GLP-1 yol arkadaşı."
+    }
+  },
+  {
+    "date": "2026-09-09",
+    "app": "haki",
+    "text": {
+      "en": "Live on the App Store and Google Play.",
+      "tr": "App Store ve Google Play'de yayında."
+    }
+  }
+]

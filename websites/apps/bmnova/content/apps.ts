@@ -2,6 +2,7 @@ import { storeLinks, type StoreKey } from "@/config/store-links";
 import { pageMetadata, type Locale } from "@/lib/i18n";
 import type { FaqItem } from "@/lib/json-ld";
 import type { FirstPartyProject } from "@/lib/site";
+import shipLog from "./ship-log.json";
 
 export type AppSlug = FirstPartyProject;
 export type AppStatus = "live" | "review" | "lab";
@@ -765,37 +766,7 @@ export type ShipLogEntry = {
 };
 
 /** Recent releases, newest first, taken from the app repositories' history. */
-export const SHIP_LOG: ShipLogEntry[] = [
-  {
-    date: "2026-10-07",
-    app: "pali",
-    text: {
-      en: "Build 65 with every locale reworded for the GLP-1 release.",
-      tr: "Build 65: tüm diller GLP-1 sürümü için yeniden yazıldı.",
-    },
-  },
-  {
-    date: "2026-10-06",
-    app: "fitvibe",
-    text: { en: "Build 122.", tr: "Build 122." },
-  },
-  {
-    date: "2026-10-05",
-    app: "pali",
-    text: {
-      en: "DietPal becomes Pali 3.0, a GLP-1 companion with shots, check-ins and a new mascot.",
-      tr: "DietPal, Pali 3.0 oldu: iğneler, check-in'ler ve yeni bir maskotla GLP-1 yol arkadaşı.",
-    },
-  },
-  {
-    date: "2026-09-09",
-    app: "haki",
-    text: {
-      en: "Live on the App Store and Google Play.",
-      tr: "App Store ve Google Play'de yayında.",
-    },
-  },
-];
+export const SHIP_LOG = shipLog as ShipLogEntry[];
 
 /** Title, description and alternates for an app's landing page. */
 export function appMetadata(locale: Locale, slug: AppSlug) {
