@@ -64,7 +64,7 @@ export const contentMap = {
     reviews: {
       eyebrow: "Loved by users",
       heading: "Real reviews, straight from the stores.",
-      note: "From the App Store and Google Play · hover to pause",
+      note: "From the App Store and Google Play · drag to browse",
       translated: "translated from Turkish",
       source: { appStore: "App Store", googlePlay: "Google Play" },
       stars: "5 out of 5 stars",
@@ -75,6 +75,7 @@ export const contentMap = {
       body: "Every app runs on the same engine: one Flutter codebase, one AI layer, shared onboarding and paywalls, and content we update remotely without shipping a new build.",
       chips: ["Flutter", "AI layer", "dynamic.intyx", "Shared onboarding & paywalls"],
       center: "core",
+      hint: "Tap the atom to pause it · tap an app to open it",
     },
     shipLog: {
       eyebrow: "Ship log",
@@ -291,7 +292,7 @@ export const contentMap = {
     reviews: {
       eyebrow: "Kullanıcılar seviyor",
       heading: "Gerçek yorumlar, doğrudan mağazalardan.",
-      note: "App Store ve Google Play'den · durdurmak için üzerine gel",
+      note: "App Store ve Google Play'den · sürükleyerek gez",
       translated: "İngilizceden çevrildi",
       source: { appStore: "App Store", googlePlay: "Google Play" },
       stars: "5 üzerinden 5 yıldız",
@@ -302,6 +303,7 @@ export const contentMap = {
       body: "Tüm uygulamalar aynı motorla çalışır: tek bir Flutter kod tabanı, tek bir yapay zekâ katmanı, ortak onboarding ve ödeme ekranları ve yeni sürüm yayınlamadan uzaktan güncellediğimiz içerik.",
       chips: ["Flutter", "Yapay zekâ katmanı", "dynamic.intyx", "Ortak onboarding ve paywall"],
       center: "çekirdek",
+      hint: "Durdurmak için atoma dokun · açmak için bir uygulamaya dokun",
     },
     shipLog: {
       eyebrow: "Yayın günlüğü",

@@ -225,7 +225,7 @@ function AppCard({ slug }: { slug: AppSlug }) {
     <Link
       href={href(`/projects/${slug}`)}
       className={`sheen group relative flex min-h-[420px] overflow-hidden rounded-card border bg-card text-primary transition-[transform,border-color] duration-300 hover:-translate-y-2 hover:-rotate-[0.4deg] hover:border-white/30 ${
-        featured ? "flex-[2_1_560px] flex-wrap" : "flex-[1_1_300px] flex-col"
+        featured ? "flex-wrap sm:col-span-2 lg:col-span-3 xl:col-span-2" : "flex-col"
       } ${app.status === "live" ? "border-border" : "border-dashed"}`}
       style={app.status === "live" ? undefined : { borderColor: `${app.color}80` }}
     >
@@ -263,7 +263,8 @@ export function AppsGrid() {
         </div>
         <p className="max-w-[360px] text-[15px] leading-normal text-muted">{apps.sub}</p>
       </div>
-      <div className="stagger flex flex-wrap gap-3.5">
+      {/* Pali takes a full row at two and three columns and two cells at four, so every row is full */}
+      <div className="stagger grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {APP_ORDER.map((slug) => (
           <AppCard key={slug} slug={slug} />
         ))}
@@ -272,9 +273,85 @@ export function AppsGrid() {
   );
 }
 
+/** Scrolls a doubled strip forever; hovering pauses it, dragging or wheel scrolling moves it by hand. */
+function useEndlessStrip(pxPerSecond = 40) {
+  const ref = useRef<HTMLDivElement>(null);
+  const reduced = usePrefersReducedMotion();
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || reduced) return;
+    let frame = 0;
+    let last = performance.now();
+    let hovered = false;
+    let drag: { x: number; left: number } | null = null;
+    const period = () => {
+      const second = el.children[el.children.length / 2] as HTMLElement;
+      return second.offsetLeft - (el.children[0] as HTMLElement).offsetLeft;
+    };
+    const wrap = () => {
+      const span = period();
+      if (el.scrollLeft >= span) el.scrollLeft -= span;
+      else if (el.scrollLeft <= 0) el.scrollLeft += span;
+    };
+    const tick = (now: number) => {
+      if (!hovered && !drag) el.scrollLeft += (pxPerSecond * (now - last)) / 1000;
+      last = now;
+      wrap();
+      frame = requestAnimationFrame(tick);
+    };
+    const onEnter = () => {
+      hovered = true;
+    };
+    const onLeave = () => {
+      hovered = false;
+      drag = null;
+    };
+    const onDown = (e: PointerEvent) => {
+      drag = { x: e.clientX, left: el.scrollLeft };
+      el.setPointerCapture(e.pointerId);
+    };
+    const onMove = (e: PointerEvent) => {
+      if (!drag) return;
+      const span = period();
+      let left = drag.left - (e.clientX - drag.x);
+      if (left < 0) {
+        left += span;
+        drag.left += span;
+      } else if (left >= span) {
+        left -= span;
+        drag.left -= span;
+      }
+      el.scrollLeft = left;
+    };
+    const onUp = () => {
+      drag = null;
+    };
+    el.addEventListener("pointerenter", onEnter);
+    el.addEventListener("pointerleave", onLeave);
+    el.addEventListener("pointerdown", onDown);
+    el.addEventListener("pointermove", onMove);
+    el.addEventListener("pointerup", onUp);
+    el.addEventListener("pointercancel", onUp);
+    frame = requestAnimationFrame(tick);
+    return () => {
+      cancelAnimationFrame(frame);
+      el.removeEventListener("pointerenter", onEnter);
+      el.removeEventListener("pointerleave", onLeave);
+      el.removeEventListener("pointerdown", onDown);
+      el.removeEventListener("pointermove", onMove);
+      el.removeEventListener("pointerup", onUp);
+      el.removeEventListener("pointercancel", onUp);
+    };
+  }, [reduced, pxPerSecond]);
+
+  return ref;
+}
+
 export function Reviews() {
   const { locale } = useLocale();
   const { reviews } = contentMap[locale];
+  const strip = useEndlessStrip();
   return (
     <section id="reviews" className="reveal overflow-hidden pb-[72px] pt-6">
       <div className={`${container} flex flex-wrap items-end justify-between gap-4 pb-7`}>
@@ -284,34 +361,31 @@ export function Reviews() {
         </div>
         <span className="text-[13px] text-dim">{reviews.note}</span>
       </div>
-      <div className="marquee overflow-hidden">
-        <div className="marquee-track flex w-max animate-marquee-slow gap-4 py-1.5">
-          {[...REVIEWS, ...REVIEWS].map((review, i) => (
-            <div key={i} aria-hidden={i >= REVIEWS.length || undefined}>
-              <ReviewCard review={review} />
-            </div>
-          ))}
-        </div>
+      <div ref={strip} className="strip flex cursor-grab select-none gap-4 overflow-x-auto py-1.5 [touch-action:pan-x] active:cursor-grabbing">
+        {[...REVIEWS, ...REVIEWS].map((review, i) => (
+          <div key={i} aria-hidden={i >= REVIEWS.length || undefined}>
+            <ReviewCard review={review} />
+          </div>
+        ))}
       </div>
     </section>
   );
 }
 
-const ORBITS: { inset: string; spin: string; dots: { app: AppSlug; at: "top" | "bottom" | "left" | "right" }[] }[] = [
-  { inset: "0%", spin: "animate-spin-18", dots: [{ app: "pali", at: "top" }, { app: "haki", at: "bottom" }, { app: "offer", at: "left" }] },
-  { inset: "17%", spin: "animate-spin-28", dots: [{ app: "fitvibe", at: "top" }, { app: "nextstep", at: "right" }] },
-  { inset: "32%", spin: "animate-spin-40", dots: [{ app: "roompace", at: "top" }, { app: "bloomish", at: "bottom" }] },
+/** Electrons on three tilted orbits; phase is where on its orbit each app starts. */
+const ORBITS: { rotate: number; duration: number; reverse?: boolean; electrons: { app: AppSlug; phase: number }[] }[] = [
+  { rotate: -22, duration: 9, electrons: [{ app: "pali", phase: 0 }, { app: "haki", phase: 0.33 }, { app: "offer", phase: 0.66 }] },
+  { rotate: 38, duration: 12, electrons: [{ app: "fitvibe", phase: 0.12 }, { app: "nextstep", phase: 0.62 }] },
+  { rotate: 98, duration: 15, reverse: true, electrons: [{ app: "roompace", phase: 0.27 }, { app: "bloomish", phase: 0.77 }] },
 ];
-const DOT_POS = {
-  top: "left-1/2 -top-[7px] -ml-[7px]",
-  bottom: "left-1/2 -bottom-[7px] -ml-[7px]",
-  left: "top-1/2 -left-[7px] -mt-[7px]",
-  right: "top-1/2 -right-[7px] -mt-[7px]",
-};
 
+/** The core as an atom: tapping pauses it, tapping an electron names the app and links to its page. */
 export function Core() {
-  const { locale } = useLocale();
-  const { core } = contentMap[locale];
+  const { locale, href } = useLocale();
+  const { core, apps } = contentMap[locale];
+  const [frozen, setFrozen] = useState(false);
+  const [selected, setSelected] = useState<AppSlug | null>(null);
+  const picked = selected ? APPS[selected] : null;
   return (
     <section className={`${container} reveal py-[72px]`}>
       <div className="relative flex flex-wrap items-center gap-10 overflow-hidden rounded-section border border-border bg-card p-[clamp(28px,4vw,64px)]">
@@ -327,27 +401,72 @@ export function Core() {
             ))}
           </div>
         </div>
-        <div className="flex min-w-0 flex-[1_1_360px] justify-center" aria-hidden="true">
-          <div className="relative aspect-square w-full max-w-[440px]">
-            {ORBITS.map((orbit) => (
-              <div key={orbit.inset} className={`absolute rounded-full border border-dashed border-white/20 ${orbit.spin}`} style={{ inset: orbit.inset }}>
-                {orbit.dots.map((dot) => (
-                  <span
-                    key={dot.app}
-                    className={`absolute h-3.5 w-3.5 rounded-full ${DOT_POS[dot.at]}`}
-                    style={{ background: APPS[dot.app].color, boxShadow: `0 0 16px ${APPS[dot.app].color}` }}
-                  />
-                ))}
+        <div className="flex min-w-0 flex-[1_1_360px] flex-col items-center gap-4">
+          <div
+            className={`atom relative aspect-square w-full max-w-[440px] ${frozen || picked ? "atom-paused" : ""}`}
+            style={{ "--glow": picked?.color ?? "#DAFF47" } as React.CSSProperties}
+            onClick={() => {
+              setFrozen(selected ? false : !frozen);
+              setSelected(null);
+            }}
+          >
+            <div className="absolute inset-0 animate-atom-sway">
+              {[0, -2.25].map((delay) => (
+                <div key={delay} className="absolute inset-[36%] animate-ripple rounded-full border border-accent/50" style={{ animationDelay: `${delay}s` }} />
+              ))}
+              {ORBITS.map((orbit) => (
+                <div key={orbit.rotate} className="absolute inset-0" style={{ rotate: `${orbit.rotate}deg` }}>
+                  <div className="absolute inset-x-0 inset-y-[31%] animate-spin-60 rounded-full border border-dashed border-white/20" />
+                  {orbit.electrons.map(({ app, phase }) => (
+                    <button
+                      key={app}
+                      type="button"
+                      aria-label={APPS[app].name}
+                      aria-pressed={selected === app}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelected(selected === app ? null : app);
+                      }}
+                      className="absolute left-0 top-0 h-7 w-7 animate-orbit before:absolute before:right-1/2 before:top-1/2 before:h-[3px] before:w-[54px] before:-translate-y-1/2 before:rounded-full before:bg-[linear-gradient(to_left,var(--c),transparent)] before:opacity-70 before:content-[''] after:absolute after:inset-[7px] after:rounded-full after:bg-[color:var(--c)] after:shadow-[0_0_18px_var(--c)] after:content-['']"
+                      style={
+                        {
+                          "--c": APPS[app].color,
+                          "--d": `${orbit.duration}s`,
+                          offsetPath: "ellipse(50% 19% at 50% 50%)",
+                          offsetRotate: "auto",
+                          offsetDistance: `${phase * 100}%`,
+                          animationDelay: `${-phase * orbit.duration}s`,
+                          animationDirection: orbit.reverse ? "reverse" : undefined,
+                        } as React.CSSProperties
+                      }
+                    />
+                  ))}
+                </div>
+              ))}
+              <div className="absolute inset-[26%] animate-glow rounded-full bg-[radial-gradient(circle,color-mix(in_srgb,var(--glow)_26%,transparent),transparent_70%)]" />
+              <div className="absolute inset-[36%] flex animate-breathe items-center justify-center rounded-full border border-white/20 bg-surface text-center">
+                <div className="absolute inset-[7%] animate-spin-7 rounded-full border-2 border-dotted border-accent/55" />
+                <span className="font-display text-base font-extrabold leading-tight">
+                  BMNova
+                  <br />
+                  <span className="text-accent">{core.center}</span>
+                </span>
               </div>
-            ))}
-            <div className="absolute inset-[40%] flex items-center justify-center rounded-full border border-white/20 bg-surface text-center shadow-[0_0_60px_rgba(218,255,71,.18)]">
-              <span className="font-display text-base font-extrabold leading-tight">
-                BMNova
-                <br />
-                <span className="text-accent">{core.center}</span>
-              </span>
             </div>
+            {picked && (
+              <div className="absolute inset-x-2 bottom-0 flex items-center gap-3 rounded-2xl border border-border bg-surface/90 p-3.5 backdrop-blur" onClick={(e) => e.stopPropagation()}>
+                <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: picked.color }} />
+                <div className="min-w-0 flex-1">
+                  <strong className="block text-[15px]">{picked.name}</strong>
+                  <span className="block truncate text-[13px] text-muted">{picked.copy[locale].tag}</span>
+                </div>
+                <Link href={href(`/projects/${picked.slug}`)} className="shrink-0 text-[13px] font-semibold text-accent">
+                  {apps.open}
+                </Link>
+              </div>
+            )}
           </div>
+          <span className="text-[13px] text-dim">{core.hint}</span>
         </div>
       </div>
     </section>

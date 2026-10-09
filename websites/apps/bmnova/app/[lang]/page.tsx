@@ -21,8 +21,8 @@ export default function Home() {
         <Ticker />
         <Numbers />
         <AppsGrid />
-        <Reviews />
         <Core />
+        <Reviews />
         <ShipLog />
         <Studio />
         <CareersCta />
