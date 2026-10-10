@@ -88,8 +88,9 @@ body {
   animation-play-state: paused;
 }
 
-/* The core atom pauses while an app is picked or after it was tapped, so electrons can be caught */
-.atom-paused * {
+/* The core atom pauses while an app is picked, after it was tapped, or while pressed, so an electron stays under the finger until the tap lands */
+.atom-paused *,
+.atom:active * {
   animation-play-state: paused;
 }
 
