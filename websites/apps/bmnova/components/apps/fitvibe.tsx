@@ -74,8 +74,8 @@ const copy = {
 export function FitVibeHeroVisual() {
   return (
     <>
-      <Image src="/apps/fitvibe/outfit-1.webp" alt="" width={120} height={229} className="absolute left-0 top-8 z-[3] hidden w-[110px] -rotate-[8deg] animate-floaty drop-shadow-[0_16px_30px_rgba(0,0,0,.5)] sm:block" style={{ animationDelay: "-1s" }} />
-      <Image src="/apps/fitvibe/outfit-2.webp" alt="" width={120} height={229} className="absolute bottom-10 right-0 z-[3] hidden w-[110px] rotate-[8deg] animate-floaty drop-shadow-[0_16px_30px_rgba(0,0,0,.5)] sm:block" style={{ animationDelay: "-3s" }} />
+      <Image src="/apps/fitvibe/outfit-1.webp" alt="" width={120} height={229} className="absolute right-0 top-8 z-[3] hidden w-[110px] rotate-[8deg] animate-floaty drop-shadow-[0_16px_30px_rgba(0,0,0,.5)] sm:block" style={{ animationDelay: "-1s" }} />
+      <Image src="/apps/fitvibe/outfit-2.webp" alt="" width={120} height={229} className="absolute bottom-10 left-0 z-[3] hidden w-[110px] -rotate-[8deg] animate-floaty drop-shadow-[0_16px_30px_rgba(0,0,0,.5)] sm:block" style={{ animationDelay: "-3s" }} />
       <PhoneFrame className="relative z-[2] w-[330px] max-w-full animate-floaty">
         <Image src="/apps/fitvibe/home.webp" alt="FitVibe home screen with outfits and clothes" width={393} height={852} priority className="block h-auto w-full" />
       </PhoneFrame>

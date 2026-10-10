@@ -186,7 +186,7 @@ export function AppPage({ slug, heroVisual, heroExtra, demo, extra, related }: A
               </div>
             </div>
 
-            <div className="flex min-w-0 flex-[1_1_420px] justify-center">
+            <div className="flex min-w-0 flex-[1_1_540px] justify-center">
               <div className="relative flex w-full max-w-[540px] justify-center py-8">
                 {copy.stickers.map((sticker, i) => (
                   <span
