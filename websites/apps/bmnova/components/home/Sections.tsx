@@ -431,7 +431,7 @@ export function Core() {
   const picked = selected ? APPS[selected] : null;
   return (
     <section className={`${container} reveal py-[72px]`}>
-      <div className="relative flex flex-wrap items-center gap-10 overflow-hidden rounded-section border border-border bg-card p-[clamp(28px,4vw,64px)]">
+      <div className="relative flex flex-wrap items-center gap-10 rounded-section border border-border bg-card p-[clamp(28px,4vw,64px)]">
         <div className="flex min-w-0 flex-[1_1_360px] flex-col gap-[18px]">
           <Eyebrow>{core.eyebrow}</Eyebrow>
           <h2 className="font-display text-[clamp(36px,4.4vw,64px)] font-extrabold">{core.heading}</h2>
