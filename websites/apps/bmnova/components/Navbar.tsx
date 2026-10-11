@@ -9,6 +9,7 @@ import { useLocale } from "@/app/locale-context";
 import { switchLocalePath, type Locale } from "@/lib/i18n";
 import { Wordmark } from "@/components/Wordmark";
 import { ArrowIcon } from "@/components/icons";
+import { useKeepScrollOnResize } from "@/components/motion";
 
 export function Navbar({ localeHrefs }: { localeHrefs?: Record<Locale, string> }) {
   const [open, setOpen] = useState(false);
@@ -16,6 +17,7 @@ export function Navbar({ localeHrefs }: { localeHrefs?: Record<Locale, string> }
   const { locale, href } = useLocale();
   const { nav } = contentMap[locale];
   const other = locale === "en" ? "tr" : "en";
+  useKeepScrollOnResize();
 
   const links = [
     { label: nav.apps, href: href("/#apps") },
