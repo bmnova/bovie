@@ -100,6 +100,20 @@ const config: Config = {
           "0%, 100%": { rotate: "-4deg" },
           "50%": { rotate: "4deg" },
         },
+        /* Studio agents: work travels from the core out to an agent (--tx, --ty) and back for approval */
+        agentOut: {
+          "0%": { left: "50%", top: "50%", opacity: "0" },
+          "15%, 85%": { opacity: "1" },
+          "100%": { left: "var(--tx)", top: "var(--ty)", opacity: "0" },
+        },
+        agentBack: {
+          "0%": { left: "var(--tx)", top: "var(--ty)", opacity: "0" },
+          "15%, 85%": { opacity: "1" },
+          "100%": { left: "50%", top: "50%", opacity: "0" },
+        },
+        wire: {
+          to: { strokeDashoffset: "-22" },
+        },
       },
       animation: {
         floaty: "floaty 7s ease-in-out infinite",
@@ -115,6 +129,9 @@ const config: Config = {
         breathe: "breathe 5s ease-in-out infinite",
         ripple: "ripple 4.5s cubic-bezier(.2,.6,.3,1) infinite",
         "atom-sway": "atomSway 16s ease-in-out infinite",
+        "agent-out": "agentOut 1.4s cubic-bezier(.5,0,.5,1) infinite",
+        "agent-back": "agentBack 1.4s cubic-bezier(.5,0,.5,1) -.7s infinite",
+        wire: "wire 1.6s linear infinite",
       },
     },
   },

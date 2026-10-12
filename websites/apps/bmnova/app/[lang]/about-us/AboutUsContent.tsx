@@ -6,6 +6,7 @@ import { fadeInUp, staggerContainer } from "@websites/shared/animations";
 import { FounderSocials } from "@/components/FounderSocials";
 import { contentMap } from "@/content";
 import { useLocale } from "@/app/locale-context";
+import { HowWeBuild } from "./HowWeBuild";
 
 export function AboutUsContent() {
   const { locale } = useLocale();
@@ -111,6 +112,8 @@ export function AboutUsContent() {
           </motion.div>
         </div>
       </section>
+
+      <HowWeBuild />
     </main>
   );
 }
