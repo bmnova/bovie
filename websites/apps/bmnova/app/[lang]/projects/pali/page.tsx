@@ -25,6 +25,7 @@ export default function PaliPage({ params }: Props) {
         demo={<PaliDemo />}
         extra={<PaliInside />}
         related={<ProjectRelatedReading posts={getPostsByProduct("pali", params.lang)} locale={params.lang} />}
+        faqHref="/pali/faq"
       />
     </>
   );

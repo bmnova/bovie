@@ -33,6 +33,8 @@ type AppPageProps = {
   extra?: React.ReactNode;
   /** Related blog posts, rendered on the server */
   related?: React.ReactNode;
+  /** The app's full FAQ page, linked next to the questions */
+  faqHref?: string;
 };
 
 function Eyebrow({ color, children }: { color: string; children: React.ReactNode }) {
@@ -100,7 +102,7 @@ export function Chip({
   );
 }
 
-export function AppPage({ slug, heroVisual, heroExtra, demo, extra, related }: AppPageProps) {
+export function AppPage({ slug, heroVisual, heroExtra, demo, extra, related, faqHref }: AppPageProps) {
   const { locale, href } = useLocale();
   const { appPage } = contentMap[locale];
   const app = APPS[slug];
@@ -307,7 +309,14 @@ export function AppPage({ slug, heroVisual, heroExtra, demo, extra, related }: A
 
         {copy.faqs && (
           <section className={`${container} reveal pb-[72px]`}>
-            <h2 className="mb-6 font-display text-[clamp(28px,3vw,40px)] font-extrabold">{fill(appPage.faqHeading, { name: app.name })}</h2>
+            <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+              <h2 className="font-display text-[clamp(28px,3vw,40px)] font-extrabold">{fill(appPage.faqHeading, { name: app.name })}</h2>
+              {faqHref && (
+                <Link href={href(faqHref)} className="text-sm font-semibold text-muted transition-colors hover:text-accent">
+                  {appPage.faqAll}
+                </Link>
+              )}
+            </div>
             <div className="flex max-w-[860px] flex-col gap-3">
               {copy.faqs.map((faq) => (
                 <details key={faq.question} className="group rounded-[20px] border border-border bg-card px-6 py-5">

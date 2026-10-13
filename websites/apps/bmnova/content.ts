@@ -128,6 +128,7 @@ export const contentMap = {
       reviewsHeading: "What people say about {name}",
       reviewsNote: "From the App Store and Google Play",
       faqHeading: "Questions about {name}",
+      faqAll: "All questions →",
       moreFrom: "More from BMNova",
       allSeven: "All seven apps →",
       downloadOn: "Download on the",
@@ -186,6 +187,7 @@ export const contentMap = {
       termsOfUse: "Terms of Use",
       refundPolicy: "Refund Policy",
       accountDataDeletion: "Account & Data Deletion",
+      paliFaq: "Pali FAQ",
       copyright: "BMNova Innovations",
     },
     privacyPolicy: {
@@ -384,6 +386,7 @@ export const contentMap = {
       reviewsHeading: "{name} hakkında ne diyorlar",
       reviewsNote: "App Store ve Google Play'den",
       faqHeading: "{name} hakkında sorular",
+      faqAll: "Tüm sorular →",
       moreFrom: "BMNova'dan diğerleri",
       allSeven: "Yedi uygulamanın hepsi →",
       downloadOn: "İndir",
@@ -442,6 +445,7 @@ export const contentMap = {
       termsOfUse: "Kullanım Koşulları",
       refundPolicy: "İade Politikası",
       accountDataDeletion: "Hesap ve Veri Silme",
+      paliFaq: "Pali SSS",
       copyright: "BMNova Innovations",
     },
     privacyPolicy: {
