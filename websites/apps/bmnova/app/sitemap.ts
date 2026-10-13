@@ -17,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/refund-policy",
     "/account-data-deletion",
     ...FIRST_PARTY_PROJECTS.map((slug) => `/projects/${slug}`),
+    "/pali/faq",
   ];
 
   const absolute = (path: string) => `${SITE_URL}${path === "/" ? "" : path}`;

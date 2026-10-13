@@ -37,6 +37,7 @@ export function Footer({ localeHrefs }: { localeHrefs?: Record<Locale, string> }
         { label: footer.termsOfUse, href: href("/terms-of-use") },
         { label: footer.refundPolicy, href: href("/refund-policy") },
         { label: footer.accountDataDeletion, href: href("/account-data-deletion") },
+        { label: footer.paliFaq, href: href("/pali/faq") },
       ],
     },
   ];
