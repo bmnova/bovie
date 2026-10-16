@@ -12,7 +12,6 @@ import { FounderSocials } from "@/components/FounderSocials";
 import { ReviewCard } from "@/components/ReviewCard";
 import { PhoneFrame, ScaledScreen } from "@/components/PhoneFrame";
 import { PaliToday } from "@/components/pali/screens";
-import { BouquetArt } from "@/components/apps/BouquetArt";
 import { usePrefersReducedMotion } from "@/components/motion";
 
 const container = "mx-auto max-w-[1440px] px-[clamp(20px,4vw,56px)]";
@@ -137,63 +136,71 @@ function SecondaryPill({ children }: { children: React.ReactNode }) {
   );
 }
 
-const nsCopy = {
-  en: { label: "Your next step", step: "Send the email. One line. Before lunch.", done: "Done ✓" },
-  tr: { label: "Sıradaki adımın", step: "E-postayı gönder. Tek satır. Öğleden önce.", done: "Tamam ✓" },
-};
+/** Radius of the clear hole the pointer makes in the lab glass, in px */
+const TORCH = 150;
 
-/** The visual at the top of each app card; it lifts on hover. */
-function CardVisual({ slug }: { slug: AppSlug }) {
-  const { locale } = useLocale();
-  const app = APPS[slug];
-  const glow = `radial-gradient(circle at 50% 120%, ${app.color}80, ${app.color}00 60%)`;
-  const shot = "transition-[translate] duration-500 ease-out group-hover:[translate:0_-18px]";
-
-  switch (slug) {
-    case "nextstep": {
-      const t = nsCopy[locale];
-      return (
-        <div className="flex h-[220px] items-center justify-center" style={{ background: glow }}>
-          <div className={`flex w-[220px] flex-col gap-2 rounded-[18px] border border-white/10 bg-[#101024] p-4 shadow-[0_30px_60px_rgba(0,0,0,.5)] ${shot}`}>
-            <span className="text-[10px] font-semibold uppercase tracking-[.12em] text-app-nextstep">{t.label}</span>
-            <span className="text-sm font-medium leading-snug">{t.step}</span>
-            <span className="inline-flex h-[30px] items-center justify-center rounded-full bg-app-nextstep text-xs font-bold text-surface">{t.done}</span>
-          </div>
-        </div>
-      );
-    }
-    default:
-      return (
-        <div className="flex h-[220px] items-center justify-center" style={{ background: glow }}>
-          <BouquetArt className={`w-[150px] rounded-full bg-[#FFE4EA] shadow-[0_30px_60px_rgba(0,0,0,.5)] ${shot}`} />
-        </div>
-      );
-  }
-}
-
-function AppCard({ slug }: { slug: AppSlug }) {
+/** A lab app behind frosted glass; a torch-shaped hole follows the pointer or a dragging finger. */
+function LabPeek({ slug }: { slug: AppSlug }) {
   const { locale, href } = useLocale();
   const { apps } = contentMap[locale];
   const app = APPS[slug];
   const copy = app.copy[locale];
+  const glass = useRef<HTMLDivElement>(null);
+  const aim = (e: React.PointerEvent<HTMLElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    glass.current?.style.setProperty("--x", `${e.clientX - r.left}px`);
+    glass.current?.style.setProperty("--y", `${e.clientY - r.top}px`);
+  };
+  const promise = (
+    <span className="max-w-[12ch] font-display text-[clamp(36px,4vw,48px)] font-extrabold">
+      {copy.heroBefore} {copy.heroAccent}
+    </span>
+  );
+  const mask = `radial-gradient(circle ${TORCH}px at var(--x) var(--y), transparent 62%, #000)`;
 
   return (
     <Link
       href={href(`/projects/${slug}`)}
-      className="sheen group relative flex min-h-[420px] flex-col overflow-hidden rounded-card border border-dashed bg-card text-primary transition-[transform,border-color] duration-300 hover:-translate-y-2 hover:-rotate-[0.4deg] hover:border-white/30"
-      style={{ borderColor: `${app.color}80` }}
+      onPointerDown={aim}
+      onPointerMove={aim}
+      onPointerLeave={() => glass.current?.style.removeProperty("--x")}
+      className="relative flex min-h-[500px] touch-none select-none overflow-hidden rounded-card border border-border bg-card text-primary"
+      style={{ backgroundImage: `radial-gradient(80% 90% at 70% 30%, ${app.color}59, transparent)` }}
     >
-      <CardVisual slug={slug} />
-      <div className="flex flex-1 flex-col gap-2.5 p-6">
-        <span className="text-xs font-semibold uppercase tracking-[.12em]" style={{ color: app.color }}>
-          {copy.category}
-        </span>
-        <h3 className="font-display text-[34px] font-extrabold">{app.name}</h3>
-        <p className="text-sm leading-normal text-muted">{copy.card}</p>
-        <div className="mt-auto flex flex-wrap items-center gap-2">
-          <StatusPill app={app} />
-          <SecondaryPill>{app.store ? (app.platforms === "both" ? apps.both : apps.android) : apps.notify}</SecondaryPill>
+      {slug === "nextstep" ? (
+        <div className="flex flex-1 flex-col justify-center gap-[22px] p-[clamp(24px,4vw,48px)] pb-24">
+          <Image src={app.icon} alt="" width={72} height={72} className="rounded-[17px]" />
+          {promise}
+          <div className="flex max-w-[380px] flex-col gap-2.5 text-[15px] font-semibold">
+            {apps.nextStepRows.map((row, i) => (
+              <span
+                key={row}
+                className={`flex h-12 items-center rounded-2xl px-[18px] ${i === 2 ? "font-bold text-surface" : ""}`}
+                style={{ background: i === 2 ? app.color : `${app.color}${i ? "52" : "38"}` }}
+              >
+                {row}
+              </span>
+            ))}
+          </div>
         </div>
+      ) : (
+        <>
+          <Image src="/apps/bloomish/banner.webp" alt="" fill sizes="(min-width: 640px) 50vw, 100vw" className="object-cover" />
+          <div className="absolute inset-x-0 bottom-0 flex flex-col gap-3.5 bg-gradient-to-t from-surface/85 to-transparent px-[clamp(24px,4vw,48px)] pb-24 pt-10">
+            <Image src={app.icon} alt="" width={64} height={64} className="rounded-[15px]" />
+            {promise}
+          </div>
+        </>
+      )}
+      <div
+        ref={glass}
+        aria-hidden="true"
+        className="absolute inset-0 bg-card/40 backdrop-blur-[22px] backdrop-saturate-[1.2] [--x:-999px] [--y:-999px]"
+        style={{ maskImage: mask, WebkitMaskImage: mask }}
+      />
+      <div className="pointer-events-none absolute inset-x-6 bottom-6 flex items-center justify-between gap-3">
+        <strong className="font-display text-[26px] font-extrabold">{app.name}</strong>
+        <StatusPill app={app} />
       </div>
     </Link>
   );
@@ -379,11 +386,14 @@ export function AppsGrid() {
           <Eyebrow>{apps.labEyebrow}</Eyebrow>
           <h3 className="font-display text-[clamp(32px,4vw,56px)] font-extrabold">{apps.labHeading}</h3>
         </div>
-        <p className="max-w-[360px] text-[15px] leading-normal text-muted">{apps.labSub}</p>
+        <div className="flex max-w-[360px] flex-col gap-2">
+          <p className="text-[15px] leading-normal text-muted">{apps.labSub}</p>
+          <span className="text-[13px] text-dim">{apps.peekHint}</span>
+        </div>
       </div>
       <div className="stagger grid grid-cols-1 gap-3.5 sm:grid-cols-2">
         {lab.map((slug) => (
-          <AppCard key={slug} slug={slug} />
+          <LabPeek key={slug} slug={slug} />
         ))}
       </div>
 
