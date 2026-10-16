@@ -38,11 +38,11 @@ export function Ticker() {
   );
 }
 
-/** Counts from zero to the target once the element scrolls into view. */
+/** Renders the target; once the element scrolls into view, counts up to it from zero. */
 function useCountUp(target: number, duration = 1100) {
   const ref = useRef<HTMLDivElement>(null);
   const reduced = usePrefersReducedMotion();
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(target);
 
   useEffect(() => {
     if (reduced) {
