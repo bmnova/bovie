@@ -340,6 +340,8 @@ type TossCard = {
   vr: number;
   held: boolean;
   tidying: boolean;
+  /** Resting on its pile spot, untouched since the pile was laid out or tidied */
+  atHome: boolean;
 };
 
 /**
@@ -367,7 +369,10 @@ function useTossPile() {
       vr: 0,
       held: false,
       tidying: false,
+      atHome: false,
     }));
+    let width = box.clientWidth;
+    let height = box.clientHeight;
     const maxX = (c: TossCard) => Math.max(0, box.clientWidth - c.el.offsetWidth);
     const maxY = (c: TossCard) => Math.max(0, box.clientHeight - c.el.offsetHeight);
     const spot = (c: TossCard) => {
@@ -394,7 +399,7 @@ function useTossPile() {
           c.y += (to.y - c.y) * 0.14;
           c.r += (to.r - c.r) * 0.14;
           if (Math.abs(to.x - c.x) + Math.abs(to.y - c.y) + Math.abs(to.r - c.r) < 0.5) {
-            Object.assign(c, to, { tidying: false });
+            Object.assign(c, to, { tidying: false, atHome: true });
           } else moving = true;
         } else if (Math.abs(c.vx) + Math.abs(c.vy) + Math.abs(c.vr) > 0.05) {
           moving = true;
@@ -434,6 +439,7 @@ function useTossPile() {
         c.el.setPointerCapture(e.pointerId);
         c.held = true;
         c.tidying = false;
+        c.atHome = false;
         c.vx = c.vy = c.vr = 0;
         grab = { dx: p.x - c.x, dy: p.y - c.y };
         last = prev = p;
@@ -473,7 +479,7 @@ function useTossPile() {
 
     const place = () => {
       for (const c of cards) {
-        Object.assign(c, spot(c), { vx: 0, vy: 0, vr: 0, tidying: false });
+        Object.assign(c, spot(c), { vx: 0, vy: 0, vr: 0, tidying: false, atHome: true });
         paint(c);
       }
     };
@@ -485,12 +491,22 @@ function useTossPile() {
       }
       run();
     };
-    // Cards keep their spots relative to the arena when it changes size
+    // When the arena changes size, resting cards move to their spots for the new size and thrown
+    // cards keep the same share of the free space they had
     const resize = new ResizeObserver(() => {
       for (const c of cards) {
-        keepInside(c);
+        if (c.atHome) Object.assign(c, spot(c));
+        else {
+          const freeX = width - c.el.offsetWidth;
+          const freeY = height - c.el.offsetHeight;
+          if (freeX > 0) c.x = (c.x / freeX) * maxX(c);
+          if (freeY > 0) c.y = (c.y / freeY) * maxY(c);
+          keepInside(c);
+        }
         paint(c);
       }
+      width = box.clientWidth;
+      height = box.clientHeight;
     });
     place();
     box.dataset.ready = "";
