@@ -316,85 +316,200 @@ export function AppsGrid() {
   );
 }
 
-/** Scrolls a doubled strip forever; hovering pauses it, dragging or wheel scrolling moves it by hand. */
-function useEndlessStrip(pxPerSecond = 40) {
-  const ref = useRef<HTMLDivElement>(null);
+/** Where each card lands in the pile: x and y as fractions of the free space, plus a tilt in degrees. */
+const PILE: [number, number, number][] = [
+  [0.02, 0.1, -4],
+  [0.37, 0, 3],
+  [0.72, 0.14, -2],
+  [0.1, 0.92, 5],
+  [0.47, 0.72, -6],
+  [0.9, 1, 2],
+];
+
+/** Thrown cards spin, but never so far that their text is hard to read. */
+const MAX_TILT = 16;
+
+type TossCard = {
+  el: HTMLElement;
+  home: number;
+  x: number;
+  y: number;
+  r: number;
+  vx: number;
+  vy: number;
+  vr: number;
+  held: boolean;
+  tidying: boolean;
+};
+
+/**
+ * Lays the arena's children out as a loose pile of cards that can be grabbed and thrown: they slide,
+ * spin and bounce off the arena's edges. Returns the arena ref and a function that tidies the pile.
+ */
+function useTossPile() {
+  const arena = useRef<HTMLDivElement>(null);
+  const tidyRef = useRef(() => {});
   const reduced = usePrefersReducedMotion();
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el || reduced) return;
+    const box = arena.current;
+    if (!box) return;
     let frame = 0;
-    let last = performance.now();
-    let hovered = false;
-    let drag: { x: number; left: number } | null = null;
-    const period = () => {
-      const second = el.children[el.children.length / 2] as HTMLElement;
-      return second.offsetLeft - (el.children[0] as HTMLElement).offsetLeft;
+    let topZ = box.children.length;
+    const cards: TossCard[] = (Array.from(box.children) as HTMLElement[]).map((el, home) => ({
+      el,
+      home,
+      x: 0,
+      y: 0,
+      r: 0,
+      vx: 0,
+      vy: 0,
+      vr: 0,
+      held: false,
+      tidying: false,
+    }));
+    const maxX = (c: TossCard) => Math.max(0, box.clientWidth - c.el.offsetWidth);
+    const maxY = (c: TossCard) => Math.max(0, box.clientHeight - c.el.offsetHeight);
+    const spot = (c: TossCard) => {
+      const [fx, fy, r] = PILE[c.home % PILE.length];
+      // On a phone the arena is about one card wide, so the cards fan out down it in order instead
+      const narrow = maxX(c) < 120;
+      return { x: fx * maxX(c), y: (narrow ? c.home / (cards.length - 1) : fy) * maxY(c), r };
     };
-    const wrap = () => {
-      const span = period();
-      if (el.scrollLeft >= span) el.scrollLeft -= span;
-      else if (el.scrollLeft <= 0) el.scrollLeft += span;
+    const paint = (c: TossCard) => {
+      c.el.style.transform = `translate(${c.x.toFixed(1)}px, ${c.y.toFixed(1)}px) rotate(${c.r.toFixed(2)}deg)`;
     };
-    const tick = (now: number) => {
-      if (!hovered && !drag) el.scrollLeft += (pxPerSecond * (now - last)) / 1000;
-      last = now;
-      wrap();
-      frame = requestAnimationFrame(tick);
+    const keepInside = (c: TossCard) => {
+      c.x = Math.min(Math.max(c.x, 0), maxX(c));
+      c.y = Math.min(Math.max(c.y, 0), maxY(c));
     };
-    const onEnter = () => {
-      hovered = true;
-    };
-    const onLeave = () => {
-      hovered = false;
-      drag = null;
-    };
-    const onDown = (e: PointerEvent) => {
-      drag = { x: e.clientX, left: el.scrollLeft };
-      el.setPointerCapture(e.pointerId);
-    };
-    const onMove = (e: PointerEvent) => {
-      if (!drag) return;
-      const span = period();
-      let left = drag.left - (e.clientX - drag.x);
-      if (left < 0) {
-        left += span;
-        drag.left += span;
-      } else if (left >= span) {
-        left -= span;
-        drag.left -= span;
+
+    const tick = () => {
+      let moving = false;
+      for (const c of cards) {
+        if (c.held) continue;
+        if (c.tidying) {
+          const to = spot(c);
+          c.x += (to.x - c.x) * 0.14;
+          c.y += (to.y - c.y) * 0.14;
+          c.r += (to.r - c.r) * 0.14;
+          if (Math.abs(to.x - c.x) + Math.abs(to.y - c.y) + Math.abs(to.r - c.r) < 0.5) {
+            Object.assign(c, to, { tidying: false });
+          } else moving = true;
+        } else if (Math.abs(c.vx) + Math.abs(c.vy) + Math.abs(c.vr) > 0.05) {
+          moving = true;
+          c.x += c.vx;
+          c.y += c.vy;
+          c.r = Math.max(-MAX_TILT, Math.min(MAX_TILT, c.r + c.vr));
+          c.vx *= 0.95;
+          c.vy *= 0.95;
+          c.vr *= 0.93;
+          if (c.x < 0 || c.x > maxX(c)) {
+            c.vx *= -0.6;
+            c.vr *= -1;
+          }
+          if (c.y < 0 || c.y > maxY(c)) c.vy *= -0.6;
+          keepInside(c);
+        } else {
+          c.vx = c.vy = c.vr = 0;
+        }
+        paint(c);
       }
-      el.scrollLeft = left;
+      frame = moving ? requestAnimationFrame(tick) : 0;
     };
-    const onUp = () => {
-      drag = null;
+    const run = () => {
+      if (!frame) frame = requestAnimationFrame(tick);
     };
-    el.addEventListener("pointerenter", onEnter);
-    el.addEventListener("pointerleave", onLeave);
-    el.addEventListener("pointerdown", onDown);
-    el.addEventListener("pointermove", onMove);
-    el.addEventListener("pointerup", onUp);
-    el.addEventListener("pointercancel", onUp);
-    frame = requestAnimationFrame(tick);
+
+    const cleanups = cards.map((c) => {
+      let grab = { dx: 0, dy: 0 };
+      let last = { x: 0, y: 0, t: 0 };
+      let prev = last;
+      const at = (e: PointerEvent) => {
+        const r = box.getBoundingClientRect();
+        return { x: e.clientX - r.left, y: e.clientY - r.top, t: e.timeStamp };
+      };
+      const onDown = (e: PointerEvent) => {
+        const p = at(e);
+        c.el.setPointerCapture(e.pointerId);
+        c.held = true;
+        c.tidying = false;
+        c.vx = c.vy = c.vr = 0;
+        grab = { dx: p.x - c.x, dy: p.y - c.y };
+        last = prev = p;
+        c.el.style.zIndex = String(++topZ);
+      };
+      const onMove = (e: PointerEvent) => {
+        if (!c.held) return;
+        const p = at(e);
+        prev = last;
+        last = p;
+        c.x = p.x - grab.dx;
+        c.y = p.y - grab.dy;
+        keepInside(c);
+        paint(c);
+      };
+      const onUp = () => {
+        if (!c.held) return;
+        c.held = false;
+        if (reduced) return;
+        const frames = Math.max(8, last.t - prev.t) / 16.67;
+        c.vx = Math.max(-60, Math.min(60, (last.x - prev.x) / frames));
+        c.vy = Math.max(-60, Math.min(60, (last.y - prev.y) / frames));
+        c.vr = c.vx * 0.04;
+        run();
+      };
+      c.el.addEventListener("pointerdown", onDown);
+      c.el.addEventListener("pointermove", onMove);
+      c.el.addEventListener("pointerup", onUp);
+      c.el.addEventListener("pointercancel", onUp);
+      return () => {
+        c.el.removeEventListener("pointerdown", onDown);
+        c.el.removeEventListener("pointermove", onMove);
+        c.el.removeEventListener("pointerup", onUp);
+        c.el.removeEventListener("pointercancel", onUp);
+      };
+    });
+
+    const place = () => {
+      for (const c of cards) {
+        Object.assign(c, spot(c), { vx: 0, vy: 0, vr: 0, tidying: false });
+        paint(c);
+      }
+    };
+    tidyRef.current = () => {
+      if (reduced) return place();
+      for (const c of cards) {
+        c.vx = c.vy = c.vr = 0;
+        c.tidying = true;
+      }
+      run();
+    };
+    // Cards keep their spots relative to the arena when it changes size
+    const resize = new ResizeObserver(() => {
+      for (const c of cards) {
+        keepInside(c);
+        paint(c);
+      }
+    });
+    place();
+    box.dataset.ready = "";
+    resize.observe(box);
+
     return () => {
       cancelAnimationFrame(frame);
-      el.removeEventListener("pointerenter", onEnter);
-      el.removeEventListener("pointerleave", onLeave);
-      el.removeEventListener("pointerdown", onDown);
-      el.removeEventListener("pointermove", onMove);
-      el.removeEventListener("pointerup", onUp);
-      el.removeEventListener("pointercancel", onUp);
+      resize.disconnect();
+      cleanups.forEach((cleanup) => cleanup());
     };
-  }, [reduced, pxPerSecond]);
+  }, [reduced]);
 
-  return ref;
+  return { arena, tidy: () => tidyRef.current() };
 }
 
 export function Reviews() {
   const { locale } = useLocale();
   const { reviews } = contentMap[locale];
-  const strip = useEndlessStrip();
+  const { arena, tidy } = useTossPile();
   return (
     <section id="reviews" className="reveal overflow-hidden pb-[72px] pt-6">
       <div className={`${container} flex flex-wrap items-end justify-between gap-4 pb-7`}>
@@ -402,14 +517,28 @@ export function Reviews() {
           <Eyebrow>{reviews.eyebrow}</Eyebrow>
           <h2 className="font-display text-[clamp(36px,4.4vw,64px)] font-extrabold">{reviews.heading}</h2>
         </div>
-        <span className="text-[13px] text-dim">{reviews.note}</span>
+        <div className="flex items-center gap-4">
+          <span className="text-[13px] text-dim">{reviews.note}</span>
+          <button
+            type="button"
+            onClick={tidy}
+            className="h-11 rounded-full border border-white/20 px-5 text-sm font-semibold text-primary transition-colors hover:border-accent hover:text-accent"
+          >
+            {reviews.tidy}
+          </button>
+        </div>
       </div>
-      <div ref={strip} className="strip flex cursor-grab select-none gap-4 overflow-x-auto py-1.5 [touch-action:pan-x] active:cursor-grabbing">
-        {[...REVIEWS, ...REVIEWS].map((review, i) => (
-          <div key={i} aria-hidden={i >= REVIEWS.length || undefined}>
-            <ReviewCard review={review} />
-          </div>
-        ))}
+      <div className={container}>
+        <div
+          ref={arena}
+          className="relative h-[640px] sm:h-[520px] [&>*]:absolute [&>*]:left-0 [&>*]:top-0 [&>*]:cursor-grab [&>*]:select-none [&>*]:opacity-0 [&>*]:[touch-action:pan-y] active:[&>*]:cursor-grabbing [&[data-ready]>*]:opacity-100"
+        >
+          {REVIEWS.map((review, i) => (
+            <div key={i}>
+              <ReviewCard review={review} />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
