@@ -69,7 +69,8 @@ export const contentMap = {
     reviews: {
       eyebrow: "Loved by users",
       heading: "Real reviews, straight from the stores.",
-      note: "From the App Store and Google Play · drag to browse",
+      note: "From the App Store and Google Play · grab a card and throw it",
+      tidy: "Tidy up",
       translated: "translated from Turkish",
       source: { appStore: "App Store", googlePlay: "Google Play" },
       stars: "5 out of 5 stars",
@@ -327,7 +328,8 @@ export const contentMap = {
     reviews: {
       eyebrow: "Kullanıcılar seviyor",
       heading: "Gerçek yorumlar, doğrudan mağazalardan.",
-      note: "App Store ve Google Play'den · sürükleyerek gez",
+      note: "App Store ve Google Play'den · bir kartı tut ve fırlat",
+      tidy: "Topla",
       translated: "İngilizceden çevrildi",
       source: { appStore: "App Store", googlePlay: "Google Play" },
       stars: "5 üzerinden 5 yıldız",
