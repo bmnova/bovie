@@ -65,6 +65,7 @@ export const contentMap = {
       labHeading: "Next ones are in the lab.",
       labSub: "Built in-house and almost out the door. Open one to get a note on launch day.",
       archiveNote: "An earlier experiment. Still on Google Play, no longer in active development.",
+      storyNav: "Live apps",
     },
     reviews: {
       eyebrow: "Loved by users",
@@ -324,6 +325,7 @@ export const contentMap = {
       labHeading: "Sıradakiler laboratuvarda.",
       labSub: "Ekipte geliştirildi, kapıdan çıkmak üzere. Çıktığı gün haber almak için sayfasını aç.",
       archiveNote: "Önceki bir denememiz. Google Play'de duruyor, artık aktif geliştirilmiyor.",
+      storyNav: "Yayındaki uygulamalar",
     },
     reviews: {
       eyebrow: "Kullanıcılar seviyor",

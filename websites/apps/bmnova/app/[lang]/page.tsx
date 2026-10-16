@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="overflow-hidden">
+      <main className="overflow-x-clip">
         <Hero />
         <Ticker />
         <Numbers />

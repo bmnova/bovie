@@ -1,15 +1,16 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { contentMap, fill } from "@/content";
-import { APP_ORDER, APPS, REVIEWS, SHIP_LOG, SHOWCASE, type AppInfo, type AppSlug } from "@/content/apps";
+import { APP_ORDER, APPS, REVIEWS, SHIP_LOG, SHOWCASE, appStore, type AppInfo, type AppSlug } from "@/content/apps";
 import { useLocale } from "@/app/locale-context";
 import { ArrowIcon } from "@/components/icons";
 import { FounderSocials } from "@/components/FounderSocials";
 import { ReviewCard } from "@/components/ReviewCard";
-import { ScaledScreen } from "@/components/PhoneFrame";
+import { PhoneFrame, ScaledScreen } from "@/components/PhoneFrame";
 import { PaliToday } from "@/components/pali/screens";
 import { BouquetArt } from "@/components/apps/BouquetArt";
 import { usePrefersReducedMotion } from "@/components/motion";
@@ -149,22 +150,6 @@ function CardVisual({ slug }: { slug: AppSlug }) {
   const shot = "transition-[translate] duration-500 ease-out group-hover:[translate:0_-18px]";
 
   switch (slug) {
-    case "pali":
-      return (
-        <div className="relative min-h-[300px] flex-[1_1_240px] overflow-hidden" style={{ background: glow }}>
-          <div className={`absolute left-1/2 top-10 w-[230px] -translate-x-1/2 overflow-hidden rounded-[30px] border-[6px] border-[#1C1C28] shadow-[0_30px_60px_rgba(0,0,0,.5)] ${shot}`}>
-            <ScaledScreen width={390} height={844} decorative>
-              <PaliToday interactive={false} />
-            </ScaledScreen>
-          </div>
-        </div>
-      );
-    case "haki":
-      return (
-        <div className="relative h-[220px] overflow-hidden">
-          <Image src="/apps/haki/panel.webp" alt="" fill sizes="(min-width: 768px) 400px, 100vw" className={`object-cover ${shot}`} />
-        </div>
-      );
     case "nextstep": {
       const t = nsCopy[locale];
       return (
@@ -177,22 +162,12 @@ function CardVisual({ slug }: { slug: AppSlug }) {
         </div>
       );
     }
-    case "bloomish":
+    default:
       return (
         <div className="flex h-[220px] items-center justify-center" style={{ background: glow }}>
           <BouquetArt className={`w-[150px] rounded-full bg-[#FFE4EA] shadow-[0_30px_60px_rgba(0,0,0,.5)] ${shot}`} />
         </div>
       );
-    default: {
-      const src = { fitvibe: "/apps/fitvibe/home.webp", roompace: "/apps/roompace/store-1.webp", offer: "/apps/offer/welcome.webp" }[slug];
-      return (
-        <div className="relative h-[220px] overflow-hidden" style={{ background: glow }}>
-          <div className={`absolute left-1/2 top-7 aspect-[9/19] w-[200px] -translate-x-1/2 overflow-hidden rounded-[26px] border border-white/20 shadow-[0_30px_60px_rgba(0,0,0,.5)] ${shot}`}>
-            <Image src={src} alt="" fill sizes="200px" className="object-cover object-top" />
-          </div>
-        </div>
-      );
-    }
   }
 }
 
@@ -201,50 +176,25 @@ function AppCard({ slug }: { slug: AppSlug }) {
   const { apps } = contentMap[locale];
   const app = APPS[slug];
   const copy = app.copy[locale];
-  const featured = slug === "pali";
-  const pills = (
-    <div className="mt-auto flex flex-wrap items-center gap-2">
-      <StatusPill app={app} />
-      <SecondaryPill>
-        {app.store ? (app.platforms === "both" ? apps.both : apps.android) : apps.notify}
-      </SecondaryPill>
-    </div>
-  );
-  const body = (
-    <>
-      <span className="text-xs font-semibold uppercase tracking-[.12em]" style={{ color: app.color }}>
-        {copy.category}
-      </span>
-      <h3 className={`font-display font-extrabold ${featured ? "text-[44px]" : "text-[34px]"}`}>{app.name}</h3>
-      <p className={`leading-normal text-muted ${featured ? "max-w-[380px] text-[15px]" : "text-sm"}`}>{copy.card}</p>
-      {pills}
-    </>
-  );
 
   return (
     <Link
       href={href(`/projects/${slug}`)}
-      className={`sheen group relative flex min-h-[420px] overflow-hidden rounded-card border bg-card text-primary transition-[transform,border-color] duration-300 hover:-translate-y-2 hover:-rotate-[0.4deg] hover:border-white/30 ${
-        featured ? "flex-wrap sm:col-span-2 lg:col-span-3" : "flex-col"
-      } ${app.status === "live" ? "border-border" : "border-dashed"}`}
-      style={app.status === "live" ? undefined : { borderColor: `${app.color}80` }}
+      className="sheen group relative flex min-h-[420px] flex-col overflow-hidden rounded-card border border-dashed bg-card text-primary transition-[transform,border-color] duration-300 hover:-translate-y-2 hover:-rotate-[0.4deg] hover:border-white/30"
+      style={{ borderColor: `${app.color}80` }}
     >
-      {featured ? (
-        <>
-          <div className="flex flex-[1_1_260px] flex-col gap-3.5 p-8">
-            <div className="flex items-center gap-2.5">
-              <Image src={app.icon} alt="" width={44} height={44} className="rounded-xl" />
-            </div>
-            {body}
-          </div>
-          <CardVisual slug={slug} />
-        </>
-      ) : (
-        <>
-          <CardVisual slug={slug} />
-          <div className="flex flex-1 flex-col gap-2.5 p-6">{body}</div>
-        </>
-      )}
+      <CardVisual slug={slug} />
+      <div className="flex flex-1 flex-col gap-2.5 p-6">
+        <span className="text-xs font-semibold uppercase tracking-[.12em]" style={{ color: app.color }}>
+          {copy.category}
+        </span>
+        <h3 className="font-display text-[34px] font-extrabold">{app.name}</h3>
+        <p className="text-sm leading-normal text-muted">{copy.card}</p>
+        <div className="mt-auto flex flex-wrap items-center gap-2">
+          <StatusPill app={app} />
+          <SecondaryPill>{app.store ? (app.platforms === "both" ? apps.both : apps.android) : apps.notify}</SecondaryPill>
+        </div>
+      </div>
     </Link>
   );
 }
@@ -272,6 +222,139 @@ function ArchivedApp({ slug }: { slug: AppSlug }) {
   );
 }
 
+/** The app screen shown in the story's phone. */
+function StoryScreen({ slug }: { slug: AppSlug }) {
+  return slug === "pali" ? (
+    <ScaledScreen width={390} height={844} decorative>
+      <PaliToday interactive={false} />
+    </ScaledScreen>
+  ) : (
+    <div className="relative aspect-[390/844]">
+      <Image src={`/apps/${slug}/store-1.webp`} alt="" fill sizes="300px" className="object-cover object-top" />
+    </div>
+  );
+}
+
+/**
+ * The live apps as a scroll story: one chapter per app on the left, and on wide screens one sticky
+ * phone on the right whose screen slides to the app in view while the section re-tints to its colour.
+ */
+function AppsStory({ slugs }: { slugs: AppSlug[] }) {
+  const { locale } = useLocale();
+  const { apps, appPage } = contentMap[locale];
+  const reduced = usePrefersReducedMotion();
+  const story = useRef<HTMLDivElement>(null);
+  const chapters = useRef<(HTMLElement | null)[]>([]);
+  const [active, setActive] = useState(0);
+  const [apple, setApple] = useState(false);
+  const last = slugs.length - 1;
+  // Chapter i fills the view when progress is i / last
+  const { scrollYProgress } = useScroll({ target: story, offset: ["start start", "end end"] });
+  useMotionValueEvent(scrollYProgress, "change", (p) => setActive(Math.round(p * last)));
+  // The screen holds while its chapter is in view and slides across in the middle half of the gap
+  const y = useTransform(scrollYProgress, (p) => {
+    const f = p * last;
+    const i = Math.min(Math.floor(f), last - 1);
+    const t = Math.min(1, Math.max(0, (f - i - 0.25) / 0.5));
+    const eased = reduced ? Math.round(t) : t * t * (3 - 2 * t);
+    return `${(-(i + eased) / slugs.length) * 100}%`;
+  });
+
+  useEffect(() => setApple(/iPhone|iPad|Macintosh/.test(navigator.userAgent)), []);
+
+  return (
+    <div ref={story} className="relative">
+      <div className="pointer-events-none absolute inset-0 hidden lg:block">
+        <div className="sticky top-0 h-screen">
+          {slugs.map((slug, i) => (
+            <div
+              key={slug}
+              aria-hidden="true"
+              className={`absolute inset-0 ${reduced ? "" : "transition-opacity duration-700"}`}
+              style={{
+                background: `radial-gradient(60% 70% at 78% 50%, ${APPS[slug].color}3D, transparent 70%)`,
+                opacity: i === active ? 1 : 0,
+              }}
+            />
+          ))}
+          <div className="relative ml-auto flex h-full w-1/2 items-center justify-center gap-12">
+            <PhoneFrame className="w-[clamp(240px,32vh,300px)]" screenClassName="bg-black">
+              <div className="aspect-[390/844] overflow-hidden">
+                <motion.div style={{ y }}>
+                  {slugs.map((slug) => (
+                    <StoryScreen key={slug} slug={slug} />
+                  ))}
+                </motion.div>
+              </div>
+            </PhoneFrame>
+            <nav aria-label={apps.storyNav} className="pointer-events-auto flex flex-col gap-1.5">
+              {slugs.map((slug, i) => (
+                <button
+                  key={slug}
+                  type="button"
+                  aria-current={i === active || undefined}
+                  onClick={() => chapters.current[i]?.scrollIntoView({ behavior: reduced ? "auto" : "smooth" })}
+                  className={`flex h-11 items-center gap-3 px-1.5 text-[15px] font-semibold transition-colors hover:text-primary ${i === active ? "text-primary" : "text-dim"}`}
+                >
+                  <span
+                    className="h-[3px] rounded-full transition-[width] duration-300"
+                    style={{ width: i === active ? 40 : 16, background: i === active ? APPS[slug].color : "rgb(255 255 255 / .2)" }}
+                  />
+                  {APPS[slug].name}
+                </button>
+              ))}
+            </nav>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative flex flex-col gap-20 lg:w-1/2 lg:gap-0">
+        {slugs.map((slug, i) => {
+          const app = APPS[slug];
+          const copy = app.copy[locale];
+          const store = appStore(app);
+          return (
+            <section
+              key={slug}
+              ref={(el) => {
+                chapters.current[i] = el;
+              }}
+              className={`flex flex-col gap-6 lg:min-h-screen lg:justify-center ${reduced ? "" : "transition-opacity duration-300"} ${i === active ? "" : "lg:opacity-25"}`}
+            >
+              <div className="flex items-center gap-3.5">
+                <Image src={app.icon} alt="" width={56} height={56} className="rounded-[14px]" />
+                <span className="flex flex-col gap-0.5">
+                  <strong className="text-lg">{app.name}</strong>
+                  <span className="text-sm" style={{ color: app.color }}>
+                    {copy.tag}
+                  </span>
+                </span>
+              </div>
+              <h3 className="max-w-[14ch] font-display text-[clamp(40px,5vw,72px)] font-extrabold">
+                {copy.heroBefore} {copy.heroAccent}
+              </h3>
+              <p className="max-w-[480px] text-[17px] leading-normal text-muted">{copy.card}</p>
+              {store && (
+                <a
+                  href={apple && "appStore" in store ? store.appStore : store.googlePlay}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-12 w-fit items-center rounded-full bg-accent px-[22px] text-[15px] font-bold text-surface transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_40px_rgba(218,255,71,.32)]"
+                >
+                  {fill(appPage.get, { name: app.name })}
+                </a>
+              )}
+              <PhoneFrame className="mt-4 w-[260px] lg:hidden" screenClassName="bg-black">
+                <StoryScreen slug={slug} />
+              </PhoneFrame>
+            </section>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 export function AppsGrid() {
   const { locale } = useLocale();
   const { apps } = contentMap[locale];
@@ -289,12 +372,7 @@ export function AppsGrid() {
         </div>
         <p className="max-w-[360px] text-[15px] leading-normal text-muted">{apps.sub}</p>
       </div>
-      {/* Pali takes a full row and the last card fills the two-column row, so every row is full */}
-      <div className="stagger grid grid-cols-1 gap-3.5 sm:grid-cols-2 sm:[&>*:last-child]:col-span-2 lg:grid-cols-3 lg:[&>*:last-child]:col-span-1">
-        {live.map((slug) => (
-          <AppCard key={slug} slug={slug} />
-        ))}
-      </div>
+      <AppsStory slugs={live} />
 
       <div className="mb-7 mt-20 flex flex-wrap items-end justify-between gap-5">
         <div className="flex flex-col gap-3">
