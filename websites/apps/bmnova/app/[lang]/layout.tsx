@@ -13,7 +13,7 @@ import "../globals.css";
 
 const display = Bricolage_Grotesque({
   subsets: ["latin", "latin-ext"],
-  axes: ["opsz"],
+  axes: ["opsz", "wdth"],
   variable: "--font-display",
   display: "swap",
 });
