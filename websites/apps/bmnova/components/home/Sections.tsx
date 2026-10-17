@@ -145,12 +145,15 @@ function LabPeek({ slug }: { slug: AppSlug }) {
   const { apps } = contentMap[locale];
   const app = APPS[slug];
   const copy = app.copy[locale];
+  const card = useRef<HTMLAnchorElement>(null);
   const glass = useRef<HTMLDivElement>(null);
-  const aim = (e: React.PointerEvent<HTMLElement>) => {
-    const r = e.currentTarget.getBoundingClientRect();
-    glass.current?.style.setProperty("--x", `${e.clientX - r.left}px`);
-    glass.current?.style.setProperty("--y", `${e.clientY - r.top}px`);
+  const aim = ({ clientX, clientY }: { clientX: number; clientY: number }) => {
+    const r = card.current?.getBoundingClientRect();
+    if (!r) return;
+    glass.current?.style.setProperty("--x", `${clientX - r.left}px`);
+    glass.current?.style.setProperty("--y", `${clientY - r.top}px`);
   };
+  const hide = () => glass.current?.style.removeProperty("--x");
   const promise = (
     <span className="max-w-[12ch] font-display text-[clamp(36px,4vw,48px)] font-extrabold">
       {copy.heroBefore} {copy.heroAccent}
@@ -160,11 +163,15 @@ function LabPeek({ slug }: { slug: AppSlug }) {
 
   return (
     <Link
+      ref={card}
       href={href(`/projects/${slug}`)}
-      onPointerDown={aim}
       onPointerMove={aim}
-      onPointerLeave={() => glass.current?.style.removeProperty("--x")}
-      className="relative flex min-h-[500px] touch-none select-none overflow-hidden rounded-card border border-border bg-card text-primary"
+      // Touch events keep coming while the page scrolls, so the hole follows the finger without blocking the scroll
+      onTouchStart={(e) => aim(e.touches[0])}
+      onTouchMove={(e) => aim(e.touches[0])}
+      onTouchEnd={hide}
+      onPointerLeave={(e) => e.pointerType !== "touch" && hide()}
+      className="relative flex min-h-[500px] select-none overflow-hidden rounded-card border border-border bg-card text-primary"
       style={{ backgroundImage: `radial-gradient(80% 90% at 70% 30%, ${app.color}59, transparent)` }}
     >
       {slug === "nextstep" ? (
@@ -185,7 +192,7 @@ function LabPeek({ slug }: { slug: AppSlug }) {
         </div>
       ) : (
         <>
-          <Image src="/apps/bloomish/banner.webp" alt="" fill sizes="(min-width: 640px) 50vw, 100vw" className="object-cover" />
+          <Image src="/apps/bloomish/splash.webp" alt="" fill sizes="(min-width: 640px) 50vw, 100vw" className="object-cover" />
           <div className="absolute inset-x-0 bottom-0 flex flex-col gap-3.5 bg-gradient-to-t from-surface/85 to-transparent px-[clamp(24px,4vw,48px)] pb-24 pt-10">
             <Image src={app.icon} alt="" width={64} height={64} className="rounded-[15px]" />
             {promise}
