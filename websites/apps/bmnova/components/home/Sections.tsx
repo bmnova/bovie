@@ -278,47 +278,34 @@ function AppsStory({ slugs }: { slugs: AppSlug[] }) {
     return `${(-(i + eased) / slugs.length) * 100}%`;
   });
 
-  // When scrolling stops between two chapters, glide to the nearer one so no app is left half in view
+  // On narrow screens a card sinks back and dims as the next one slides over it, so every step reads as a deck
   useEffect(() => {
-    let timer = 0;
-    let touching = false;
-    const settle = () => {
+    let frame = 0;
+    const update = () => {
+      frame = 0;
       const cards = chapters.current.filter((el): el is HTMLElement => !!el);
-      const column = cards[0]?.parentElement;
-      if (touching || !column) return;
-      const gap = parseFloat(getComputedStyle(column).rowGap) || 0;
-      // Where each chapter is in place: a sticky card has reached its top, a static chapter fills the view
-      let top = column.getBoundingClientRect().top + window.scrollY;
-      const stops = cards.map((card) => {
-        const style = getComputedStyle(card);
-        const stop = top - (style.position === "sticky" ? parseFloat(style.top) : 0);
-        top += card.offsetHeight + gap;
-        return stop;
+      cards.forEach((card, i) => {
+        const next = cards[i + 1];
+        if (reduced || !next || getComputedStyle(card).position !== "sticky") {
+          card.style.transform = card.style.filter = "";
+          return;
+        }
+        const stop = parseFloat(getComputedStyle(next).top);
+        const t = Math.min(1, Math.max(0, 1 - (next.getBoundingClientRect().top - stop) / (window.innerHeight - stop)));
+        card.style.transform = `scale(${1 - 0.08 * t})`;
+        card.style.filter = `brightness(${1 - 0.45 * t})`;
       });
-      const y = window.scrollY;
-      if (y <= stops[0] || y >= stops[stops.length - 1]) return;
-      const nearest = stops.reduce((a, b) => (Math.abs(b - y) < Math.abs(a - y) ? b : a));
-      if (Math.abs(nearest - y) > 2) window.scrollTo({ top: nearest, behavior: reduced ? "auto" : "smooth" });
     };
-    const onScroll = () => {
-      clearTimeout(timer);
-      timer = window.setTimeout(settle, 140);
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update);
     };
-    const onTouchStart = () => {
-      touching = true;
-    };
-    const onTouchEnd = () => {
-      touching = false;
-      onScroll();
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("touchstart", onTouchStart, { passive: true });
-    window.addEventListener("touchend", onTouchEnd);
+    update();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
     return () => {
-      clearTimeout(timer);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("touchstart", onTouchStart);
-      window.removeEventListener("touchend", onTouchEnd);
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
     };
   }, [reduced]);
 
@@ -379,7 +366,7 @@ function AppsStory({ slugs }: { slugs: AppSlug[] }) {
               ref={(el) => {
                 chapters.current[i] = el;
               }}
-              className={`sticky flex flex-col gap-5 overflow-hidden rounded-card border border-border bg-card px-6 pt-6 shadow-[0_-24px_48px_rgba(0,0,0,.45)] lg:static lg:min-h-screen lg:justify-center lg:gap-6 lg:overflow-visible lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none ${reduced ? "" : "transition-opacity duration-300"} ${i === active ? "" : "lg:opacity-25"}`}
+              className={`sticky flex origin-top flex-col gap-5 overflow-hidden rounded-card border border-border bg-card px-6 pt-6 shadow-[0_-24px_48px_rgba(0,0,0,.45)] lg:static lg:min-h-screen lg:justify-center lg:gap-6 lg:overflow-visible lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none ${reduced ? "" : "transition-opacity duration-300"} ${i === active ? "" : "lg:opacity-25"}`}
               style={{ top: 88 + i * 12 }}
             >
               <div
