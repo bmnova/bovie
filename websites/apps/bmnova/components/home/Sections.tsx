@@ -140,8 +140,8 @@ function SecondaryPill({ children }: { children: React.ReactNode }) {
 const TORCH = 150;
 
 /**
- * A lab app behind frosted glass; a torch-shaped hole follows the pointer or a dragging finger.
- * On touch screens the hole starts in the middle of the card and stays where the finger leaves it.
+ * A lab app behind frosted glass with a torch-shaped hole in the middle. The hole follows the pointer or
+ * a dragging finger; it goes back to the middle when the pointer leaves and stays where a finger leaves it.
  */
 function LabPeek({ slug }: { slug: AppSlug }) {
   const { locale, href } = useLocale();
@@ -171,7 +171,11 @@ function LabPeek({ slug }: { slug: AppSlug }) {
       // Touch events keep coming while the page scrolls, so the hole follows the finger without blocking the scroll
       onTouchStart={(e) => aim(e.touches[0])}
       onTouchMove={(e) => aim(e.touches[0])}
-      onPointerLeave={(e) => e.pointerType !== "touch" && glass.current?.style.removeProperty("--x")}
+      onPointerLeave={(e) => {
+        if (e.pointerType === "touch") return;
+        glass.current?.style.removeProperty("--x");
+        glass.current?.style.removeProperty("--y");
+      }}
       className="relative flex min-h-[500px] select-none overflow-hidden rounded-card border border-border bg-card text-primary"
       style={{ backgroundImage: `radial-gradient(80% 90% at 70% 30%, ${app.color}59, transparent)` }}
     >
@@ -203,7 +207,7 @@ function LabPeek({ slug }: { slug: AppSlug }) {
       <div
         ref={glass}
         aria-hidden="true"
-        className="absolute inset-0 bg-card/40 backdrop-blur-[22px] backdrop-saturate-[1.2] [--x:-999px] [--y:-999px] [@media(hover:none)]:[--x:50%] [@media(hover:none)]:[--y:40%]"
+        className="absolute inset-0 bg-card/40 backdrop-blur-[22px] backdrop-saturate-[1.2] [--x:50%] [--y:40%]"
         style={{ maskImage: mask, WebkitMaskImage: mask }}
       />
       <div className="pointer-events-none absolute inset-x-6 bottom-6 flex items-center justify-between gap-3">
@@ -273,6 +277,50 @@ function AppsStory({ slugs }: { slugs: AppSlug[] }) {
     const eased = reduced ? Math.round(t) : t * t * (3 - 2 * t);
     return `${(-(i + eased) / slugs.length) * 100}%`;
   });
+
+  // When scrolling stops between two chapters, glide to the nearer one so no app is left half in view
+  useEffect(() => {
+    let timer = 0;
+    let touching = false;
+    const settle = () => {
+      const cards = chapters.current.filter((el): el is HTMLElement => !!el);
+      const column = cards[0]?.parentElement;
+      if (touching || !column) return;
+      const gap = parseFloat(getComputedStyle(column).rowGap) || 0;
+      // Where each chapter is in place: a sticky card has reached its top, a static chapter fills the view
+      let top = column.getBoundingClientRect().top + window.scrollY;
+      const stops = cards.map((card) => {
+        const style = getComputedStyle(card);
+        const stop = top - (style.position === "sticky" ? parseFloat(style.top) : 0);
+        top += card.offsetHeight + gap;
+        return stop;
+      });
+      const y = window.scrollY;
+      if (y <= stops[0] || y >= stops[stops.length - 1]) return;
+      const nearest = stops.reduce((a, b) => (Math.abs(b - y) < Math.abs(a - y) ? b : a));
+      if (Math.abs(nearest - y) > 2) window.scrollTo({ top: nearest, behavior: reduced ? "auto" : "smooth" });
+    };
+    const onScroll = () => {
+      clearTimeout(timer);
+      timer = window.setTimeout(settle, 140);
+    };
+    const onTouchStart = () => {
+      touching = true;
+    };
+    const onTouchEnd = () => {
+      touching = false;
+      onScroll();
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchend", onTouchEnd);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchend", onTouchEnd);
+    };
+  }, [reduced]);
 
   return (
     <div ref={story} className="relative">
