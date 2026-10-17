@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { contentMap, fill } from "@/content";
@@ -9,9 +10,8 @@ import { useLocale } from "@/app/locale-context";
 import { ArrowIcon } from "@/components/icons";
 import { FounderSocials } from "@/components/FounderSocials";
 import { ReviewCard } from "@/components/ReviewCard";
-import { ScaledScreen } from "@/components/PhoneFrame";
+import { PhoneFrame, ScaledScreen } from "@/components/PhoneFrame";
 import { PaliToday } from "@/components/pali/screens";
-import { BouquetArt } from "@/components/apps/BouquetArt";
 import { usePrefersReducedMotion } from "@/components/motion";
 
 const container = "mx-auto max-w-[1440px] px-[clamp(20px,4vw,56px)]";
@@ -136,115 +136,84 @@ function SecondaryPill({ children }: { children: React.ReactNode }) {
   );
 }
 
-const nsCopy = {
-  en: { label: "Your next step", step: "Send the email. One line. Before lunch.", done: "Done ✓" },
-  tr: { label: "Sıradaki adımın", step: "E-postayı gönder. Tek satır. Öğleden önce.", done: "Tamam ✓" },
-};
+/** Radius of the clear hole the pointer makes in the lab glass, in px */
+const TORCH = 150;
 
-/** The visual at the top of each app card; it lifts on hover. */
-function CardVisual({ slug }: { slug: AppSlug }) {
-  const { locale } = useLocale();
-  const app = APPS[slug];
-  const glow = `radial-gradient(circle at 50% 120%, ${app.color}80, ${app.color}00 60%)`;
-  const shot = "transition-[translate] duration-500 ease-out group-hover:[translate:0_-18px]";
-
-  switch (slug) {
-    case "pali":
-      return (
-        <div className="relative min-h-[300px] flex-[1_1_240px] overflow-hidden" style={{ background: glow }}>
-          <div className={`absolute left-1/2 top-10 w-[230px] -translate-x-1/2 overflow-hidden rounded-[30px] border-[6px] border-[#1C1C28] shadow-[0_30px_60px_rgba(0,0,0,.5)] ${shot}`}>
-            <ScaledScreen width={390} height={844} decorative>
-              <PaliToday interactive={false} />
-            </ScaledScreen>
-          </div>
-        </div>
-      );
-    case "haki":
-      return (
-        <div className="relative h-[220px] overflow-hidden">
-          <Image src="/apps/haki/panel.webp" alt="" fill sizes="(min-width: 768px) 400px, 100vw" className={`object-cover ${shot}`} />
-        </div>
-      );
-    case "nextstep": {
-      const t = nsCopy[locale];
-      return (
-        <div className="flex h-[220px] items-center justify-center" style={{ background: glow }}>
-          <div className={`flex w-[220px] flex-col gap-2 rounded-[18px] border border-white/10 bg-[#101024] p-4 shadow-[0_30px_60px_rgba(0,0,0,.5)] ${shot}`}>
-            <span className="text-[10px] font-semibold uppercase tracking-[.12em] text-app-nextstep">{t.label}</span>
-            <span className="text-sm font-medium leading-snug">{t.step}</span>
-            <span className="inline-flex h-[30px] items-center justify-center rounded-full bg-app-nextstep text-xs font-bold text-surface">{t.done}</span>
-          </div>
-        </div>
-      );
-    }
-    case "bloomish":
-      return (
-        <div className="flex h-[220px] items-center justify-center" style={{ background: glow }}>
-          <BouquetArt className={`w-[150px] rounded-full bg-[#FFE4EA] shadow-[0_30px_60px_rgba(0,0,0,.5)] ${shot}`} />
-        </div>
-      );
-    default: {
-      const src = { fitvibe: "/apps/fitvibe/home.webp", roompace: "/apps/roompace/store-1.webp", offer: "/apps/offer/welcome.webp" }[slug];
-      return (
-        <div className="relative h-[220px] overflow-hidden" style={{ background: glow }}>
-          <div className={`absolute left-1/2 top-7 aspect-[9/19] w-[200px] -translate-x-1/2 overflow-hidden rounded-[26px] border border-white/20 shadow-[0_30px_60px_rgba(0,0,0,.5)] ${shot}`}>
-            <Image src={src} alt="" fill sizes="200px" className="object-cover object-top" />
-          </div>
-        </div>
-      );
-    }
-  }
-}
-
-function AppCard({ slug }: { slug: AppSlug }) {
+/**
+ * A lab app behind frosted glass with a torch-shaped hole in the middle. The hole follows the pointer or
+ * a dragging finger; it goes back to the middle when the pointer leaves and stays where a finger leaves it.
+ */
+function LabPeek({ slug }: { slug: AppSlug }) {
   const { locale, href } = useLocale();
   const { apps } = contentMap[locale];
   const app = APPS[slug];
   const copy = app.copy[locale];
-  const featured = slug === "pali";
-  const pills = (
-    <div className="mt-auto flex flex-wrap items-center gap-2">
-      <StatusPill app={app} />
-      <SecondaryPill>
-        {app.store ? (app.platforms === "both" ? apps.both : apps.android) : apps.notify}
-      </SecondaryPill>
-    </div>
+  const card = useRef<HTMLAnchorElement>(null);
+  const glass = useRef<HTMLDivElement>(null);
+  const aim = ({ clientX, clientY }: { clientX: number; clientY: number }) => {
+    const r = card.current?.getBoundingClientRect();
+    if (!r) return;
+    glass.current?.style.setProperty("--x", `${clientX - r.left}px`);
+    glass.current?.style.setProperty("--y", `${clientY - r.top}px`);
+  };
+  const promise = (
+    <span className="max-w-[12ch] font-display text-[clamp(30px,4vw,48px)] font-extrabold">
+      {copy.heroBefore} {copy.heroAccent}
+    </span>
   );
-  const body = (
-    <>
-      <span className="text-xs font-semibold uppercase tracking-[.12em]" style={{ color: app.color }}>
-        {copy.category}
-      </span>
-      <h3 className={`font-display font-extrabold ${featured ? "text-[44px]" : "text-[34px]"}`}>{app.name}</h3>
-      <p className={`leading-normal text-muted ${featured ? "max-w-[380px] text-[15px]" : "text-sm"}`}>{copy.card}</p>
-      {pills}
-    </>
-  );
+  const mask = `radial-gradient(circle ${TORCH}px at var(--x) var(--y), transparent 62%, #000)`;
 
   return (
     <Link
+      ref={card}
       href={href(`/projects/${slug}`)}
-      className={`sheen group relative flex min-h-[420px] overflow-hidden rounded-card border bg-card text-primary transition-[transform,border-color] duration-300 hover:-translate-y-2 hover:-rotate-[0.4deg] hover:border-white/30 ${
-        featured ? "flex-wrap sm:col-span-2 lg:col-span-3" : "flex-col"
-      } ${app.status === "live" ? "border-border" : "border-dashed"}`}
-      style={app.status === "live" ? undefined : { borderColor: `${app.color}80` }}
+      onPointerMove={aim}
+      // Touch events keep coming while the page scrolls, so the hole follows the finger without blocking the scroll
+      onTouchStart={(e) => aim(e.touches[0])}
+      onTouchMove={(e) => aim(e.touches[0])}
+      onPointerLeave={(e) => {
+        if (e.pointerType === "touch") return;
+        glass.current?.style.removeProperty("--x");
+        glass.current?.style.removeProperty("--y");
+      }}
+      className="relative flex min-h-[460px] w-[85%] shrink-0 snap-center select-none overflow-hidden rounded-card border border-border bg-card text-primary sm:min-h-[500px] sm:w-auto"
+      style={{ backgroundImage: `radial-gradient(80% 90% at 70% 30%, ${app.color}59, transparent)` }}
     >
-      {featured ? (
-        <>
-          <div className="flex flex-[1_1_260px] flex-col gap-3.5 p-8">
-            <div className="flex items-center gap-2.5">
-              <Image src={app.icon} alt="" width={44} height={44} className="rounded-xl" />
-            </div>
-            {body}
+      {slug === "nextstep" ? (
+        <div className="flex flex-1 flex-col justify-center gap-4 p-[clamp(24px,4vw,48px)] pb-24 sm:gap-[22px]">
+          <Image src={app.icon} alt="" width={72} height={72} className="h-14 w-14 rounded-[14px] sm:h-[72px] sm:w-[72px] sm:rounded-[17px]" />
+          {promise}
+          <div className="flex max-w-[380px] flex-col gap-2.5 text-[15px] font-semibold">
+            {apps.nextStepRows.map((row, i) => (
+              <span
+                key={row}
+                className={`flex h-10 items-center rounded-2xl px-[18px] sm:h-12 ${i === 2 ? "font-bold text-surface" : ""}`}
+                style={{ background: i === 2 ? app.color : `${app.color}${i ? "52" : "38"}` }}
+              >
+                {row}
+              </span>
+            ))}
           </div>
-          <CardVisual slug={slug} />
-        </>
+        </div>
       ) : (
         <>
-          <CardVisual slug={slug} />
-          <div className="flex flex-1 flex-col gap-2.5 p-6">{body}</div>
+          <Image src="/apps/bloomish/splash.webp" alt="" fill sizes="(min-width: 640px) 50vw, 100vw" className="object-cover" />
+          <div className="absolute inset-x-0 bottom-0 flex flex-col gap-3.5 bg-gradient-to-t from-surface/85 to-transparent px-[clamp(24px,4vw,48px)] pb-24 pt-10">
+            <Image src={app.icon} alt="" width={64} height={64} className="rounded-[15px]" />
+            {promise}
+          </div>
         </>
       )}
+      <div
+        ref={glass}
+        aria-hidden="true"
+        className="absolute inset-0 bg-card/40 backdrop-blur-[22px] backdrop-saturate-[1.2] [--x:50%] [--y:40%]"
+        style={{ maskImage: mask, WebkitMaskImage: mask }}
+      />
+      <div className="pointer-events-none absolute inset-x-6 bottom-6 flex items-center justify-between gap-3">
+        <strong className="font-display text-[26px] font-extrabold">{app.name}</strong>
+        <StatusPill app={app} />
+      </div>
     </Link>
   );
 }
@@ -272,6 +241,177 @@ function ArchivedApp({ slug }: { slug: AppSlug }) {
   );
 }
 
+/** The app screen shown in the story's phone. */
+function StoryScreen({ slug }: { slug: AppSlug }) {
+  return slug === "pali" ? (
+    <ScaledScreen width={390} height={844} decorative>
+      <PaliToday interactive={false} />
+    </ScaledScreen>
+  ) : (
+    <div className="relative aspect-[390/844]">
+      <Image src={`/apps/${slug}/store-1.webp`} alt="" fill sizes="300px" className="object-cover object-top" />
+    </div>
+  );
+}
+
+/**
+ * The live apps as a scroll story: one chapter per app on the left, and on wide screens one sticky
+ * phone on the right whose screen slides to the app in view while the section re-tints to its colour.
+ */
+function AppsStory({ slugs }: { slugs: AppSlug[] }) {
+  const { locale, href } = useLocale();
+  const { apps, appPage } = contentMap[locale];
+  const reduced = usePrefersReducedMotion();
+  const story = useRef<HTMLDivElement>(null);
+  const chapters = useRef<(HTMLElement | null)[]>([]);
+  const [active, setActive] = useState(0);
+  const last = slugs.length - 1;
+  // Chapter i fills the view when progress is i / last
+  const { scrollYProgress } = useScroll({ target: story, offset: ["start start", "end end"] });
+  useMotionValueEvent(scrollYProgress, "change", (p) => setActive(Math.round(p * last)));
+  // The screen moves with the chapters, so the next app's screen and copy arrive together
+  const y = useTransform(scrollYProgress, (p) => `${(-(reduced ? Math.round(p * last) : p * last) / slugs.length) * 100}%`);
+
+  // On narrow screens a card sinks back and dims as the next one slides over it, so every step reads as a deck
+  useEffect(() => {
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const cards = chapters.current.filter((el): el is HTMLElement => !!el);
+      cards.forEach((card, i) => {
+        const next = cards[i + 1];
+        if (reduced || !next || getComputedStyle(card).position !== "sticky") {
+          card.style.transform = card.style.filter = "";
+          return;
+        }
+        const stop = parseFloat(getComputedStyle(next).top);
+        const t = Math.min(1, Math.max(0, 1 - (next.getBoundingClientRect().top - stop) / (window.innerHeight - stop)));
+        card.style.transform = `scale(${1 - 0.08 * t})`;
+        card.style.filter = `brightness(${1 - 0.45 * t})`;
+      });
+    };
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
+  }, [reduced]);
+
+  return (
+    <div ref={story} className="relative">
+      <div className="pointer-events-none absolute inset-0 hidden lg:block">
+        <div className="sticky top-0 h-screen">
+          {slugs.map((slug, i) => (
+            <div
+              key={slug}
+              aria-hidden="true"
+              className={`absolute inset-0 ${reduced ? "" : "transition-opacity duration-700"}`}
+              style={{
+                background: `radial-gradient(60% 70% at 78% 50%, ${APPS[slug].color}3D, transparent 70%)`,
+                opacity: i === active ? 1 : 0,
+              }}
+            />
+          ))}
+          <div className="relative ml-auto flex h-full w-1/2 items-center justify-center gap-12">
+            <PhoneFrame className="w-[clamp(240px,32vh,300px)]" screenClassName="bg-black">
+              <div className="aspect-[390/844] overflow-hidden">
+                <motion.div style={{ y }}>
+                  {slugs.map((slug) => (
+                    <StoryScreen key={slug} slug={slug} />
+                  ))}
+                </motion.div>
+              </div>
+            </PhoneFrame>
+            {/* A fixed width keeps the phone still while the active bar grows and the names differ in length */}
+            <nav aria-label={apps.storyNav} className="pointer-events-auto flex w-40 flex-col gap-1.5">
+              {slugs.map((slug, i) => (
+                <button
+                  key={slug}
+                  type="button"
+                  aria-current={i === active || undefined}
+                  onClick={() => chapters.current[i]?.scrollIntoView({ behavior: reduced ? "auto" : "smooth" })}
+                  className={`flex h-11 items-center gap-3 px-1.5 text-[15px] font-semibold transition-colors hover:text-primary ${i === active ? "text-primary" : "text-dim"}`}
+                >
+                  <span
+                    className="h-[3px] rounded-full transition-[width] duration-300"
+                    style={{ width: i === active ? 40 : 16, background: i === active ? APPS[slug].color : "rgb(255 255 255 / .2)" }}
+                  />
+                  {APPS[slug].name}
+                </button>
+              ))}
+            </nav>
+          </div>
+        </div>
+      </div>
+
+      {/* On narrow screens the chapters are cards that stick under the navbar, so each app slides in over the last */}
+      <div className="relative flex flex-col gap-[30vh] lg:w-1/2 lg:gap-0">
+        {slugs.map((slug, i) => {
+          const app = APPS[slug];
+          const copy = app.copy[locale];
+          return (
+            <section
+              key={slug}
+              ref={(el) => {
+                chapters.current[i] = el;
+              }}
+              className={`sticky flex origin-top flex-col gap-4 overflow-hidden rounded-card border border-border bg-card px-6 pt-6 shadow-[0_-24px_48px_rgba(0,0,0,.45)] lg:static lg:min-h-screen lg:justify-center lg:gap-6 lg:overflow-visible lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none ${reduced ? "" : "transition-opacity duration-300"} ${i === active ? "" : "lg:opacity-25"}`}
+              style={{ top: 88 + i * 12 }}
+            >
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 lg:hidden"
+                style={{ background: `radial-gradient(90% 60% at 80% 100%, ${app.color}40, transparent)` }}
+              />
+              {/* On a phone the card stays compact so the screenshot gets most of the room */}
+              <div className="relative flex items-center gap-3.5">
+                <Image src={app.icon} alt="" width={56} height={56} className="h-11 w-11 rounded-xl lg:h-14 lg:w-14 lg:rounded-[14px]" />
+                <span className="flex flex-col gap-0.5">
+                  <strong className="text-lg">{app.name}</strong>
+                  <span className="text-sm" style={{ color: app.color }}>
+                    {copy.tag}
+                  </span>
+                </span>
+                <span className="ml-auto lg:hidden">
+                  <StatusPill app={app} />
+                </span>
+              </div>
+              <h3 className="relative font-display text-[clamp(28px,5vw,72px)] font-extrabold lg:max-w-[14ch]">
+                {copy.heroBefore} {copy.heroAccent}
+              </h3>
+              <p className="relative line-clamp-2 max-w-[480px] text-[15px] leading-normal text-muted lg:line-clamp-none lg:text-[17px]">{copy.card}</p>
+              <div className="relative flex flex-wrap items-center gap-2">
+                <Link
+                  href={href(`/projects/${slug}`)}
+                  className="mr-2 inline-flex h-11 items-center rounded-full bg-accent px-5 text-sm font-bold text-surface transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_40px_rgba(218,255,71,.32)] lg:h-12 lg:px-[22px] lg:text-[15px]"
+                >
+                  {fill(appPage.get, { name: app.name })}
+                </Link>
+                <span className="hidden lg:contents">
+                  <StatusPill app={app} />
+                </span>
+                <SecondaryPill>{app.platforms === "both" ? apps.both : apps.android}</SecondaryPill>
+              </div>
+              {/* The phone rises out of the card's bottom edge, cropped to what fits under the copy */}
+              <div className="relative h-[clamp(220px,calc(100svh-440px),440px)] overflow-hidden lg:hidden">
+                <PhoneFrame className="mx-auto w-[260px]" screenClassName="bg-black">
+                  <StoryScreen slug={slug} />
+                </PhoneFrame>
+              </div>
+            </section>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 export function AppsGrid() {
   const { locale } = useLocale();
   const { apps } = contentMap[locale];
@@ -289,23 +429,22 @@ export function AppsGrid() {
         </div>
         <p className="max-w-[360px] text-[15px] leading-normal text-muted">{apps.sub}</p>
       </div>
-      {/* Pali takes a full row and the last card fills the two-column row, so every row is full */}
-      <div className="stagger grid grid-cols-1 gap-3.5 sm:grid-cols-2 sm:[&>*:last-child]:col-span-2 lg:grid-cols-3 lg:[&>*:last-child]:col-span-1">
-        {live.map((slug) => (
-          <AppCard key={slug} slug={slug} />
-        ))}
-      </div>
+      <AppsStory slugs={live} />
 
       <div className="mb-7 mt-20 flex flex-wrap items-end justify-between gap-5">
         <div className="flex flex-col gap-3">
           <Eyebrow>{apps.labEyebrow}</Eyebrow>
           <h3 className="font-display text-[clamp(32px,4vw,56px)] font-extrabold">{apps.labHeading}</h3>
         </div>
-        <p className="max-w-[360px] text-[15px] leading-normal text-muted">{apps.labSub}</p>
+        <div className="flex max-w-[360px] flex-col gap-2">
+          <p className="text-[15px] leading-normal text-muted">{apps.labSub}</p>
+          <span className="text-[13px] text-dim">{apps.peekHint}</span>
+        </div>
       </div>
-      <div className="stagger grid grid-cols-1 gap-3.5 sm:grid-cols-2">
+      {/* On a phone the lab cards sit side by side in a swipe row, so they take one card's height */}
+      <div className="stagger strip -mx-[clamp(20px,4vw,56px)] flex snap-x snap-mandatory gap-3.5 overflow-x-auto px-[clamp(20px,4vw,56px)] sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0">
         {lab.map((slug) => (
-          <AppCard key={slug} slug={slug} />
+          <LabPeek key={slug} slug={slug} />
         ))}
       </div>
 
