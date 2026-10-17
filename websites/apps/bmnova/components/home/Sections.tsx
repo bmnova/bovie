@@ -5,7 +5,7 @@ import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-mot
 import Image from "next/image";
 import Link from "next/link";
 import { contentMap, fill } from "@/content";
-import { APP_ORDER, APPS, REVIEWS, SHIP_LOG, SHOWCASE, appStore, type AppInfo, type AppSlug } from "@/content/apps";
+import { APP_ORDER, APPS, REVIEWS, SHIP_LOG, SHOWCASE, type AppInfo, type AppSlug } from "@/content/apps";
 import { useLocale } from "@/app/locale-context";
 import { ArrowIcon } from "@/components/icons";
 import { FounderSocials } from "@/components/FounderSocials";
@@ -139,7 +139,10 @@ function SecondaryPill({ children }: { children: React.ReactNode }) {
 /** Radius of the clear hole the pointer makes in the lab glass, in px */
 const TORCH = 150;
 
-/** A lab app behind frosted glass; a torch-shaped hole follows the pointer or a dragging finger. */
+/**
+ * A lab app behind frosted glass; a torch-shaped hole follows the pointer or a dragging finger.
+ * On touch screens the hole starts in the middle of the card and stays where the finger leaves it.
+ */
 function LabPeek({ slug }: { slug: AppSlug }) {
   const { locale, href } = useLocale();
   const { apps } = contentMap[locale];
@@ -153,7 +156,6 @@ function LabPeek({ slug }: { slug: AppSlug }) {
     glass.current?.style.setProperty("--x", `${clientX - r.left}px`);
     glass.current?.style.setProperty("--y", `${clientY - r.top}px`);
   };
-  const hide = () => glass.current?.style.removeProperty("--x");
   const promise = (
     <span className="max-w-[12ch] font-display text-[clamp(36px,4vw,48px)] font-extrabold">
       {copy.heroBefore} {copy.heroAccent}
@@ -169,8 +171,7 @@ function LabPeek({ slug }: { slug: AppSlug }) {
       // Touch events keep coming while the page scrolls, so the hole follows the finger without blocking the scroll
       onTouchStart={(e) => aim(e.touches[0])}
       onTouchMove={(e) => aim(e.touches[0])}
-      onTouchEnd={hide}
-      onPointerLeave={(e) => e.pointerType !== "touch" && hide()}
+      onPointerLeave={(e) => e.pointerType !== "touch" && glass.current?.style.removeProperty("--x")}
       className="relative flex min-h-[500px] select-none overflow-hidden rounded-card border border-border bg-card text-primary"
       style={{ backgroundImage: `radial-gradient(80% 90% at 70% 30%, ${app.color}59, transparent)` }}
     >
@@ -202,7 +203,7 @@ function LabPeek({ slug }: { slug: AppSlug }) {
       <div
         ref={glass}
         aria-hidden="true"
-        className="absolute inset-0 bg-card/40 backdrop-blur-[22px] backdrop-saturate-[1.2] [--x:-999px] [--y:-999px]"
+        className="absolute inset-0 bg-card/40 backdrop-blur-[22px] backdrop-saturate-[1.2] [--x:-999px] [--y:-999px] [@media(hover:none)]:[--x:50%] [@media(hover:none)]:[--y:40%]"
         style={{ maskImage: mask, WebkitMaskImage: mask }}
       />
       <div className="pointer-events-none absolute inset-x-6 bottom-6 flex items-center justify-between gap-3">
@@ -254,13 +255,12 @@ function StoryScreen({ slug }: { slug: AppSlug }) {
  * phone on the right whose screen slides to the app in view while the section re-tints to its colour.
  */
 function AppsStory({ slugs }: { slugs: AppSlug[] }) {
-  const { locale } = useLocale();
+  const { locale, href } = useLocale();
   const { apps, appPage } = contentMap[locale];
   const reduced = usePrefersReducedMotion();
   const story = useRef<HTMLDivElement>(null);
   const chapters = useRef<(HTMLElement | null)[]>([]);
   const [active, setActive] = useState(0);
-  const [apple, setApple] = useState(false);
   const last = slugs.length - 1;
   // Chapter i fills the view when progress is i / last
   const { scrollYProgress } = useScroll({ target: story, offset: ["start start", "end end"] });
@@ -273,8 +273,6 @@ function AppsStory({ slugs }: { slugs: AppSlug[] }) {
     const eased = reduced ? Math.round(t) : t * t * (3 - 2 * t);
     return `${(-(i + eased) / slugs.length) * 100}%`;
   });
-
-  useEffect(() => setApple(/iPhone|iPad|Macintosh/.test(navigator.userAgent)), []);
 
   return (
     <div ref={story} className="relative">
@@ -322,20 +320,26 @@ function AppsStory({ slugs }: { slugs: AppSlug[] }) {
         </div>
       </div>
 
-      <div className="relative flex flex-col gap-20 lg:w-1/2 lg:gap-0">
+      {/* On narrow screens the chapters are cards that stick under the navbar, so each app slides in over the last */}
+      <div className="relative flex flex-col gap-[30vh] lg:w-1/2 lg:gap-0">
         {slugs.map((slug, i) => {
           const app = APPS[slug];
           const copy = app.copy[locale];
-          const store = appStore(app);
           return (
             <section
               key={slug}
               ref={(el) => {
                 chapters.current[i] = el;
               }}
-              className={`flex flex-col gap-6 lg:min-h-screen lg:justify-center ${reduced ? "" : "transition-opacity duration-300"} ${i === active ? "" : "lg:opacity-25"}`}
+              className={`sticky flex flex-col gap-5 overflow-hidden rounded-card border border-border bg-card px-6 pt-6 shadow-[0_-24px_48px_rgba(0,0,0,.45)] lg:static lg:min-h-screen lg:justify-center lg:gap-6 lg:overflow-visible lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none ${reduced ? "" : "transition-opacity duration-300"} ${i === active ? "" : "lg:opacity-25"}`}
+              style={{ top: 88 + i * 12 }}
             >
-              <div className="flex items-center gap-3.5">
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 lg:hidden"
+                style={{ background: `radial-gradient(90% 60% at 80% 100%, ${app.color}40, transparent)` }}
+              />
+              <div className="relative flex items-center gap-3.5">
                 <Image src={app.icon} alt="" width={56} height={56} className="rounded-[14px]" />
                 <span className="flex flex-col gap-0.5">
                   <strong className="text-lg">{app.name}</strong>
@@ -344,23 +348,26 @@ function AppsStory({ slugs }: { slugs: AppSlug[] }) {
                   </span>
                 </span>
               </div>
-              <h3 className="max-w-[14ch] font-display text-[clamp(40px,5vw,72px)] font-extrabold">
+              <h3 className="relative max-w-[14ch] font-display text-[clamp(32px,5vw,72px)] font-extrabold">
                 {copy.heroBefore} {copy.heroAccent}
               </h3>
-              <p className="max-w-[480px] text-[17px] leading-normal text-muted">{copy.card}</p>
-              {store && (
-                <a
-                  href={apple && "appStore" in store ? store.appStore : store.googlePlay}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex h-12 w-fit items-center rounded-full bg-accent px-[22px] text-[15px] font-bold text-surface transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_40px_rgba(218,255,71,.32)]"
+              <p className="relative max-w-[480px] text-[15px] leading-normal text-muted lg:text-[17px]">{copy.card}</p>
+              <div className="relative flex flex-wrap items-center gap-2">
+                <Link
+                  href={href(`/projects/${slug}`)}
+                  className="mr-2 inline-flex h-12 items-center rounded-full bg-accent px-[22px] text-[15px] font-bold text-surface transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_40px_rgba(218,255,71,.32)]"
                 >
                   {fill(appPage.get, { name: app.name })}
-                </a>
-              )}
-              <PhoneFrame className="mt-4 w-[260px] lg:hidden" screenClassName="bg-black">
-                <StoryScreen slug={slug} />
-              </PhoneFrame>
+                </Link>
+                <StatusPill app={app} />
+                <SecondaryPill>{app.platforms === "both" ? apps.both : apps.android}</SecondaryPill>
+              </div>
+              {/* The phone rises out of the card's bottom edge, cropped to what fits under the copy */}
+              <div className="relative h-[clamp(120px,calc(100svh-560px),260px)] overflow-hidden lg:hidden">
+                <PhoneFrame className="mx-auto w-[240px]" screenClassName="bg-black">
+                  <StoryScreen slug={slug} />
+                </PhoneFrame>
+              </div>
             </section>
           );
         })}
