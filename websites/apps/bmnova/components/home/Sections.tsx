@@ -157,7 +157,7 @@ function LabPeek({ slug }: { slug: AppSlug }) {
     glass.current?.style.setProperty("--y", `${clientY - r.top}px`);
   };
   const promise = (
-    <span className="max-w-[12ch] font-display text-[clamp(36px,4vw,48px)] font-extrabold">
+    <span className="max-w-[12ch] font-display text-[clamp(30px,4vw,48px)] font-extrabold">
       {copy.heroBefore} {copy.heroAccent}
     </span>
   );
@@ -176,18 +176,18 @@ function LabPeek({ slug }: { slug: AppSlug }) {
         glass.current?.style.removeProperty("--x");
         glass.current?.style.removeProperty("--y");
       }}
-      className="relative flex min-h-[500px] select-none overflow-hidden rounded-card border border-border bg-card text-primary"
+      className="relative flex min-h-[460px] w-[85%] shrink-0 snap-center select-none overflow-hidden rounded-card border border-border bg-card text-primary sm:min-h-[500px] sm:w-auto"
       style={{ backgroundImage: `radial-gradient(80% 90% at 70% 30%, ${app.color}59, transparent)` }}
     >
       {slug === "nextstep" ? (
-        <div className="flex flex-1 flex-col justify-center gap-[22px] p-[clamp(24px,4vw,48px)] pb-24">
-          <Image src={app.icon} alt="" width={72} height={72} className="rounded-[17px]" />
+        <div className="flex flex-1 flex-col justify-center gap-4 p-[clamp(24px,4vw,48px)] pb-24 sm:gap-[22px]">
+          <Image src={app.icon} alt="" width={72} height={72} className="h-14 w-14 rounded-[14px] sm:h-[72px] sm:w-[72px] sm:rounded-[17px]" />
           {promise}
           <div className="flex max-w-[380px] flex-col gap-2.5 text-[15px] font-semibold">
             {apps.nextStepRows.map((row, i) => (
               <span
                 key={row}
-                className={`flex h-12 items-center rounded-2xl px-[18px] ${i === 2 ? "font-bold text-surface" : ""}`}
+                className={`flex h-10 items-center rounded-2xl px-[18px] sm:h-12 ${i === 2 ? "font-bold text-surface" : ""}`}
                 style={{ background: i === 2 ? app.color : `${app.color}${i ? "52" : "38"}` }}
               >
                 {row}
@@ -366,7 +366,7 @@ function AppsStory({ slugs }: { slugs: AppSlug[] }) {
               ref={(el) => {
                 chapters.current[i] = el;
               }}
-              className={`sticky flex origin-top flex-col gap-5 overflow-hidden rounded-card border border-border bg-card px-6 pt-6 shadow-[0_-24px_48px_rgba(0,0,0,.45)] lg:static lg:min-h-screen lg:justify-center lg:gap-6 lg:overflow-visible lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none ${reduced ? "" : "transition-opacity duration-300"} ${i === active ? "" : "lg:opacity-25"}`}
+              className={`sticky flex origin-top flex-col gap-4 overflow-hidden rounded-card border border-border bg-card px-6 pt-6 shadow-[0_-24px_48px_rgba(0,0,0,.45)] lg:static lg:min-h-screen lg:justify-center lg:gap-6 lg:overflow-visible lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none ${reduced ? "" : "transition-opacity duration-300"} ${i === active ? "" : "lg:opacity-25"}`}
               style={{ top: 88 + i * 12 }}
             >
               <div
@@ -374,32 +374,38 @@ function AppsStory({ slugs }: { slugs: AppSlug[] }) {
                 className="pointer-events-none absolute inset-0 lg:hidden"
                 style={{ background: `radial-gradient(90% 60% at 80% 100%, ${app.color}40, transparent)` }}
               />
+              {/* On a phone the card stays compact so the screenshot gets most of the room */}
               <div className="relative flex items-center gap-3.5">
-                <Image src={app.icon} alt="" width={56} height={56} className="rounded-[14px]" />
+                <Image src={app.icon} alt="" width={56} height={56} className="h-11 w-11 rounded-xl lg:h-14 lg:w-14 lg:rounded-[14px]" />
                 <span className="flex flex-col gap-0.5">
                   <strong className="text-lg">{app.name}</strong>
                   <span className="text-sm" style={{ color: app.color }}>
                     {copy.tag}
                   </span>
                 </span>
+                <span className="ml-auto lg:hidden">
+                  <StatusPill app={app} />
+                </span>
               </div>
-              <h3 className="relative max-w-[14ch] font-display text-[clamp(32px,5vw,72px)] font-extrabold">
+              <h3 className="relative font-display text-[clamp(28px,5vw,72px)] font-extrabold lg:max-w-[14ch]">
                 {copy.heroBefore} {copy.heroAccent}
               </h3>
-              <p className="relative max-w-[480px] text-[15px] leading-normal text-muted lg:text-[17px]">{copy.card}</p>
+              <p className="relative line-clamp-2 max-w-[480px] text-[15px] leading-normal text-muted lg:line-clamp-none lg:text-[17px]">{copy.card}</p>
               <div className="relative flex flex-wrap items-center gap-2">
                 <Link
                   href={href(`/projects/${slug}`)}
-                  className="mr-2 inline-flex h-12 items-center rounded-full bg-accent px-[22px] text-[15px] font-bold text-surface transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_40px_rgba(218,255,71,.32)]"
+                  className="mr-2 inline-flex h-11 items-center rounded-full bg-accent px-5 text-sm font-bold text-surface transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_40px_rgba(218,255,71,.32)] lg:h-12 lg:px-[22px] lg:text-[15px]"
                 >
                   {fill(appPage.get, { name: app.name })}
                 </Link>
-                <StatusPill app={app} />
+                <span className="hidden lg:contents">
+                  <StatusPill app={app} />
+                </span>
                 <SecondaryPill>{app.platforms === "both" ? apps.both : apps.android}</SecondaryPill>
               </div>
               {/* The phone rises out of the card's bottom edge, cropped to what fits under the copy */}
-              <div className="relative h-[clamp(120px,calc(100svh-560px),260px)] overflow-hidden lg:hidden">
-                <PhoneFrame className="mx-auto w-[240px]" screenClassName="bg-black">
+              <div className="relative h-[clamp(220px,calc(100svh-440px),440px)] overflow-hidden lg:hidden">
+                <PhoneFrame className="mx-auto w-[260px]" screenClassName="bg-black">
                   <StoryScreen slug={slug} />
                 </PhoneFrame>
               </div>
@@ -440,7 +446,8 @@ export function AppsGrid() {
           <span className="text-[13px] text-dim">{apps.peekHint}</span>
         </div>
       </div>
-      <div className="stagger grid grid-cols-1 gap-3.5 sm:grid-cols-2">
+      {/* On a phone the lab cards sit side by side in a swipe row, so they take one card's height */}
+      <div className="stagger strip -mx-[clamp(20px,4vw,56px)] flex snap-x snap-mandatory gap-3.5 overflow-x-auto px-[clamp(20px,4vw,56px)] sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0">
         {lab.map((slug) => (
           <LabPeek key={slug} slug={slug} />
         ))}
