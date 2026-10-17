@@ -269,14 +269,8 @@ function AppsStory({ slugs }: { slugs: AppSlug[] }) {
   // Chapter i fills the view when progress is i / last
   const { scrollYProgress } = useScroll({ target: story, offset: ["start start", "end end"] });
   useMotionValueEvent(scrollYProgress, "change", (p) => setActive(Math.round(p * last)));
-  // The screen holds while its chapter is in view and slides across in the middle half of the gap
-  const y = useTransform(scrollYProgress, (p) => {
-    const f = p * last;
-    const i = Math.min(Math.floor(f), last - 1);
-    const t = Math.min(1, Math.max(0, (f - i - 0.25) / 0.5));
-    const eased = reduced ? Math.round(t) : t * t * (3 - 2 * t);
-    return `${(-(i + eased) / slugs.length) * 100}%`;
-  });
+  // The screen moves with the chapters, so the next app's screen and copy arrive together
+  const y = useTransform(scrollYProgress, (p) => `${(-(reduced ? Math.round(p * last) : p * last) / slugs.length) * 100}%`);
 
   // On narrow screens a card sinks back and dims as the next one slides over it, so every step reads as a deck
   useEffect(() => {
