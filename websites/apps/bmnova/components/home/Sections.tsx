@@ -328,7 +328,8 @@ function AppsStory({ slugs }: { slugs: AppSlug[] }) {
                 </motion.div>
               </div>
             </PhoneFrame>
-            <nav aria-label={apps.storyNav} className="pointer-events-auto flex flex-col gap-1.5">
+            {/* A fixed width keeps the phone still while the active bar grows and the names differ in length */}
+            <nav aria-label={apps.storyNav} className="pointer-events-auto flex w-40 flex-col gap-1.5">
               {slugs.map((slug, i) => (
                 <button
                   key={slug}
