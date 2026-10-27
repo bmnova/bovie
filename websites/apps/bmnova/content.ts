@@ -49,7 +49,7 @@ export const contentMap = {
       downloads: { label: "downloads", sub: "across iOS and Android" },
       ratings: { label: "store ratings", sub: "and {n}+ written reviews" },
       inhouse: { label: "in-house", sub: "design, code, AI, growth" },
-      founded: { label: "founded", sub: "Ostim Teknokent, Ankara" },
+      founded: { label: "founded", sub: "December 2025 · Ostim Teknokent, Ankara" },
     },
     apps: {
       eyebrow: "The apps",
@@ -310,7 +310,7 @@ export const contentMap = {
       downloads: { label: "indirme", sub: "iOS ve Android'de" },
       ratings: { label: "mağaza puanı", sub: "ve {n}+ yazılı yorum" },
       inhouse: { label: "kendi ekibimiz", sub: "tasarım, kod, yapay zekâ, büyüme" },
-      founded: { label: "kuruluş", sub: "Ostim Teknokent, Ankara" },
+      founded: { label: "kuruluş", sub: "Aralık 2025 · Ostim Teknokent, Ankara" },
     },
     apps: {
       eyebrow: "Uygulamalar",
