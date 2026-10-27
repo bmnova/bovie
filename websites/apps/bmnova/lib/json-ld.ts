@@ -43,6 +43,7 @@ export function organizationJsonLd(locale: Locale = "en") {
     email: "contact@bmnova.com",
     description: ORG_DESCRIPTION[locale],
     slogan: locale === "tr" ? "Küçük stüdyo. Büyük uygulamalar." : "Tiny studio. Big apps.",
+    foundingDate: "2025-12",
     foundingLocation: {
       "@type": "Place",
       name: "Ostim Teknokent",
