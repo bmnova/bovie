@@ -31,6 +31,14 @@ const ORG_DESCRIPTION: Record<Locale, string> = {
   tr: "BMNova (BMNova Innovations), Ankara Ostim Teknokent'te kurulu bir mobil uygulama stüdyosu ve tüketici uygulaması startup'ıdır. Kendi yapay zekâ uygulamalarını tasarlar, geliştirir ve yayınlar: Pali, FitVibe, Haki, RoomPace, NextStep, Bloomish ve Offer.",
 };
 
+// App Store links carry App Store Connect campaign parameters; structured data
+// uses the bare listing URL.
+function canonicalStoreUrls(links: Record<string, string>) {
+  return Object.values(links).map((url) =>
+    url.startsWith("https://apps.apple.com/") ? url.split("?")[0] : url,
+  );
+}
+
 export function organizationJsonLd(locale: Locale = "en") {
   return {
     "@context": "https://schema.org",
@@ -108,7 +116,7 @@ export function organizationJsonLd(locale: Locale = "en") {
       })),
     },
     sameAs: [
-      ...Object.values(storeLinks).flatMap((links) => Object.values(links)),
+      ...Object.values(storeLinks).flatMap(canonicalStoreUrls),
       ...FIRST_PARTY_EXTERNAL.map((p) => p.url),
     ],
   };
@@ -189,7 +197,7 @@ export function softwareApplicationJsonLd(project: FirstPartyProject, locale: Lo
             price: "0",
             priceCurrency: "USD",
           },
-          downloadUrl: Object.values(store),
+          downloadUrl: canonicalStoreUrls(store),
           installUrl: store.googlePlay,
         }
       : {}),
