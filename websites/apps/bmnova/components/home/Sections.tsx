@@ -105,7 +105,7 @@ export function Numbers() {
       </div>
       <div className="stagger grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
         <NumberTile value={APP_ORDER.length} label={numbers.apps.label} sub={numbers.apps.sub} />
-        <NumberTile value={2000} suffix="+" label={numbers.downloads.label} sub={numbers.downloads.sub} />
+        <NumberTile value={2500} suffix="+" label={numbers.downloads.label} sub={numbers.downloads.sub} />
         <NumberTile value={50} suffix="+" label={numbers.ratings.label} sub={fill(numbers.ratings.sub, { n: 20 })} />
         <NumberTile value={100} suffix="%" label={numbers.inhouse.label} sub={numbers.inhouse.sub} />
         <NumberTile value="'25" label={numbers.founded.label} sub={numbers.founded.sub} />
